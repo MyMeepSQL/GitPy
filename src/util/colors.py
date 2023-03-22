@@ -9,6 +9,7 @@
 #  Language ~ Python3                                                       #
 # ---[Author]----------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
+#  Jonas Petitpierre (Bashy)                                                #
 # ---[Operating System]------------------------------------------------------#
 #  Developed for Linux                                                      #
 # ---[License]---------------------------------------------------------------#
@@ -170,8 +171,8 @@ class Color():
         '''
         Prints an exception. Includes stack trace if necessary.
         '''
-        from src.__main__ import AOVPNS
-        # AOVPNS.Banner()
+        from src.__main__ import GitPy
+        # GitPy.Banner()
         # print()
         Color.pl('\n  {!} {R}Error: %s' % str(exception))
         

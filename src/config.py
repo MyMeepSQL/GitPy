@@ -9,6 +9,7 @@
 #  Language ~ Python3                                                       #
 #---[Author]----------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
+#  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#
 #  Developed for Linux                                                      #
 #---[License]---------------------------------------------------------------#
@@ -54,8 +55,8 @@ from src.util.internet_check import internet_check
 # Main
 class Configuration(object):
     '''
-    The configuration class of GitPy. Where all the variables are stored.
-    This class is used to parse all arguments from the 'ars.py' file (The "Arguments"' class).
+        The configuration class of GitPy. Where all the variables are stored.
+        This class is used to parse all arguments from the 'ars.py' file (The "Arguments"' class).
     '''
 
     # Verbosity level: 1 = executed commands, 2 = executed commands and stdout/stderr, 
@@ -71,14 +72,14 @@ class Configuration(object):
 
     # The version's message for the -V/--version argument
     version_message = VERSION
-    version_message_verbose = '''Automatate OpenVPN Server (GitPy) %s
-
-Copyright (C) 2021-2023 PSociety™, All rights reserved. By Thomas Pellissier (MyMeepSQL)
-License GPLv3+: GNU GPL version 3 or later <https://www.gnu.org/licenses/gpl-3.0.html>.
-This is free software; you can modify the program and share it as long as the {R}original authors
-appears in credit and the program is of the same license{W}.
-
-This tool was written by Thomas Pellissier (MyMeepSQL).''' % VERSION
+    version_message_verbose = '''GitPy %s
+    \r
+    \rCopyright (C) 2021-2023 PSociety™, All rights reserved. By Thomas Pellissier (MyMeepSQL)
+    \rLicense GPLv3+: GNU GPL version 3 or later <https://www.gnu.org/licenses/gpl-3.0.html>.
+    \rThis is free software; you can modify the program and share it as long as the {R}original authors
+    \rappears in credit and the program is of the same license{W}.
+    \r
+    \rThis tool was written by Thomas Pellissier (MyMeepSQL).''' % VERSION
 
     # Where GitPy is installed
     DEFAULT_INSTALL_PATH = r'/opt/gitpy/'
@@ -105,7 +106,7 @@ This tool was written by Thomas Pellissier (MyMeepSQL).''' % VERSION
     @classmethod
     def load_arguments(cls, pwd):
         '''
-        Load argument and parse them to the specific function.
+            Load argument and parse them to the specific function.
         '''
         # Get the arguments
         args = Arguments.get_arguments()
@@ -131,14 +132,17 @@ This tool was written by Thomas Pellissier (MyMeepSQL).''' % VERSION
 
         # Parse the arguments
         cls.parse_informations_args(args)
-        cls.first_args_to_operate(args)
-        cls.parse_vpn_args(args, pwd)
+        cls.first_args_to_parse(args)
+        cls.parse_main_args(args, pwd)
         cls.parse_installation_args(args, pwd)
         cls.parse_miscellaneous_args(args, pwd)
         # cls.parse_test_args(args)
 
     @classmethod
-    def first_args_to_operate(cls,args):
+    def first_args_to_parse(cls,args):
+        '''
+            Parse the first arguments that should be parsed before the others.
+        '''
         if args.install_path == '0':
             __MAIN__.GitPy.Banner()
             print()
@@ -147,9 +151,9 @@ This tool was written by Thomas Pellissier (MyMeepSQL).''' % VERSION
 
     # -------------------- [ MAIN ARGUMENTS ] -------------------- #
     @classmethod
-    def parse_vpn_args(cls, args, pwd):
+    def parse_main_args(cls, args, pwd):
         '''
-        Parse all main arguments.
+            Parse all main arguments.
         '''
         # if args.console:
         #     # # if the user didn't install GitPy on his system
@@ -176,14 +180,14 @@ This tool was written by Thomas Pellissier (MyMeepSQL).''' % VERSION
             Color.pl('  {-} Starting the GitPy\'s console...')
             sleep(1)
             # Call the main console of GitPy
-            from src.core.cli import Main_Console
-            Main_Console(pwd=pwd)
+            from src.core.cli_console import CLI_Console
+            CLI_Console(pwd=pwd)
 
     # -------------------- [ INSTALLATION ARGUMENTS ] -------------------- #
     @classmethod
     def parse_installation_args(cls, args, pwd):
         '''
-        Parse all installation arguments
+            Parse all installation arguments
         '''
         if args.install:
             from src.core.installer import entry_point as Installer
@@ -197,7 +201,7 @@ This tool was written by Thomas Pellissier (MyMeepSQL).''' % VERSION
     @classmethod
     def parse_informations_args(cls, args):
         '''
-        Parse all informations arguments
+            Parse all informations arguments
         '''
         if args.help:
             # Show more help for wich command
@@ -331,6 +335,9 @@ This tool was written by Thomas Pellissier (MyMeepSQL).''' % VERSION
     # -------------------- [ MISCELLANEOUS ARGUMENTS ] -------------------- #
     @classmethod
     def parse_miscellaneous_args(cls, args, pwd):
+        '''
+            Parse all miscellaneous arguments
+        '''
         if args.update:
             from src.core.updater import entry_point as Updater
             Updater(args, pwd=pwd)
@@ -410,7 +417,6 @@ This tool was written by Thomas Pellissier (MyMeepSQL).''' % VERSION
             from src.util.remove_python_cache import remove_python_cache
             remove_python_cache(pwd=pwd)
 
-    # -------------------- [ MISCELLANEOUS ARGUMENTS ] -------------------- #
     # @classmethod
     # def parse_test_args(cls, args):
     #     from src.util.process import Process

@@ -5,10 +5,11 @@
 #  Filename ~ cli_console.py            [Created: 2023-01-14 |  5:49 - PM]  #
 #                                       [Updated: 2023-01-14 |  5:49 - PM]  #
 #---[Info]------------------------------------------------------------------#
-#  The CLI console of aovpns                                             #
+#  The CLI console of gitpy                                             #
 #  Language ~ Python3                                                       #
 #---[Author]----------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
+#  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#
 #  Developed for Linux                                                      #
 #---[License]---------------------------------------------------------------#
@@ -172,7 +173,7 @@ class Help_message:
 			'help' : '''
             \r    Description
             \r    -----------
-			\r    Show the AOVPNS's modules and their modules in development too.
+			\r    Show the GitPy's modules and their modules in development too.
 
             \r    Argument          Description
             \r    --------          -----------
@@ -206,7 +207,7 @@ class Help_message:
 			'help' : '''
             \r    Description
             \r    -----------
-			\r    Show the username of your current user that you have loaded AOVPNS.
+			\r    Show the username of your current user that you have loaded GitPy.
 			''',
 			'least_args' : 0,
 			'max_args' : 0
@@ -217,7 +218,7 @@ class Help_message:
 			'help' : '''
             \r    Description
             \r    -----------
-			\r    Show the current instance version of AOVPNS on your system.
+			\r    Show the current instance version of GitPy on your system.
 			''',
 			'least_args' : 0,
 			'max_args' : 0
@@ -228,7 +229,7 @@ class Help_message:
 			'help' : '''
             \r    Description
             \r    -----------
-			\r    Clear cache and exit the AOVPNS's CLI environment.
+			\r    Clear cache and exit the GitPy's CLI environment.
 			''',
 			'least_args' : 0,
 			'max_args' : 0
@@ -240,8 +241,8 @@ class Help_message:
 			'help' : Color.s('''
             \r    Description
             \r    -----------
-            \r    Download and update the current instance of AOVPNS on the machine with
-            \r    the latest stable version of AOVPNS from its repository.
+            \r    Download and update the current instance of GitPy on the machine with
+            \r    the latest stable version of GitPy from its repository.
 
             \r    Options          Description
             \r    -------          -----------
@@ -290,9 +291,9 @@ class Help_message:
 
 class CLI_Console():
 
-    VERSION = config.Configuration.VERSION # Current version of AOVPNS in the Configuration's Class.
-    DEFAULT_INSTALL_PATH = config.Configuration.DEFAULT_INSTALL_PATH  # Where AOVPNS is installed
-    # REPO_VERSION = config.Configuration.REPO_VERSION # The latest version of AOVPNS from the GitHub Repository
+    VERSION = config.Configuration.VERSION # Current version of GitPy in the Configuration's Class.
+    DEFAULT_INSTALL_PATH = config.Configuration.DEFAULT_INSTALL_PATH  # Where GitPy is installed
+    # REPO_VERSION = config.Configuration.REPO_VERSION # The latest version of GitPy from the GitHub Repository
     REPO_URL = config.Configuration.REPO_URL
 
     def __init__(self, pwd):
@@ -361,7 +362,7 @@ class CLI_Console():
                         subprocess.run('whoami' , shell = True)
 
             except KeyboardInterrupt:
-                Color.p('  {*} Interrupt: For exit AOVPNS, run: {G}exit{W}\n')
+                Color.p('  {*} Interrupt: For exit GitPy, run: {G}exit{W}\n')
                 pass
 
 

@@ -5,12 +5,13 @@
 #  Filename ~ check_path.py             [Created: 2023-02-21 | 11:12 - AM]  #
 #                                       [Updated: 2023-02-21 | 11:54 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  Check if the folder_path finish with 'aovpns/'.                          # 
+#  Check if the folder_path finish with 'gitpy/'.                           # 
 #  Exemple: if the user enter '/home' for the install path, it will add     #
-#  '/aovpns/' to the folder_path. So it give '/home/aovpns/'                #
+#  '/gitpy/' to the folder_path. So it give '/home/gitpy/'                  #
 #  Language ~ Python3                                                       #
 #---[Author]----------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
+#  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#
 #  Developed for Linux                                                      #
 #---[License]---------------------------------------------------------------#
@@ -37,27 +38,27 @@ import sys
 
 ## Third party modules
 from src.util.colors import Color
-from src.__main__ import AOVPNS
+from src.__main__ import GitPy
 from src.config import Configuration
 
 # Main
 def check_folder_path(folder_path):
     if '//' in folder_path:
-        AOVPNS.Banner()
+        GitPy.Banner()
         print()
         Color.pl('  {!} The path must not contain double slash (//)!')
         if Configuration.verbose == 3:
             Color.pl('  {§} Exiting with the exit code: {R}1{W}')
             Color.pl('    {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
         sys.exit(1)
-    elif folder_path.endswith('aovpns/'):
+    elif folder_path.endswith('gitpy/'):
         pass
-    elif folder_path.endswith('aovpns'):
+    elif folder_path.endswith('gitpy'):
         folder_path += '/'
-    elif not folder_path.endswith('aovpns'):
+    elif not folder_path.endswith('gitpy'):
         if folder_path.endswith('/'):
-            folder_path += 'aovpns/'
+            folder_path += 'gitpy/'
         else:
-            folder_path += '/aovpns/'
+            folder_path += '/gitpy/'
         
     return folder_path

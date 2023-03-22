@@ -4,10 +4,11 @@
 #  Filename ~ informations.py           [Created: 2023-02-28 |  9:21 - AM]  #
 #                                       [Updated: 2023-02-28 | 10:28 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  The informations page about AOVPNS                                       #
+#  The informations page about GitPy                                       #
 #  Language ~ Python3                                                       #
 #---[Author]----------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
+#  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#
 #  Developed for Linux                                                      #
 #---[License]---------------------------------------------------------------#
@@ -37,36 +38,36 @@ from src.config import Configuration
 # Main
 class Informations():
     '''
-    The main class of the informations page of AOVPNS that will be called when the user runs aovpns --info. 
-    This class will display all informations about AOVPNS.
+    The main class of the informations page of GitPy that will be called when the user runs gitpy --info. 
+    This class will display all informations about GitPy.
     '''
 
     VERSION = Configuration.VERSION
 
     def __init__(self):
         Color.pl('''
-        \r  {*} All informations about the AOVPNS.
+        \r  {*} All informations about the GitPy.
 
-        \r{SB2}{bold}Informations about AOVPNS{W}:
+        \r{SB2}{bold}Informations about GitPy{W}:
         \r==========================
 
         \r  Description
         \r  -----------
-        \r  AOVPNS is a tool to automatate an OpenVPN server configuration 
+        \r  GitPy is a tool to automatate an OpenVPN server configuration 
         \r  and installation with users. It's a tool for Linux distros based
         \r  on Debian or Arch (for the moment).
 
         \r  Options                  Description
         \r  -------                  -----------
-        \r  --install                Install AOVPNS with all depencies on your system.
-        \r  --uninstall              Uninstall AOVPNS from your system.
-        \r  --update                 Update the AOVPNS directly from GitHub.
-        \r  --console                Start the main console of AOVPNS.
-        \r  --cli                    Start the CLI environment of AOVPNS.
+        \r  --install                Install GitPy with all depencies on your system.
+        \r  --uninstall              Uninstall GitPy from your system.
+        \r  --update                 Update the GitPy directly from GitHub.
+        \r  --console                Start the main console of GitPy.
+        \r  --cli                    Start the CLI environment of GitPy.
 
         \r  Program                  Version (on your system)
         \r  -------                  ------------------------
-        \r  aovpns                   %s
+        \r  gitpy                   %s
 
         \r  Copyright & Licensing
         \r  ---------------------
@@ -77,9 +78,9 @@ class Informations():
 
         \r  Other informations
         \r  ------------------
-        \r  GitHub page              https://github.com/MyMeepSQL/aovpns
-        \r  Changelogs               https://github.com/MyMeepSQL/aovpns/blob/main/CHANGLOG.md
-        \r  Issues pages             https://github.com/MyMeepSQL/aovpns/issues
+        \r  GitHub page              https://github.com/MyMeepSQL/gitpy
+        \r  Changelogs               https://github.com/MyMeepSQL/gitpy/blob/main/CHANGLOG.md
+        \r  Issues pages             https://github.com/MyMeepSQL/gitpy/issues
 
         \r{SB2}{bold}Informations about author{W}:
         \r==========================
@@ -88,7 +89,7 @@ class Informations():
         \r  --------------------
         \r  Author's fullname        Thomas Pellissier
         \r  Author's codename        MyMeepSQL
-        \r  Author's email           thomas.pellissier.pro@proton.me ({bold}only for professional{W} or for {G}report bugs of AOVPNS{W})
+        \r  Author's email           thomas.pellissier.pro@proton.me ({bold}only for professional{W} or for {G}report bugs of GitPy{W})
 
         \r  Other informations
         \r  ------------------

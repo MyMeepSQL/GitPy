@@ -5,10 +5,11 @@
 #  Filename ~ remove_python_cache.py    [Created: 2023-03-07 |  9:21 - AM]  #
 #                                       [Updated: 2023-03-07 | 10:18 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  Remove the __pycache__'s folder in the AOVPNS's folder                   #
+#  Remove the __pycache__'s folder in the GitPy's folder                   #
 #  Language ~ Python3                                                       #
 #---[Author]----------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
+#  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#
 #  Developed for Linux                                                      #
 #---[License]---------------------------------------------------------------#

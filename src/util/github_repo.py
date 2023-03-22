@@ -5,12 +5,13 @@
 #  Filename ~ github_repo.py            [Created: 2023-02-21 | 11:12 - AM]  #
 #                                       [Updated: 2023-02-21 | 12:03 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  Compare the version between the AOVPNS instance on the system and        #
+#  Compare the version between the GitPy instance on the system and         #
 #  the GitHub's repositorie one.                                            #               
-#  Also check if the AOVPNS' repositorie are reachable or not               #
+#  Also check if the GitPy' repositorie are reachable or not                #
 #  Language ~ Python3                                                       #
 #---[Author]----------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
+#  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#
 #  Developed for Linux                                                      #
 #---[License]---------------------------------------------------------------#
@@ -49,18 +50,18 @@ from src.util.internet_check import internet_check
 # Main
 def compare_version(mode=None):
     '''
-    Compare version between the AOVPNS instance on
+    Compare version between the GitPy instance on
     the system and the GitHub repositorie's version
     with the 'metadata.json' file.
     '''
 
     # if os.path.isdir(C.Configuration.DEFAULT_INSTALL_PATH):
     if internet_check() == True:
-        rqst = get('https://raw.githubusercontent.com/MyMeepSQL/aovpns/master/metadata.json', timeout=3)
+        rqst = get('https://raw.githubusercontent.com/MyMeepSQL/gitpy/master/metadata.json', timeout=3)
         fetch_sc = rqst.status_code
 
         if fetch_sc == 404:
-            Color.pl('  {!} The AOVPNS\'s repositorie can\'t be reach for checking if a new version are avalable.')
+            Color.pl('  {!} The GitPy\'s repositorie can\'t be reach for checking if a new version are avalable.')
             Color.pl('  {*} Maybe the repository has been switched to private mode.')
             Color.pl('  {*} Please contact MyMeepSQL by sending an email or add him on Discord (use the {G}--info{W} option for author\'s informations).')
 
@@ -76,17 +77,17 @@ def compare_version(mode=None):
                 Color.pl('  {*} A new update are avalable : %s' % cp_online_ver)
 
                 if mode == None:
-                    Color.pl('  {*} You can update your AOVPNS instance with the {G}--update{W} option.')
+                    Color.pl('  {*} You can update your GitPy instance with the {G}--update{W} option.')
 
             else:
 
                 if mode == 'update':
-                    Color.pl('  {!} You already have the latest version of AOVPNS!')
+                    Color.pl('  {!} You already have the latest version of GitPy!')
                     sys.exit(1)
                     
     else:
         Color.pl('  {!} You are not connected to the internet.')
-        Color.pl('  {*} I can\'t check if a new version of AOVPNS are avalable. or not')
+        Color.pl('  {*} I can\'t check if a new version of GitPy are avalable. or not')
         REPO_VERSION = 'no-internet'
 
 
@@ -105,11 +106,11 @@ def is_reachable(args):
         # If the repository is in private mode, the page returns a 404 status (Not Found)
         if rqst.status_code == 404:
             if args.quiet:
-                Color.pl('The AOVPNS\'s repositorie can\'t be reach.')
+                Color.pl('The GitPy\'s repositorie can\'t be reach.')
                 Color.pl('Maybe the repository has been switched to private mode.')
                 sys.exit(1)
             else:
-                Color.pl('  {!} The AOVPNS\'s repositorie can\'t be reach.')
+                Color.pl('  {!} The GitPy\'s repositorie can\'t be reach.')
                 Color.pl('  {*} Maybe the repository has been switched to private mode.')
                 Color.pl('  {*} Please contact MyMeepSQL by sending an email or add him on Discord (use the {G}--info{W} option for author\'s informations).')
                 if args.verbose == 3:

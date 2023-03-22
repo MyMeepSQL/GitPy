@@ -5,10 +5,11 @@
 #  Filename ~ help_messages.py          [Created: 2023-02-21 | 10:26 - AM]  #
 #                                       [Updated: 2023-02-28 |  9:12 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  All help messages for AOVPNS                                             #
+#  All help messages for GitPy                                             #
 #  Language ~ Python3                                                       #
 #---[Author]----------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
+#  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#
 #  Developed for Linux                                                      #
 #---[License]---------------------------------------------------------------#
@@ -41,11 +42,11 @@ from src.util.colors import Color
 # Main
 class Help_Messages():
     '''
-    All help messages for: the 'aovpns' command, the main console and the CLI environment.
+    All help messages for: the 'gitpy' command, the main console and the CLI environment.
     '''
     def main_help_msg():
         '''
-        The help message of the aovpns command (aovpns -h/--help)
+        The help message of the gitpy command (gitpy -h/--help)
         '''
         Color.pl('''
         \r{SB2}{bold}VPN options{W}:
@@ -53,21 +54,21 @@ class Help_Messages():
 
         \r  Options                              Description
         \r  -------                              -----------
-        \r       --console                       Start the main console of AOVPNS.
-        \r       --cli                           Start the CLI environment of AOVPNS.
+        \r       --console                       Start the main console of GitPy.
+        \r       --cli                           Start the CLI environment of GitPy.
 
         \r{SB2}{bold}Installation options{W}:
         \r=====================
 
-        \r  Options                             DescriptionAOVPNS
+        \r  Options                             Description
         \r  -------                             -----------
-        \r       --install                [+]   Install AOVPNS with all depencies on your system.
-        \r       --uninstall              [+]   Uninstall AOVPNS from your system.
+        \r       --install                [+]   Install GitPy with all depencies on your system.
+        \r       --uninstall              [+]   Uninstall GitPy from your system.
  
-        \r       --skip-update                  Skip the system update phase during the installation of AOVPNS.
-        \r       --offline                      Install AOVPNS with the local file already downloaded
+        \r       --skip-update                  Skip the system update phase during the installation of GitPy.
+        \r       --offline                      Install GitPy with the local file already downloaded
         \r                                      (default: {G}download new files from GitHub{W}).
-        \r  -iP, --install-path [PATH]          Chose where the AOVPNS will be install on the system
+        \r  -iP, --install-path [PATH]          Chose where the GitPy will be install on the system
         \r                                      (default: {G}%s{W}).
 
         \r{SB2}{bold}Output options{W}:
@@ -91,7 +92,7 @@ class Help_Messages():
 
         \r  Options                             Description
         \r  -------                             -----------
-        \r       --info                         Show more informations about AOVPNS and exit.
+        \r       --info                         Show more informations about GitPy and exit.
         \r  -h,  --help                   [+]   Show this help message and exit or show more help for a option.
         \r  -V,  --version                      Show program's version and exit.
 
@@ -100,23 +101,23 @@ class Help_Messages():
 
         \r  Options                             Description
         \r  -------                             -----------
-        \r  -u,  --update                 [+]   Update the AOVPNS directly from GitHub.
+        \r  -u,  --update                 [+]   Update the GitPy directly from GitHub.
         \r       --show-config                  Prompt the content of the config file.
-        \r       --show-env-var                 Prompt the value of the {C}{bold}AOVPNS_INSTALL_PATH{W} environment variable.
-        \r       --remove-cache           [+]   Delete python cache from the AOVPNS directory.
+        \r       --show-env-var                 Prompt the value of the {C}{bold}GITPY_INSTALL_PATH{W} environment variable.
+        \r       --remove-cache           [+]   Delete python cache from the GitPy directory.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
 
         \r  Usage
         \r  -----
-        \r  aovpns <OPTIONS>
+        \r  gitpy <OPTIONS>
 
         \r  Others
         \r  ------
-        \r  Report all bugs to <thomas.pellissier.pro@proton.me> or open an issue at <https://github.com/MyMeepSQL/aovpns/issues>.
+        \r  Report all bugs to <thomas.pellissier.pro@proton.me> or open an issue at <https://github.com/MyMeepSQL/gitpy/issues>.
         \r  The options with the [+] mean that it may require additional option(s).
-        \r  If you want more details about a command, run: {G}aovpns --help <OPTION>{W}''' % config.Configuration.DEFAULT_INSTALL_PATH)
+        \r  If you want more details about a command, run: {G}gitpy --help <OPTION>{W}''' % config.Configuration.DEFAULT_INSTALL_PATH)
 
 
     # -------------------- [ Main options ] -------------------- #
@@ -134,7 +135,7 @@ class Help_Messages():
 
         \r  Description
         \r  -----------
-        \r  Start the CLI environment of AOVPNS. The CLI environment of AOVPNS
+        \r  Start the CLI environment of GitPy. The CLI environment of GitPy
         \r  work like a shell, you can use the command like you do in a shell.
         \r  Inspired by the Metasploit Framework.
 
@@ -143,7 +144,7 @@ class Help_Messages():
 
         \r  Usage
         \r  -----
-        \r  aovpns --cli''')
+        \r  gitpy --cli''')
 
     def option_console():
         '''
@@ -159,7 +160,7 @@ class Help_Messages():
 
         \r  Description
         \r  -----------
-        \r  Start the main console of AOVPNS. This console work like a choice
+        \r  Start the main console of GitPy. This console work like a choice
         \r  menu console. Inspired by the Social Engineering Toolkit (SET).
 
         \r{SB2}{bold}Others avalable informations{W}:
@@ -167,7 +168,7 @@ class Help_Messages():
 
         \r  Usage
         \r  -----
-        \r  aovpns --console''')
+        \r  gitpy --console''')
 
 
     # -------------------- [ Installation options ] -------------------- #
@@ -185,11 +186,11 @@ class Help_Messages():
 
         \r  Description
         \r  -----------
-        \r  Install AOVPNS on your system with all of his depencies.
+        \r  Install GitPy on your system with all of his depencies.
 
         \r  Options                         Description
         \r  -------                         -----------
-        \r              --skip-update       Skip the system update phase during the installation of AOVPNS.
+        \r              --skip-update       Skip the system update phase during the installation of GitPy.
         \r  -y,         --noconfirm         Bypass any and all "Are you sure?" messages.
         \r  -q,         --quiet             Prevent header from displaying. {O}Warning{W}: bypass any "Are your sure?"
         \r                                  message!
@@ -200,7 +201,7 @@ class Help_Messages():
 
         \r  Usage
         \r  -----
-        \r  aovpns --install [OPTIONS]''')
+        \r  gitpy --install [OPTIONS]''')
 
     def option_uninstall():
         '''
@@ -216,7 +217,7 @@ class Help_Messages():
 
         \r  Description
         \r  -----------
-        \r  Remove AOVPNS from your system (do not remove depencies)
+        \r  Remove GitPy from your system (do not remove depencies)
 
         \r  Options                         Description
         \r  -------                         -----------
@@ -230,7 +231,7 @@ class Help_Messages():
 
         \r  Usage
         \r  -----
-        \r  aovpns --uninstall [OPTIONS]''')
+        \r  gitpy --uninstall [OPTIONS]''')
 
     def option_skip_update():
         '''
@@ -250,14 +251,14 @@ class Help_Messages():
 
         \r  Options           Description
         \r  -------           -----------
-        \r  --install         Install AOVPNS with all depencies on your system.
+        \r  --install         Install GitPy with all depencies on your system.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
 
         \r  Usage
         \r  -----
-        \r  aovpns --install --skip-update''')
+        \r  gitpy --install --skip-update''')
 
     def option_offline():
         '''
@@ -273,20 +274,20 @@ class Help_Messages():
 
         \r  Description
         \r  -----------
-        \r  Install AOVPNS from the local files (do not download anything).
+        \r  Install GitPy from the local files (do not download anything).
         \r  By default, the installaiton process will download the latest 
-        \r  version of AOVPNS from the GitHub repository.
+        \r  version of GitPy from the GitHub repository.
 
         \r  Options           Description
         \r  -------           -----------
-        \r  --install         Install AOVPNS with all depencies on your system.
+        \r  --install         Install GitPy with all depencies on your system.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
 
         \r  Usage
         \r  -----
-        \r  aovpns --install --offline''')
+        \r  gitpy --install --offline''')
 
     def option_install_path():
         '''
@@ -302,21 +303,21 @@ class Help_Messages():
 
         \r  Description
         \r  -----------
-        \r  You can specify the path where AOVPNS will be installed.
-        \r  By default, AOVPNS will be installed in %s.
+        \r  You can specify the path where GitPy will be installed.
+        \r  By default, GitPy will be installed in %s.
 
         \r  Options           Description
         \r  -------           -----------
-        \r  --install         Install AOVPNS with all depencies on your system.
+        \r  --install         Install GitPy with all depencies on your system.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
 
         \r  Usage
         \r  -----
-        \r  aovpns --install -iP <PATH>
+        \r  gitpy --install -iP <PATH>
         \r    or
-        \r  aovpns --install --install-path <PATH>''' % config.Configuration.DEFAULT_INSTALL_PATH)
+        \r  gitpy --install --install-path <PATH>''' % config.Configuration.DEFAULT_INSTALL_PATH)
 
 
     # -------------------- [ Output options ] -------------------- #
@@ -338,18 +339,18 @@ class Help_Messages():
 
         \r  Options           Description
         \r  -------           -----------
-        \r      --install     Install AOVPNS with all depencies on your system.
-        \r      --uninstall   Uninstall AOVPNS from your system.
-        \r  -u, --update      Update the AOVPNS directly from GitHub.
+        \r      --install     Install GitPy with all depencies on your system.
+        \r      --uninstall   Uninstall GitPy from your system.
+        \r  -u, --update      Update the GitPy directly from GitHub.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
 
         \r  Usage
         \r  -----
-        \r  aovpns <OPTIONS> -q
+        \r  gitpy <OPTIONS> -q
         \r    or
-        \r  aovpns <OPTIONS> --quiet''')
+        \r  gitpy <OPTIONS> --quiet''')
 
     def option_verbose():
         '''
@@ -371,9 +372,9 @@ class Help_Messages():
 
         \r  Options           Description
         \r  -------           -----------
-        \r      --install     Install AOVPNS with all depencies on your system.
-        \r      --uninstall   Uninstall AOVPNS from your system.
-        \r  -u, --update      Update the AOVPNS directly from GitHub.
+        \r      --install     Install GitPy with all depencies on your system.
+        \r      --uninstall   Uninstall GitPy from your system.
+        \r  -u, --update      Update the GitPy directly from GitHub.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
@@ -388,9 +389,9 @@ class Help_Messages():
 
         \r  Usage
         \r  -----
-        \r  aovpns <OPTIONS> -v [LEVEL]
+        \r  gitpy <OPTIONS> -v [LEVEL]
         \r    or
-        \r  aovpns <OPTIONS> --verbose [LEVEL]''')
+        \r  gitpy <OPTIONS> --verbose [LEVEL]''')
 
 
     # -------------------- [ Additional options ] -------------------- #
@@ -412,18 +413,18 @@ class Help_Messages():
 
         \r  Options           Description
         \r  -------           -----------
-        \r      --install     Install AOVPNS with all depencies on your system.
-        \r      --uninstall   Uninstall AOVPNS from your system.
-        \r  -u, --update      Update the AOVPNS directly from GitHub.
+        \r      --install     Install GitPy with all depencies on your system.
+        \r      --uninstall   Uninstall GitPy from your system.
+        \r  -u, --update      Update the GitPy directly from GitHub.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
 
         \r  Usage
         \r  -----
-        \r  aovpns <OPTIONS> -y
+        \r  gitpy <OPTIONS> -y
         \r    or
-        \r  aovpns <OPTIONS> --no-confirm''')
+        \r  gitpy <OPTIONS> --no-confirm''')
 
 
     # -------------------- [ Informations options ] -------------------- #
@@ -441,14 +442,14 @@ class Help_Messages():
 
         \r  Description
         \r  -----------
-        \r  Show all informations about AOVPNS. Version, owner, etc.
+        \r  Show all informations about GitPy. Version, owner, etc.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
 
         \r  Usage
         \r  -----
-        \r  aovpns --info''')
+        \r  gitpy --info''')
 
 
     # -------------------- [ Miscellaneous options ] -------------------- #
@@ -466,8 +467,8 @@ class Help_Messages():
 
         \r  Description
         \r  -----------
-        \r  Download and update the current instance of AOVPNS on the machine with
-        \r  the latest stable version of AOVPNS from its repository.
+        \r  Download and update the current instance of GitPy on the machine with
+        \r  the latest stable version of GitPy from its repository.
 
         \r  Options                         Description
         \r  -------                         -----------
@@ -481,9 +482,9 @@ class Help_Messages():
 
         \r  Usage
         \r  -----
-        \r  aovpns -U [OPTIONS]
+        \r  gitpy -U [OPTIONS]
         \r    or
-        \r  aovpns --update [OPTIONS]''')
+        \r  gitpy --update [OPTIONS]''')
 
     def option_force_update():
         '''
@@ -499,25 +500,25 @@ class Help_Messages():
 
         \r  Description
         \r  -----------
-        \r  Update AOVPN even if the AOVPNS' instance version on the machine is 
+        \r  Update AOVPN even if the GitPy' instance version on the machine is 
         \r  already the latest.
 
         \r  Options        Description
         \r  -------        -----------
-        \r  -u,  --update  Update the AOVPNS directly from GitHub.
+        \r  -u,  --update  Update the GitPy directly from GitHub.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
 
         \r  Usage
         \r  -----
-        \r  aovpns -u -fu [OPTIONS]
+        \r  gitpy -u -fu [OPTIONS]
         \r    or
-        \r  aovpns -u --force-update [OPTIONS]
+        \r  gitpy -u --force-update [OPTIONS]
         \r    or
-        \r  aovpns --update -fu [OPTIONS]
+        \r  gitpy --update -fu [OPTIONS]
         \r    or
-        \r  aovpns --update --force-update [OPTIONS]''')
+        \r  gitpy --update --force-update [OPTIONS]''')
 
     def option_show_env_var():
         '''
@@ -533,14 +534,14 @@ class Help_Messages():
 
         \r  Description
         \r  -----------
-        \r  Show the value of the {C}{bold}AOVPNS_INSTALL_PATH{W} environment variable.
+        \r  Show the value of the {C}{bold}GITPY_INSTALL_PATH{W} environment variable.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
 
         \r  Usage
         \r  -----
-        \r  aovpns --show-env-var''')
+        \r  gitpy --show-env-var''')
 
     def option_remove_cache():
         '''
@@ -556,7 +557,7 @@ class Help_Messages():
 
         \r  Description
         \r  -----------
-        \r  Delete all __pycache__ directories and .pyc files of AOVPNS.
+        \r  Delete all __pycache__ directories and .pyc files of GitPy.
 
         \r  Options                         Description
         \r  -------                         -----------
@@ -567,7 +568,7 @@ class Help_Messages():
 
         \r  Usage
         \r  -----
-        \r  aovpns --remove-cache [OPTIONS]''')
+        \r  gitpy --remove-cache [OPTIONS]''')
 
 
     # -------------------- [ Consoles ] -------------------- #
@@ -589,15 +590,15 @@ class Help_Messages():
         \r  Options        Description
         \r  -------        -----------
         \r  help           Show this help message.
-        \r  version        Show the version of AOVPNS.
-        \r  info           Show more informations about AOVPNS.
+        \r  version        Show the version of GitPy.
+        \r  info           Show more informations about GitPy.
         \r  verbose  [+]   Verbosity level: 1-3 (default: {G}0{W})
         \r  99, exit       Exit the console.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
 
-        \r  Report all bugs to <thomas.pellissier.pro@proton.me> or open an issue at <https://github.com/MyMeepSQL/aovpns/issues>.''')
+        \r  Report all bugs to <thomas.pellissier.pro@proton.me> or open an issue at <https://github.com/MyMeepSQL/gitpy/issues>.''')
 
     def CLI_env_main_help_msg():
         '''
@@ -620,16 +621,16 @@ class Help_Messages():
         \r    show    [+]     Displays all modules.
         \r    help    [+]     Show this help message.
         \r    whoami          Show the your current user.
-        \r    version         Show version of AOVPNS.
-        \r    exit            Exit the AOVPNS's CLI environment.
+        \r    version         Show version of GitPy.
+        \r    exit            Exit the GitPy's CLI environment.
 
         \r {SB2}{bold}Miscellaneous commands{W}
         \r ======================
 
         \r    Command         Description
         \r    -------         -----------
-        \r    update  [+]     Update the current instance of AOVPNS on the machine with the latest
-        \r                    stable version of AOVPNS from its repository.
+        \r    update  [+]     Update the current instance of GitPy on the machine with the latest
+        \r                    stable version of GitPy from its repository.
 
         \r    The commands with the [+] mean that it may require additional arguments.
         \r    If you want more details about a command, run: {G}help <COMMAND>{W}''')

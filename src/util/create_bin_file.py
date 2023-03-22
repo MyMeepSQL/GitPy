@@ -5,11 +5,12 @@
 #  Filename ~ create_bin_file.py        [Created: 2023-02-21 | 11:25 - AM]  #
 #                                       [Updated: 2023-02-21 | 11:39 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  Create the content of the bin file (aovpns) with the correct install     #
+#  Create the content of the bin file (gitpy) with the correct install     #
 #  path                                                                     #
 #  Language ~ Python3                                                       #
 #---[Author]----------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
+#  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#
 #  Developed for Linux                                                      #
 #---[License]---------------------------------------------------------------#
@@ -37,20 +38,21 @@ from src.config import Configuration
 # Main
 class Create_bin_file:
     '''
-    Create the content of the bin file (aovpns) with the correct install path
+    Create the content of the bin file (gitpy) with the correct install path
     '''
     def __init__(path=Configuration.DEFAULT_INSTALL_PATH):
         return '''#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #---[Name & Dates]----------------------------------------------------------#
-#  Filename ~ aovpns.py                 [Created: 2023-01-26 | 10:37 - AM]  #
+#  Filename ~ gitpy.py                 [Created: 2023-01-26 | 10:37 - AM]  #
 #                                       [Updated: 2023-02-13 |  4:12 - PM]  #
 #---[Info]------------------------------------------------------------------#
-#  The call methode of aovpns                                               #
+#  The call methode of gitpy                                               #
 #  Language ~ Python3                                                       #
 #---[Author]----------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
+#  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#
 #  Developed for Linux                                                      #
 #---[License]---------------------------------------------------------------#
@@ -89,7 +91,7 @@ try:
     # Where this file is executed
     cwd = os.path.dirname(os.path.abspath(__file__))
 
-    # Call the entry point of the main file of AOVPNS
+    # Call the entry point of the main file of GitPy
     __main__.entry_point(pwd = cwd)
 except KeyboardInterrupt:
     Color.pl('\\n  {!} Interrupted, shutting down...')
