@@ -5,7 +5,7 @@
 #  Filename ~ installer.py              [Created: 2023-03-07 | 10:27 - AM]  #
 #                                       [Updated: 2023-03-14 |  9:21 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  The installer of AOVPNS for install AOVPNS and the                       #
+#  The installer of GitPy for install GitPy and the                       #
 #  dependencies                                                             #
 #  Language ~ Python3                                                       #
 #---[Author]----------------------------------------------------------------#
@@ -42,7 +42,7 @@ from time import sleep
 
 ## Third party libraries
 import src.util.github_repo as GR
-from src.__main__ import AOVPNS
+from src.__main__ import GitPy
 from src.config import Configuration
 from src.util.clear import clear
 from src.util.colors import Color
@@ -58,7 +58,7 @@ from src.util.check_path import check_folder_path
 # Main
 class Installer():
     '''
-    The installer of AOVPNS
+    The installer of GitPy
     '''
     # Variables
     DEFAULT_INSTALL_PATH = Configuration.DEFAULT_INSTALL_PATH
@@ -66,8 +66,8 @@ class Installer():
     TEMP_PATH = Configuration.TEMP_PATH
     INSTALL_PATH = DEFAULT_INSTALL_PATH
     # Environment variables
-    aovpns_path_env_var_name = Configuration.aovpns_path_env_var_name
-    aovpns_path_env_var_value = Configuration.DEFAULT_INSTALL_PATH
+    gitpy_path_env_var_name = Configuration.gitpy_path_env_var_name
+    gitpy_path_env_var_value = Configuration.DEFAULT_INSTALL_PATH
 
     # Packages list for Arch based distros (pacman)
     arch_package_list = [
@@ -107,16 +107,16 @@ class Installer():
     def __init__(self, args, pwd):
         # Check if the user's platform is a Linux machine or not
         if platform.system() != 'Linux':
-            AOVPNS.Banner()
+            GitPy.Banner()
             print()
-            Color.pl('  {!} You tried to run AOVPNS on a non-linux machine!')
-            Color.pl('  {*} AOVPNS can be run only on a Linux kernel.')
+            Color.pl('  {!} You tried to run GitPy on a non-linux machine!')
+            Color.pl('  {*} GitPy can be run only on a Linux kernel.')
             sys.exit(1)
         else:
             if os.getuid() != 0:
-                AOVPNS.Banner()
+                GitPy.Banner()
                 print()
-                Color.pl('  {!} The AOVPNS Installer must be run as root.')
+                Color.pl('  {!} The GitPy Installer must be run as root.')
                 Color.pl('  {*} Re-run with sudo or switch to root user.')
                 sys.exit(1)
             else:
@@ -128,10 +128,10 @@ class Installer():
                     based_distro = 'Debian'
                     pass
                 else:
-                    AOVPNS.Banner()
+                    GitPy.Banner()
                     print()
                     Color.pl('  {!} You\'re not running Arch or Debian variant.')
-                    Color.pl('  {*} AOVPNS can only run on Arch or Debian based distros.')
+                    Color.pl('  {*} GitPy can only run on Arch or Debian based distros.')
                     Color.pl('  {-} Exiting...')
                     sys.exit(1)
         if args.skip_update:
@@ -141,10 +141,10 @@ class Installer():
         if args.install_path:
             self.INSTALL_PATH = ''.join(args.install_path).strip()
             self.INSTALL_PATH = check_folder_path(self.INSTALL_PATH)
-            self.aovpns_path_env_var_value = self.INSTALL_PATH
+            self.gitpy_path_env_var_value = self.INSTALL_PATH
             
-        # aovpns main file in /usr/bin/
-        aovpns_command_bin = Create_bin_file.__init__(path=self.INSTALL_PATH)
+        # gitpy main file in /usr/bin/
+        gitpy_command_bin = Create_bin_file.__init__(path=self.INSTALL_PATH)
 
         # Main
         if args.quiet:
@@ -182,56 +182,56 @@ class Installer():
                     except pkg_resources.DistributionNotFound:
                         Process.call('pip install %s' % pip_package_name, shell=True)
 
-                # ---------- [ AOVPNS installation ] ---------- #
+                # ---------- [ GitPy installation ] ---------- #
                 if os.path.isdir(self.INSTALL_PATH):
                     shutil.rmtree(self.INSTALL_PATH)
                     if os.path.isdir(self.TEMP_PATH):
                         shutil.rmtree(self.TEMP_PATH)
 
-                ## ------ [ AOVPNS files ] ------ ##
+                ## ------ [ GitPy files ] ------ ##
                 ### ---- [ Create the main folder in /usr/share/ ] ---- ###
-                os.makedirs(self.INSTALL_PATH, mode=0o777)    # Create the main directory of AOVPNS
+                os.makedirs(self.INSTALL_PATH, mode=0o777)    # Create the main directory of GitPy
 
-                ### ---- [ Create the temp folder that be use to download the latest AOVPNS version from GitHub
-                #          in it and install AOVPNS from this folder                                            ] ---- ###
+                ### ---- [ Create the temp folder that be use to download the latest GitPy version from GitHub
+                #          in it and install GitPy from this folder                                            ] ---- ###
                 os.makedirs(self.TEMP_PATH, mode=0o777)
 
-                ### ---- [ Clone the latest version of AOVPNS into the temp. folder ] ---- ###
+                ### ---- [ Clone the latest version of GitPy into the temp. folder ] ---- ###
                 Process.call('git clone %s --verbose --branch %s %s' % (self.REPO_URL , self.REPO_BRANCH , self.TEMP_PATH), shell=True)
 
-                ### ---- [ Install AOVPNS by moving all the files from the temp. folder to the main folder ] ---- ###
+                ### ---- [ Install GitPy by moving all the files from the temp. folder to the main folder ] ---- ###
                 shutil.copytree(src=self.TEMP_PATH, dst=self.INSTALL_PATH, dirs_exist_ok=True)
 
-                ### ---- [ Create the command 'aovpns' in /usr/bin ] ---- ###
-                # If a file called 'aovpns' already exist, inform the user and delete it
-                if os.path.isfile(self.BIN_PATH + 'aovpns'):
-                    os.remove(self.BIN_PATH + 'aovpns')
+                ### ---- [ Create the command 'gitpy' in /usr/bin ] ---- ###
+                # If a file called 'gitpy' already exist, inform the user and delete it
+                if os.path.isfile(self.BIN_PATH + 'gitpy'):
+                    os.remove(self.BIN_PATH + 'gitpy')
                 else:
                     pass
 
-                # Create and write the 'aovpns' file into /usr/bin/
-                with open(self.BIN_PATH + 'aovpns', 'x') as aovpns_file:
-                    aovpns_file.write(aovpns_command_bin)
+                # Create and write the 'gitpy' file into /usr/bin/
+                with open(self.BIN_PATH + 'gitpy', 'x') as gitpy_file:
+                    gitpy_file.write(gitpy_command_bin)
 
                 ### ---- [ Apply rights on files ] ---- ###
                 sleep(1)
-                Process.call('chmod 777 %saovpns' % self.BIN_PATH, shell=True)
+                Process.call('chmod 777 %sgitpy' % self.BIN_PATH, shell=True)
                 Process.call('chmod 777 -R %s' % self.INSTALL_PATH, shell=True)
                 # Deleting the temporary directory
                 shutil.rmtree(self.TEMP_PATH)
                 sleep(1)
                 # Create the environment variable
-                set_env_var(var_name=self.aovpns_path_env_var_name, var_value=self.aovpns_path_env_var_value)
+                set_env_var(var_name=self.gitpy_path_env_var_name, var_value=self.gitpy_path_env_var_value)
             except KeyboardInterrupt:
                 Color.pl('\n  {!} Installation process interrupted.')
                 # Removing the python cache
                 remove_python_cache(pwd=pwd)
-                Color.pl('  {!} You must re-run the installation process to install AOVPNS correctly.')
+                Color.pl('  {!} You must re-run the installation process to install GitPy correctly.')
                 Color.pl('  {*} Exiting...')
                 sys.exit(1)
         else:
             # -------------------- [ No quiet installation ] -------------------- #
-            AOVPNS.Banner()
+            GitPy.Banner()
             print()
             if Configuration.verbose >= 1:
                 Color.pl('  {*} Verbosity level: %s' % Configuration.verbose)
@@ -258,21 +258,21 @@ class Installer():
                 Color.pl('  {!} No Internet connexion found, please check if you are connected to the Internet and retry.')
                 sys.exit(1)
             if Configuration.verbose == 3:
-                Color.pl('  {§} Check if the AOVPNS\'s repositorie are reachable or not...')
+                Color.pl('  {§} Check if the GitPy\'s repositorie are reachable or not...')
                 Color.pl('   {SY1}╰──╼{W} Call the {SY1}is_reachable(){W} function.')
 
-            ## ---------- [ Check if the AOVPNS repositorie on GitHub are reachable or not ] ---------- ##
+            ## ---------- [ Check if the GitPy repositorie on GitHub are reachable or not ] ---------- ##
             GR.is_reachable(args)
 
             # ---- [ The info box ] ---- #
             Color.pl('''  {*} {underscore}This tool will{W}:
                     \r     {D}[{W}{LL}1{W}{D}]{W} Update your system. %s
                     \r     {D}[{W}{LL}2{W}{D}]{W} Install python-pip.
-                    \r     {D}[{W}{LL}3{W}{D}]{W} Create the AOVPNS's folder in {C}%s{W}.
-                    \r     {D}[{W}{LL}4{W}{D}]{W} Create the AOVPNS's temporary folder in {C}%s{W} and clone the AOVPNS files, from GitHub, into it.
-                    \r     {D}[{W}{LL}5{W}{D}]{W} Move the AOVPNS's files from {C}%s{W} into {C}%s{W}.
-                    \r     {D}[{W}{LL}6{W}{D}]{W} Create and install the command {G}aovpns{W} into {C}%s{W}.
-                    \r     {D}[{W}{LL}7{W}{D}]{W} Apply all rights on the new files in {C}%s{W} and {C}%saovpns{W}.
+                    \r     {D}[{W}{LL}3{W}{D}]{W} Create the GitPy's folder in {C}%s{W}.
+                    \r     {D}[{W}{LL}4{W}{D}]{W} Create the GitPy's temporary folder in {C}%s{W} and clone the GitPy files, from GitHub, into it.
+                    \r     {D}[{W}{LL}5{W}{D}]{W} Move the GitPy's files from {C}%s{W} into {C}%s{W}.
+                    \r     {D}[{W}{LL}6{W}{D}]{W} Create and install the command {G}gitpy{W} into {C}%s{W}.
+                    \r     {D}[{W}{LL}7{W}{D}]{W} Apply all rights on the new files in {C}%s{W} and {C}%sgitpy{W}.
             ''' %
                 (
                 UPDATE_SYSTEM_SKIPED,
@@ -334,27 +334,27 @@ class Installer():
                             Color.pl('  {-} Installing \'%s\' PIP\'s package...' % pip_package_name)
                             Process.call('pip install %s' % pip_package_name, shell=True)
 
-                    # ---------- [ AOVPNS installation ] ---------- #
+                    # ---------- [ GitPy installation ] ---------- #
                     if os.path.isdir(self.INSTALL_PATH):
-                        Color.pl('  {$} A AOVPNS instance already exist in %s.' % self.INSTALL_PATH)
+                        Color.pl('  {$} A GitPy instance already exist in %s.' % self.INSTALL_PATH)
                         if args.no_confirm:
                             Color.pl('  {?} Do you want to replace it? [Y/n] y')
                             choice_2 = 'y'
                         else:
                             choice_2 = input(Color.s('  {?} Do you want to replace it? [Y/n] '))
                         if choice_2.lower() == 'y' or not choice_2:
-                            Color.pl('  {-} Deleting current AOVPNS files...')
+                            Color.pl('  {-} Deleting current GitPy files...')
                             if Configuration.verbose == 3:
                                 Color.pl('   {SY1}╰──╼{W} Python: {SY1}shutil.rmtree(%s){W}' % self.INSTALL_PATH)
                             shutil.rmtree(self.INSTALL_PATH)
                             if os.path.isdir(self.TEMP_PATH):
                                 if Configuration.verbose  == 3:
-                                    Color.pl('  {§} AOVPNS\'s temporary folder detected.')
+                                    Color.pl('  {§} GitPy\'s temporary folder detected.')
                                     Color.pl('  {§} Remove it...')
                                     Color.pl('   {SY1}╰──╼{W} Python: {SY1}shutil.rmtree(self.TEMP_PATH){W}')
                                 shutil.rmtree(self.TEMP_PATH)
                         else:
-                            Color.pl('  {!} You must remove the current AOVPNS files by yourself for continue the install process!')
+                            Color.pl('  {!} You must remove the current GitPy files by yourself for continue the install process!')
                             Color.pl('  {*} Exiting...')
                             # Removing the python cache
                             remove_python_cache(pwd=pwd)
@@ -363,56 +363,56 @@ class Installer():
                                 Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
                             sys.exit(1)
 
-                    ## ------ [ AOVPNS files ] ------ ##
-                    Color.pl('  {-} Installing AOVPNS files...')
+                    ## ------ [ GitPy files ] ------ ##
+                    Color.pl('  {-} Installing GitPy files...')
 
                     ### ---- [ Create the main folder in /usr/share/ ] ---- ###
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Creating main folder ({C}%s{W})...' % self.INSTALL_PATH)
                         Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.makedirs(INSTALL_PATH, mode=0o777){W}')
-                    os.makedirs(self.INSTALL_PATH, mode=0o777)    # Create the main directory of AOVPNS
+                    os.makedirs(self.INSTALL_PATH, mode=0o777)    # Create the main directory of GitPy
 
-                    ### ---- [ Create the temp folder that be use to download the latest AOVPNS version from GitHub
-                    #          in it and install AOVPNS from this folder                                            ] ---- ###
+                    ### ---- [ Create the temp folder that be use to download the latest GitPy version from GitHub
+                    #          in it and install GitPy from this folder                                            ] ---- ###
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Creating temporary folder ({C}%s{W})...' % self.TEMP_PATH)
                         Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.makedirs(self.TEMP_PATH, mode=0o777){W}')
                     os.makedirs(self.TEMP_PATH, mode=0o777)
 
-                    ### ---- [ Clone the latest version of AOVPNS into the temp. folder ] ---- ###
+                    ### ---- [ Clone the latest version of GitPy into the temp. folder ] ---- ###
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Cloning files from GitHub to the temporary directory...')
                     Process.call('git clone %s --verbose --branch %s %s' % (self.REPO_URL , self.REPO_BRANCH , self.TEMP_PATH), shell=True)
 
-                    ### ---- [ Install AOVPNS by moving all the files from the temp. folder to the main folder ] ---- ###
+                    ### ---- [ Install GitPy by moving all the files from the temp. folder to the main folder ] ---- ###
                     if Configuration.verbose == 3:
-                        Color.pl('  {§} Copying all files from the AOVPNS\'s temporary folder to the main directory ({C}%s{W})...' % self.INSTALL_PATH)
+                        Color.pl('  {§} Copying all files from the GitPy\'s temporary folder to the main directory ({C}%s{W})...' % self.INSTALL_PATH)
                         Color.pl('   {SY1}╰──╼{W} Python: {SY1}shutil.copytree(src=self.TEMP_PATH, dst=INSTALL_PATH, dirs_exist_ok=True){W}')
                     shutil.copytree(src=self.TEMP_PATH, dst=self.INSTALL_PATH, dirs_exist_ok=True)
 
-                    ### ---- [ Create the command 'aovpns' in /usr/bin ] ---- ###
-                    # If a file called 'aovpns' already exist, inform the user and delete it
-                    if os.path.isfile(self.BIN_PATH + 'aovpns'):
+                    ### ---- [ Create the command 'gitpy' in /usr/bin ] ---- ###
+                    # If a file called 'gitpy' already exist, inform the user and delete it
+                    if os.path.isfile(self.BIN_PATH + 'gitpy'):
                         if Configuration.verbose == 3:
-                            Color.pl('  {§} The aovpns command already exist in {C}%s{W}' % self.BIN_PATH)
+                            Color.pl('  {§} The gitpy command already exist in {C}%s{W}' % self.BIN_PATH)
                             Color.pl('  {§} Remove it...')
-                            Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.remove(self.BIN_PATH + \'aovpns\'){W})')
-                        os.remove(self.BIN_PATH + 'aovpns')
+                            Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.remove(self.BIN_PATH + \'gitpy\'){W})')
+                        os.remove(self.BIN_PATH + 'gitpy')
                     else:
                         pass
-                    # Create the command 'aovpns' in /usr/bin/
-                    Color.pl('  {-} Create the {G}aovpns{W} command into {C}%s{W}...' % self.BIN_PATH)
+                    # Create the command 'gitpy' in /usr/bin/
+                    Color.pl('  {-} Create the {G}gitpy{W} command into {C}%s{W}...' % self.BIN_PATH)
 
-                    # Create and write the 'aovpns' file into /usr/bin/
-                    with open(self.BIN_PATH + 'aovpns', 'x') as aovpns_file:
-                        aovpns_file.write(aovpns_command_bin)
+                    # Create and write the 'gitpy' file into /usr/bin/
+                    with open(self.BIN_PATH + 'gitpy', 'x') as gitpy_file:
+                        gitpy_file.write(gitpy_command_bin)
 
                     ### ---- [ Apply rights on files ] ---- ###
                     Color.pl('  {-} Apply rights to the new files...')
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Python: {SY1}sleep(1){W}')
                     sleep(1)
-                    Process.call('chmod 777 %saovpns' % self.BIN_PATH, shell=True)
+                    Process.call('chmod 777 %sgitpy' % self.BIN_PATH, shell=True)
                     Process.call('chmod 777 -R %s' % self.INSTALL_PATH, shell=True)
                     # Deleting the temporary directory
                     if Configuration.verbose == 3:
@@ -423,14 +423,14 @@ class Installer():
                     sleep(1)
                     # Create the environment variable
                     if Configuration.verbose == 3:
-                        Color.pl('  {§} Create the {C}{bold}AOVPNS_INSTALL_PATH{W} environment variable...')
+                        Color.pl('  {§} Create the {C}{bold}GITPY_INSTALL_PATH{W} environment variable...')
                         Color.pl('  {§} Call the {P}set_env_var(){W} function.')
-                        Color.pl('   {SY1}╰──╼{W} Python: {SY1}set_env_var(name=self.aovpns_path_env_var_name, value=self.aovpns_path_env_var_value){W}')
-                    set_env_var(var_name=self.aovpns_path_env_var_name, var_value=self.aovpns_path_env_var_value)
+                        Color.pl('   {SY1}╰──╼{W} Python: {SY1}set_env_var(name=self.gitpy_path_env_var_name, value=self.gitpy_path_env_var_value){W}')
+                    set_env_var(var_name=self.gitpy_path_env_var_name, var_value=self.gitpy_path_env_var_value)
 
                     # -------------------- [ FINISH ] -------------------- #
-                    Color.pl('  {+} AOVPNS are successfully installed on your system.')
-                    Color.pl('  {*} You need to restart your machine to use AOVPNS normaly.')
+                    Color.pl('  {+} GitPy are successfully installed on your system.')
+                    Color.pl('  {*} You need to restart your machine to use GitPy normaly.')
                     choice_3 = input(Color.s('  {?} Do you want to reboot your machine now? [y/n] '))
                     if choice_3.lower() == 'y':
                         # Removing the python cache
@@ -440,14 +440,14 @@ class Installer():
                     else:
                         # Removing the python cache
                         remove_python_cache(pwd=pwd)
-                        Color.pl('  {*} Now you can run the command {G}aovpns{W} anywhere in the terminal.')
+                        Color.pl('  {*} Now you can run the command {G}gitpy{W} anywhere in the terminal.')
                         if Configuration.verbose == 3:
                             Color.pl('  {§} Exiting with the exit code: {G}0{W}')
                             Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(0){W}')
                         sys.exit(0)
                 except KeyboardInterrupt:
                     Color.pl('\n  {!} Installation process interrupted.')
-                    Color.pl('  {*} You must re-run the installation process to install AOVPNS correctly.')
+                    Color.pl('  {*} You must re-run the installation process to install GitPy correctly.')
                     Color.pl('  {-} Exiting...')
                     # Removing the python cache
                     remove_python_cache(pwd=pwd)

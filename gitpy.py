@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 #---[Name & Dates]----------------------------------------------------------#
-#  Filename ~ aovpns.py                 [Created: 2023-01-26 | 10:37 - AM]  #
+#  Filename ~ gitpy.py                 [Created: 2023-01-26 | 10:37 - AM]  #
 #                                       [Updated: 2023-02-13 |  4:12 - PM]  #
 #---[Info]------------------------------------------------------------------#
-#  The call methode of aovpns                                               #
+#  The call methode of gitpy                                               #
 #  Language ~ Python3                                                       #
 #---[Author]----------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
@@ -44,31 +44,31 @@ try:
     # Where this file is executed
     cwd = os.path.dirname(os.path.abspath(__file__))
 
-    # Call the entry point of the main file of AOVPNS
+    # Call the entry point of the main file of GitPy
     __main__.entry_point(pwd = cwd)
 
 except ModuleNotFoundError as mnfe:
     Color.pexception(mnfe)
     Color.pl('  {!} ModuleNotFoundError: %s' % mnfe)
-    Color.pl('  {*} Try to run {G}aovpns --install{W} to install AOVPNS properly on you system.')
+    Color.pl('  {*} Try to run {G}gitpy --install{W} to install GitPy properly on you system.')
     Color.pl('  {*} If the problem was not solved, please report the issue on {C}%s{W}' % Configuration.REPO_URL)
 
 except NameError as ne:
     Color.pexception(ne)
     Color.pl('  {!} NameError: %s' % ne)
-    Color.pl('  {*} Try to run {G}aovpns --install{W} to install AOVPNS properly on you system.')
+    Color.pl('  {*} Try to run {G}gitpy --install{W} to install GitPy properly on you system.')
     Color.pl('  {*} If the problem was not solved, please report the issue on {C}%s{W}' % Configuration.REPO_URL)
 
 except ImportError as ie:
     Color.pexception(ie)
     Color.pl('  {!} ImportError: %s' % ie)
-    Color.pl('  {*} Try to run {G}aovpns --install{W} to install AOVPNS properly on you system.')
+    Color.pl('  {*} Try to run {G}gitpy --install{W} to install GitPy properly on you system.')
     Color.pl('  {*} If the problem was not solved, please report the issue on {C}%s{W}' % Configuration.REPO_URL)
 
 except Exception as e:
     Color.pexception(e)
     Color.pl('  {!} Exception error: %s' % e)
-    Color.pl('  {*} Try to run {G}aovpns --install{W} to install AOVPNS properly on you system.')
+    Color.pl('  {*} Try to run {G}gitpy --install{W} to install GitPy properly on you system.')
     Color.pl('  {*} If the problem was not solved, please report the issue on {C}%s{W}' % Configuration.REPO_URL)
 
 except KeyboardInterrupt:

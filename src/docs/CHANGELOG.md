@@ -41,7 +41,7 @@
                       /_/  |_\____/ _____/  /_/     /_/ |_/  /____/
                       
 
-  AOVPNS - A tool for make multiple OpenVPN server and manage existing OpenVPN's client config.
+  GitPy - A tool for make multiple OpenVPN server and manage existing OpenVPN's client config.
 
 </pre>
 
@@ -63,25 +63,25 @@ Liens à modifier
 
 <!--  [ Version ] -->
 <p align="center">
-    <img src="https://img.shields.io/badge/Version-0.0.0.1-success?style=for-the-badge" alt="aovpns's version">
+    <img src="https://img.shields.io/badge/Version-0.0.0.1-success?style=for-the-badge" alt="gitpy's version">
 </p>
 
 <!--  [ Informations about this repositorie ] -->
 <p align="center">
-    <a href="https://github.com/MyMeepSQL/aovpns/stargazers">
-        <img src="https://img.shields.io/github/stars/MyMeepSQL/aovpns?style=for-the-badge&color=success" alt="Stars">
+    <a href="https://github.com/MyMeepSQL/gitpy/stargazers">
+        <img src="https://img.shields.io/github/stars/MyMeepSQL/gitpy?style=for-the-badge&color=success" alt="Stars">
     </a>
-    <a href="https://github.com/MyMeepSQL/aovpns/network/members">
-        <img src="https://img.shields.io/github/forks/MyMeepSQL/aovpns?color=cyan&style=for-the-badge&color=success" alt="Forks">
+    <a href="https://github.com/MyMeepSQL/gitpy/network/members">
+        <img src="https://img.shields.io/github/forks/MyMeepSQL/gitpy?color=cyan&style=for-the-badge&color=success" alt="Forks">
     </a>
-    <a href="https://github.com/MyMeepSQL/aovpns/watchers">
-        <img src="https://img.shields.io/github/watchers/MyMeepSQL/aovpns?color=cyan&style=for-the-badge&color=success" alt="Watchers">
+    <a href="https://github.com/MyMeepSQL/gitpy/watchers">
+        <img src="https://img.shields.io/github/watchers/MyMeepSQL/gitpy?color=cyan&style=for-the-badge&color=success" alt="Watchers">
     </a>
-    <a href="https://github.com/MyMeepSQL/aovpns/issues">
-        <img src="https://img.shields.io/github/issues/MyMeepSQL/aovpns?color=success&style=for-the-badge" alt="Issues">
+    <a href="https://github.com/MyMeepSQL/gitpy/issues">
+        <img src="https://img.shields.io/github/issues/MyMeepSQL/gitpy?color=success&style=for-the-badge" alt="Issues">
     </a>
-    <a href="https://github.com/MyMeepSQL/aovpns/issues">
-        <img src="https://img.shields.io/github/last-commit/MyMeepSQL/aovpns/master?color=success&style=for-the-badge" alt="GitHub last commit (branch)">
+    <a href="https://github.com/MyMeepSQL/gitpy/issues">
+        <img src="https://img.shields.io/github/last-commit/MyMeepSQL/gitpy/master?color=success&style=for-the-badge" alt="GitHub last commit (branch)">
     </a>
 
 </p>
@@ -91,9 +91,9 @@ Liens à modifier
     <img src="https://img.shields.io/badge/Release%20status-In%20Development-informational?style=for-the-badge" alt="Release status">
     <img src="https://img.shields.io/badge/Supported%20OS-Linux-informational?style=for-the-badge" alt="Supported OS">
     <img src="https://img.shields.io/badge/Supported%20distros-Arch%20&%20Debian%20based-informational?style=for-the-badge" alt="Supported ditros">
-    <img src="https://img.shields.io/github/repo-size/MyMeepSQL/aovpns?color=informational&style=for-the-badge" alt="Repo size">
-    <a href="https://github.com/MyMeepSQL/aovpns/blob/test_v1/LICENSE">
-        <img src="https://img.shields.io/github/license/MyMeepSQL/aovpns?color=informational&style=for-the-badge" alt="Repo License" >
+    <img src="https://img.shields.io/github/repo-size/MyMeepSQL/gitpy?color=informational&style=for-the-badge" alt="Repo size">
+    <a href="https://github.com/MyMeepSQL/gitpy/blob/test_v1/LICENSE">
+        <img src="https://img.shields.io/github/license/MyMeepSQL/gitpy?color=informational&style=for-the-badge" alt="Repo License" >
     </a>
 </p>
 
@@ -105,7 +105,7 @@ Liens à modifier
 ---
 
 
-# All changes of the AOVPNS
+# All changes of the GitPy
 
 | Version | Date | Type | Description |
 | ------------- | ------------- |------------- | ------------- |

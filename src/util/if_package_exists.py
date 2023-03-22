@@ -1,11 +1,12 @@
-<!--
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
-#---[Metadata]--------------------------------------------------------------#
-#  Filename ~ AUTHORS                   [Created: 2023-02-11 | 12:54 - AM]  #
-#                                       [Updated: 2023-02-11 | 12:54 - AM]  #
+#---[Name & Dates]----------------------------------------------------------#
+#  Filename ~ if_package_exists.py      [Created: 2023-02-28 |  8:46 - AM]  #
+#                                       [Updated: 2023-02-28 |  9:22 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  The author information                                                   #
-#  Language ~ Markdown                                                      #
+#  Check if a package are installed on the machine                          #
+#  Language ~ Python3                                                       #
 #---[Author]----------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
 #---[Operating System]------------------------------------------------------#
@@ -29,19 +30,19 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.              #
 #---------------------------------------------------------------------------#
 
--->
+# Import section
+import subprocess
 
-# Author of GitPy
+## Third party libraries
+from src.util.based_distro import Based_Distro as BD
 
-GitPy is a projet owned by © PSociety™ and coded by *Thomas Pellissier (@MyMeepSQL)*.
-
-----
-
-* Contact
-  * Email: <thomas.pellissier.pro@proton.me>
-  * Discord: MyMeepSQL#0141
-* Socal
-  * GitHub profile: <https://github.com/MyMeepSQL>
-  * Twitter profile: <https://twitter.com/MyMeepSQL>
-
-----
+# Main
+def package_exists(package):
+    '''
+    Check if package are install on the machine
+    '''
+    if BD.__init__() == 'Debian':
+        result = subprocess.run('dpkg -s %s' % package, shell = True, stdout = subprocess.PIPE)
+    elif BD.__init__() == 'Arch':
+        result = subprocess.run('pacman -Q %s' % package, shell = True, stdout = subprocess.PIPE)
+    return result.stdout != b''

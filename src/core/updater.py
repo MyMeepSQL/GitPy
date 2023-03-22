@@ -5,8 +5,8 @@
 #  Filename ~ updater.py                [Created: 2023-03-21 |  8:32 - AM]  #
 #                                       [Updated: 2023-03-21 | 10:23 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  The updater of AOVPNS for download and install the latest                #
-#  version of AOVPNS from the GitHub repository.                            #
+#  The updater of GitPy for download and install the latest                #
+#  version of GitPy from the GitHub repository.                            #
 #  Language ~ Python3                                                       #
 #---[Author]----------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
@@ -43,7 +43,7 @@ from requests import get
 
 ## Third party libraries
 from src.config import Configuration
-from src.__main__ import AOVPNS
+from src.__main__ import GitPy
 from src.tools.packaging import version
 from src.util.clear import clear
 from src.util.colors import Color
@@ -58,7 +58,7 @@ from src.util.env_var import set_env_var, remove_env_var
 # Main
 class Updater():
     '''
-    The updater of AOVPNS for download and install the latest version of AOVPNS from the GitHub repository.
+    The updater of GitPy for download and install the latest version of GitPy from the GitHub repository.
     '''
 
     # Variables
@@ -71,8 +71,8 @@ class Updater():
     REPO_METADATA_URL = Configuration.REPO_METADATA_URL
 
     # Environment variables
-    aovpns_path_env_var_name = Configuration.aovpns_path_env_var_name
-    aovpns_path_env_var_value = Configuration.DEFAULT_INSTALL_PATH
+    gitpy_path_env_var_name = Configuration.gitpy_path_env_var_name
+    gitpy_path_env_var_value = Configuration.DEFAULT_INSTALL_PATH
 
     # Github's repo settings
     REPO_URL = Configuration.REPO_URL
@@ -85,17 +85,17 @@ class Updater():
     def __init__(self, args, pwd):
         # Check if the user's platform is a Linux machine or not
         if platform.system() != 'Linux':
-            AOVPNS.Banner()
+            GitPy.Banner()
             print()
-            Color.pl('  {!} You tried to run AOVPNS on a non-linux machine!')
-            Color.pl('  {*} AOVPNS can be run only on a Linux kernel.')
+            Color.pl('  {!} You tried to run GitPy on a non-linux machine!')
+            Color.pl('  {*} GitPy can be run only on a Linux kernel.')
             sys.exit(1)
         else:
-            # Check if the user ran AOVPNS with root privileges or not
+            # Check if the user ran GitPy with root privileges or not
             if os.getuid() != 0:
-                AOVPNS.Banner()
+                GitPy.Banner()
                 print()
-                Color.pl('  {!} The AOVPNS Updater must be run as root.')
+                Color.pl('  {!} The GitPy Updater must be run as root.')
                 Color.pl('  {*} Re-run with sudo or switch to root user.')
                 sys.exit(1)
             else:
@@ -107,15 +107,15 @@ class Updater():
                     based_distro = 'Debian'
                     pass
                 else:
-                    AOVPNS.Banner()
+                    GitPy.Banner()
                     print()
                     Color.pl('  {!} You\'re not running Arch or Debian variant.')
-                    Color.pl('  {*} AOVPNS can only run on Arch or Debian based distros.')
+                    Color.pl('  {*} GitPy can only run on Arch or Debian based distros.')
                     Color.pl('  {-} Exiting...')
                     sys.exit(1)
 
-            # aovpns main file in /usr/bin/
-            aovpns_command_bin = Create_bin_file.__init__(path=self.INSTALL_PATH)
+            # gitpy main file in /usr/bin/
+            gitpy_command_bin = Create_bin_file.__init__(path=self.INSTALL_PATH)
 
         if args.quiet:
             # -------------------- [ Quiet update ] -------------------- #
@@ -125,10 +125,10 @@ class Updater():
                     Color.pl('No Internet connexion found, please check if you are connected to the Internet and retry.')
                     sys.exit(1)
 
-                ## ---------- [ Check if the AOVPNS repositorie on GitHub are reachable or not ] ---------- ##
+                ## ---------- [ Check if the GitPy repositorie on GitHub are reachable or not ] ---------- ##
                 GR.is_reachable(args)
 
-                ## ---------- [ Check if the AOVPNS version is up to date or not ] ---------- ##
+                ## ---------- [ Check if the GitPy version is up to date or not ] ---------- ##
                 rqst = get('%s' % self.REPO_METADATA_URL, timeout=5)
                 fetch_sc = rqst.status_code
                 if fetch_sc == 200:
@@ -138,37 +138,37 @@ class Updater():
                     if version.parse(cp_online_ver) > version.parse(self.VERSION):
                         pass
                     else:
-                        Color.pl('  {!} You already have the latest version of AOVPNS!')
+                        Color.pl('  {!} You already have the latest version of GitPy!')
                         sys.exit(1)
                 sleep(0.5)
 
                 # ---------- [ Prepare the update ] ---------- #
-                # If a file called 'aovpns' already exist in /usr/bin/, inform the user and delete it
-                if os.path.isfile(self.BIN_PATH + 'aovpns'):
-                    os.remove(self.BIN_PATH + 'aovpns')
+                # If a file called 'gitpy' already exist in /usr/bin/, inform the user and delete it
+                if os.path.isfile(self.BIN_PATH + 'gitpy'):
+                    os.remove(self.BIN_PATH + 'gitpy')
                 # Remove the temporary directory if it already exists
                 if os.path.isdir(self.TEMP_PATH):
                     shutil.rmtree(self.TEMP_PATH)
-                # Create the temp folder that be use to download the latest AOVPNS version from GitHub
-                # in it and install AOVPNS from this folder
+                # Create the temp folder that be use to download the latest GitPy version from GitHub
+                # in it and install GitPy from this folder
                 os.makedirs(self.TEMP_PATH, mode=0o777)
-                # Remove the current AOVPNS instance
+                # Remove the current GitPy instance
                 shutil.rmtree(self.INSTALL_PATH)
-                # Create the main folder where AOVPNS will be installed
+                # Create the main folder where GitPy will be installed
                 os.makedirs(self.INSTALL_PATH, mode=0o777)
-                # Clone the latest version of AOVPNS into the temp. folder
+                # Clone the latest version of GitPy into the temp. folder
                 Process.call('git clone %s --branch %s %s' % (self.REPO_URL , self.REPO_BRANCH , self.TEMP_PATH), shell=True)
                 sleep(1)
 
-                #  ---------- [ AOVPNS Update ] ---------- #
-                # Install AOVPNS by moving all the files from the temp. folder to the main folder
+                #  ---------- [ GitPy Update ] ---------- #
+                # Install GitPy by moving all the files from the temp. folder to the main folder
                 shutil.copytree(src=self.TEMP_PATH, dst=self.INSTALL_PATH, dirs_exist_ok=True)
-                # Update the command 'aovpns' in /usr/bin/
-                with open(self.BIN_PATH + 'aovpns', 'x') as aovpns_file:
-                    aovpns_file.write(aovpns_command_bin)
+                # Update the command 'gitpy' in /usr/bin/
+                with open(self.BIN_PATH + 'gitpy', 'x') as gitpy_file:
+                    gitpy_file.write(gitpy_command_bin)
                 # Apply rights on files
                 sleep(1)
-                Process.call('chmod 777 %saovpns' % self.BIN_PATH, shell=True)
+                Process.call('chmod 777 %sgitpy' % self.BIN_PATH, shell=True)
                 Process.call('chmod 777 -R %s' % self.INSTALL_PATH, shell=True)
                 # Deleting the temporary directory
                 shutil.rmtree(self.TEMP_PATH)
@@ -181,13 +181,13 @@ class Updater():
                 # Color.pl(f'Exception : %s' % str(E) )
             except KeyboardInterrupt:
                 Color.pl('\nUpdate process interrupted.')
-                Color.pl('You must re-run the update process to update AOVPNS correctly.')
+                Color.pl('You must re-run the update process to update GitPy correctly.')
                 # Removing the python cache
                 remove_python_cache(pwd=pwd)
                 sys.exit(1)
         else:
             # -------------------- [ No quiet installation ] -------------------- #
-            AOVPNS.Banner()
+            GitPy.Banner()
             print()
             if Configuration.verbose >= 1:
                 Color.pl('  {*} Verbosity level: %s' % Configuration.verbose)
@@ -200,16 +200,16 @@ class Updater():
                     Color.pl('   {G}├──╼{W} Verbose level 1 ({C}Blue color{W})   : {&}')
                     Color.pl('   {G}├──╼{W} Verbose level 2 ({P}Pink color{W})   : {#}')
                     Color.pl('   {G}╰──╼{W} Verbose level 3 ({SY1}Yellow color{W}) : {§}')
-            # Check if the AOVPNS_INSTALL_PATH environment variable is set or not
+            # Check if the GITPY_INSTALL_PATH environment variable is set or not
             try:
                 if Configuration.verbose == 3:
-                    Color.pl('  {§} Checking if the {C}{bold}AOVPNS_INSTALL_PATH{W} environment variable is set or not...')
-                    Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.environ[self.aovpns_path_env_var_name]{W}')
-                AOVPNS_PATH = os.environ[self.aovpns_path_env_var_name]
-                self.INSTALL_PATH = AOVPNS_PATH
+                    Color.pl('  {§} Checking if the {C}{bold}GITPY_INSTALL_PATH{W} environment variable is set or not...')
+                    Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.environ[self.gitpy_path_env_var_name]{W}')
+                GITPY_PATH = os.environ[self.gitpy_path_env_var_name]
+                self.INSTALL_PATH = GITPY_PATH
             except KeyError:
-                Color.pl('  {!} AOVPNS is not installed on this machine.')
-                Color.pl('  {*} Because the AOVPNS_INSTALL_PATH environment variable is not set (in the {C}/etc/environment{W} file).')
+                Color.pl('  {!} GitPy is not installed on this machine.')
+                Color.pl('  {*} Because the GITPY_INSTALL_PATH environment variable is not set (in the {C}/etc/environment{W} file).')
                 Color.pl('  {-} Exiting...')
                 if Configuration.verbose == 3:
                     Color.pl('  {§} Exiting with the exit code: {R}1{W}')
@@ -228,16 +228,16 @@ class Updater():
                 Color.pl('  {!} No Internet connexion found, please check if you are connected to the Internet and retry.')
                 sys.exit(1)
 
-            ## ---------- [ Check if the AOVPNS repositorie on GitHub are reachable or not ] ---------- ##
+            ## ---------- [ Check if the GitPy repositorie on GitHub are reachable or not ] ---------- ##
             if Configuration.verbose == 3:
-                Color.pl('  {§} Check if the AOVPNS\'s repositorie are reachable or not...')
+                Color.pl('  {§} Check if the GitPy\'s repositorie are reachable or not...')
                 Color.pl('   {SY1}╰──╼{W} Call the {SY1}is_reachable(){W} function.')
             GR.is_reachable(args)
 
             # ---- [ The info box ] ---- #
             Color.pl('''  {*} {underscore}This tool will{W}:
-                    \r     {D}[{W}{LL}1{W}{D}]{W} Download the latest version of AOVPNS into {C}%s{W}.
-                    \r     {D}[{W}{LL}2{W}{D}]{W} Update the current AOVPNS instance with the new one.
+                    \r     {D}[{W}{LL}1{W}{D}]{W} Download the latest version of GitPy into {C}%s{W}.
+                    \r     {D}[{W}{LL}2{W}{D}]{W} Update the current GitPy instance with the new one.
                     \r     {D}[{W}{LL}3{W}{D}]{W} Apply all rights on the new files.
             ''' % self.TEMP_PATH)
             if args.no_confirm:
@@ -258,7 +258,7 @@ class Updater():
                             if version.parse(cp_online_ver) > version.parse(self.VERSION):
                                 Color.pl('  {*} A new update are avalable : %s (current: %s)' % (cp_online_ver, self.VERSION))
                             else:
-                                Color.pl('  {!} You already have the latest version of AOVPNS!')
+                                Color.pl('  {!} You already have the latest version of GitPy!')
                                 if Configuration.verbose == 3:
                                     Color.pl('  {§} Exiting with the exit code: {R}1{W}')
                                     Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
@@ -268,38 +268,38 @@ class Updater():
                     sleep(0.5)
 
                     # ---------- [ Prepare the update ] ---------- #
-                    # If a file called 'aovpns' already exist in /usr/bin/, inform the user and delete it
-                    if os.path.isfile(self.BIN_PATH + 'aovpns'):
+                    # If a file called 'gitpy' already exist in /usr/bin/, inform the user and delete it
+                    if os.path.isfile(self.BIN_PATH + 'gitpy'):
                         if Configuration.verbose == 3:
-                            Color.pl('  {§} The aovpns command already exist in {C}%s{W}' % self.BIN_PATH)
+                            Color.pl('  {§} The gitpy command already exist in {C}%s{W}' % self.BIN_PATH)
                             Color.pl('  {§} Remove it...')
-                            Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.remove(self.BIN_PATH + \'aovpns\'){W})')
-                        os.remove(self.BIN_PATH + 'aovpns')
+                            Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.remove(self.BIN_PATH + \'gitpy\'){W})')
+                        os.remove(self.BIN_PATH + 'gitpy')
                     # Remove the temporary directory if it already exists
                     if os.path.isdir(self.TEMP_PATH):
                         if args.verbose == 3:
-                            Color.pl('  {§} AOVPNS\'s temporary folder detected.')
+                            Color.pl('  {§} GitPy\'s temporary folder detected.')
                             Color.pl('  {§} Remove it...')
                             Color.pl('   {SY1}╰──╼{W} Python: {SY1}shutil.rmtree(self.TEMP_PATH){W}')
                         shutil.rmtree(self.TEMP_PATH)
-                    # Create the temp folder that be use to download the latest AOVPNS version from GitHub
-                    # in it and install AOVPNS from this folder
+                    # Create the temp folder that be use to download the latest GitPy version from GitHub
+                    # in it and install GitPy from this folder
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Creating temporary folder ({C}%s{W})...' % self.TEMP_PATH)
                         Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.makedirs(self.TEMP_PATH, mode=0o777){W}')
                     os.makedirs(self.TEMP_PATH, mode=0o777)
-                    # Remove the current AOVPNS instance
+                    # Remove the current GitPy instance
                     if Configuration.verbose == 3:
-                        Color.pl('  {§} Deleting current AOVPNS instance...')
+                        Color.pl('  {§} Deleting current GitPy instance...')
                         Color.pl('   {SY1}╰──╼{W} Python: {SY1}shutil.rmtree(%s){W}' % self.INSTALL_PATH)
                     shutil.rmtree(self.INSTALL_PATH)
-                    # Create the main folder where AOVPNS will be installed
+                    # Create the main folder where GitPy will be installed
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Creating main folder ({C}%s{W})...' % self.INSTALL_PATH)
                         Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.makedirs(self.INSTALL_PATH, mode=0o777){W}')
                     os.makedirs(self.INSTALL_PATH, mode=0o777)
-                    # Clone the latest version of AOVPNS into the temp. folder
-                    Color.pl('  {-} Downloading the latest AOVPNS\'s version into {C}%s{W}...' % self.TEMP_PATH)
+                    # Clone the latest version of GitPy into the temp. folder
+                    Color.pl('  {-} Downloading the latest GitPy\'s version into {C}%s{W}...' % self.TEMP_PATH)
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Cloning files from GitHub to the temporary directory...')
                     Process.call('git clone %s --branch %s %s' % (self.REPO_URL , self.REPO_BRANCH , self.TEMP_PATH), shell=True)
@@ -307,23 +307,23 @@ class Updater():
                         Color.pl('  {§} Python: {SY1}sleep(1){W}')
                     sleep(1)
 
-                    #  ---------- [ AOVPNS Update ] ---------- #
-                    Color.pl('  {-} Updating AOVPNS...')
-                    # Install AOVPNS by moving all the files from the temp. folder to the main folder
+                    #  ---------- [ GitPy Update ] ---------- #
+                    Color.pl('  {-} Updating GitPy...')
+                    # Install GitPy by moving all the files from the temp. folder to the main folder
                     if Configuration.verbose == 3:
-                        Color.pl('  {§} Copying all files from the AOVPNS\'s temporary folder to the main directory ({C}%s{W})...' % self.INSTALL_PATH)
+                        Color.pl('  {§} Copying all files from the GitPy\'s temporary folder to the main directory ({C}%s{W})...' % self.INSTALL_PATH)
                         Color.pl('   {SY1}╰──╼{W} Python: {SY1}shutil.copytree(src=self.TEMP_PATH, dst=INSTALL_PATH, dirs_exist_ok=True){W}')
                     shutil.copytree(src=self.TEMP_PATH, dst=self.INSTALL_PATH, dirs_exist_ok=True)
-                    # Update the command 'aovpns' in /usr/bin/
-                    Color.pl('  {-} Updating the {G}aovpns{W} command into {C}%s{W}...' % self.BIN_PATH)
-                    with open(self.BIN_PATH + 'aovpns', 'x') as aovpns_file:
-                        aovpns_file.write(aovpns_command_bin)
+                    # Update the command 'gitpy' in /usr/bin/
+                    Color.pl('  {-} Updating the {G}gitpy{W} command into {C}%s{W}...' % self.BIN_PATH)
+                    with open(self.BIN_PATH + 'gitpy', 'x') as gitpy_file:
+                        gitpy_file.write(gitpy_command_bin)
                     # Apply rights on files
                     Color.pl('  {-} Apply rights to the new files...')
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Python: {SY1}sleep(1){W}')
                     sleep(1)
-                    Process.call('chmod 777 %saovpns' % self.BIN_PATH, shell=True)
+                    Process.call('chmod 777 %sgitpy' % self.BIN_PATH, shell=True)
                     Process.call('chmod 777 -R %s' % self.INSTALL_PATH, shell=True)
                     # Deleting the temporary directory
                     if Configuration.verbose == 3:
@@ -334,7 +334,7 @@ class Updater():
                     sleep(1)
                     # Removing the python cache
                     remove_python_cache(pwd=pwd)
-                    Color.pl('  {+} AOVPNS successfully updated with the version: %s' % cp_online_ver)
+                    Color.pl('  {+} GitPy successfully updated with the version: %s' % cp_online_ver)
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Exiting with the exit code: {G}0{W}')
                         Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(0){W}')
@@ -342,10 +342,10 @@ class Updater():
                 except Exception as E:
                     Color.pexception(E)
                     # Color.pl(f'Exception : %s' % str(E) )
-                    # log_writer(f'aovpns, %s' % str(E) )
+                    # log_writer(f'gitpy, %s' % str(E) )
                 except KeyboardInterrupt:
                     Color.pl('\n  {!} Update process interrupted.')
-                    Color.pl('  {!} You must re-run the update process to update AOVPNS correctly.')
+                    Color.pl('  {!} You must re-run the update process to update GitPy correctly.')
                     # Removing the python cache
                     remove_python_cache(pwd=pwd)
                     if Configuration.verbose == 3:

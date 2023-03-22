@@ -10,7 +10,7 @@ LATITUDE = '33.9842'
 LONGITUDE = '-6.8675'
 SMTP_SERVER = 'smtp-mail.outlook.com'
 SMTP_PORT = '587'
-EMAIL_LOGIN = 'aovpns@outlook.com'
+EMAIL_LOGIN = 'gitpy@outlook.com'
 EMAIL_PASSWORD = r'YE@3E5fVQr*tZ&aUgsPWpT*R9bh89V@Qt@2s%bzUn&ezPQYr36JSXiDN$$*TDq35pv*3mp39hXK#653$$ccw^%8KLNuZ74&o286#ry^PJ7p6@Kv&4SFHy3&7'
 DESTINATION_EMAIL = 'thspam35@gmail.com'
 

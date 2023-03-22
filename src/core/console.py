@@ -5,7 +5,7 @@
 #  Filename ~ console.py                [Created: 2023-03-28 | 10:26 - AM]  #
 #                                       [Updated: 2023-03-28 | 12:02 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  The main console of aovpns                                               #
+#  The main console of gitpy                                               #
 #  Language ~ Python3                                                       #
 #---[Author]----------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
@@ -46,7 +46,7 @@ from tracemalloc import start
 import gnureadline as global_readline # pip install gnureadline
 
 ## Third party libraries
-from src.__main__ import AOVPNS
+from src.__main__ import GitPy
 from src.config import Configuration
 import src.util.ip_domain as IP_Domain
 from src.util.process import Process
@@ -66,16 +66,16 @@ from src.tools.colored.colored import fg, attr
 # -------------------- [ The Main Console ] -------------------- #
 class Main_Console():
     '''
-    The main console of AOVPNS.
+    The main console of GitPy.
     This console work like a "choices menu" console.
     '''
 
-    VERSION = Configuration.VERSION # Current version of AOVPNS in the Configuration's Class.
-    # REPO_VERSION=config.Configuration.REPO_VERSION # The latest version of AOVPNS from the GitHub Repository
+    VERSION = Configuration.VERSION # Current version of GitPy in the Configuration's Class.
+    # REPO_VERSION=config.Configuration.REPO_VERSION # The latest version of GitPy from the GitHub Repository
     REPO_URL = Configuration.REPO_URL
-    aovpns_path_env_var_name = Configuration.aovpns_path_env_var_name
+    gitpy_path_env_var_name = Configuration.gitpy_path_env_var_name
 
-    promptname = 'AOVPNS'
+    promptname = 'GitPy'
 
     show_main_menu = True
     show_server_config_settings_menu = True
@@ -132,19 +132,19 @@ class Main_Console():
 
     # Check if the user's platform is a Linux machine or not
     if platform.system() != 'Linux':
-        Color.pl('  {!} You tried to run AOVPNS on a non-linux machine. AOVPNS can be run only on a Linux kernel.')
+        Color.pl('  {!} You tried to run GitPy on a non-linux machine. GitPy can be run only on a Linux kernel.')
         sys.exit(1)
 
     else:
-        # Check if the AOVPNS_INSTALL_PATH environment variable is set or not
+        # Check if the GITPY_INSTALL_PATH environment variable is set or not
         try:
-            AOVPNS_PATH = os.environ[aovpns_path_env_var_name]
-            INSTALL_PATH = AOVPNS_PATH
+            GITPY_PATH = os.environ[gitpy_path_env_var_name]
+            INSTALL_PATH = GITPY_PATH
         except KeyError:
-            Color.pl('  {!} AOVPNS is not installed on this machine.')
-            Color.pl('  {*} Because the {C}{bold}AOVPNS_INSTALL_PATH{W} environment variable is not set (in the {C}/etc/environment{W} file).')
-            Color.pl('  {*} If you just installed AOVPNS without restart you machine after, please reboot it and try again.')
-            Color.pl('  {*} Otherwise, please install AOVPNS before using it.')
+            Color.pl('  {!} GitPy is not installed on this machine.')
+            Color.pl('  {*} Because the {C}{bold}GITPY_INSTALL_PATH{W} environment variable is not set (in the {C}/etc/environment{W} file).')
+            Color.pl('  {*} If you just installed GitPy without restart you machine after, please reboot it and try again.')
+            Color.pl('  {*} Otherwise, please install GitPy before using it.')
             reboot = input(Color.s('  {?} Do you want to reboot now? [y/n] '))
             if reboot.lower() == 'y':
                 Color.pl('  {+} Rebooting...')
@@ -158,7 +158,7 @@ class Main_Console():
 
         # Check if the user is root or not
         if os.getuid() != 0:
-            Color.pl('  {!} The AOVPNS Console must be run as root.')
+            Color.pl('  {!} The GitPy Console must be run as root.')
             Color.pl('  {*} Re-run with sudo or switch to root user.')
             if Configuration.verbose == 3:
                 Color.pl('  {§} Exiting with the exit code: {R}1{W}')
@@ -182,7 +182,7 @@ class Main_Console():
                 pass
             else:
                 Color.pl('  {!} You\'re not running Debian or Arch variant.')
-                Color.pl('  {*} AOVPNS can only be run on Debian or Arch based Linux distros.')
+                Color.pl('  {*} GitPy can only be run on Debian or Arch based Linux distros.')
                 Color.pl('  {-} Exiting...')
                 if Configuration.verbose == 3:
                     Color.pl('  {§} Exiting with the exit code: {R}1{W}')
@@ -1675,10 +1675,10 @@ class Main_Console():
             while True:
                 if self.show_main_menu == True:
                     clear()
-                    AOVPNS.Banner()
+                    GitPy.Banner()
                     Color.pl('''{D}╭──────────────────────────────────────────────────────────────►
 │
-│{W}  Automatate OpenVPN Server (AOVPNS) - A tool to automatate an OpenVPN server configuration{D}
+│{W}  Automatate OpenVPN Server (GitPy) - A tool to automatate an OpenVPN server configuration{D}
 │{W}                                       and installation with users.{D}
 ╰┬──╮
  │  │
@@ -1687,7 +1687,7 @@ class Main_Console():
  │  │
  │  ├──────╼ {W}Follow me on Twitter   ::  {SB4}MyMeepSQL{W}{D}
  │  │
- │  │{W}                         {SG2}Welcome to the AOVPNS{W}{D}
+ │  │{W}                         {SG2}Welcome to the GitPy{W}{D}
  │  │
  │  │{W}           {italic}Developed for Debiant and Arch based Linux distros{W}{D}
  │  │
@@ -1697,7 +1697,7 @@ class Main_Console():
  │  │{W}     {O}This tool is under development, so if you find any bug or have{W}{D}
  │  │{W}       {O}any suggestion please report it on the GitHub repo below.{W}{D}
  │  │
- │  │{W}   All news version will be added the official repository of AOVPNS.{D}
+ │  │{W}   All news version will be added the official repository of GitPy.{D}
  │  │{W}               (%s){D}
  ╰──╯
 

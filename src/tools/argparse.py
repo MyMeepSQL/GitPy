@@ -1101,7 +1101,7 @@ class _HelpAction(Action):
             help=help)
 
     def __call__(self, parser, namespace, values, option_string=None):
-        _MAIN.AOVPNS.Banner()
+        _MAIN.GitPy.Banner()
         print()
         parser.print_help()
         parser.exit()
@@ -1833,7 +1833,7 @@ class ArgumentParser(_AttributeHolder, _ActionsContainer):
         args, argv = self.parse_known_args(args, namespace)
         if argv:
             msg = _(Color.s('{O}Unrecognized arguments{W}: %s'))
-            _MAIN.AOVPNS.Banner()
+            _MAIN.GitPy.Banner()
             print()
             self.error(msg % ' '.join(argv))
         return args
@@ -1937,7 +1937,7 @@ class ArgumentParser(_AttributeHolder, _ActionsContainer):
                     if conflict_action in seen_non_default_actions:
                         msg = _('not allowed with argument %s')
                         action_name = _get_action_name(conflict_action)
-                        _MAIN.AOVPNS.Banner()
+                        _MAIN.GitPy.Banner()
                         print()
                         raise ArgumentError(action, msg % action_name)
 
@@ -1984,7 +1984,7 @@ class ArgumentParser(_AttributeHolder, _ActionsContainer):
                             explicit_arg = new_explicit_arg
                         else:
                             msg = _('ignored explicit argument %r')
-                            _MAIN.AOVPNS.Banner()
+                            _MAIN.GitPy.Banner()
                             print()
                             raise ArgumentError(action, msg % explicit_arg)
 
@@ -2000,7 +2000,7 @@ class ArgumentParser(_AttributeHolder, _ActionsContainer):
                     # explicit argument
                     else:
                         msg = _('ignored explicit argument %r')
-                        _MAIN.AOVPNS.Banner()
+                        _MAIN.GitPy.Banner()
                         print()
                         raise ArgumentError(action, msg % explicit_arg)
 
@@ -2175,7 +2175,7 @@ class ArgumentParser(_AttributeHolder, _ActionsContainer):
                 msg = ngettext('expected %s argument',
                                'expected %s arguments',
                                action.nargs) % action.nargs
-            _MAIN.AOVPNS.Banner()
+            _MAIN.GitPy.Banner()
             print()
             raise ArgumentError(action, msg)
 
@@ -2522,7 +2522,7 @@ class ArgumentParser(_AttributeHolder, _ActionsContainer):
             args = {'value': value,
                     'choices': ', '.join(map(repr, action.choices))}
             msg = _('invalid choice: %(value)r (choose from %(choices)s)')
-            _MAIN.AOVPNS.Banner()
+            _MAIN.GitPy.Banner()
             print()
             raise ArgumentError(action, msg % args)
 
@@ -2600,4 +2600,4 @@ class ArgumentParser(_AttributeHolder, _ActionsContainer):
         # self.print_usage(_sys.stderr)
         
         args={'prog': self.prog, 'message': message}
-        self.exit(2, _(Color.s('  {*} {C}Usage{W}: aovpns [OPTIONS]\n  {!} %(message)s\n  {*} Try {G}aovpns --help{W} for more information.\n')) % args)
+        self.exit(2, _(Color.s('  {*} {C}Usage{W}: gitpy [OPTIONS]\n  {!} %(message)s\n  {*} Try {G}gitpy --help{W} for more information.\n')) % args)

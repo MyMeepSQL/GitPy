@@ -5,7 +5,7 @@
 #  Filename ~ uninstaller.py            [Created: 2023-03-14 | 10:25 - AM]  #
 #                                       [Updated: 2023-03-14 | 12:01 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  Uninstall AOVPNS from your system                                        #
+#  Uninstall GitPy from your system                                        #
 #  Language ~ Python3                                                       #
 #---[Author]----------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
@@ -39,7 +39,7 @@ import subprocess
 from time import sleep
 
 ## Third party libraries
-from src.__main__ import AOVPNS
+from src.__main__ import GitPy
 from src.config import Configuration
 from src.util.clear import clear
 from src.util.colors import Color
@@ -52,27 +52,27 @@ from src.util.based_distro import Based_Distro as BD
 # Main
 class Uninstaller():
     '''
-    Uninstall AOVPNS from your system
+    Uninstall GitPy from your system
     '''
     # Variables
     BIN_PATH = Configuration.BIN_PATH
     TEMP_PATH = Configuration.TEMP_PATH
     VERSION = Configuration.VERSION
-    aovpns_path_env_var_name = Configuration.aovpns_path_env_var_name
+    gitpy_path_env_var_name = Configuration.gitpy_path_env_var_name
     # Main
     def __init__(self, args, pwd):
         # Check if the user's platform is a Linux machine or not
         if platform.system() != 'Linux':
-            AOVPNS.Banner()
+            GitPy.Banner()
             print()
-            Color.pl('  {!} You tried to run AOVPNS on a non-linux machine!')
-            Color.pl('  {*} AOVPNS can be run only on a Linux kernel.')
+            Color.pl('  {!} You tried to run GitPy on a non-linux machine!')
+            Color.pl('  {*} GitPy can be run only on a Linux kernel.')
             sys.exit(1)
         else:
             if os.getuid() != 0:
-                AOVPNS.Banner()
+                GitPy.Banner()
                 print()
-                Color.pl('  {!} The AOVPNS Installer must be run as root.')
+                Color.pl('  {!} The GitPy Installer must be run as root.')
                 Color.pl('  {*} Re-run with sudo or switch to root user.')
                 sys.exit(1)
             else:
@@ -84,38 +84,38 @@ class Uninstaller():
                     based_distro = 'Debian'
                     pass
                 else:
-                    AOVPNS.Banner()
+                    GitPy.Banner()
                     print()
                     Color.pl('  {!} You\'re not running Arch or Debian variant.')
-                    Color.pl('  {*} AOVPNS can only run on Arch or Debian based distros.')
+                    Color.pl('  {*} GitPy can only run on Arch or Debian based distros.')
                     Color.pl('  {-} Exiting...')
                     sys.exit(1)
         if args.quiet:
             # -------------------- [ Quiet installation ] -------------------- #
-            # Check if the AOVPNS_INSTALL_PATH environment variable is set or not
+            # Check if the GITPY_INSTALL_PATH environment variable is set or not
             try:
-                AOVPNS_PATH = os.environ[self.aovpns_path_env_var_name]
-                INSTALL_PATH = AOVPNS_PATH
+                GITPY_PATH = os.environ[self.gitpy_path_env_var_name]
+                INSTALL_PATH = GITPY_PATH
             except KeyError:
-                Color.pl('  {!} AOVPNS is not installed on this machine.')
-                Color.pl('  {*} Because the {C}{bold}AOVPNS_INSTALL_PATH{W} environment variable is not set (in the {C}/etc/environment{W} file).')
+                Color.pl('  {!} GitPy is not installed on this machine.')
+                Color.pl('  {*} Because the {C}{bold}GITPY_INSTALL_PATH{W} environment variable is not set (in the {C}/etc/environment{W} file).')
                 Color.pl('  {-} Exiting...')
                 sys.exit(1)
 
             ## ------ [ Remove the main folder ] ------ ##
             shutil.rmtree(INSTALL_PATH)
 
-            ## ------ [ Remove the 'aovpns' command ] ------ ##
-            os.remove(self.BIN_PATH + 'aovpns')
+            ## ------ [ Remove the 'gitpy' command ] ------ ##
+            os.remove(self.BIN_PATH + 'gitpy')
 
-            ## ------ [ Remove the 'AOVPNS_INSTALL_PAT' environment variable ] ------ ##
-            remove_env_var(var_name=self.aovpns_path_env_var_name)
+            ## ------ [ Remove the 'GITPY_INSTALL_PAT' environment variable ] ------ ##
+            remove_env_var(var_name=self.gitpy_path_env_var_name)
             # Removing the python cache
             remove_python_cache(pwd=pwd)
             sys.exit(0)            
         else:
             # -------------------- [ No quiet installation ] -------------------- #
-            AOVPNS.Banner()
+            GitPy.Banner()
             if Configuration.verbose >= 1:
                 Color.pl('\n  {*} Verbosity level: %s' % Configuration.verbose)
                 if Configuration.verbose == 1:
@@ -127,16 +127,16 @@ class Uninstaller():
                     Color.pl('   {G}├──╼{W} Verbose level 1 ({C}Blue color{W})   : {&}')
                     Color.pl('   {G}├──╼{W} Verbose level 2 ({P}Pink color{W})   : {#}')
                     Color.pl('   {G}╰──╼{W} Verbose level 3 ({SY1}Yellow color{W}) : {§}')
-            # Check if the AOVPNS_INSTALL_PATH environment variable is set or not
+            # Check if the GITPY_INSTALL_PATH environment variable is set or not
             try:
                 if Configuration.verbose == 3:
-                    Color.pl('  {§} Checking if the {C}{bold}AOVPNS_INSTALL_PATH{W} environment variable is set or not...')
-                    Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.environ[self.aovpns_path_env_var_name]{W}')
-                AOVPNS_PATH = os.environ[self.aovpns_path_env_var_name]
-                INSTALL_PATH = AOVPNS_PATH
+                    Color.pl('  {§} Checking if the {C}{bold}GITPY_INSTALL_PATH{W} environment variable is set or not...')
+                    Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.environ[self.gitpy_path_env_var_name]{W}')
+                GITPY_PATH = os.environ[self.gitpy_path_env_var_name]
+                INSTALL_PATH = GITPY_PATH
             except KeyError:
-                Color.pl('  {!} AOVPNS is not installed on this machine.')
-                Color.pl('  {*} Because the AOVPNS_INSTALL_PATH environment variable is not set (in the {C}/etc/environment{W} file).')
+                Color.pl('  {!} GitPy is not installed on this machine.')
+                Color.pl('  {*} Because the GITPY_INSTALL_PATH environment variable is not set (in the {C}/etc/environment{W} file).')
                 Color.pl('  {-} Exiting...')
                 if Configuration.verbose == 3:
                     Color.pl('  {§} Exiting with the exit code: {R}1{W}')
@@ -145,19 +145,19 @@ class Uninstaller():
             # Inform the user what the uninstaller will do
             Color.pl('''  {*} {underscore}This tool will{W}:
                     \r     {D}[{W}{LL}1{W}{D}]{W} Remove the {C}%s{W} folder.
-                    \r     {D}[{W}{LL}2{W}{D}]{W} Remove the {C}%saovpns{W} file.
+                    \r     {D}[{W}{LL}2{W}{D}]{W} Remove the {C}%sgitpy{W} file.
                     \r     {D}[{W}{LL}3{W}{D}]{W} Remove the {C}{bold}%s{W} environment variable.
-            ''' % (INSTALL_PATH, self.BIN_PATH, self.aovpns_path_env_var_name))
+            ''' % (INSTALL_PATH, self.BIN_PATH, self.gitpy_path_env_var_name))
             if args.no_confirm:
                 Color.pl('  {?} Do you want to continue? [Y/n] y')
                 choice_1 = 'y'
             else:
                 choice_1 = input(Color.s('  {?} Do you want to continue? [Y/n] '))
 
-            # ---------- [ AOVPNS uninstallation ] ---------- #
+            # ---------- [ GitPy uninstallation ] ---------- #
             if choice_1.lower() == 'y' or not choice_1:
                 try:
-                    Color.pl('  {-} Uninstalling AOVPNS from your system...')
+                    Color.pl('  {-} Uninstalling GitPy from your system...')
 
                     ## ------ [ Remove the main folder ] ------ ##
                     if Configuration.verbose == 3:
@@ -165,19 +165,19 @@ class Uninstaller():
                         Color.pl('   {SY1}╰──╼{W} Python: {SY1}shutil.rmtree(self.INSTALL_PATH){W}')
                     shutil.rmtree(INSTALL_PATH)
 
-                    ## ------ [ Remove the 'aovpns' command ] ------ ##
+                    ## ------ [ Remove the 'gitpy' command ] ------ ##
                     if Configuration.verbose == 3:
-                        Color.pl('  {§} Removing the {C}%saovpns{W} file...' % self.BIN_PATH)
-                        Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.remove(self.BIN_PATH + \'aovpns\'){W}')
-                    os.remove(self.BIN_PATH + 'aovpns')
+                        Color.pl('  {§} Removing the {C}%sgitpy{W} file...' % self.BIN_PATH)
+                        Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.remove(self.BIN_PATH + \'gitpy\'){W}')
+                    os.remove(self.BIN_PATH + 'gitpy')
 
-                    ## ------ [ Remove the 'AOVPNS_INSTALL_PAT' environment variable ] ------ ##
+                    ## ------ [ Remove the 'GITPY_INSTALL_PAT' environment variable ] ------ ##
                     if Configuration.verbose == 3:
-                        Color.pl('  {§} Removing the {C}{bold}AOVPNS_INSTALL_PAT{W} environment variable...')
-                        Color.pl('   {SY1}╰──╼{W} Python: {SY1}remove_env_var(self.aovpns_path_env_var_name){W}')
-                    remove_env_var(var_name=self.aovpns_path_env_var_name)
-                    Color.pl('  {*} AOVPNS are successfully uninstalled from your system.')
-                    Color.pl('  {*} You need to restart your machine to completly remove the {C}{bold}AOVPNS_INSTALL_PATH{W} environment variable.')
+                        Color.pl('  {§} Removing the {C}{bold}GITPY_INSTALL_PAT{W} environment variable...')
+                        Color.pl('   {SY1}╰──╼{W} Python: {SY1}remove_env_var(self.gitpy_path_env_var_name){W}')
+                    remove_env_var(var_name=self.gitpy_path_env_var_name)
+                    Color.pl('  {*} GitPy are successfully uninstalled from your system.')
+                    Color.pl('  {*} You need to restart your machine to completly remove the {C}{bold}GITPY_INSTALL_PATH{W} environment variable.')
                     choice_2 = input(Color.s('  {?} Do you want to reboot your machine now? [y/n] '))
                     if choice_2.lower() == 'y':
                         # Removing the python cache
@@ -193,7 +193,7 @@ class Uninstaller():
                         sys.exit(0)
                 except KeyboardInterrupt:
                     Color.pl('\n  {!} Uninstallation process interrupted.')
-                    Color.pl('  {*} You must re-run the uninstalation process to uninstall AOVPNS correctly.')
+                    Color.pl('  {*} You must re-run the uninstalation process to uninstall GitPy correctly.')
                     Color.pl('  {-} Exiting...')
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Exiting with the exit code: {R}1{W}')
