@@ -104,59 +104,90 @@ class Main_Console():
         response = requests.get(search_url)
         search_results = json.loads(response.text)
 
-        
         # Affichage des dépôts similaires trouvés
         items = search_results['items']
         if len(items) == 0:
-            print(f"No deposits found with the name '{repo_name}'.")
+            Color.pl('  {!} No repositories found with the name \'%s\'.' % repo_name)
             return
-        
-        # Affichage des dépôts trouvés
-        print(f"Here are the similar deposits found for {repo_name}:")
-        for index, repo in enumerate(search_results["items"]):
-            print(f"{index+1}. {repo['full_name']}")
 
-        # Demande de l'utilisateur pour choisir un dépôt
-        selected_index = int(input("Enter the deposit number you wish to display: ")) - 1
-        selected_repo = search_results["items"][selected_index]
+        while True:
+            clear()
+            # Affichage des dépôts trouvés
+            Color.pl('\n  {*} Here are the similar repositories found for \'%s\':' % repo_name)
+            for index, repo in enumerate(search_results["items"]):
+                Color.pl('  {D}[{W}{SB2}%s{W}{D}]{W} %s'% (index+1,repo['full_name']))
 
-        # Récupération des informations sur le dépôt
-        repo_url = selected_repo["url"]
-        response = requests.get(repo_url)
-        repo_info = json.loads(response.text)
+            # Demande de l'utilisateur pour choisir un dépôt
+            selected_index = int(input(self.prompt(menu='choose_repo'))) -1
 
-        # Affichage des informations sur le dépôt
-        print(f"\nInformation about {repo_info['name']}:")
-        print(f"Repository's name  ::  {repo_info['name']}")
-        print(f"Author             ::  {repo_info['owner']['login']}")
-        print(f"Description        ::  {repo_info['description']}")
-        print(f"Number of stars    ::  {repo_info['stargazers_count']}")
-        print(f"Main language      ::  {repo_info['language']}")
-        print(f"Creation date      ::  {repo_info['created_at']}")
-        print(f"Last update date   ::  {repo_info['updated_at']}")
-        print(f"Repository's URL   ::  {repo_info['html_url']}")
-        print(f"Cloning URL        ::  {repo_info['clone_url']}")
-        print(f"License            ::  {repo_info['license']['name'] if repo_info['license'] else 'None'}")
+            # if not selected_index:
+            #     continue
 
-        # Demande de l'utilisateur pour choisir la branche
-        branches_url = f"{repo_info['url']}/branches"
-        response = requests.get(branches_url)
-        branches_info = json.loads(response.text)
-        print(f"\nVoici les branches du dépôt {repo_info['name']}:")
-        for index, branch in enumerate(branches_info):
-            print(f"{index+1}. {branch['name']}")
-        selected_branch_index = int(input("Entrez le numéro de la branche que vous souhaitez télécharger: ")) - 1
-        selected_branch = branches_info[selected_branch_index]['name']
+            # if selected_index in search_results["items"]:
+            #     print('test')
+            #     continue
 
-        # Demande de l'utilisateur pour télécharger le dépôt
-        download_choice = input("Voulez-vous télécharger ce dépôt ? (y/n) ")
-        if download_choice == "y":
-            download_url = repo_info["clone_url"]
-            download_dir = input("Entrez le répertoire de téléchargement: ")
-            download_command = f"git clone -b {selected_branch} {download_url} {download_dir}"
-            print(f"Téléchargement en cours avec la commande : {download_command}")
-            os.system(download_command)
+            selected_repo = search_results["items"][selected_index]
 
+            # Récupération des informations sur le dépôt
+            repo_url = selected_repo["url"]
+            response = requests.get(repo_url)
+            repo_info = json.loads(response.text)
+
+            # Affichage des informations sur le dépôt
+            clear()
+
+            # Data channel setting
+            data = [
+                ('',''), 
+                ('  Information about \'%s\':' % repo_info['name'], ''),
+                ('',''), 
+                ('  Repository\'s name   ::  %s' % repo_info['name'], ''),
+                ('  Author              ::  %s' % repo_info['owner']['login'], ''),
+                ('  Description         ::  %s' % repo_info['description'], ''),
+                ('  Number of stars     ::  %s' % repo_info['stargazers_count'], ''),
+                ('  Main language       ::  %s' % repo_info['language'], ''),
+                ('  Creation date       ::  %s' % repo_info['created_at'], ''),
+                ('  Last update date    ::  %s' % repo_info['updated_at'], ''),
+                ('  Repository\'s URL    ::  %s' % repo_info['html_url'], ''),
+                ('  License             ::  %s' % repo_info['license']['name'] if repo_info['license'] else 'None', ''),
+                ('  Cloning URL         ::  %s' % repo_info['clone_url'], ''),
+                ('',''),
+            ]
+            
+            # Display the data
+            self.display_array(data=data)
+
+            # Color.pl('\nInformation about \'%s\':' % repo_info['name'])
+            # Color.pl('Repository\'s name  ::  %s' % repo_info['name'])
+            # Color.pl('Author             ::  %s' % repo_info['owner']['login'])
+            # Color.pl('Description        ::  %s' % repo_info['description'])
+            # Color.pl('Number of stars    ::  %s' % repo_info['stargazers_count'])
+            # Color.pl('Main language      ::  %s' % repo_info['language'])
+            # Color.pl('Creation date      ::  %s' % repo_info['created_at'])
+            # Color.pl('Last update date   ::  %s' % repo_info['updated_at'])
+            # Color.pl('Repository\'s URL   ::  %s' % repo_info['html_url'])
+            # Color.pl('Cloning URL        ::  %s' % repo_info['clone_url'])
+            # Color.pl('License            ::  %s' % repo_info['license']['name'] if repo_info['license'] else 'None')
+
+            # Demande de l'utilisateur pour choisir la branche
+            branches_url = f"{repo_info['url']}/branches"
+            response = requests.get(branches_url)
+            branches_info = json.loads(response.text)
+            print(f"\nVoici les branches du dépôt {repo_info['name']}:")
+            for index, branch in enumerate(branches_info):
+                print(f"{index+1}. {branch['name']}")
+            selected_branch_index = int(input("Entrez le numéro de la branche que vous souhaitez télécharger: ")) - 1
+            selected_branch = branches_info[selected_branch_index]['name']
+
+            # Demande de l'utilisateur pour télécharger le dépôt
+            download_choice = input("Voulez-vous télécharger ce dépôt ? (y/n) ")
+            if download_choice == "y":
+                download_url = repo_info["clone_url"]
+                download_dir = input("Entrez le répertoire de téléchargement: ")
+                download_command = f"git clone -b {selected_branch} {download_url} {download_dir}"
+                print(f"Téléchargement en cours avec la commande : {download_command}")
+                os.system(download_command)
 
     def display_array(self, data):
         '''
@@ -188,7 +219,10 @@ class Main_Console():
         ptnm = self.promptname
 
         if menu == 'main':
-            return Color.s('{underscore}%s{W}> ' % ptnm)
+            return Color.s('{underscore}%s{W}:{underscore}search-repo{W}> ' % ptnm)
+        
+        if menu == 'choose_repo':
+            return Color.s('{underscore}%s{W}:{underscore}choose-repo{W}> ' % ptnm)
 
     def main_menu(self):
         try:
