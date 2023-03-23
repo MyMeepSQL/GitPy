@@ -1,8 +1,23 @@
 {
-	"name": "GitPy",
-	"version": "0.0.0.1",
-	"author": "MyMeepSQL",
-	"author_email": "thomas.pellissier.pro@proton.me",
-	"twitter": "https://twitter.com/MyMeepSQL",
-	"web_site_url": "https://psociety.ch"
+	"name":
+		"GitPy",
+
+	"version":
+		"0.0.0.1",
+
+	"authors": [
+		"Thomas Pellissier",
+		"Jonas Petitpierre"
+	],		
+
+	"author_email": [
+		"thomas.pellissier.pro@proton.me",
+		"petitpierre@duck.com"
+	],
+
+	"twitter":
+		"https://twitter.com/MyMeepSQL",
+
+	"web_site_url":
+		"https://psociety.ch"
 }

@@ -155,19 +155,19 @@ class Configuration(object):
         '''
             Parse all main arguments.
         '''
-        # if args.console:
-        #     # # if the user didn't install GitPy on his system
-        #     # if not os.path.isdir(cls.DEFAULT_INSTALL_PATH) or not os.path.isfile('%sgitpy.py' % cls.DEFAULT_INSTALL_PATH):
-        #     #     Color.pl('  {!} GitPy isn\'t installed on your system!')
-        #     #     Color.pl('  {*} Please run {G}gitpy --install{W} to install GitPy.')
-        #     #     sys.exit(1)
+        if args.console:
+            # # if the user didn't install GitPy on his system
+            # if not os.path.isdir(cls.DEFAULT_INSTALL_PATH) or not os.path.isfile('%sgitpy.py' % cls.DEFAULT_INSTALL_PATH):
+            #     Color.pl('  {!} GitPy isn\'t installed on your system!')
+            #     Color.pl('  {*} Please run {G}gitpy --install{W} to install GitPy.')
+            #     sys.exit(1)
 
-        #     # else:
-        #     Color.pl('  {-} Starting the GitPy\'s console...')
-        #     sleep(1)
-        #     # Call the main console of GitPy
-        #     from src.core.console import Main_Console
-        #     Main_Console(pwd=pwd)
+            # else:
+            Color.pl('  {-} Starting the GitPy\'s console...')
+            sleep(1)
+            # Call the main console of GitPy
+            from src.core.console import Main_Console
+            Main_Console(pwd=pwd)
 
         if args.cli:
             # # if the user didn't install GitPy on his system
