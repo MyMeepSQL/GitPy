@@ -35,12 +35,12 @@
 ---
 
 <pre>
-                              __________________________         
-                              __  ____/__(_)_  /___  __ \____  __                             
+                              __________________________
+                              __  ____/__(_)_  /___  __ \____  __
                               _  / __ __  /_  __/_  /_/ /_  / / /
                               / /_/ / _  / / /_ _  ____/_  /_/ / 
                               \____/  /_/  \__/ /_/     _\__, /  
-                                                        /____/                                
+                                                        /____/
 
   GitPy - A Python3 tool for search and download a GitHub's repository directly in the terminal
 
@@ -66,25 +66,25 @@ Liens à modifier
 
 <!--  [ Version ] -->
 <p align="center">
-    <img src="https://img.shields.io/badge/Version-0.0.0.1-success?style=for-the-badge" alt="aovpns's version">
+    <img src="https://img.shields.io/badge/Version-0.0.0.1-success?style=for-the-badge" alt="gitpy's version">
 </p>
 
 <!--  [ Informations about this repositorie ] -->
 <p align="center">
-    <a href="https://github.com/MyMeepSQL/aovpns/stargazers">
-        <img src="https://img.shields.io/github/stars/MyMeepSQL/GitPy?style=for-the-badge&color=success" alt="Stars">
+    <a href="https://github.com/MyMeepSQL/gitpy/stargazers">
+        <img src="https://img.shields.io/github/stars/MyMeepSQL/gitpy?style=for-the-badge&color=success" alt="Stars">
     </a>
-    <a href="https://github.com/MyMeepSQL/aovpns/network/members">
-        <img src="https://img.shields.io/github/forks/MyMeepSQL/GitPy?color=cyan&style=for-the-badge&color=success" alt="Forks">
+    <a href="https://github.com/MyMeepSQL/gitpy/network/members">
+        <img src="https://img.shields.io/github/forks/MyMeepSQL/gitpy?color=cyan&style=for-the-badge&color=success" alt="Forks">
     </a>
-    <a href="https://github.com/MyMeepSQL/aovpns/watchers">
-        <img src="https://img.shields.io/github/watchers/MyMeepSQL/GitPy?color=cyan&style=for-the-badge&color=success" alt="Watchers">
+    <a href="https://github.com/MyMeepSQL/gitpy/watchers">
+        <img src="https://img.shields.io/github/watchers/MyMeepSQL/gitpy?color=cyan&style=for-the-badge&color=success" alt="Watchers">
     </a>
-    <a href="https://github.com/MyMeepSQL/aovpns/issues">
-        <img src="https://img.shields.io/github/issues/MyMeepSQL/GitPy?color=success&style=for-the-badge" alt="Issues">
+    <a href="https://github.com/MyMeepSQL/gitpy/issues">
+        <img src="https://img.shields.io/github/issues/MyMeepSQL/gitpy?color=success&style=for-the-badge" alt="Issues">
     </a>
-    <a href="https://github.com/MyMeepSQL/GitPy/issues">
-        <img src="https://img.shields.io/github/last-commit/MyMeepSQL/GitPy/master?color=success&style=for-the-badge" alt="GitHub last commit (branch)">
+    <a href="https://github.com/MyMeepSQL/gitpy/issues">
+        <img src="https://img.shields.io/github/last-commit/MyMeepSQL/gitpy/master?color=success&style=for-the-badge" alt="GitHub last commit (branch)">
     </a>
 
 </p>
@@ -94,9 +94,9 @@ Liens à modifier
     <img src="https://img.shields.io/badge/Release%20status-In%20Development-informational?style=for-the-badge" alt="Release status">
     <img src="https://img.shields.io/badge/Supported%20OS-Linux-informational?style=for-the-badge" alt="Supported OS">
     <img src="https://img.shields.io/badge/Supported%20distros-Arch%20&%20Debian%20based-informational?style=for-the-badge" alt="Supported ditros">
-    <img src="https://img.shields.io/github/repo-size/MyMeepSQL/GitPy?color=informational&style=for-the-badge" alt="Repo size">
-    <a href="https://github.com/MyMeepSQL/GitPy/blob/test_v1/LICENSE">
-        <img src="https://img.shields.io/github/license/MyMeepSQL/GitPy?color=informational&style=for-the-badge" alt="Repo License" >
+    <img src="https://img.shields.io/github/repo-size/MyMeepSQL/gitpy?color=informational&style=for-the-badge" alt="Repo size">
+    <a href="https://github.com/MyMeepSQL/gitpy/blob/test_v1/LICENSE">
+        <img src="https://img.shields.io/github/license/MyMeepSQL/gitpy?color=informational&style=for-the-badge" alt="Repo License" >
     </a>
 </p>
 
@@ -121,7 +121,7 @@ Liens à modifier
 
 # **About GitPy**
 
-**Automatate OpenVPN Server (GitPy)** is a program that can be used to automate the creation and the configuration of a OpenVPN server and manage existing OpenVPN's client config. The program was written in Python3 and designed to be use on Arch and Debian based ditros. AOVPNS have a main console that can be used to manage the OpenVPN server and the OpenVPN's client config. It could also be used in a CLI environment, inspired by the [Metasploit](https://github.com/rapid7/metasploit-framework) network testing tool
+**Automatate OpenVPN Server (GitPy)** is a program that can be used to automate the creation and the configuration of a OpenVPN server and manage existing OpenVPN's client config. The program was written in Python3 and designed to be use on Arch and Debian based ditros. GitPy have a main console that can be used to manage the OpenVPN server and the OpenVPN's client config. It could also be used in a CLI environment, inspired by the [Metasploit](https://github.com/rapid7/metasploit-framework) network testing tool
 
 - **In development!**
 - Can only be run on a **Linux machine**
@@ -130,7 +130,7 @@ Liens à modifier
 ## **Credit & Copyrights**
 
 ```
-             The AOVPNS is a product of PSociety™ by Thomas Pellissier (MyMeepSQL) 
+             The GitPY is a product of PSociety™ by Thomas Pellissier (MyMeepSQL) 
                                 and Jonas Petitpierre (Bashy).                 
                   Copyright (C) 2021-2023 © PSociety™. All rights reserved.
 
@@ -157,10 +157,10 @@ sudo pacman -S git
 # sudo apt install git
 
 # Clone the repositorie with:
-sudo git clone https://github.com/MyMeepSQL/gitpy.git
+git clone https://github.com/MyMeepSQL/gitpy.git
 
 # And go in its directory
-cd gitpy
+cd GitPy
 
 # To install GitPy on your system, run:
 sudo python3 gitpy.py --install
