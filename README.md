@@ -130,23 +130,23 @@ Liens à modifier
 ## **Credit & Copyrights**
 
 ```
-             The AOVPNS is a product of PSociety™ by Thomas Pellissier (MyMeepSQL).
+             The AOVPNS is a product of PSociety™ by Thomas Pellissier (MyMeepSQL) and Jonas Petitpierre (Bashy).
                    Copyright (C) 2021-2023 © PSociety™. All rights reserved.
 
-           This tool has been created and designed from scratch by Thomas Pellissier.
+           This tool has been created and designed from scratch by Thomas Pellissier and Jonas Petitpierre (Bashy).
 ```
 
 ## **Changelogs**
 
-All new changes compared to _**AOVPNS**_ can be found [here](src/docs/CHANGELOG.md).
+All new changes compared to _**GitPy**_ can be found [here](src/docs/CHANGELOG.md).
 
 ## **License**
 
-AOVPNS is licensed under the GNU General Public License v3.0 license. Refer to [LICENSE](LICENSE) for more informations.
+GitPy is licensed under the GNU General Public License v3.0 license. Refer to [LICENSE](LICENSE) for more informations.
 
 ## **Installation**
 
-Instructions to install AOVPNS... (Linux commands)
+Instructions to install GitPy... (Linux commands)
 
 ```bash
 # Install git tool for clone this repositories with (if you didn’t have it):
@@ -155,18 +155,18 @@ sudo pacman -S git
 # sudo apt install git
 
 # Clone the repositorie with:
-sudo git clone https://github.com/MyMeepSQL/aovpns.git
+sudo git clone https://github.com/MyMeepSQL/gitpy.git
 
 # And go in its directory
-cd aovpns
+cd gitpy
 
 # To install AOVPNS on your system, run:
-sudo python3 aovpns.py --install
+sudo python3 gitpy.py --install
 
-# Once installed, you can run the 'aovpns' command anywhere in the terminal
+# Once installed, you can run the 'gitpy' command anywhere in the terminal
 
 # Run the main console of AOVPNS with:
-aovpns --console
+gitpy --console
 ```
 
 ## Options of _GitPy_
@@ -174,75 +174,74 @@ aovpns --console
 All avalable options for the **GitPy** command (the help message):
 
 ```
-VPN options:
-============
+Main options:
+=============
 
   Options                              Description
   -------                              -----------
-       --console                       Start the main console of AOVPNS.
-       --cli                           Start the CLI environment of AOVPNS.
+       --console                       Start the main console of GitPy.
 
 Installation options:
 =====================
 
-  Options                              DescriptionAOVPNS
-  -------                              -----------
-       --install                 [+]   Install AOVPNS with all depencies on your system.
-       --uninstall               [+]   Uninstall AOVPNS from your system.
+  Options                             Description
+  -------                             -----------
+       --install                [+]   Install GitPy with all depencies on your system.
+       --uninstall              [+]   Uninstall GitPy from your system.
  
-       --skip-update                   Skip the system update phase during the installation of AOVPNS.
-       --offline                       Install AOVPNS with the local file already downloaded
-                                       (default: download new files from GitHub).
-  -iP, --install-path [PATH]           Chose where the AOVPNS will be install on the system
-                                       (default: /opt/aovpns/).
+       --skip-update                  Skip the system update phase during the installation of GitPy.
+       --offline                      Install GitPy with the local file already downloaded
+                                      (default: download new files from GitHub).
+  -iP, --install-path [PATH]          Chose where the GitPy will be install on the system
+                                      (default: /opt/gitpy/).
 
 Output options:
 ===============
 
-  Options                              Description
-  -------                              -----------
-  -q,  --quiet                         Prevent header from displaying. Warning: bypass any "Are your sure?"
-                                       message!
-  -v [LEVEL], --verbose [LEVEL]        Verbosity level: 1-3 (default: 0 | const: 1).
+  Options                             Description
+  -------                             -----------
+  -q,  --quiet                        Prevent header from displaying. Warning: bypass any "Are your sure?"
+                                      message!
+  -v [LEVEL], --verbose [LEVEL]       Verbosity level: 1-3 (default: 0 | const: 1).
 
 Additional options:
 ===================
 
-  Options                              Description
-  -------                              -----------
-  -y,  --no-confirm                    Bypass any and all "Are you sure?" messages.
+  Options                             Description
+  -------                             -----------
+  -y,  --no-confirm                   Bypass any and all "Are you sure?" messages.
 
 Informations options:
 =====================
 
-  Options                              Description
-  -------                              -----------
-       --info                          Show more informations about AOVPNS and exit.
-  -h,  --help                    [+]   Show this help message and exit or show more help for a option.
-  -V,  --version                       Show program's version and exit.
+  Options                             Description
+  -------                             -----------
+       --info                         Show more informations about GitPy and exit.
+  -h,  --help                   [+]   Show this help message and exit or show more help for a option.
+  -V,  --version                      Show program's version and exit.
 
 Miscellaneous options:
 ======================
 
-  Options                              Description
-  -------                              -----------
-  -u,  --update                  [+]   Update the AOVPNS directly from GitHub.
-       --show-config                   Prompt the content of the config file.
-       --show-env-var                  Prompt the value of the AOVPNS_INSTALL_PATH environment variable.
-       --remove-cache            [+]   Delete python cache from the AOVPNS directory.
+  Options                             Description
+  -------                             -----------
+  -u,  --update                 [+]   Update the GitPy directly from GitHub.
+       --show-config                  Prompt the content of the config file.
+       --show-env-var                 Prompt the value of the GITPY_INSTALL_PATH environment variable.
+       --remove-cache           [+]   Delete python cache from the GitPy directory.
 
 Others avalable informations:
 =============================
 
   Usage 
   ----- 
-  aovpns <OPTIONS>
+  gitpy <OPTIONS>
 
   Others
   ------
-  Report all bugs to <thomas.pellissier.pro@proton.me> or open an issue at <https://github.com/MyMeepSQL/aovpns/issues>.
+  Report all bugs to <thomas.pellissier.pro@proton.me> or open an issue at <https://github.com/MyMeepSQL/gitpy/issues>.
   The options with the [+] mean that it may require additional option(s).
-  If you want more details about a command, run: aovpns --help <OPTION>
+  If you want more details about a command, run: gitpy --help <OPTION>
 ```
 
 ## **Update**
@@ -250,14 +249,14 @@ Others avalable informations:
 To download and update the current GitPy instance on your system, run:
 
 ```bash
-sudo aovpns --update
+sudo gitpy --update
 ```
 
 ## **Information about GitPy**
 
-If you want all informations about AOVPNS and authors' and with other informations, run:
+If you want all informations about GitPy and authors' and with other informations, run:
 
 ```bash
-aovpns --info
+gitpy --info
 ```
 
