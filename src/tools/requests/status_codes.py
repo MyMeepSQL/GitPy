@@ -5,7 +5,7 @@ items.
 
 Example::
 
-    >>> import requests
+    >>> import src.tools.requests as requests
     >>> requests.codes['temporary_redirect']
     307
     >>> requests.codes.teapot

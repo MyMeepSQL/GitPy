@@ -39,7 +39,7 @@ import rich
 import json
 import shutil
 import random
-import requests
+import src.tools.requests as requests
 import platform
 import subprocess
 import configparser

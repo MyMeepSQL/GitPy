@@ -10,7 +10,7 @@ Requests HTTP Library
 Requests is an HTTP library, written in Python, for human beings.
 Basic GET usage:
 
-   >>> import requests
+   >>> import src.tools.requests as requests
    >>> r = requests.get('https://www.python.org')
    >>> r.status_code
    200

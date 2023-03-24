@@ -1,4 +1,4 @@
-import requests
+import src.tools.requests as requests
 import json
 import os
 

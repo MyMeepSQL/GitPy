@@ -36,12 +36,12 @@
 # Imports section
 import os
 import sys
-import requests
 from json import loads
 
 ## Third party libraries
 import src.config as C
 from src.tools.packaging import version
+import src.tools.requests as requests
 from src.tools.requests import get
 from src.util.colors import Color
 from src.util.internet_check import internet_check

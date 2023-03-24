@@ -46,7 +46,7 @@ def request(method, url, **kwargs):
 
     Usage::
 
-      >>> import requests
+      >>> import src.tools.requests as requests
       >>> req = requests.request('GET', 'https://httpbin.org/get')
       >>> req
       <Response [200]>

@@ -35,7 +35,7 @@
 # Imports section
 import re
 import ipaddress
-import requests
+import src.tools.requests as requests
 import socket
 
 ## Third party libraries

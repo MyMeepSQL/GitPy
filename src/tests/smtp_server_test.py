@@ -1,4 +1,4 @@
-import requests
+import src.tools.requests as requests
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
