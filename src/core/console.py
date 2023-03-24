@@ -53,6 +53,7 @@ from src.__main__ import GitPy
 from src.config import Configuration
 import src.util.ip_domain as IP_Domain
 from src.util.process import Process
+from src.util.check_path import check_folder_path
 from src.util.clear import clear
 from src.util.colors import Color
 from src.util.help_messages import Help_Messages as HM
@@ -181,13 +182,23 @@ class Main_Console():
             selected_branch = branches_info[selected_branch_index]['name']
 
             # Demande de l'utilisateur pour télécharger le dépôt
-            download_choice = input("Voulez-vous télécharger ce dépôt ? [Y/n] ")
+            download_url = repo_info["clone_url"]
+            download_dir = input("Entrez le répertoire de téléchargement: ")
+
+            # self.INSTALL_PATH = ''.join(args.install_path).strip()
+            # self.INSTALL_PATH = check_folder_path(self.INSTALL_PATH,self.PROGRAM_NAME)
+            # self.gitpy_path_env_var_value = self.INSTALL_PATH
+
+            repo_install_path = ''.join(download_dir).strip()
+            repo_install_path = check_folder_path(repo_install_path,repo_info['name'])
+
+            Color.pl('  {*} The repository \'%s\' will be downloaded in the folder \'{C}%s{W}\'.' % (repo_info['name'],repo_install_path))
+
+            download_choice = input(Color.s('  {?} Do you want to download this repository? [Y/n] '))
+
             if download_choice == "y" or not download_choice:
-                download_url = repo_info["clone_url"]
-                download_dir = input("Entrez le répertoire de téléchargement: ")
-                if
-                download_command = f"git clone -b {selected_branch} {download_url} {download_dir}"
-                print(f"Téléchargement en cours avec la commande : {download_command}")
+                download_command = f"git clone -b {selected_branch} {download_url} {repo_install_path}"
+                Color.pl('  {*} Downloading the repository...')
                 Process.call(download_command, shell=True)
 
     def display_array(self, data):
