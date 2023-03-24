@@ -38,11 +38,11 @@ import os
 import sys
 import requests
 from json import loads
-from requests import get
 
 ## Third party libraries
 import src.config as C
 from src.tools.packaging import version
+from src.tools.requests import get
 from src.util.colors import Color
 from src.util.internet_check import internet_check
 

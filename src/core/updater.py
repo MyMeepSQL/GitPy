@@ -40,12 +40,12 @@ import platform
 import subprocess
 from json import loads
 from time import sleep
-from requests import get
 
 ## Third party libraries
 from src.config import Configuration
 from src.__main__ import GitPy
 from src.tools.packaging import version
+from src.tools.requests import get
 from src.util.clear import clear
 from src.util.colors import Color
 from src.util.process import Process
