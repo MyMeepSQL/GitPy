@@ -143,7 +143,7 @@ class Main_Console():
                 ('  Information about \'%s\':' % repo_info['name'], ''),
                 ('',''), 
                 ('  Repository\'s name   ::  %s' % repo_info['name'], ''),
-                ('  Author              ::  %s' % repo_info['owner']['login'], '')y,
+                ('  Author              ::  %s' % repo_info['owner']['login'], ''),
                 ('  Description         ::  %s' % repo_info['description'], ''),
                 ('  Number of stars     ::  %s' % repo_info['stargazers_count'], ''),
                 ('  Main language       ::  %s' % repo_info['language'], ''),
@@ -152,7 +152,7 @@ class Main_Console():
                 ('  Repository\'s URL    ::  %s' % repo_info['html_url'], ''),
                 ('  License             ::  %s' % repo_info['license']['name'] if repo_info['license'] else 'None', ''),
                 ('  Cloning URL         ::  %s' % repo_info['clone_url'], ''),
-                ('',''),
+                ('','')
             ]
             
             # Display the data
