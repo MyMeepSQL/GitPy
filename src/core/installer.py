@@ -66,6 +66,8 @@ class Installer():
     BIN_PATH = Configuration.BIN_PATH
     TEMP_PATH = Configuration.TEMP_PATH
     INSTALL_PATH = DEFAULT_INSTALL_PATH
+    PROGRAM_NAME = Configuration.program_name
+
     # Environment variables
     gitpy_path_env_var_name = Configuration.gitpy_path_env_var_name
     gitpy_path_env_var_value = Configuration.DEFAULT_INSTALL_PATH
@@ -132,7 +134,7 @@ class Installer():
             UPDATE_SYSTEM_SKIPED=''
         if args.install_path:
             self.INSTALL_PATH = ''.join(args.install_path).strip()
-            self.INSTALL_PATH = check_folder_path(self.INSTALL_PATH)
+            self.INSTALL_PATH = check_folder_path(self.INSTALL_PATH,self.PROGRAM_NAME)
             self.gitpy_path_env_var_value = self.INSTALL_PATH
             
         # gitpy main file in /usr/bin/

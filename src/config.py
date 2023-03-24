@@ -63,6 +63,8 @@ class Configuration(object):
     # 3 = level 1 + 2 + more information about the execution of python functions
     verbose = 0
 
+    program_name = 'gitpy'
+
     # The main version of GitPy
     VERSION = '0.0.0.1'
 

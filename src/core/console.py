@@ -181,13 +181,14 @@ class Main_Console():
             selected_branch = branches_info[selected_branch_index]['name']
 
             # Demande de l'utilisateur pour télécharger le dépôt
-            download_choice = input("Voulez-vous télécharger ce dépôt ? (y/n) ")
-            if download_choice == "y":
+            download_choice = input("Voulez-vous télécharger ce dépôt ? [Y/n] ")
+            if download_choice == "y" or not download_choice:
                 download_url = repo_info["clone_url"]
                 download_dir = input("Entrez le répertoire de téléchargement: ")
+                if
                 download_command = f"git clone -b {selected_branch} {download_url} {download_dir}"
                 print(f"Téléchargement en cours avec la commande : {download_command}")
-                os.system(download_command)
+                Process.call(download_command, shell=True)
 
     def display_array(self, data):
         '''
@@ -237,7 +238,7 @@ class Main_Console():
 ╰┬──╮
  │  │
  │  ├──────╼{W} Created by             ::  {italic}Thomas Pellissier{W} ({R}{bold}MyMeepSQL{W}){D}
- │  │{W}                               ::  {italic}Jonas Petipierre{W} ({R}{bold}Bashy{W}){D}
+ │  │{W}                               ::  {italic}Jonas Petitpierre{W} ({R}{bold}Bashy{W}){D}
  │  ├──────╼{W} Version                ::  {G}%s{W}{D}
  │  │
  │  ├──────╼{W} Follow me on Twitter   ::  {SB4}MyMeepSQL{W}{D}

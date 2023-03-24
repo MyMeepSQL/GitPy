@@ -42,7 +42,7 @@ from src.__main__ import GitPy
 from src.config import Configuration
 
 # Main
-def check_folder_path(folder_path):
+def check_folder_path(folder_path,folder_name):
     if '//' in folder_path:
         GitPy.Banner()
         print()
@@ -51,14 +51,14 @@ def check_folder_path(folder_path):
             Color.pl('  {§} Exiting with the exit code: {R}1{W}')
             Color.pl('    {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
         sys.exit(1)
-    elif folder_path.endswith('gitpy/'):
+    elif folder_path.endswith('%s/' % folder_name):
         pass
-    elif folder_path.endswith('gitpy'):
+    elif folder_path.endswith('%s' % folder_name):
         folder_path += '/'
-    elif not folder_path.endswith('gitpy'):
+    elif not folder_path.endswith('%s' % folder_name):
         if folder_path.endswith('/'):
-            folder_path += 'gitpy/'
+            folder_path += '%s/' % folder_name
         else:
-            folder_path += '/gitpy/'
+            folder_path += '/%s/' % folder_name
         
     return folder_path
