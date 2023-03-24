@@ -111,95 +111,95 @@ class Main_Console():
             Color.pl('  {!} No repositories found with the name \'%s\'.' % repo_name)
             return
 
-        while True:
-            clear()
-            # Affichage des dépôts trouvés
-            Color.pl('\n  {*} Here are the similar repositories found for \'%s\':' % repo_name)
-            for index, repo in enumerate(search_results["items"]):
-                Color.pl('  {D}[{W}{SB2}%s{W}{D}]{W} %s'% (index+1,repo['full_name']))
+        # while True:
+        clear()
+        # Affichage des dépôts trouvés
+        Color.pl('\n  {*} Here are the similar repositories found for \'%s\':' % repo_name)
+        for index, repo in enumerate(search_results["items"]):
+            Color.pl('  {D}[{W}{SB2}%s{W}{D}]{W} %s'% (index+1,repo['full_name']))
 
-            # Demande de l'utilisateur pour choisir un dépôt
-            selected_index = int(input(self.prompt(menu='choose_repo'))) -1
+        # Demande de l'utilisateur pour choisir un dépôt
+        selected_index = int(input(self.prompt(menu='choose_repo'))) -1
 
-            # if not selected_index:
-            #     continue
+        # if not selected_index:
+        #     continue
 
-            # if selected_index in search_results["items"]:
-            #     print('test')
-            #     continue
+        # if selected_index in search_results["items"]:
+        #     print('test')
+        #     continue
 
-            selected_repo = search_results["items"][selected_index]
+        selected_repo = search_results["items"][selected_index]
 
-            # Récupération des informations sur le dépôt
-            repo_url = selected_repo["url"]
-            response = requests.get(repo_url)
-            repo_info = json.loads(response.text)
+        # Récupération des informations sur le dépôt
+        repo_url = selected_repo["url"]
+        response = requests.get(repo_url)
+        repo_info = json.loads(response.text)
 
-            # Affichage des informations sur le dépôt
-            clear()
+        # Affichage des informations sur le dépôt
+        clear()
 
-            # Data channel setting
-            data = [
-                ('',''), 
-                ('  Information about \'%s\':' % repo_info['name'], ''),
-                ('',''), 
-                ('  Repository\'s name   ::  %s' % repo_info['name'], ''),
-                ('  Author              ::  %s' % repo_info['owner']['login'], ''),
-                ('  Description         ::  %s' % repo_info['description'], ''),
-                ('  Number of stars     ::  %s' % repo_info['stargazers_count'], ''),
-                ('  Main language       ::  %s' % repo_info['language'], ''),
-                ('  Creation date       ::  %s' % repo_info['created_at'], ''),
-                ('  Last update date    ::  %s' % repo_info['updated_at'], ''),
-                ('  Repository\'s URL    ::  %s' % repo_info['html_url'], ''),
-                ('  License             ::  %s' % repo_info['license']['name'] if repo_info['license'] else 'None', ''),
-                ('  Cloning URL         ::  %s' % repo_info['clone_url'], ''),
-                ('','')
-            ]
-            
-            # Display the data
-            self.display_array(data=data)
+        # Data channel setting
+        data = [
+            ('',''), 
+            ('  Information about \'%s\':' % repo_info['name'], ''),
+            ('',''), 
+            ('  Repository\'s name   ::  %s' % repo_info['name'], ''),
+            ('  Author              ::  %s' % repo_info['owner']['login'], ''),
+            ('  Description         ::  %s' % repo_info['description'], ''),
+            ('  Number of stars     ::  %s' % repo_info['stargazers_count'], ''),
+            ('  Main language       ::  %s' % repo_info['language'], ''),
+            ('  Creation date       ::  %s' % repo_info['created_at'], ''),
+            ('  Last update date    ::  %s' % repo_info['updated_at'], ''),
+            ('  Repository\'s URL    ::  %s' % repo_info['html_url'], ''),
+            ('  License             ::  %s' % repo_info['license']['name'] if repo_info['license'] else 'None', ''),
+            ('  Cloning URL         ::  %s' % repo_info['clone_url'], ''),
+            ('','')
+        ]
+        
+        # Display the data
+        self.display_array(data=data)
 
-            # Color.pl('\nInformation about \'%s\':' % repo_info['name'])
-            # Color.pl('Repository\'s name  ::  %s' % repo_info['name'])
-            # Color.pl('Author             ::  %s' % repo_info['owner']['login'])
-            # Color.pl('Description        ::  %s' % repo_info['description'])
-            # Color.pl('Number of stars    ::  %s' % repo_info['stargazers_count'])
-            # Color.pl('Main language      ::  %s' % repo_info['language'])
-            # Color.pl('Creation date      ::  %s' % repo_info['created_at'])
-            # Color.pl('Last update date   ::  %s' % repo_info['updated_at'])
-            # Color.pl('Repository\'s URL   ::  %s' % repo_info['html_url'])
-            # Color.pl('Cloning URL        ::  %s' % repo_info['clone_url'])
-            # Color.pl('License            ::  %s' % repo_info['license']['name'] if repo_info['license'] else 'None')
+        # Color.pl('\nInformation about \'%s\':' % repo_info['name'])
+        # Color.pl('Repository\'s name  ::  %s' % repo_info['name'])
+        # Color.pl('Author             ::  %s' % repo_info['owner']['login'])
+        # Color.pl('Description        ::  %s' % repo_info['description'])
+        # Color.pl('Number of stars    ::  %s' % repo_info['stargazers_count'])
+        # Color.pl('Main language      ::  %s' % repo_info['language'])
+        # Color.pl('Creation date      ::  %s' % repo_info['created_at'])
+        # Color.pl('Last update date   ::  %s' % repo_info['updated_at'])
+        # Color.pl('Repository\'s URL   ::  %s' % repo_info['html_url'])
+        # Color.pl('Cloning URL        ::  %s' % repo_info['clone_url'])
+        # Color.pl('License            ::  %s' % repo_info['license']['name'] if repo_info['license'] else 'None')
 
-            # Demande de l'utilisateur pour choisir la branche
-            branches_url = f"{repo_info['url']}/branches"
-            response = requests.get(branches_url)
-            branches_info = json.loads(response.text)
-            print(f"\nVoici les branches du dépôt {repo_info['name']}:")
-            for index, branch in enumerate(branches_info):
-                print(f"{index+1}. {branch['name']}")
-            selected_branch_index = int(input("Entrez le numéro de la branche que vous souhaitez télécharger: ")) - 1
-            selected_branch = branches_info[selected_branch_index]['name']
+        # Demande de l'utilisateur pour choisir la branche
+        branches_url = f"{repo_info['url']}/branches"
+        response = requests.get(branches_url)
+        branches_info = json.loads(response.text)
+        print(f"\nVoici les branches du dépôt {repo_info['name']}:")
+        for index, branch in enumerate(branches_info):
+            print(f"{index+1}. {branch['name']}")
+        selected_branch_index = int(input("Entrez le numéro de la branche que vous souhaitez télécharger: ")) - 1
+        selected_branch = branches_info[selected_branch_index]['name']
 
-            # Demande de l'utilisateur pour télécharger le dépôt
-            download_url = repo_info["clone_url"]
-            download_dir = input("Entrez le répertoire de téléchargement: ")
+        # Demande de l'utilisateur pour télécharger le dépôt
+        download_url = repo_info["clone_url"]
+        download_dir = input("Entrez le répertoire de téléchargement: ")
 
-            # self.INSTALL_PATH = ''.join(args.install_path).strip()
-            # self.INSTALL_PATH = check_folder_path(self.INSTALL_PATH,self.PROGRAM_NAME)
-            # self.gitpy_path_env_var_value = self.INSTALL_PATH
+        # self.INSTALL_PATH = ''.join(args.install_path).strip()
+        # self.INSTALL_PATH = check_folder_path(self.INSTALL_PATH,self.PROGRAM_NAME)
+        # self.gitpy_path_env_var_value = self.INSTALL_PATH
 
-            repo_install_path = ''.join(download_dir).strip()
-            repo_install_path = check_folder_path(repo_install_path,repo_info['name'])
+        repo_install_path = ''.join(download_dir).strip()
+        repo_install_path = check_folder_path(repo_install_path,repo_info['name'])
 
-            Color.pl('  {*} The repository \'%s\' will be downloaded in the folder \'{C}%s{W}\'.' % (repo_info['name'],repo_install_path))
+        Color.pl('  {*} The repository \'%s\' will be downloaded in the folder \'{C}%s{W}\'.' % (repo_info['name'],repo_install_path))
 
-            download_choice = input(Color.s('  {?} Do you want to download this repository? [Y/n] '))
+        download_choice = input(Color.s('  {?} Do you want to download this repository? [Y/n] '))
 
-            if download_choice == "y" or not download_choice:
-                download_command = f"git clone -b {selected_branch} {download_url} {repo_install_path}"
-                Color.pl('  {*} Downloading the repository...')
-                Process.call(download_command, shell=True)
+        if download_choice == "y" or not download_choice:
+            download_command = f"git clone -b {selected_branch} {download_url} {repo_install_path}"
+            Color.pl('  {*} Downloading the repository...')
+            Process.call(download_command, shell=True)
 
     def display_array(self, data):
         '''
