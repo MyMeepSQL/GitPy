@@ -36,11 +36,11 @@
 
 <pre>
                               __________________________         
-                              __  ____/__(_)_  /___  __ \____  __
+                              __  ____/__(_)_  /___  __ \____  __                             
                               _  / __ __  /_  __/_  /_/ /_  / / /
                               / /_/ / _  / / /_ _  ____/_  /_/ / 
                               \____/  /_/  \__/ /_/     _\__, /  
-                                                        /____/ 
+                                                        /____/                                
 
   GitPy - A Python3 tool for search and download a GitHub's repository directly in the terminal
 
@@ -130,10 +130,12 @@ Liens à modifier
 ## **Credit & Copyrights**
 
 ```
-             The AOVPNS is a product of PSociety™ by Thomas Pellissier (MyMeepSQL) and Jonas Petitpierre (Bashy).
-                   Copyright (C) 2021-2023 © PSociety™. All rights reserved.
+             The AOVPNS is a product of PSociety™ by Thomas Pellissier (MyMeepSQL) 
+                                and Jonas Petitpierre (Bashy).                 m
+                  Copyright (C) 2021-2023 © PSociety™. All rights reserved.
 
-           This tool has been created and designed from scratch by Thomas Pellissier and Jonas Petitpierre (Bashy).
+           This tool has been created and designed from scratch by Thomas Pellissier 
+                                and Jonas Petitpierre (Bashy).                   
 ```
 
 ## **Changelogs**
