@@ -49,7 +49,7 @@ class Informations():
         \r  {*} All informations about the GitPy.
 
         \r{SB2}{bold}Informations about GitPy{W}:
-        \r==========================
+        \r=========================
 
         \r  Description
         \r  -----------
@@ -82,12 +82,12 @@ class Informations():
         \r  Changelogs                      https://github.com/MyMeepSQL/GitPy/blob/master/src/docs/CHANGELOG.md
         \r  Issues pages                    https://github.com/MyMeepSQL/gitpy/issues
 
-        \r{SB2}{bold}Informations about author{W}:
-        \r==========================
+        \r{SB2}{bold}Informations about authors{W}:
+        \r===========================
 
-        \r  General informations
-        \r  --------------------
-        \r  MyMeepSQL's fullname            Thomas Pellissier and Jonas Petitpierre
+        \r  Main informations
+        \r  -----------------
+        \r  MyMeepSQL's fullname            Thomas Pellissier
         \r  MyMeepSQL's email               thomas.pellissier.pro@proton.me ({bold}only for professional{W} or for {G}report bugs of GitPy{W})
 
         \r  Bashy's fullname                Jonas Petitpierre
@@ -100,9 +100,4 @@ class Informations():
         \r  MyMeepSQL's Discord username    MyMeepSQL#0141
 
         \r  Bashy's GitHub profile          https://github.com/jonas52
-        \r  Bashy's Discord username        Bashy#2643
-        
-        
-        
-        
-        ''' % self.VERSION)
+        \r  Bashy's Discord username        Bashy#2643''' % self.VERSION)
