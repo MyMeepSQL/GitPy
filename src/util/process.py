@@ -7,7 +7,7 @@
 #---[Info]------------------------------------------------------------------#
 #  Execute command and prompt the STDOUT and STDERR                         #
 #  Language ~ Python3                                                       #
-#---[Author]----------------------------------------------------------------#
+#---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
 #  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#

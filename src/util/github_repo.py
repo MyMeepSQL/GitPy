@@ -9,7 +9,7 @@
 #  the GitHub's repositorie one.                                            #               
 #  Also check if the GitPy' repositorie are reachable or not                #
 #  Language ~ Python3                                                       #
-#---[Author]----------------------------------------------------------------#
+#---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
 #  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#

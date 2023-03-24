@@ -7,7 +7,7 @@
 #---[Info]------------------------------------------------------------------#
 #  Check if the user are connected to the Internet or not                   #
 #  Language ~ Python3                                                       #
-#---[Author]----------------------------------------------------------------#
+#---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
 #  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#

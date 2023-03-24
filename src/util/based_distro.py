@@ -8,7 +8,7 @@
 #  The function for check if the user's machine ran on a Debian distro      #
 #  based or an Arch based.                                                  #
 #  Language ~ Python3                                                       #
-#---[Author]----------------------------------------------------------------#
+#---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
 #  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#

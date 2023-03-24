@@ -7,7 +7,7 @@
 #---[Info]------------------------------------------------------------------#
 #  A function to easly make or remove a environment variables               #
 #  Language ~ Python3                                                       #
-#---[Author]----------------------------------------------------------------#
+#---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
 #  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#

@@ -8,7 +8,7 @@
 #  The installer of GitPy for install GitPy and the                       #
 #  dependencies                                                             #
 #  Language ~ Python3                                                       #
-#---[Author]----------------------------------------------------------------#
+#---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
 #  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#
@@ -76,10 +76,6 @@ class Installer():
         'git',
         'curl',
         'wget',
-        'openvpn',
-        'openssl',
-        'ca-certificates',
-        'iptables',
     ]
     # Packages list for Debian based distros (apt)
     debian_package_list = [
@@ -87,11 +83,6 @@ class Installer():
         'git',
         'curl',
         'wget'
-        'openvpn',
-        'openssl',
-        'ca-certificates'
-        'iptables',
-        'gnupg'
     ]
     # pip package list 
     pip_package_name_list = [

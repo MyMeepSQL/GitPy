@@ -8,7 +8,7 @@
 #  The updater of GitPy for download and install the latest                #
 #  version of GitPy from the GitHub repository.                            #
 #  Language ~ Python3                                                       #
-#---[Author]----------------------------------------------------------------#
+#---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
 #  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#

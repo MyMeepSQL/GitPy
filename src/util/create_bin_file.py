@@ -8,7 +8,7 @@
 #  Create the content of the bin file (gitpy) with the correct install     #
 #  path                                                                     #
 #  Language ~ Python3                                                       #
-#---[Author]----------------------------------------------------------------#
+#---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
 #  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#
@@ -50,7 +50,7 @@ class Create_bin_file:
 #---[Info]------------------------------------------------------------------#
 #  The call methode of gitpy                                               #
 #  Language ~ Python3                                                       #
-#---[Author]----------------------------------------------------------------#
+#---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
 #  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#

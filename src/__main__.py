@@ -7,7 +7,7 @@
 #---[Info]------------------------------------------------------------------#
 #  The main file of GitPy, where all start                                  #
 #  Language ~ Python3                                                       #
-#---[Author]----------------------------------------------------------------#
+#---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
 #  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#
@@ -83,6 +83,7 @@ class GitPy(object):
         #     C.load_from_arguments(args.get_arguments, pwd = pwd)
 
         else:
+
             # Load parsed argument into the Configuration class
             Configuration.load_arguments(pwd=pwd)
 

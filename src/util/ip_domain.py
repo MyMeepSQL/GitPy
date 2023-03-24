@@ -8,7 +8,7 @@
 #  Check if the string is a valid IP/Domain or not                          #
 #  Check if the string is a private IP or not                               #
 #  Language ~ Python3                                                       #
-#---[Author]----------------------------------------------------------------#
+#---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
 #  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#

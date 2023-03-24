@@ -6,7 +6,7 @@
 #---[Info]------------------------------------------------------------------#
 #  The changelogs of ConvPro Framework                                      #
 #  Language ~ Markdown                                                      #
-#---[Author]----------------------------------------------------------------#
+#---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier ~ @MyMeepSQL                                           #
 #---[Operating System]------------------------------------------------------#
 #  Developed for Linux (Arch based)                                         #

@@ -9,7 +9,7 @@
 #  Exemple: if the user enter '/home' for the install path, it will add     #
 #  '/gitpy/' to the folder_path. So it give '/home/gitpy/'                  #
 #  Language ~ Python3                                                       #
-#---[Author]----------------------------------------------------------------#
+#---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
 #  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#
