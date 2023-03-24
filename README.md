@@ -131,7 +131,7 @@ Liens à modifier
 
 ```
              The AOVPNS is a product of PSociety™ by Thomas Pellissier (MyMeepSQL) 
-                                and Jonas Petitpierre (Bashy).                 m
+                                and Jonas Petitpierre (Bashy).                 
                   Copyright (C) 2021-2023 © PSociety™. All rights reserved.
 
            This tool has been created and designed from scratch by Thomas Pellissier 
