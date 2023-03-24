@@ -115,10 +115,12 @@ class Main_Console():
         clear()
         # Affichage des dépôts trouvés
         Color.pl('\n  {*} Here are the similar repositories found for \'%s\':' % repo_name)
-        for index, repo in enumerate(search_results["items"]):
+        print()
+        for index, repo in enumerate(search_results['items']):
             Color.pl('  {D}[{W}{SB2}%s{W}{D}]{W} %s'% (index+1,repo['full_name']))
 
         # Demande de l'utilisateur pour choisir un dépôt
+        print()
         selected_index = int(input(self.prompt(menu='choose_repo'))) -1
 
         # if not selected_index:
@@ -128,15 +130,14 @@ class Main_Console():
         #     print('test')
         #     continue
 
-        selected_repo = search_results["items"][selected_index]
+        selected_repo = search_results['items'][selected_index]
 
         # Récupération des informations sur le dépôt
-        repo_url = selected_repo["url"]
+        repo_url = selected_repo['url']
         response = requests.get(repo_url)
         repo_info = json.loads(response.text)
 
-        # Affichage des informations sur le dépôt
-        clear()
+        # clear()
 
         # Data channel setting
         information_line_length = 'Information about \'%s\':' % repo_info['name']
@@ -164,7 +165,7 @@ class Main_Console():
             ('','')
         ]
         
-        # Display the data
+        # Affichage des informations sur le dépôt
         self.display_array(data=data)
 
         # Color.pl('\nInformation about \'%s\':' % repo_info['name'])
@@ -183,18 +184,36 @@ class Main_Console():
         branches_url = f"{repo_info['url']}/branches"
         response = requests.get(branches_url)
         branches_info = json.loads(response.text)
-        print(f"\nVoici les branches du dépôt {repo_info['name']}:")
+        Color.pl('\n  {*} All branches avalable for \'%s\':' % repo_info['name'])
         for index, branch in enumerate(branches_info):
-            print(f"{index+1}. {branch['name']}")
-        selected_branch_index = int(input("Entrez le numéro de la branche que vous souhaitez télécharger: ")) - 1
+            Color.pl('  {D}[{W}{SB2}%s{W}{D}]{W} %s' % (index+1,branch['name']))
+        Color.pl('  {*} Select the branch that you want to download: ')
+        selected_branch_index = int(input(self.prompt(menu='choose_branch'))) - 1
         selected_branch = branches_info[selected_branch_index]['name']
 
         # Demande de l'utilisateur pour télécharger le dépôt
-        download_url = repo_info["clone_url"]
-        download_dir = input("Entrez le répertoire de téléchargement: ")
+        download_url = repo_info['clone_url']
+        Color.pl('  {*} Enter the path where you want to download the repository.')
+        download_dir = input(self.prompt(menu='choose_download_dir'))
 
         repo_install_path = ''.join(download_dir).strip()
         repo_install_path = check_folder_path(repo_install_path,repo_info['name'])
+
+        if os.path.isdir(repo_install_path):
+            Color.pl('  {!} The folder {C}%s{W} already exists.' % repo_install_path)
+            Color.pl('  {?} Do you want to replace it? [Y/n] ')
+
+            replace_choice = input(self.prompt(menu='replace_folder'))
+            if replace_choice == "y" or not replace_choice:
+                remove
+
+
+        while os.path.isdir(repo_install_path) is True:
+            Color.pl('  {!} The folder {C}%s{W} already exists.' % repo_install_path)
+            Color.pl('  {*} Enter a new path where you want to download the repository.')
+            download_dir = input(self.prompt(menu='choose_download_dir'))
+            repo_install_path = ''.join(download_dir).strip()
+            repo_install_path = check_folder_path(repo_install_path,repo_info['name'])
 
         Color.pl('  {*} The repository \'%s\' will be downloaded in the folder {C}%s{W}.' % (repo_info['name'],repo_install_path))
 
@@ -202,8 +221,28 @@ class Main_Console():
 
         if download_choice == "y" or not download_choice:
             download_command = f"git clone -b {selected_branch} {download_url} {repo_install_path}"
-            Color.pl('  {*} Downloading the repository...')
+            Color.pl('  {-} Downloading the repository...')
             Process.call(download_command, shell=True)
+            Color.pl('  {+} The repository has been downloaded in the folder {C}%s{W}.' % repo_install_path)
+
+            Color.pl('  {-} Applying files permissions...')
+            Process.call(f"chmod -R 755 {repo_install_path}", shell=True)
+            Color.pl('  {+} Files permissions have been applied.')
+
+            Color.pl('  {-} Return to the main menu...')
+
+            if Configuration.verbose == 3:
+                Color.pl('  {§} Python: {SY1}sleep(3){W}')
+            sleep(3)
+            
+            self.show_main_menu = True
+            clear()
+            self.main_menu()
+
+        else:
+            self.show_main_menu = True
+            self.main_menu()
+
 
     def display_array(self, data):
         '''
@@ -239,6 +278,12 @@ class Main_Console():
         
         if menu == 'choose_repo':
             return Color.s('{underscore}%s{W}:{underscore}choose-repo{W}> ' % ptnm)
+        
+        if menu == 'choose_branch':
+            return Color.s('{underscore}%s{W}:{underscore}choose-branch{W}> ' % ptnm)
+        
+        if menu == 'choose_download_dir':
+            return Color.s('{underscore}%s{W}:{underscore}choose-download-dir{W}> ' % ptnm)
 
     def main_menu(self):
         try:

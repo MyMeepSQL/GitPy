@@ -4,7 +4,7 @@
 #  Filename ~ informations.py           [Created: 2023-02-28 |  9:21 - AM]  #
 #                                       [Updated: 2023-02-28 | 10:28 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  The informations page about GitPy                                       #
+#  The informations page about GitPy                                        #
 #  Language ~ Python3                                                       #
 #---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
@@ -57,42 +57,52 @@ class Informations():
         \r  and installation with users. It's a tool for Linux distros based
         \r  on Debian or Arch (for the moment).
 
-        \r  Options                  Description
-        \r  -------                  -----------
-        \r  --install                Install GitPy with all depencies on your system.
-        \r  --uninstall              Uninstall GitPy from your system.
-        \r  --update                 Update the GitPy directly from GitHub.
-        \r  --console                Start the main console of GitPy.
-        \r  --cli                    Start the CLI environment of GitPy.
+        \r  Options                         Description
+        \r  -------                         -----------
+        \r  --install                       Install GitPy with all depencies on your system.
+        \r  --uninstall                     Uninstall GitPy from your system.
+        \r  --update                        Update the GitPy directly from GitHub.
+        \r  --console                       Start the main console of GitPy.
+        \r  --cli                           Start the CLI environment of GitPy.
 
-        \r  Program                  Version (on your system)
-        \r  -------                  ------------------------
-        \r  gitpy                   %s
+        \r  Program                         Version (on your system)
+        \r  -------                         ------------------------
+        \r  gitpy                           %s
 
         \r  Copyright & Licensing
         \r  ---------------------
-        \r  Owner                    © PSociety™ by Thomas Pellissier (MyMeepSQL)
-        \r  Copyright                Copyright (C) 2021-2023 PSociety™, {R}All rights reserved{W}. By Thomas Pellissier (MyMeepSQL)
-        \r  License                  This program is under GNU General Public License v3.0 (GPL 3.0). You can modify the program and 
-        \r                           share it as long as the original author appears in credits and the program is on the same license.
+        \r  Owner                           © PSociety
+        \r  Copyright                       Copyright (C) 2021-2023 PSociety, {R}All rights reserved{W}.
+        \r  License                         This program is under GNU General Public License v3.0 (GPL 3.0). You can modify the program and 
+        \r                                  share it as long as the original author appears in credits and the program is on the same license.
 
         \r  Other informations
         \r  ------------------
-        \r  GitHub page              https://github.com/MyMeepSQL/gitpy
-        \r  Changelogs               https://github.com/MyMeepSQL/gitpy/blob/main/CHANGLOG.md
-        \r  Issues pages             https://github.com/MyMeepSQL/gitpy/issues
+        \r  GitHub page                     https://github.com/MyMeepSQL/gitpy
+        \r  Changelogs                      https://github.com/MyMeepSQL/GitPy/blob/master/src/docs/CHANGELOG.md
+        \r  Issues pages                    https://github.com/MyMeepSQL/gitpy/issues
 
         \r{SB2}{bold}Informations about author{W}:
         \r==========================
 
         \r  General informations
         \r  --------------------
-        \r  Author's fullname        Thomas Pellissier
-        \r  Author's codename        MyMeepSQL
-        \r  Author's email           thomas.pellissier.pro@proton.me ({bold}only for professional{W} or for {G}report bugs of GitPy{W})
+        \r  MyMeepSQL's fullname            Thomas Pellissier and Jonas Petitpierre
+        \r  MyMeepSQL's email               thomas.pellissier.pro@proton.me ({bold}only for professional{W} or for {G}report bugs of GitPy{W})
+
+        \r  Bashy's fullname                Jonas Petitpierre
+        \r  Bashy's email                   petitpierre@duck.com ({bold}only for personal{W} or for {G}report bugs of GitPy{W})
 
         \r  Other informations
         \r  ------------------
-        \r  GitHub profile           https://github.com/MyMeepSQL
-        \r  Twitter profile          https://twitter.com/MyMeepSQL
-        \r  Discord username         MyMeepSQL#0141''' % self.VERSION)
+        \r  MyMeepSQL's GitHub profile      https://github.com/MyMeepSQL
+        \r  MyMeepSQL's Twitter profile     https://twitter.com/MyMeepSQL
+        \r  MyMeepSQL's Discord username    MyMeepSQL#0141
+
+        \r  Bashy's GitHub profile          https://github.com/jonas52
+        \r  Bashy's Discord username        Bashy#2643
+        
+        
+        
+        
+        ''' % self.VERSION)

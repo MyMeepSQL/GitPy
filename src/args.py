@@ -107,7 +107,7 @@ class Arguments(argparse.ArgumentParser):
 
         gitpy = Arguments(
             prog='gitpy',
-            description='Automatate OpenVPN Server (GitPy) - A programm that help the user to create a OpenVPN server \nwith users and other things.',
+            description='GitPy - A Python3 tool for search and download a GitHub\'s repository directly in the terminal',
             usage='gitpy [options]',
             add_help=False,
             allow_abbrev=False,
@@ -115,8 +115,7 @@ class Arguments(argparse.ArgumentParser):
             formatter_class=lambda prog: BetterHelpFormatter(prog, max_help_position=80, width=100,indent_increment=2),
         )
 
-        cls._add_vpn_args(gitpy.add_argument_group(Color.s('{SB2}{bold}VPN options{W}')))
-        # cls._add_main_args(gitpy.add_argument_group(Color.s('{SB2}{bold}Main Options{W}')))
+        cls._add_main_args(gitpy.add_argument_group(Color.s('{SB2}{bold}Main options{W}')))
         cls._add_installation_args(gitpy.add_argument_group(Color.s('{SB2}{bold}Installation options{W}')))
         cls._add_output_args(gitpy.add_argument_group(Color.s('{SB2}{bold}Output options{W}')))
         cls._add_additional_args(gitpy.add_argument_group(Color.s('{SB2}{bold}Additional options{W}')))
@@ -130,7 +129,7 @@ class Arguments(argparse.ArgumentParser):
 
     # -------------------- [ VPN Arguments ] -------------------- #
     @classmethod
-    def _add_vpn_args(cls,main):
+    def _add_main_args(cls,main):
         main.add_argument(
             '--console',
             action='store_true',
