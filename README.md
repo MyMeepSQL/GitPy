@@ -94,9 +94,9 @@ Liens à modifier
     <img src="https://img.shields.io/badge/Release%20status-In%20Development-informational?style=for-the-badge" alt="Release status">
     <img src="https://img.shields.io/badge/Supported%20OS-Linux-informational?style=for-the-badge" alt="Supported OS">
     <img src="https://img.shields.io/badge/Supported%20distros-Arch%20&%20Debian%20based-informational?style=for-the-badge" alt="Supported ditros">
-    <img src="https://img.shields.io/github/repo-size/MyMeepSQL/aovpns?color=informational&style=for-the-badge" alt="Repo size">
-    <a href="https://github.com/MyMeepSQL/aovpns/blob/test_v1/LICENSE">
-        <img src="https://img.shields.io/github/license/MyMeepSQL/aovpns?color=informational&style=for-the-badge" alt="Repo License" >
+    <img src="https://img.shields.io/github/repo-size/MyMeepSQL/GitPy?color=informational&style=for-the-badge" alt="Repo size">
+    <a href="https://github.com/MyMeepSQL/GitPy/blob/test_v1/LICENSE">
+        <img src="https://img.shields.io/github/license/MyMeepSQL/GitPy?color=informational&style=for-the-badge" alt="Repo License" >
     </a>
 </p>
 
