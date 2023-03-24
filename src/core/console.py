@@ -151,6 +151,7 @@ class Main_Console():
             ('  %s' % seconde_line,'#1898CC'), 
             ('',''),
             ('  Repository\'s name   ::  %s' % repo_info['name'], ''),
+            ('  Repository\'s size   ::  %s' % repo_info['size'], ''),
             ('  Author              ::  %s' % repo_info['owner']['login'], ''),
             ('  Description         ::  %s' % repo_info['description'], ''),
             ('  Number of stars     ::  %s' % repo_info['stargazers_count'], ''),
@@ -204,16 +205,22 @@ class Main_Console():
             Color.pl('  {?} Do you want to replace it? [Y/n] ')
 
             replace_choice = input(self.prompt(menu='replace_folder'))
+
             if replace_choice == "y" or not replace_choice:
-                remove
+                remove_existing_folder = True
+            else:
+                Color.pl('  {!} You need to choose a new path where you want to download the repository.')
+                Color.pl('  {*} Enter the path where you want to download the repository.')
+                download_dir = input(self.prompt(menu='choose_download_dir'))
+                repo_install_path = ''.join(download_dir).strip()
+                repo_install_path = check_folder_path(repo_install_path,repo_info['name'])
 
-
-        while os.path.isdir(repo_install_path) is True:
-            Color.pl('  {!} The folder {C}%s{W} already exists.' % repo_install_path)
-            Color.pl('  {*} Enter a new path where you want to download the repository.')
-            download_dir = input(self.prompt(menu='choose_download_dir'))
-            repo_install_path = ''.join(download_dir).strip()
-            repo_install_path = check_folder_path(repo_install_path,repo_info['name'])
+        # while os.path.isdir(repo_install_path) is True:
+        #     Color.pl('  {!} The folder {C}%s{W} already exists.' % repo_install_path)
+        #     Color.pl('  {*} Enter a new path where you want to download the repository.')
+        #     download_dir = input(self.prompt(menu='choose_download_dir'))
+        #     repo_install_path = ''.join(download_dir).strip()
+        #     repo_install_path = check_folder_path(repo_install_path,repo_info['name'])
 
         Color.pl('  {*} The repository \'%s\' will be downloaded in the folder {C}%s{W}.' % (repo_info['name'],repo_install_path))
 
@@ -284,6 +291,9 @@ class Main_Console():
         
         if menu == 'choose_download_dir':
             return Color.s('{underscore}%s{W}:{underscore}choose-download-dir{W}> ' % ptnm)
+        
+        # if menu == 'replace_folder':
+        #     return Color.s('{underscore}%s{W}:{underscore}replace-folder{W}> ' % ptnm)
 
     def main_menu(self):
         try:
