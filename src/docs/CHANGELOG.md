@@ -34,14 +34,14 @@
 ---
 
 <pre>
-                      _________________    ______________   _________ 
-                      ___    |_  __ \_ |  / /__  __ \__  | / /_  ___/
-                      __  /| |  / / /_ | / /__  /_/ /_   |/ /_____ \ 
-                      _  ___ / /_/ /__ |/ / _  ____/_  /|  / ____/ / 
-                      /_/  |_\____/ _____/  /_/     /_/ |_/  /____/
-                      
+                              __________________________
+                              __  ____/__(_)_  /___  __ \____  __
+                              _  / __ __  /_  __/_  /_/ /_  / / /
+                              / /_/ / _  / / /_ _  ____/_  /_/ / 
+                              \____/  /_/  \__/ /_/     _\__, /  
+                                                        /____/
 
-  GitPy - A tool for make multiple OpenVPN server and manage existing OpenVPN's client config.
+  gitpy - A Python3 tool for search and download a GitHub's repository directly in the terminal
 
 </pre>
 
@@ -55,6 +55,8 @@ Liens à modifier
 <p align="center">
     <a href="https://github.com/MyMeepSQL">
         <img src="https://img.shields.io/badge/Made%20by-Thomas%20Pellissier%20(MyMeepSQL)-important?style=for-the-badge" alt="Made by">
+    <a href="https://github.com/jonas52">
+        <img src="https://img.shields.io/badge/Made%20by-Jonas%20Petitpierre%20(Bashy)-important?style=for-the-badge" alt="Made by">
     </a>
     <a href="https://github.com/PentestSociety">
         <img src="https://img.shields.io/badge/Owner-©%20PSociety™%20(MyMeepSQL)-important?style=for-the-badge" alt="Owner">
