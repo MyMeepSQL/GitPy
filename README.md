@@ -83,7 +83,7 @@ Liens à modifier
     <a href="https://github.com/MyMeepSQL/aovpns/issues">
         <img src="https://img.shields.io/github/issues/MyMeepSQL/GitPy?color=success&style=for-the-badge" alt="Issues">
     </a>
-    <a href="https://github.com/MyMeepSQL/aovpns/issues">
+    <a href="https://github.com/MyMeepSQL/GitPy/issues">
         <img src="https://img.shields.io/github/last-commit/MyMeepSQL/GitPy/master?color=success&style=for-the-badge" alt="GitHub last commit (branch)">
     </a>
 
@@ -160,12 +160,12 @@ sudo git clone https://github.com/MyMeepSQL/gitpy.git
 # And go in its directory
 cd gitpy
 
-# To install AOVPNS on your system, run:
+# To install GitPy on your system, run:
 sudo python3 gitpy.py --install
 
 # Once installed, you can run the 'gitpy' command anywhere in the terminal
 
-# Run the main console of AOVPNS with:
+# Run the main console of GitPy with:
 gitpy --console
 ```
 
