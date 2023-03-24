@@ -143,7 +143,7 @@ class Main_Console():
                 ('  Information about \'%s\':' % repo_info['name'], ''),
                 ('',''), 
                 ('  Repository\'s name   ::  %s' % repo_info['name'], ''),
-                ('  Author              ::  %s' % repo_info['owner']['login'], ''),
+                ('  Author              ::  %s' % repo_info['owner']['login'], '')y,
                 ('  Description         ::  %s' % repo_info['description'], ''),
                 ('  Number of stars     ::  %s' % repo_info['stargazers_count'], ''),
                 ('  Main language       ::  %s' % repo_info['language'], ''),

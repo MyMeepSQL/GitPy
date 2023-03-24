@@ -5,7 +5,7 @@
 #  Filename ~ __main__.py               [Created: 2023-01-31 | 09:20 - AM]  #
 #                                       [Updated: 2023-01-31 | 09:20 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  The main file of GitPy, where all start                                 #
+#  The main file of GitPy, where all start                                  #
 #  Language ~ Python3                                                       #
 #---[Author]----------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
@@ -54,6 +54,7 @@ class GitPy(object):
     '''
     The first GitPy class that will be called first when the user runs GitPy
     '''
+
     def __init__(self, pwd):
         if len(sys.argv) == 1:
             # If the user ran gitpy with any option(s) 
@@ -131,11 +132,10 @@ class GitPy(object):
 
     #     #     # Load parsed argument into the Configuration class
     #     #     C.load_from_arguments(args.get_arguments, pwd = pwd)
-    
+
     #     else:
     #         # Load parsed argument into the Configuration class
     #         Configuration(pwd=pwd)
-
 
 # Main (entry point)
 def entry_point(pwd):
@@ -186,4 +186,3 @@ def entry_point(pwd):
     except KeyboardInterrupt as ki:
         # Color.pexception(ki)
         Color.pl('\n  {!} Interrupted, shutting down...')
-
