@@ -74,17 +74,19 @@ class Main_Console():
         This console work like a "choices menu" console.
     '''
 
+    # Variables
     VERSION = Configuration.VERSION # Current version of GitPy in the Configuration's Class.
     # REPO_VERSION=config.Configuration.REPO_VERSION # The latest version of GitPy from the GitHub Repository
     REPO_URL = Configuration.REPO_URL
     gitpy_path_env_var_name = Configuration.gitpy_path_env_var_name
 
+    # Parameters
+    remove_existing_folder = False
     promptname = 'GitPy'
-
     show_main_menu = True
-
     SPACE = '#>SPACE$<#'
-    
+
+    # Commands
     global_commands = [
 
         '99',
@@ -102,17 +104,29 @@ class Main_Console():
         search_url = f"https://api.github.com/search/repositories?q={repo_name}"
         if username:
             search_url += f"+user:{username}"
+
+        if Configuration.verbose >= 3:
+            Color.pl('  {§}  Searching for similar repositories with the GitHub API...')
+            Color.pl('   {SY1}╰──╼{W} URL: {C}%s{W}' % search_url)
+
         response = requests.get(search_url)
+
         search_results = json.loads(response.text)
+
+        # if Configuration.verbose >= 3:
+        #     Color.pl('  {§}  Response: {C}%s{W}' % search_results)
+
 
         # Affichage des dépôts similaires trouvés
         items = search_results['items']
         if len(items) == 0:
+            if Configuration.verbose >= 3:
+                Color.pl('  {§} No items found in the "items" key of the search results.')
             Color.pl('  {!} No repositories found with the name \'%s\'.' % repo_name)
             return
 
         # while True:
-        clear()
+        # clear()
         # Affichage des dépôts trouvés
         Color.pl('\n  {*} Here are the similar repositories found for \'%s\':' % repo_name)
         print()
@@ -130,13 +144,43 @@ class Main_Console():
         #     print('test')
         #     continue
 
+        # Récupération des informations sur le dépôt
+        if Configuration.verbose >= 3:
+            Color.pl('  {§}  Getting information about the selected repository...')
+            Color.pl('   {SY1}╰──╼{W} Python: {SY1}selected_repo = search_results[\'items\'][selected_index]{W}')
         selected_repo = search_results['items'][selected_index]
 
         # Récupération des informations sur le dépôt
+        if Configuration.verbose >= 3:
+            Color.pl('  {§}  Getting information about the selected repository...')
+            Color.pl('   {SY1}├──╼{W} Python: {SY1}repo_url = selected_repo[\'url\']{W}')
+
         repo_url = selected_repo['url']
+
+        if Configuration.verbose >= 3:
+            Color.pl('   {SY1}├──╼{W} Python: {SY1}response = requests.get(repo_url){W}')
+        
         response = requests.get(repo_url)
+
+        if Configuration.verbose >= 3:
+            Color.pl('   {SY1}╰──╼{W} Python: {SY1}repo_info = json.loads(response.text){W}')
+        
         repo_info = json.loads(response.text)
 
+        # if Configuration.verbose >= 3:
+        #     Color.pl('   {SY1}├──╼{W} value: {C}%s{W}' % repo_info['name'])
+        #     Color.pl('   {SY1}├──╼{W} URL: {C}%s{W}' % repo_info['size'])
+        #     Color.pl('   {SY1}├──╼{W} URL: {C}%s{W}' % repo_info['owner']['login'])
+        #     Color.pl('   {SY1}├──╼{W} URL: {C}%s{W}' % repo_info['description'])
+        #     Color.pl('   {SY1}├──╼{W} URL: {C}%s{W}' % repo_info['stargazers_count'])
+        #     Color.pl('   {SY1}├──╼{W} URL: {C}%s{W}' % repo_info['forks_count'])
+        #     Color.pl('   {SY1}├──╼{W} URL: {C}%s{W}' % repo_info['language'])
+        #     Color.pl('   {SY1}├──╼{W} URL: {C}%s{W}' % repo_info['created_at'])
+        #     Color.pl('   {SY1}├──╼{W} URL: {C}%s{W}' % repo_info['updated_at'])
+        #     Color.pl('   {SY1}├──╼{W} URL: {C}%s{W}' % repo_info['html_url'])
+        #     Color.pl('   {SY1}├──╼{W} URL: {C}%s{W}' % repo_info['url'])
+        #     Color.pl('   {SY1}├──╼{W} URL: {C}%s{W}' % repo_info['license']['name'] if repo_info['license'] else 'None')
+            # Color.pl('   {SY1}╰──╼{W} URL: {C}%s{W}' % repo_info['clone_url'])
         # clear()
 
         # Data channel setting
@@ -167,6 +211,11 @@ class Main_Console():
         ]
         
         # Affichage des informations sur le dépôt
+
+
+        if Configuration.verbose >= 3:
+            Color.pl('  {§}  Displaying the information about the selected repository...')
+            Color.pl('   {SY1}╰──╼{W} Python: {SY1}self.display_array(data=data){W}')
         self.display_array(data=data)
 
         # Color.pl('\nInformation about \'%s\':' % repo_info['name'])
@@ -182,6 +231,9 @@ class Main_Console():
         # Color.pl('License            ::  %s' % repo_info['license']['name'] if repo_info['license'] else 'None')
 
         # Demande de l'utilisateur pour choisir la branche
+        if Configuration.verbose >= 3:
+            Color.pl('  {§}  Getting information about the branches of the selected repository...')
+            Color.pl('   {SY1}╰──╼{W} Request: {SY1}GET %s/branches{W}' % repo_info['url'])
         branches_url = f"{repo_info['url']}/branches"
         response = requests.get(branches_url)
         branches_info = json.loads(response.text)
@@ -189,7 +241,20 @@ class Main_Console():
         for index, branch in enumerate(branches_info):
             Color.pl('  {D}[{W}{SB2}%s{W}{D}]{W} %s' % (index+1,branch['name']))
         Color.pl('  {*} Select the branch that you want to download: ')
-        selected_branch_index = int(input(self.prompt(menu='choose_branch'))) - 1
+        while True:
+            try:
+                selected_branch_index = int(input(self.prompt(menu='choose_branch')))
+                if not selected_branch_index:
+                    continue
+                if selected_branch_index > len(branches_info) or selected_branch_index < 1:
+                    Color.pl('  {!} Invalid choice. Please enter a number between 1 and %s.' % len(branches_info))
+                    continue
+                break
+            except ValueError:
+                Color.pl('  {!} Invalid choice. Please enter a number between 1 and %s.' % len(branches_info))
+                continue
+
+
         selected_branch = branches_info[selected_branch_index]['name']
 
         # Demande de l'utilisateur pour télécharger le dépôt
@@ -206,13 +271,19 @@ class Main_Console():
 
 
             if replace_choice == "y" or not replace_choice:
-                remove_existing_folder = True
+                self.remove_existing_folder = True
             else:
                 Color.pl('  {!} You need to choose a new path where you want to download the repository.')
                 Color.pl('  {*} Enter the path where you want to download the repository.')
-                download_dir = input(self.prompt(menu='choose_download_dir'))
-                repo_install_path = ''.join(download_dir).strip()
-                repo_install_path = check_folder_path(repo_install_path,repo_info['name'])
+                while os.path.isdir(repo_install_path) == True:
+                    download_dir = input(self.prompt(menu='choose_download_dir'))
+                    repo_install_path = ''.join(download_dir).strip()
+                    repo_install_path = check_folder_path(repo_install_path,repo_info['name'])
+
+                    if os.path.isdir(repo_install_path):
+                        Color.pl('  {!} The folder {C}%s{W} already exists.' % repo_install_path)
+                        continue
+
 
         # while os.path.isdir(repo_install_path) is True:
         #     Color.pl('  {!} The folder {C}%s{W} already exists.' % repo_install_path)
@@ -226,15 +297,20 @@ class Main_Console():
         download_choice = input(Color.s('  {?} Do you want to download this repository? [Y/n] '))
 
         if download_choice == "y" or not download_choice:
-            download_command = f"git clone -b {selected_branch} {download_url} {repo_install_path}"
+            # download_command = f"git clone -b {selected_branch} {download_url} {repo_install_path}"
+
+            if self.remove_existing_folder == True:
+                Color.pl('  {-} Removing the existing folder...')
+                Process.call('rm -fr "%s" ' % repo_install_path, shell=True)
+
             Color.pl('  {-} Downloading the repository...')
-            Process.call(download_command, shell=True)
-            Color.pl('  {+} The repository has been downloaded in the folder {C}%s{W}.' % repo_install_path)
+            Process.call('git clone -b "%s" "%s" "%s"' % (selected_branch,download_url,repo_install_path), shell=True)
 
             Color.pl('  {-} Applying files permissions...')
-            Process.call(f"chmod -R 755 {repo_install_path}", shell=True)
-            Color.pl('  {+} Files permissions have been applied.')
+            Process.call('chmod -R 777 "%s" ' % repo_install_path, shell=True)
 
+
+            Color.pl('  {*} The repository has successfully been downloaded in the folder {C}%s{W}.' % repo_install_path)
             Color.pl('  {-} Return to the main menu...')
 
             if Configuration.verbose == 3:
@@ -242,7 +318,7 @@ class Main_Console():
             sleep(3)
             
             self.show_main_menu = True
-            clear()
+            # clear()
             self.main_menu()
 
         else:
