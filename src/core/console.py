@@ -202,9 +202,8 @@ class Main_Console():
 
         if os.path.isdir(repo_install_path):
             Color.pl('  {!} The folder {C}%s{W} already exists.' % repo_install_path)
-            Color.pl('  {?} Do you want to replace it? [Y/n] ')
+            replace_choice = input(Color.s('  {?} Do you want to replace it? [Y/n] '))
 
-            replace_choice = input(self.prompt(menu='replace_folder'))
 
             if replace_choice == "y" or not replace_choice:
                 remove_existing_folder = True
