@@ -452,6 +452,35 @@ class Help_Messages():
         \r  -----
         \r  gitpy --info''')
 
+    def option_version():
+        '''
+        The help message for the -V/--version option
+        '''
+        Color.pl('''
+        \r{SB2}{bold}Version option{W}:
+        \r===============
+
+        \r  Category
+        \r  --------
+        \r  Informations options
+
+        \r  Description
+        \r  -----------
+        \r  Show the GitPy's version and exit.
+
+        \r  Options                         Description
+        \r  -------                         -----------
+        \r  -v [LEVEL], --verbose [LEVEL]   Verbosity level: 1-3 (default: {G}0{W} | const: {G}1{W}).
+        
+        \r{SB2}{bold}Others avalable informations{W}:
+        \r=============================
+
+        \r  Usage
+        \r  -----
+        \r  gitpy -V [OPTION]
+        \r    or
+        \r  gitpy --version [OPTION]''')
+
 
     # -------------------- [ Miscellaneous options ] -------------------- #
     def option_update():

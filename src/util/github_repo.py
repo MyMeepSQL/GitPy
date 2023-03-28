@@ -57,7 +57,7 @@ def compare_version(mode=None):
 
     # if os.path.isdir(C.Configuration.DEFAULT_INSTALL_PATH):
     if internet_check() == True:
-        rqst = get('https://raw.githubusercontent.com/MyMeepSQL/gitpy/master/metadata.json', timeout=3)
+        rqst = get('https://raw.githubusercontent.com/MyMeepSQL/GitPy/master/metadata.json', timeout=3)
         fetch_sc = rqst.status_code
 
         if fetch_sc == 404:
@@ -68,16 +68,19 @@ def compare_version(mode=None):
         if fetch_sc == 200:
             metadata = rqst.text
             json_data = loads(metadata)
+            # print(json_data)
             cp_online_ver = json_data['version']
 
-            REPO_VERSION = cp_online_ver
-            # print(REPO_VERSION)
+            C.Configuration.REPO_VERSION = cp_online_ver
+            # print(C.Configuration.VERSION)
+            # print(cp_online_ver)
+            # print(C.Configuration.REPO_VERSION)
 
             if version.parse(cp_online_ver) > version.parse(C.Configuration.VERSION):
                 Color.pl('  {*} A new update are avalable: %s' % cp_online_ver)
 
                 if mode == None:
-                    Color.pl('  {*} A new update are avalable: %s' % cp_online_ver)
+                    # Color.pl('  {*} A new update are avalable: %s' % cp_online_ver)
                     Color.pl('  {*} You can update your GitPy instance with the {G}--update{W} option.')
 
             else:
@@ -89,7 +92,7 @@ def compare_version(mode=None):
     else:
         Color.pl('  {!} You are not connected to the internet.')
         Color.pl('  {*} I can\'t check if a new version of GitPy are avalable. or not')
-        REPO_VERSION = 'no-internet'
+        C.Configuration.REPO_VERSION = 'no-internet'
 
 
 def is_reachable(args):

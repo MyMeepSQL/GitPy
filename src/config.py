@@ -267,6 +267,12 @@ class Configuration(object):
                 print()
                 GR.compare_version()
                 exit_tool(0)
+            if args.version:
+                __MAIN__.GitPy.Banner()
+                HM.option_version()
+                print()
+                GR.compare_version()
+                exit_tool(0)
 
             # ---------- [ Miscellaneous options ] ---------- #
             if args.update:
