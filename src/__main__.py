@@ -63,7 +63,7 @@ class GitPy(object):
             self.Banner()   
 
             Color.pl('''
-                \r  {*} {C}Usage{W}: gitpy [OPTIONS]
+                \r  {*} {C}Usage{W}: gitpy <OPTIONS>
                 \r  {!} Missing options
                 \r  {*} Try {G}gitpy --help{W} for more information.''')
 
@@ -98,7 +98,7 @@ class GitPy(object):
         '''
         Color.pl('''{SB2}{bold}
             \r ┌─┐┬┌┬┐┌─┐┬ ┬ {W}{bold}{{W}{D}%s{W}{bold}}{W}{SB2}{bold}
-            \r │ ┬│ │ ├─┘└┬┘ {W}{D}by MyMeepSQL{W}{SB2}{bold}
+            \r │ ┬│ │ ├─┘└┬┘ {W}{D}by MyMeepSQL & Bashy{W}{SB2}{bold}
             \r └─┘┴ ┴ ┴   ┴  {W}{GR}{underscore}%s{W}''' 
 
             % (Configuration.VERSION, Configuration.REPO_URL)

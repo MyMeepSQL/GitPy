@@ -129,20 +129,29 @@ class Main_Console():
         # clear()
         # Affichage des dépôts trouvés
         Color.pl('\n  {*} Here are the similar repositories found for \'%s\':' % repo_name)
-        print()
         for index, repo in enumerate(search_results['items']):
             Color.pl('  {D}[{W}{SB2}%s{W}{D}]{W} %s'% (index+1,repo['full_name']))
 
         # Demande de l'utilisateur pour choisir un dépôt
-        print()
-        selected_index = int(input(self.prompt(menu='choose_repo'))) -1
+        Color.pl('  {*} Select the repository that you want to clone.')
+        Color.pl('  {*} Enter {G}back{W} to come back to the main menu.')
+        while True:
+            try:
+                selected_index = input(self.prompt(menu='choose_repo'))
+                if selected_index == 'back':
+                    self.show_main_menu = True
+                    break
+                if not selected_index:
+                    continue
+                if int(selected_index) > len(items) or int(selected_index) < 1:
+                    Color.pl('  {!} Invalid choice. Please enter a number between 1 and %s.' % len(items))
+                    continue
+                break
+            except ValueError:
+                Color.pl('  {!} Invalid choice. Please enter a number between 1 and %s.' % len(items))
+                continue
 
-        # if not selected_index:
-        #     continue
-
-        # if selected_index in search_results["items"]:
-        #     print('test')
-        #     continue
+        selected_index = int(selected_index)
 
         # Récupération des informations sur le dépôt
         if Configuration.verbose >= 3:
@@ -240,7 +249,7 @@ class Main_Console():
         Color.pl('\n  {*} All branches avalable for \'%s\':' % repo_info['name'])
         for index, branch in enumerate(branches_info):
             Color.pl('  {D}[{W}{SB2}%s{W}{D}]{W} %s' % (index+1,branch['name']))
-        Color.pl('  {*} Select the branch that you want to download: ')
+        Color.pl('  {*} Select the branch that you want to download.')
         while True:
             try:
                 selected_branch_index = int(input(self.prompt(menu='choose_branch')))
@@ -378,15 +387,15 @@ class Main_Console():
                     GitPy.Banner()
                     Color.pl('''{D}╭──────────────────────────────────────────────────────────────╼
 │
-│{W}  GitPy - A tool to automatate an OpenVPN server configuration{D}
+│{W}  GitPy - A tool to search and download a GitHub repository quickly.{D}
 │
 ╰┬──╮
  │  │
- │  ├──────╼{W} Created by             ::  {italic}Thomas Pellissier{W} ({R}{bold}MyMeepSQL{W}){D}
- │  │{W}                               ::  {italic}Jonas Petitpierre{W} ({R}{bold}Bashy{W}){D}
- │  ├──────╼{W} Version                ::  {G}%s{W}{D}
+ │  ├──────╼{W} Created by                    ::  {italic}Thomas Pellissier{W} ({R}{bold}MyMeepSQL{W}){D}
+ │  │{W}                                      ::  {italic}Jonas Petitpierre{W} ({R}{bold}Bashy{W}){D}
+ │  ├──────╼{W} Version                       ::  {G}%s{W}{D}
  │  │
- │  ├──────╼{W} Follow me on Twitter   ::  {SB4}MyMeepSQL{W}{D}
+ │  ├──────╼{W} Follow MyMeepSQL on Twitter   ::  {SB4}MyMeepSQL{W}{D}
  │  │
  │  │{W}                         {SG2}Welcome to the GitPy{W}{D}
  │  │
