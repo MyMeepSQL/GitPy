@@ -44,6 +44,7 @@ from src.__main__ import GitPy
 from src.config import Configuration
 from src.util.clear import clear
 from src.util.colors import Color
+from src.util.exit_tool import exit_tool.
 from src.util.internet_check import internet_check
 from src.util.env_var import remove_env_var
 from src.util.process import Process
@@ -68,14 +69,16 @@ class Uninstaller():
             print()
             Color.pl('  {!} You tried to run GitPy on a non-linux machine!')
             Color.pl('  {*} GitPy can be run only on a Linux kernel.')
-            sys.exit(1)
+            # Exit and removing the python cache
+            exit_tool(0,pwd=pwd)
         else:
             if os.getuid() != 0:
                 GitPy.Banner()
                 print()
                 Color.pl('  {!} The GitPy Installer must be run as root.')
                 Color.pl('  {*} Re-run with sudo or switch to root user.')
-                sys.exit(1)
+                # Exit and removing the python cache
+                exit_tool(0,pwd=pwd)
             else:
                 # Distro check
                 if BD.__init__() == 'Arch':
@@ -90,7 +93,8 @@ class Uninstaller():
                     Color.pl('  {!} You\'re not running Arch or Debian variant.')
                     Color.pl('  {*} GitPy can only run on Arch or Debian based distros.')
                     Color.pl('  {-} Exiting...')
-                    sys.exit(1)
+                    # Exit and removing the python cache
+                    exit_tool(0,pwd=pwd)
         if args.quiet:
             # -------------------- [ Quiet installation ] -------------------- #
             # Check if the GITPY_INSTALL_PATH environment variable is set or not
@@ -101,7 +105,8 @@ class Uninstaller():
                 Color.pl('  {!} GitPy is not installed on this machine.')
                 Color.pl('  {*} Because the {C}{bold}GITPY_INSTALL_PATH{W} environment variable is not set (in the {C}/etc/environment{W} file).')
                 Color.pl('  {-} Exiting...')
-                sys.exit(1)
+                # Exit and removing the python cache
+                exit_tool(0,pwd=pwd)
 
             ## ------ [ Remove the main folder ] ------ ##
             shutil.rmtree(INSTALL_PATH)
@@ -111,9 +116,9 @@ class Uninstaller():
 
             ## ------ [ Remove the 'GITPY_INSTALL_PAT' environment variable ] ------ ##
             remove_env_var(var_name=self.gitpy_path_env_var_name)
-            # Removing the python cache
-            remove_python_cache(pwd=pwd)
-            sys.exit(0)            
+
+            # Exit and removing the python cache
+            exit_tool(0,pwd=pwd)
         else:
             # -------------------- [ No quiet installation ] -------------------- #
             GitPy.Banner()
@@ -139,10 +144,8 @@ class Uninstaller():
                 Color.pl('  {!} GitPy is not installed on this machine.')
                 Color.pl('  {*} Because the GITPY_INSTALL_PATH environment variable is not set (in the {C}/etc/environment{W} file).')
                 Color.pl('  {-} Exiting...')
-                if Configuration.verbose == 3:
-                    Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-                    Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-                sys.exit(1)
+                # Exit and removing the python cache
+                exit_tool(1,pwd=pwd)
             # Inform the user what the uninstaller will do
             Color.pl('''  {*} {underscore}This tool will{W}:
                     \r     {D}[{W}{LL}1{W}{D}]{W} Remove the {C}%s{W} folder.

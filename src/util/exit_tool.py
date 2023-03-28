@@ -37,9 +37,10 @@ import sys
 
 ## Third party libraries
 from src.util.colors import Color
+from src.util.remove_python_cache import remove_python_cache
 
 
-def exit_tool(code):
+def exit_tool(code,pwd):
     '''
     Exit with a message if verbose was applied
     :param code: Exit code

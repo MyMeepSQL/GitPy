@@ -432,10 +432,7 @@ class Main_Console():
         except KeyboardInterrupt:
             Color.pl('  {!} Interrupted, shutting down...')
             remove_python_cache(pwd=self.pwd, line_enter=True)
-            if Configuration.verbose == 3:
-                Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-                Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-            sys.exit(1)
+            exit_tool(1)
 
     def __init__(self, pwd):
 
@@ -475,10 +472,7 @@ class Main_Console():
             #     else:
             #         Color.pl('  {-} Exiting...')
             #         # remove_python_cache(pwd=pwd, line_enter=True)
-            #     if Configuration.verbose == 3:
-            #         Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-            #         Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-            #     sys.exit(1)
+            #     exit_tool(1)
 
             # Check if the user is root or not
             if Configuration.verbose == 3:

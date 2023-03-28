@@ -48,6 +48,7 @@ from src.config import Configuration
 from src.util.clear import clear
 from src.util.colors import Color
 from src.util.process import Process
+from src.util.exit_tool import exit_tool
 from src.util.env_var import set_env_var
 from src.util.based_distro import Based_Distro as BD
 from src.util.internet_check import internet_check
@@ -105,14 +106,14 @@ class Installer():
             print()
             Color.pl('  {!} You tried to run GitPy on a non-linux machine!')
             Color.pl('  {*} GitPy can be run only on a Linux kernel.')
-            sys.exit(1)
+            exit_tool(1)
         else:
             if os.getuid() != 0:
                 GitPy.Banner()
                 print()
                 Color.pl('  {!} The GitPy Installer must be run as root.')
                 Color.pl('  {*} Re-run with sudo or switch to root user.')
-                sys.exit(1)
+                exit_tool(1)
             else:
                 # Distro check
                 if BD.__init__() == 'Arch':
@@ -127,7 +128,8 @@ class Installer():
                     Color.pl('  {!} You\'re not running Arch or Debian variant.')
                     Color.pl('  {*} GitPy can only run on Arch or Debian based distros.')
                     Color.pl('  {-} Exiting...')
-                    sys.exit(1)
+                    exit_tool(1)
+
         if args.skip_update:
             UPDATE_SYSTEM_SKIPED='(Skipped)'
         else:
@@ -222,7 +224,7 @@ class Installer():
                 remove_python_cache(pwd=pwd)
                 Color.pl('  {!} You must re-run the installation process to install GitPy correctly.')
                 Color.pl('  {*} Exiting...')
-                sys.exit(1)
+                exit_tool(1)
         else:
             # -------------------- [ No quiet installation ] -------------------- #
             GitPy.Banner()
@@ -250,7 +252,7 @@ class Installer():
             else:
                 Color.pl('  {+} Internet status: {R}Not connected{W}.')
                 Color.pl('  {!} No Internet connexion found, please check if you are connected to the Internet and retry.')
-                sys.exit(1)
+                exit_tool(1)
             if Configuration.verbose == 3:
                 Color.pl('  {§} Check if the GitPy\'s repositorie are reachable or not...')
                 Color.pl('   {SY1}╰──╼{W} Call the {SY1}is_reachable(){W} function.')
@@ -352,10 +354,7 @@ class Installer():
                             Color.pl('  {*} Exiting...')
                             # Removing the python cache
                             remove_python_cache(pwd=pwd)
-                            if Configuration.verbose == 3:
-                                Color.pl(' {§} Exiting with the exit code: {R}1{W}')
-                                Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-                            sys.exit(1)
+                            exit_tool(1)
 
                     ## ------ [ GitPy files ] ------ ##
                     Color.pl('  {-} Installing GitPy files...')
@@ -435,26 +434,21 @@ class Installer():
                         # Removing the python cache
                         remove_python_cache(pwd=pwd)
                         Color.pl('  {*} Now you can run the command {G}gitpy{W} anywhere in the terminal.')
-                        if Configuration.verbose == 3:
-                            Color.pl('  {§} Exiting with the exit code: {G}0{W}')
-                            Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(0){W}')
-                        sys.exit(0)
+                        # Removing the python cache
+                        remove_python_cache(pwd=pwd)
+                        exit_tool(0)
                 except KeyboardInterrupt:
                     Color.pl('\n  {!} Installation process interrupted.')
                     Color.pl('  {*} You must re-run the installation process to install GitPy correctly.')
                     Color.pl('  {-} Exiting...')
                     # Removing the python cache
                     remove_python_cache(pwd=pwd)
-                    if Configuration.verbose == 3:
-                        Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-                        Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-                    sys.exit(1)
+                    exit_tool(1)
             else:
                 Color.pl('  {*} Aborted')
-                if Configuration.verbose == 3:
-                    Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-                    Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-                sys.exit(1)
+                # Removing the python cache
+                remove_python_cache(pwd=pwd)
+                exit_tool(1)
 
 def entry_point(args, pwd):
     try:
@@ -463,15 +457,9 @@ def entry_point(args, pwd):
         Color.pl('\n  {*} Aborted')
         # Removing the python cache
         remove_python_cache(pwd=pwd)
-        if Configuration.verbose == 3:
-            Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-            Color.pl('    {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-        sys.exit(1)
+        exit_tool(1)
     except KeyboardInterrupt:
         Color.pl('\n  {*} Aborted')
         # Removing the python cache
         remove_python_cache(pwd=pwd)
-        if Configuration.verbose == 3:
-            Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-            Color.pl('    {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-        sys.exit(1)
+        exit_tool(1)
