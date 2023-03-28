@@ -189,45 +189,27 @@ class Uninstaller():
                         Color.pl('  {-} Rebooting the machine...')
                         Process.call('reboot', shell=True)
                     else:
-                        # Removing the python cache
-                        remove_python_cache(pwd=pwd)
-                        if Configuration.verbose == 3:
-                            Color.pl('  {§} Exiting with the exit code: {G}0{W}')
-                            Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(0){W}')
-                        sys.exit(0)
+                        # Exit and removing the python cache
+                        exit_tool(0,pwd=pwd)
                 except KeyboardInterrupt:
                     Color.pl('\n  {!} Uninstallation process interrupted.')
                     Color.pl('  {*} You must re-run the uninstalation process to uninstall GitPy correctly.')
                     Color.pl('  {-} Exiting...')
-                    if Configuration.verbose == 3:
-                        Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-                        Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-                    sys.exit(1)
+                    # Exit and removing the python cache
+                    exit_tool(1,pwd=pwd)
             else:
                 Color.pl('  {*} Aborted')
-                # Removing the python cache
-                remove_python_cache(pwd=pwd)
-                if Configuration.verbose == 3:
-                    Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-                    Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-                sys.exit(1)
+                # Exit and removing the python cache
+                exit_tool(1,pwd=pwd)
 
 def entry_point(args, pwd):
     try:
         Uninstaller(args=args, pwd=pwd)
     except EOFError:
         Color.pl('\n  {*} Aborted')
-        # Removing the python cache
-        remove_python_cache(pwd=pwd)
-        if Configuration.verbose == 3:
-            Color.pl('  {#} Exiting with the exit code: {R}1{W}')
-            Color.pl('   {P}╰──╼{W} Python: {P}sys.exit(1){W}')
-        sys.exit(1)
+        # Exit and removing the python cache
+        exit_tool(1,pwd=pwd)
     except KeyboardInterrupt:
         Color.pl('\n  {*} Aborted')
-        # Removing the python cache
-        remove_python_cache(pwd=pwd)
-        if Configuration.verbose == 3:
-            Color.pl('  {#} Exiting with the exit code: {R}1{W}')
-            Color.pl('   {P}╰──╼{W} Python: {P}sys.exit(1){W}')
-        sys.exit(1)
+        # Exit and removing the python cache
+        exit_tool(1,pwd=pwd)
