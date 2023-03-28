@@ -77,9 +77,12 @@ class Create_bin_file:
 # Import section
 import os
 import sys
-from src import __main__
+
+# Import all files from the install path
+sys.path.insert(0, '%s')
 
 ## Third party libraries
+from src import __main__
 from src.util.colors import Color
 from src.util.exit_verbose import exit_tool
 
@@ -93,7 +96,6 @@ try:
 
 except KeyboardInterrupt:
     Color.pl('\\n  {!} Interrupted, shutting down...')
-    exit_tool(1)
-''' % path
+    exit_tool(1)''' % path
 
 

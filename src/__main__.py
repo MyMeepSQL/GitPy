@@ -64,7 +64,7 @@ class GitPy(object):
 
             Color.pl('''
                 \r  {*} {C}Usage{W}: gitpy [OPTIONS]
-                \r  {!} {O}Missing options{W}
+                \r  {!} Missing options
                 \r  {*} Try {G}gitpy --help{W} for more information.''')
 
             sys.exit(1)

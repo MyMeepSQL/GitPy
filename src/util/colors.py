@@ -171,16 +171,18 @@ class Color():
         '''
         Prints an exception. Includes stack trace if necessary.
         '''
-        from src.__main__ import GitPy
+        # from src.__main__ import GitPy
+        from src.config import Configuration
         # GitPy.Banner()
         # print()
         Color.pl('\n  {!} {R}Error: %s' % str(exception))
+        if Configuration.verbose == 0:
+            Color.pl('  {*} Use {G}-v{W}/{G}--verbose{W} to show the full stack trace')
         
         # Don't dump trace for the "no targets found" case.
         if 'No targets found' in str(exception):
             return
 
-        from src.config import Configuration
         # if Configuration.verbose == 0:
         #     Color.pl('  {!} Full stack trace below')
         #     from traceback import format_exc
