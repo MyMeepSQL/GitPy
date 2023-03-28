@@ -48,7 +48,7 @@ import src.__main__ as __MAIN__
 from src.args import Arguments
 import src.util.github_repo as GR
 from src.util.clear import clear
-from src.util.exit_verbose import exit_tool
+from src.util.exit_tool import exit_tool
 from src.util.colors import Color
 from src.util.help_messages import Help_Messages as HM
 from src.util.internet_check import internet_check

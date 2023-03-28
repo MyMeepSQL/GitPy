@@ -84,7 +84,7 @@ sys.path.insert(0, '%s')
 ## Third party libraries
 from src import __main__
 from src.util.colors import Color
-from src.util.exit_verbose import exit_tool
+from src.util.exit_tool import exit_tool
 
 # Main
 try:

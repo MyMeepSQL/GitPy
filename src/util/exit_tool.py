@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 #---[Name & Dates]----------------------------------------------------------#
-#  Filename ~ exit_verbose.py           [Created: 2023-03-28 |  8:54 - PM]  #
+#  Filename ~ exit_tool.py              [Created: 2023-03-28 |  8:54 - PM]  #
 #                                       [Updated: 2023-03-28 |  8:54 - PM]  #
 #---[Info]------------------------------------------------------------------#
 #  Just a small function to prompt a exit message if verbose was applied    #
@@ -48,9 +48,9 @@ def exit_tool(code):
     from src.config import Configuration
     if Configuration.verbose == 3:
         if code == 0:
-            Color.pl(' {§} Exiting with the exit code: {G}0{W}')
+            Color.pl('  {§} Exiting with the exit code: {G}0{W}')
             Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(0){W}')
         else:
-            Color.pl(' {§} Exiting with the exit code: {R}1{W}')
+            Color.pl('  {§} Exiting with the exit code: {R}1{W}')
             Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
     sys.exit(code)

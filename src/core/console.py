@@ -56,6 +56,7 @@ from src.util.process import Process
 from src.util.check_path import check_folder_path
 from src.util.clear import clear
 from src.util.colors import Color
+from src.util.exit_tool import exit_tool
 from src.util.help_messages import Help_Messages as HM
 from src.util.informations import Informations
 from src.util.based_distro import Based_Distro as BD
@@ -442,11 +443,22 @@ class Main_Console():
         self.pwd = pwd
 
         # Check if the user's platform is a Linux machine or not
+        if Configuration.verbose == 3:
+            Color.pl('  {§} Checking if the user\'s platform is a Linux machine or not...')
+            Color.pl('   {SY1}├──╼{W} Python: {SY1}platform.system() != Linux{W}')
+            sleep(1)
         if platform.system() != 'Linux':
+            if Configuration.verbose == 3:
+                Color.pl('   {SY1}├──╼{W} The user\'s platform is {R}%s{W}' % platform.system())
+                Color.pl('   {SY1}╰──╼{W} The user\'s platform is not a Linux machine.')
+                sleep(1)
             Color.pl('  {!} You tried to run GitPy on a non-linux machine. GitPy can be run only on a Linux kernel.')
-            sys.exit(1)
+            exit_tool(1)
 
         else:
+            if Configuration.verbose == 3:
+                Color.pl('   {SY1}╰──╼{W} The user\'s platform is {C}%s{W}' % platform.system())
+                sleep(1)
             # Check if the GITPY_INSTALL_PATH environment variable is set or not
             # try:
             #     GITPY_PATH = os.environ[self.gitpy_path_env_var_name]
@@ -469,36 +481,44 @@ class Main_Console():
             #     sys.exit(1)
 
             # Check if the user is root or not
+            if Configuration.verbose == 3:
+                Color.pl('  {§} Checking if the user is root or not...')
+                Color.pl('   {SY1}├──╼{W} Python: {SY1}os.getuid() != 0{W}')
             if os.getuid() != 0:
+                if Configuration.verbose == 3:
+                    Color.pl('   {SY1}╰──╼{W} The user is {C}not root{W}')
                 Color.pl('  {!} The GitPy Console must be run as root.')
                 Color.pl('  {*} Re-run with sudo or switch to root user.')
-                if Configuration.verbose == 3:
-                    Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-                    Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-                sys.exit(1)
+                exit_tool(1)
             else:
-                # Check if the tun module is available or not.
-                if not os.path.exists('/dev/net/tun'):
-                    Color.pl('  {!} The TUN/TAP module is not available.')
-                    Color.pl('  {*} Please install it and try again.')
-                    if Configuration.verbose == 3:
-                        Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-                        Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-                    sys.exit(1) 
+                if Configuration.verbose == 3:
+                    Color.pl('   {SY1}╰──╼{W} The user is {C}%s{W}' % ('root' if os.getuid() == 0 else 'not root'))
+                    sleep(1)
+                    Color.pl('  {§} Checking if the user\'s Linux distro is Debian or Arch based...')
+                    Color.pl('   {SY1}├──╼{W} Python: {SY1}BD.__init__(){W}')
+                    sleep(1)
                 # Distro check
                 if BD.__init__() == 'Arch':
+                    if Configuration.verbose == 3:
+                        Color.pl('   {SY1}╰──╼{W} The user\'s Linux distro is {C}Arch{W}')
+                        sleep(1)
                     based_distro = 'Arch'
                     pass
                 elif BD.__init__() == 'Debian':
+                    if Configuration.verbose == 3:
+                        Color.pl('   {SY1}╰──╼{W} The user\'s Linux distro is {C}Arch{W}')
+                        sleep(1)
                     based_distro = 'Debian'
                     pass
                 else:
+                    if Configuration.verbose == 3:
+                        Color.pl('   {SY1}╰──╼{W} The user\'s Linux distro is {C}not Arch or Debian{W}')
                     Color.pl('  {!} You\'re not running Debian or Arch variant.')
                     Color.pl('  {*} GitPy can only be run on Debian or Arch based Linux distros.')
                     Color.pl('  {-} Exiting...')
-                    if Configuration.verbose == 3:
-                        Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-                        Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-                    sys.exit(1)
-                
+                    exit_tool(1)
+                if Configuration.verbose == 3:
+                    Color.pl('  {§} Loading the main menu...')
+                    Color.pl('   {SY1}╰──╼{W} Python: {SY1}self.main_menu(){W}')
+                    sleep(1)
                 self.main_menu()
