@@ -74,10 +74,11 @@ def compare_version(mode=None):
             # print(REPO_VERSION)
 
             if version.parse(cp_online_ver) > version.parse(C.Configuration.VERSION):
-                Color.pl('  {*} A new update are avalable : %s' % cp_online_ver)
+                Color.pl('  {*} A new update are avalable: %s' % cp_online_ver)
 
-                if mode == None:
-                    Color.pl('  {*} You can update your GitPy instance with the {G}--update{W} option.')
+            if mode == None:
+                Color.pl('  {*} A new update are avalable: %s' % cp_online_ver)
+                Color.pl('  {*} You can update your GitPy instance with the {G}--update{W} option.')
 
             else:
 
