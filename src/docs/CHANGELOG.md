@@ -2,12 +2,13 @@
 
 #---[Metadata]--------------------------------------------------------------#
 #  Filename ~ CHANGLOG.md               [Created: 2022-11-23 |  1:23 - PM]  #
-#                                       [Updated: 2023-03-18 |  2:28 - PM]  #
+#                                       [Updated: 2023-03-28 |  7:41 - PM]  #
 #---[Info]------------------------------------------------------------------#
 #  The changelogs of ConvPro Framework                                      #
 #  Language ~ Markdown                                                      #
 #---[Authors]---------------------------------------------------------------#
-#  Thomas Pellissier ~ @MyMeepSQL                                           #
+#  Thomas Pellissier (MyMeepSQL)                                            #
+#  Jonas Petitpierre (Bashy)                                                #
 #---[Operating System]------------------------------------------------------#
 #  Developed for Linux (Arch based)                                         #
 #---[License]---------------------------------------------------------------#
@@ -41,7 +42,7 @@
                               \____/  /_/  \__/ /_/     _\__, /  
                                                         /____/
 
-  gitpy - A Python3 tool for search and download a GitHub's repository directly in the terminal
+  GitPy - A Python3 tool for search and download a GitHub's repository directly in the terminal
 
 </pre>
 

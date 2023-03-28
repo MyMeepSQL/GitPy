@@ -1,8 +1,8 @@
 <!--
 
 #---[Metadata]--------------------------------------------------------------#
-#  Filename ~ README.md                 [Created: 2023-04-24 | 11:00 - AM]  #
-#                                       [Updated: 2023-04-24 | 11:00 - AM]  #
+#  Filename ~ README.md                 [Created: 2022-11-23 |  1:23 - PM]  #
+#                                       [Updated: 2023-03-28 |  7:45 - PM]  #
 #---[Info]------------------------------------------------------------------#
 #  A long description of the GitPy                                          #
 #  Language ~ Markdown                                                      #
@@ -121,7 +121,7 @@ Liens à modifier
 
 # **About GitPy**
 
-**Automatate OpenVPN Server (GitPy)** is a program that can be used to automate the creation and the configuration of a OpenVPN server and manage existing OpenVPN's client config. The program was written in Python3 and designed to be use on Arch and Debian based ditros. GitPy have a main console that can be used to manage the OpenVPN server and the OpenVPN's client config. It could also be used in a CLI environment, inspired by the [Metasploit](https://github.com/rapid7/metasploit-framework) network testing tool
+**GitPy** is a program that can be use to search and download a repository on GitHub using the GitHub API REST. The program was written in Python3 and designed to be use on Arch and Debian based ditros. GitPy have a main console that can be used to search and download a repository. It could also be used in a CLI environment, inspired by the [Metasploit](https://github.com/rapid7/metasploit-framework) network testing tool (not yet implemented).
 
 - **In development!**
 - Can only be run on a **Linux machine**
@@ -130,12 +130,12 @@ Liens à modifier
 ## **Credit & Copyrights**
 
 ```
-             The GitPY is a product of PSociety™ by Thomas Pellissier (MyMeepSQL) 
-                                and Jonas Petitpierre (Bashy).                 
+            The GitPY is a product of PSociety™ by Thomas Pellissier (MyMeepSQL) 
+                               and Jonas Petitpierre (Bashy).
                   Copyright (C) 2021-2023 © PSociety™. All rights reserved.
 
-           This tool has been created and designed from scratch by Thomas Pellissier 
-                                and Jonas Petitpierre (Bashy).                   
+          This tool has been created and designed from scratch by Thomas Pellissier 
+                                   and Jonas Petitpierre.
 ```
 
 ## **Changelogs**
@@ -157,7 +157,7 @@ sudo pacman -S git
 # sudo apt install git
 
 # Clone the repositorie with:
-git clone https://github.com/MyMeepSQL/gitpy.git
+git clone https://github.com/MyMeepSQL/GitPy.git
 
 # And go in its directory
 cd GitPy
@@ -177,60 +177,61 @@ All avalable options for the **GitPy** command (the help message):
 
 ```
 Main options:
-=============
+============
 
-  Options                              Description
-  -------                              -----------
-       --console                       Start the main console of GitPy.
+  Options                                  Description
+  -------                                  -----------
+       --console                           Start the main console of GitPy.
 
 Installation options:
 =====================
 
-  Options                             Description
-  -------                             -----------
-       --install                [+]   Install GitPy with all depencies on your system.
-       --uninstall              [+]   Uninstall GitPy from your system.
+  Options                                  Description
+  -------                                  -----------
+       --install                     [+]   Install GitPy with all depencies on your system.
+       --uninstall                   [+]   Uninstall GitPy from your system.
  
-       --skip-update                  Skip the system update phase during the installation of GitPy.
-       --offline                      Install GitPy with the local file already downloaded
-                                      (default: download new files from GitHub).
-  -iP, --install-path [PATH]          Chose where the GitPy will be install on the system
-                                      (default: /opt/gitpy/).
+       --skip-update                       Skip the system update phase during the installation of GitPy.
+       --offline                           Install GitPy with the local file already downloaded
+                                           (default: download new files from GitHub).
+  -iP [PATH], --install-path [PATH]        Chose where GitPy will be install on the system
+                                           (default: /opt/gitpy/).
 
 Output options:
 ===============
 
-  Options                             Description
-  -------                             -----------
-  -q,  --quiet                        Prevent header from displaying. Warning: bypass any "Are your sure?"
-                                      message!
-  -v [LEVEL], --verbose [LEVEL]       Verbosity level: 1-3 (default: 0 | const: 1).
+  Options                                  Description
+  -------                                  -----------
+  -q,  --quiet                             Prevent header from displaying. Warning: bypass any "Are your sure?"
+                                           message!
+  -v [LEVEL], --verbose [LEVEL]            Verbosity level: 1-3 (default: 0 | const: 1).
 
 Additional options:
 ===================
 
-  Options                             Description
-  -------                             -----------
-  -y,  --no-confirm                   Bypass any and all "Are you sure?" messages.
+  Options                                  Description
+  -------                                  -----------
+  -y,  --no-confirm                        Bypass any and all "Are you sure?" messages.
 
 Informations options:
 =====================
 
-  Options                             Description
-  -------                             -----------
-       --info                         Show more informations about GitPy and exit.
-  -h,  --help                   [+]   Show this help message and exit or show more help for a option.
-  -V,  --version                      Show program's version and exit.
+  Options                                  Description
+  -------                                  -----------
+       --info                              Show more informations about GitPy and exit.
+  -h,  --help                        [+]   Show this help message and exit or show more help for a option.
+  -V,  --version                           Show program's version and exit.
 
 Miscellaneous options:
 ======================
 
-  Options                             Description
-  -------                             -----------
-  -u,  --update                 [+]   Update the GitPy directly from GitHub.
-       --show-config                  Prompt the content of the config file.
-       --show-env-var                 Prompt the value of the GITPY_INSTALL_PATH environment variable.
-       --remove-cache           [+]   Delete python cache from the GitPy directory.
+  Options                                  Description
+  -------                                  -----------
+  -u,  --update                      [+]   Update the GitPy directly from GitHub.
+  -fu, --force-update                      Update AOVPNS even if the version on the machine is already the latest.
+       --show-config                       Prompt the content of the config file.
+       --show-env-var                      Prompt the value of the GITPY_INSTALL_PATH environment variable.
+       --remove-cache                [+]   Delete python cache from the GitPy directory.
 
 Others avalable informations:
 =============================
@@ -241,7 +242,7 @@ Others avalable informations:
 
   Others
   ------
-  Report all bugs to <thomas.pellissier.pro@proton.me> or open an issue at <https://github.com/MyMeepSQL/gitpy/issues>.
+  Report all bugs to <thomas.pellissier.pro@proton.me> or open an issue at <https://github.com/MyMeepSQL/GitPy/issues>.
   The options with the [+] mean that it may require additional option(s).
   If you want more details about a command, run: gitpy --help <OPTION>
 ```

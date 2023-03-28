@@ -45,10 +45,10 @@ class Create_bin_file:
 # -*- coding: utf-8 -*-
 
 #---[Name & Dates]----------------------------------------------------------#
-#  Filename ~ gitpy.py                 [Created: 2023-01-26 | 10:37 - AM]  #
+#  Filename ~ gitpy.py                  [Created: 2023-03-26 | 10:37 - AM]  #
 #                                       [Updated: 2023-02-13 |  4:12 - PM]  #
 #---[Info]------------------------------------------------------------------#
-#  The call methode of gitpy                                               #
+#  The call methode of gitpy                                                #
 #  Language ~ Python3                                                       #
 #---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
@@ -77,14 +77,11 @@ class Create_bin_file:
 # Import section
 import os
 import sys
-
-# Import all files from the install path
-sys.path.insert(0, '%s')
+from src import __main__
 
 ## Third party libraries
-from src import __main__
 from src.util.colors import Color
-from src.config import Configuration
+from src.util.exit_verbose import exit_tool
 
 # Main
 try:
@@ -93,8 +90,10 @@ try:
 
     # Call the entry point of the main file of GitPy
     __main__.entry_point(pwd = cwd)
+
 except KeyboardInterrupt:
     Color.pl('\\n  {!} Interrupted, shutting down...')
-    sys.exit(1)''' % path
+    exit_tool(1)
+''' % path
 
 

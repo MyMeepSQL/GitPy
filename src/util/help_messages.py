@@ -52,59 +52,60 @@ class Help_Messages():
         \r{SB2}{bold}VPN options{W}:
         \r============
 
-        \r  Options                              Description
-        \r  -------                              -----------
-        \r       --console                       Start the main console of GitPy.
-        \r       --cli                           Start the CLI environment of GitPy.
+        \r  Options                                  Description
+        \r  -------                                  -----------
+        \r       --console                           Start the main console of GitPy.
+        \r       --cli                               Start the CLI environment of GitPy.
 
         \r{SB2}{bold}Installation options{W}:
         \r=====================
 
-        \r  Options                             Description
-        \r  -------                             -----------
-        \r       --install                [+]   Install GitPy with all depencies on your system.
-        \r       --uninstall              [+]   Uninstall GitPy from your system.
+        \r  Options                                  Description
+        \r  -------                                  -----------
+        \r       --install                     [+]   Install GitPy with all depencies on your system.
+        \r       --uninstall                   [+]   Uninstall GitPy from your system.
  
-        \r       --skip-update                  Skip the system update phase during the installation of GitPy.
-        \r       --offline                      Install GitPy with the local file already downloaded
-        \r                                      (default: {G}download new files from GitHub{W}).
-        \r  -iP, --install-path [PATH]          Chose where the GitPy will be install on the system
-        \r                                      (default: {G}%s{W}).
+        \r       --skip-update                       Skip the system update phase during the installation of GitPy.
+        \r       --offline                           Install GitPy with the local file already downloaded
+        \r                                           (default: {G}download new files from GitHub{W}).
+        \r  -iP [PATH], --install-path [PATH]        Chose where GitPy will be install on the system
+        \r                                           (default: {G}%s{W}).
 
         \r{SB2}{bold}Output options{W}:
         \r===============
 
-        \r  Options                             Description
-        \r  -------                             -----------
-        \r  -q,  --quiet                        Prevent header from displaying. {O}Warning{W}: bypass any "Are your sure?"
-        \r                                      message!
-        \r  -v [LEVEL], --verbose [LEVEL]       Verbosity level: 1-3 (default: {G}0{W} | const: {G}1{W}).
+        \r  Options                                  Description
+        \r  -------                                  -----------
+        \r  -q,  --quiet                             Prevent header from displaying. {O}Warning{W}: bypass any "Are your sure?"
+        \r                                           message!
+        \r  -v [LEVEL], --verbose [LEVEL]            Verbosity level: 1-3 (default: {G}0{W} | const: {G}1{W}).
 
         \r{SB2}{bold}Additional options{W}:
         \r===================
 
-        \r  Options                             Description
-        \r  -------                             -----------
-        \r  -y,  --no-confirm                   Bypass any and all "Are you sure?" messages.
+        \r  Options                                  Description
+        \r  -------                                  -----------
+        \r  -y,  --no-confirm                        Bypass any and all "Are you sure?" messages.
 
         \r{SB2}{bold}Informations options{W}:
         \r=====================
 
-        \r  Options                             Description
-        \r  -------                             -----------
-        \r       --info                         Show more informations about GitPy and exit.
-        \r  -h,  --help                   [+]   Show this help message and exit or show more help for a option.
-        \r  -V,  --version                      Show program's version and exit.
+        \r  Options                                  Description
+        \r  -------                                  -----------
+        \r       --info                              Show more informations about GitPy and exit.
+        \r  -h,  --help                        [+]   Show this help message and exit or show more help for a option.
+        \r  -V,  --version                           Show program's version and exit.
 
         \r{SB2}{bold}Miscellaneous options{W}:
         \r======================
 
-        \r  Options                             Description
-        \r  -------                             -----------
-        \r  -u,  --update                 [+]   Update the GitPy directly from GitHub.
-        \r       --show-config                  Prompt the content of the config file.
-        \r       --show-env-var                 Prompt the value of the {C}{bold}GITPY_INSTALL_PATH{W} environment variable.
-        \r       --remove-cache           [+]   Delete python cache from the GitPy directory.
+        \r  Options                                  Description
+        \r  -------                                  -----------
+        \r  -u,  --update                      [+]   Update the GitPy directly from GitHub.
+        \r  -fu, --force-update                      Update AOVPNS even if the version on the machine is already the latest.
+        \r       --show-config                       Prompt the content of the config file.
+        \r       --show-env-var                      Prompt the value of the {C}{bold}GITPY_INSTALL_PATH{W} environment variable.
+        \r       --remove-cache                [+]   Delete python cache from the GitPy directory.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================

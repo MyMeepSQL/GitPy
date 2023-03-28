@@ -48,6 +48,7 @@ import src.__main__ as __MAIN__
 from src.args import Arguments
 import src.util.github_repo as GR
 from src.util.clear import clear
+from src.util.exit_verbose import exit_tool
 from src.util.colors import Color
 from src.util.help_messages import Help_Messages as HM
 from src.util.internet_check import internet_check
@@ -118,7 +119,7 @@ class Configuration(object):
             __MAIN__.GitPy.Banner()
             print()
             Color.pl('  {!} The -q/--quiet and -v/--verbose option are not compatible together.')
-            sys.exit(1)
+            exit_tool(1)
 
 
 
@@ -149,7 +150,7 @@ class Configuration(object):
             __MAIN__.GitPy.Banner()
             print()
             Color.pl('  {!} You must specify a path where GitPy will be installed.')
-            sys.exit(1)
+            exit_tool(1)
 
     # -------------------- [ MAIN ARGUMENTS ] -------------------- #
     @classmethod
@@ -158,13 +159,6 @@ class Configuration(object):
             Parse all main arguments.
         '''
         if args.console:
-            # # if the user didn't install GitPy on his system
-            # if not os.path.isdir(cls.DEFAULT_INSTALL_PATH) or not os.path.isfile('%sgitpy.py' % cls.DEFAULT_INSTALL_PATH):
-            #     Color.pl('  {!} GitPy isn\'t installed on your system!')
-            #     Color.pl('  {*} Please run {G}gitpy --install{W} to install GitPy.')
-            #     sys.exit(1)
-
-            # else:
             Color.pl('  {-} Starting the GitPy\'s console...')
             sleep(1)
             # Call the main console of GitPy
@@ -172,18 +166,8 @@ class Configuration(object):
             Main_Console(pwd=pwd)
 
         if args.cli:
-            # # if the user didn't install GitPy on his system
-            # if not os.path.isdir(cls.DEFAULT_INSTALL_PATH) or not os.path.isfile('%sgitpy.py' % cls.DEFAULT_INSTALL_PATH):
-            #     Color.pl('  {!} GitPy isn\'t installed on your system!')
-            #     Color.pl('  {*} Please run {G}gitpy --install{W} to install GitPy.')
-            #     sys.exit(1)
-
-            # else:
-            Color.pl('  {-} Starting the GitPy\'s console...')
-            sleep(1)
-            # Call the main console of GitPy
-            from src.core.cli_console import CLI_Console
-            CLI_Console(pwd=pwd)
+            Color.pl('  {!} The GitPy\'s CLI is not available yet.')
+            exit_tool(1)
 
     # -------------------- [ INSTALLATION ARGUMENTS ] -------------------- #
     @classmethod
@@ -213,13 +197,13 @@ class Configuration(object):
                 HM.option_console()
                 print()
                 GR.compare_version()
-                sys.exit(0)
+                exit_tool(0)
             if args.cli:
                 __MAIN__.GitPy.Banner()
                 HM.option_cli()
                 print()
                 GR.compare_version()
-                sys.exit(0)
+                exit_tool(0)
 
             # ---------- [ Installation options ] ---------- #
             if args.install:
@@ -227,31 +211,31 @@ class Configuration(object):
                 HM.option_install()
                 print()
                 GR.compare_version()
-                sys.exit(0)
+                exit_tool(0)
             if args.uninstall:
                 __MAIN__.GitPy.Banner()
                 HM.option_uninstall()
                 print()
                 GR.compare_version()
-                sys.exit(0)
+                exit_tool(0)
             if args.skip_update:
                 __MAIN__.GitPy.Banner()
                 HM.option_skip_update()
                 print()
                 GR.compare_version()
-                sys.exit(0)
+                exit_tool(0)
             if args.offline:
                 __MAIN__.GitPy.Banner()
                 HM.option_offline()
                 print()
                 GR.compare_version()
-                sys.exit(0)
+                exit_tool(0)
             if args.install_path:
                 __MAIN__.GitPy.Banner()
                 HM.option_install_path()
                 print()
                 GR.compare_version()
-                sys.exit(0)
+                exit_tool(0)
 
             # ---------- [ Output options ] ---------- #
             if args.quiet:
@@ -259,14 +243,14 @@ class Configuration(object):
                 HM.option_quiet()
                 print()
                 GR.compare_version()
-                sys.exit(0)
+                exit_tool(0)
 
             if args.verbose:
                 __MAIN__.GitPy.Banner()
                 HM.option_verbose()
                 print()
                 GR.compare_version()
-                sys.exit(0)
+                exit_tool(0)
 
             # ---------- [ Additional options ] ---------- #
             if args.no_confirm:
@@ -274,7 +258,7 @@ class Configuration(object):
                 HM.option_no_confirm()
                 print()
                 GR.compare_version()
-                sys.exit(0)
+                exit_tool(0)
 
             # ---------- [ Informations options ] ---------- #
             if args.info:
@@ -282,7 +266,7 @@ class Configuration(object):
                 HM.option_info()
                 print()
                 GR.compare_version()
-                sys.exit(0)
+                exit_tool(0)
 
             # ---------- [ Miscellaneous options ] ---------- #
             if args.update:
@@ -290,25 +274,25 @@ class Configuration(object):
                 HM.option_update()
                 print()
                 GR.compare_version()
-                sys.exit(0)
+                exit_tool(0)
             if args.force_update:
                 __MAIN__.GitPy.Banner()
                 HM.option_force_update()
                 print()
                 GR.compare_version()
-                sys.exit(0)
+                exit_tool(0)
             if args.show_env_var:
                 __MAIN__.GitPy.Banner()
                 HM.option_show_env_var()
                 print()
                 GR.compare_version()
-                sys.exit(0)
+                exit_tool(0)
             if args.remove_cache:
                 __MAIN__.GitPy.Banner()
                 HM.option_remove_cache()
                 print()
                 GR.compare_version()
-                sys.exit(0)
+                exit_tool(0)
             
 
             # ---- No options ---- #
@@ -317,7 +301,7 @@ class Configuration(object):
                 HM.main_help_msg()
                 print()
                 GR.compare_version()
-                sys.exit(0)
+                exit_tool(0)
     
         if args.info:
             from src.util.informations import Informations
@@ -325,14 +309,14 @@ class Configuration(object):
             Informations()
             print()
             GR.compare_version()
-            sys.exit(0)
+            exit_tool(0)
 
         if args.version:
             if args.verbose:
                 Color.pl(cls.version_message_verbose)
             else:
                 Color.pl(cls.version_message)
-            sys.exit(0)
+            exit_tool(0)
 
     # -------------------- [ MISCELLANEOUS ARGUMENTS ] -------------------- #
     @classmethod
@@ -370,11 +354,11 @@ class Configuration(object):
             #                     config_file.write(cls.DEFAULT_INSTALL_PATH)
 
             #                 Color.pl('  {+} Config file re-generated.')
-            #                 sys.exit(0)
+            #                 exit_tool(0)
 
             #             else:
             #                 Color.pl('  {*} Remove the configuration file yourself and re-run the the create config command.')
-            #                 sys.exit(1)
+            #                 exit_tool(1)
 
             #         else:
             #             Color.pl('  {*} The config file was not found')
@@ -391,12 +375,12 @@ class Configuration(object):
             #                 config_file.write(cls.DEFAULT_INSTALL_PATH)
 
             #             Color.pl('  {+} Config file generated.')
-            #             sys.exit(0)
+            #             exit_tool(0)
 
             #     else:
             #         Color.pl('  {!} GitPy are not installed on your system!')
             #         Color.pl('  {*} Run {G}conpro --install{W} for install GitPy on your system')
-            #         sys.exit(1)
+            #         exit_tool(1)
 
         if args.show_env_var:
             try:
@@ -405,7 +389,7 @@ class Configuration(object):
             except KeyError:
                 Color.pl('  {!} GitPy is not installed on this machine.')
                 Color.pl('  {*} Because the {C}{bold}GITPY_INSTALL_PATH{W} environment variable is not set.')
-                sys.exit(1)
+                exit_tool(1)
             # if args.show_config:
             #     # Open the file in read mode
             #     with open(cls.CONFIG_FILE_PATH, "r") as config_file:
