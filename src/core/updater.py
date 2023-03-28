@@ -50,6 +50,7 @@ from src.util.clear import clear
 from src.util.colors import Color
 from src.util.process import Process
 import src.util.github_repo as GR
+from src.util.exit_tool import exit_tool
 from src.util.internet_check import internet_check
 from src.util.based_distro import Based_Distro as BD
 from src.util.remove_python_cache import remove_python_cache
@@ -90,7 +91,8 @@ class Updater():
             print()
             Color.pl('  {!} You tried to run GitPy on a non-linux machine!')
             Color.pl('  {*} GitPy can be run only on a Linux kernel.')
-            sys.exit(1)
+            # Exit and removing the python cache
+            exit_tool(1,pwd=pwd)
         else:
             # Check if the user ran GitPy with root privileges or not
             if os.getuid() != 0:
@@ -98,7 +100,8 @@ class Updater():
                 print()
                 Color.pl('  {!} The GitPy Updater must be run as root.')
                 Color.pl('  {*} Re-run with sudo or switch to root user.')
-                sys.exit(1)
+                # Exit and removing the python cache
+                exit_tool(1,pwd=pwd)
             else:
                 # Distro check
                 if BD.__init__() == 'Arch':
@@ -112,8 +115,8 @@ class Updater():
                     print()
                     Color.pl('  {!} You\'re not running Arch or Debian variant.')
                     Color.pl('  {*} GitPy can only run on Arch or Debian based distros.')
-                    Color.pl('  {-} Exiting...')
-                    sys.exit(1)
+                    # Exit and removing the python cache
+                    exit_tool(1,pwd=pwd)
 
             # gitpy main file in /usr/bin/
             gitpy_command_bin = Create_bin_file.__init__(path=self.INSTALL_PATH)
@@ -124,7 +127,8 @@ class Updater():
                 if internet_check() == False:
                     Color.pl('Internet status: {R}Not connected{W}.')
                     Color.pl('No Internet connexion found, please check if you are connected to the Internet and retry.')
-                    sys.exit(1)
+                    # Exit and removing the python cache
+                    exit_tool(1,pwd=pwd)
 
                 ## ---------- [ Check if the GitPy repositorie on GitHub are reachable or not ] ---------- ##
                 GR.is_reachable(args)
@@ -140,7 +144,8 @@ class Updater():
                         pass
                     else:
                         Color.pl('  {!} You already have the latest version of GitPy!')
-                        sys.exit(1)
+                        # Exit and removing the python cache
+                        exit_tool(1,pwd=pwd)
                 sleep(0.5)
 
                 # ---------- [ Prepare the update ] ---------- #
@@ -174,18 +179,16 @@ class Updater():
                 # Deleting the temporary directory
                 shutil.rmtree(self.TEMP_PATH)
                 sleep(1)
-                # Removing the python cache
-                remove_python_cache(pwd=pwd)
-                sys.exit(0)
+                # Exit and removing the python cache
+                exit_tool(0,pwd=pwd)
             except Exception as E:
                 Color.pexception(E)
                 # Color.pl(f'Exception : %s' % str(E) )
             except KeyboardInterrupt:
                 Color.pl('\nUpdate process interrupted.')
                 Color.pl('You must re-run the update process to update GitPy correctly.')
-                # Removing the python cache
-                remove_python_cache(pwd=pwd)
-                sys.exit(1)
+                # Exit and removing the python cache
+                exit_tool(1,pwd=pwd)
         else:
             # -------------------- [ No quiet installation ] -------------------- #
             GitPy.Banner()
@@ -212,10 +215,8 @@ class Updater():
                 Color.pl('  {!} GitPy is not installed on this machine.')
                 Color.pl('  {*} Because the GITPY_INSTALL_PATH environment variable is not set (in the {C}/etc/environment{W} file).')
                 Color.pl('  {-} Exiting...')
-                if Configuration.verbose == 3:
-                    Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-                    Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-                sys.exit(1)
+                # Exit and removing the python cache
+                exit_tool(1,pwd=pwd)
             # Check if the use are connected to the Internet network with the internet_check() function
             Color.pl('  {-} Checking for internet connexion...')
             if Configuration.verbose == 3:
@@ -227,7 +228,8 @@ class Updater():
             else:
                 Color.pl('  {+} Internet status: {R}Not connected{W}.')
                 Color.pl('  {!} No Internet connexion found, please check if you are connected to the Internet and retry.')
-                sys.exit(1)
+                # Exit and removing the python cache
+                exit_tool(1,pwd=pwd)
 
             ## ---------- [ Check if the GitPy repositorie on GitHub are reachable or not ] ---------- ##
             if Configuration.verbose == 3:
@@ -260,10 +262,8 @@ class Updater():
                                 Color.pl('  {*} A new update are avalable : %s (current: %s)' % (cp_online_ver, self.VERSION))
                             else:
                                 Color.pl('  {!} You already have the latest version of GitPy!')
-                                if Configuration.verbose == 3:
-                                    Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-                                    Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-                                sys.exit(1)
+                                # Exit and removing the python cache
+                                exit_tool(1,pwd=pwd)
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Python: {SY1}sleep(0.5){W}')
                     sleep(0.5)
@@ -333,13 +333,9 @@ class Updater():
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Python: {SY1}sleep(1){W}')
                     sleep(1)
-                    # Removing the python cache
-                    remove_python_cache(pwd=pwd)
                     Color.pl('  {+} GitPy successfully updated with the version: %s' % cp_online_ver)
-                    if Configuration.verbose == 3:
-                        Color.pl('  {§} Exiting with the exit code: {G}0{W}')
-                        Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(0){W}')
-                    sys.exit(0)
+                    # Exit and removing the python cache
+                    exit_tool(1,pwd=pwd)
                 except Exception as E:
                     Color.pexception(E)
                     # Color.pl(f'Exception : %s' % str(E) )
@@ -347,38 +343,22 @@ class Updater():
                 except KeyboardInterrupt:
                     Color.pl('\n  {!} Update process interrupted.')
                     Color.pl('  {!} You must re-run the update process to update GitPy correctly.')
-                    # Removing the python cache
-                    remove_python_cache(pwd=pwd)
-                    if Configuration.verbose == 3:
-                        Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-                        Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-                    sys.exit(1)
+                    # Exit and removing the python cache
+                    exit_tool(1,pwd=pwd)
             else:
                 Color.pl('  {*} Aborted')
-                # Removing the python cache
-                remove_python_cache(pwd=pwd)
-                if Configuration.verbose == 3:
-                    Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-                    Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-                sys.exit(1)
+                # Exit and removing the python cache
+                exit_tool(1,pwd=pwd)
 
 def entry_point(args, pwd):
     try:
         Updater(args=args, pwd=pwd)
     except EOFError:
         Color.pl('\n  {*} Aborted')
-        # Removing the python cache
-        remove_python_cache(pwd=pwd)
-        if Configuration.verbose == 3:
-            Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-            Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-        sys.exit(1)
+        # Exit and removing the python cache
+        exit_tool(1,pwd=pwd)
     except KeyboardInterrupt:
         Color.pl('\n  {*} Aborted')
-        # Removing the python cache
-        remove_python_cache(pwd=pwd)
-        if Configuration.verbose == 3:
-            Color.pl('  {§} Exiting with the exit code: {R}1{W}')
-            Color.pl('   {SY1}╰──╼{W} Python: {SY1}sys.exit(1){W}')
-        sys.exit(1)
+        # Exit and removing the python cache
+        exit_tool(1,pwd=pwd)
 

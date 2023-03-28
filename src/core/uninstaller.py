@@ -44,7 +44,7 @@ from src.__main__ import GitPy
 from src.config import Configuration
 from src.util.clear import clear
 from src.util.colors import Color
-from src.util.exit_tool import exit_tool.
+from src.util.exit_tool import exit_tool
 from src.util.internet_check import internet_check
 from src.util.env_var import remove_env_var
 from src.util.process import Process
