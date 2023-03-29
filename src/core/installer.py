@@ -100,20 +100,23 @@ class Installer():
 
     # Main
     def __init__(self, args, pwd):
+
+        self.pwd = pwd
+
         # Check if the user's platform is a Linux machine or not
         if platform.system() != 'Linux':
             GitPy.Banner()
             print()
             Color.pl('  {!} You tried to run GitPy on a non-linux machine!')
             Color.pl('  {*} GitPy can be run only on a Linux kernel.')
-            exit_tool(1)
+            exit_tool(1,pwd=self.pwd)
         else:
             if os.getuid() != 0:
                 GitPy.Banner()
                 print()
                 Color.pl('  {!} The GitPy Installer must be run as root.')
                 Color.pl('  {*} Re-run with sudo or switch to root user.')
-                exit_tool(1)
+                exit_tool(1,pwd=self.pwd)
             else:
                 # Distro check
                 if BD.__init__() == 'Arch':
@@ -127,8 +130,7 @@ class Installer():
                     print()
                     Color.pl('  {!} You\'re not running Arch or Debian variant.')
                     Color.pl('  {*} GitPy can only run on Arch or Debian based distros.')
-                    Color.pl('  {-} Exiting...')
-                    exit_tool(1)
+                    exit_tool(1,pwd=self.pwd)
 
         if args.skip_update:
             UPDATE_SYSTEM_SKIPED='(Skipped)'
@@ -220,11 +222,9 @@ class Installer():
                 set_env_var(var_name=self.gitpy_path_env_var_name, var_value=self.gitpy_path_env_var_value)
             except KeyboardInterrupt:
                 Color.pl('\n  {!} Installation process interrupted.')
-                # Removing the python cache
-                remove_python_cache(pwd=pwd)
-                Color.pl('  {!} You must re-run the installation process to install GitPy correctly.')
-                Color.pl('  {*} Exiting...')
-                exit_tool(1)
+                Color.pl('  {!} You must re-run the installation process to install GitPy correctly.')  
+                # Exit and removing the python cache
+                exit_tool(1,pwd=self.pwd)
         else:
             # -------------------- [ No quiet installation ] -------------------- #
             GitPy.Banner()
@@ -252,7 +252,7 @@ class Installer():
             else:
                 Color.pl('  {+} Internet status: {R}Not connected{W}.')
                 Color.pl('  {!} No Internet connexion found, please check if you are connected to the Internet and retry.')
-                exit_tool(1)
+                exit_tool(1,pwd=self.pwd)
             if Configuration.verbose == 3:
                 Color.pl('  {§} Check if the GitPy\'s repositorie are reachable or not...')
                 Color.pl('   {SY1}╰──╼{W} Call the {SY1}is_reachable(){W} function.')
@@ -351,10 +351,8 @@ class Installer():
                                 shutil.rmtree(self.TEMP_PATH)
                         else:
                             Color.pl('  {!} You must remove the current GitPy files by yourself for continue the install process!')
-                            Color.pl('  {*} Exiting...')
-                            # Removing the python cache
-                            remove_python_cache(pwd=pwd)
-                            exit_tool(1)
+                            # Exit and removing the python cache
+                            exit_tool(1,pwd=self.pwd)
 
                     ## ------ [ GitPy files ] ------ ##
                     Color.pl('  {-} Installing GitPy files...')
@@ -431,35 +429,27 @@ class Installer():
                         Color.pl('  {-} Rebooting the machine...')
                         Process.call('reboot', shell=True)
                     else:
-                        # Removing the python cache
-                        remove_python_cache(pwd=pwd)
                         Color.pl('  {*} Now you can run the command {G}gitpy{W} anywhere in the terminal.')
-                        # Removing the python cache
-                        remove_python_cache(pwd=pwd)
-                        exit_tool(0)
+                        # Exit and removing the python cache
+                        exit_tool(0,pwd=self.pwd)
                 except KeyboardInterrupt:
                     Color.pl('\n  {!} Installation process interrupted.')
                     Color.pl('  {*} You must re-run the installation process to install GitPy correctly.')
-                    Color.pl('  {-} Exiting...')
-                    # Removing the python cache
-                    remove_python_cache(pwd=pwd)
-                    exit_tool(1)
+                    # Exit and removing the python cache
+                    exit_tool(1,pwd=self.pwd)
             else:
                 Color.pl('  {*} Aborted')
-                # Removing the python cache
-                remove_python_cache(pwd=pwd)
-                exit_tool(1)
+                # Exit and removing the python cache
+                exit_tool(1,pwd=self.pwd)
 
 def entry_point(args, pwd):
     try:
         Installer(args=args, pwd=pwd)
     except EOFError:
         Color.pl('\n  {*} Aborted')
-        # Removing the python cache
-        remove_python_cache(pwd=pwd)
-        exit_tool(1)
+        # Exit and removing the python cache
+        exit_tool(1,pwd=pwd)
     except KeyboardInterrupt:
         Color.pl('\n  {*} Aborted')
-        # Removing the python cache
-        remove_python_cache(pwd=pwd)
-        exit_tool(1)
+        # Exit and removing the python cache
+        exit_tool(1,pwd=pwd)
