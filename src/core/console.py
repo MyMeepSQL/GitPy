@@ -264,8 +264,7 @@ class Main_Console():
                 Color.pl('  {!} Invalid choice. Please enter a number between 1 and %s.' % len(branches_info))
                 continue
 
-
-        selected_branch = branches_info[selected_branch_index]['name'] -1
+        selected_branch = branches_info[selected_branch_index -1 ]['name']
 
         # Demande de l'utilisateur pour télécharger le dépôt
         download_url = repo_info['clone_url']

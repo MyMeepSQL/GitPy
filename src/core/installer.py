@@ -283,9 +283,9 @@ class Installer():
             )
             if args.no_confirm:
                 Color.pl('  {?} Do you want to continue? [Y/n] y')
-                choice_1='y'
+                choice_1 = 'y'
             else:
-                choice_1=input(Color.s('  {?} Do you want to continue? [Y/n] '))
+                choice_1 = input(Color.s('  {?} Do you want to continue? [Y/n] '))
             if choice_1.lower() == 'y' or not choice_1:
                 try:
                     # ---------- [ System update ] ---------- #

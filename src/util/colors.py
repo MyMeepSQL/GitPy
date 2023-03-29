@@ -2,33 +2,33 @@
 # -*- coding: utf-8 -*-
 
 # ---[Name & Dates]----------------------------------------------------------#
-#  Filename ~ colors.py                 [Created: 2023-02-21 |  8:37 - AM]  #
-#                                       [Updated: 2023-02-21 | 10:25 - AM]  #
+#  Filename ~ colors.py                  [Created: 2023-02-21 |  8:37 - AM]  #
+#                                        [Updated: 2023-02-21 | 10:25 - AM]  #
 # ---[Info]------------------------------------------------------------------#
-#  All colors directly from the system                                      #
-#  Language ~ Python3                                                       #
+#  All colors directly from the system                                       #
+#  Language ~ Python3                                                        #
 # ---[Author]----------------------------------------------------------------#
-#  Thomas Pellissier (MyMeepSQL)                                            #
-#  Jonas Petitpierre (Bashy)                                                #
+#  Thomas Pellissier (MyMeepSQL)                                             #
+#  Jonas Petitpierre (Bashy)                                                 #
 # ---[Operating System]------------------------------------------------------#
-#  Developed for Linux                                                      #
+#  Developed for Linux                                                       #
 # ---[License]---------------------------------------------------------------#
-#  GNU General Public License v3.0                                          #
-#  -------------------------------                                          #
-#                                                                           #
-#  This program is free software; you can redistribute it and/or modify     #
-#  it under the terms of the GNU General Public License as published by     #
-#  the Free Software Foundation; either version 2 of the License, or        #
-#  (at your option) any later version.                                      #
-#                                                                           #
-#  This program is distributed in the hope that it will be useful,          #
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of           #
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the             #
-#  GNU General Public License for more details.                             #
-#                                                                           #
-#  You should have received a copy of the GNU General Public License along  #
-#  with this program; if not, write to the Free Software Foundation, Inc.,  #
-#  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.              #
+#  GNU General Public License v3.0                                           #
+#  -------------------------------                                           #
+#                                                                            #
+#  This program is free software; you can redistribute it and/or modify      #
+#  it under the terms of the GNU General Public License as published by      #
+#  the Free Software Foundation; either version 2 of the License, or         #
+#  (at your option) any later version.                                       #
+#                                                                            #
+#  This program is distributed in the hope that it will be useful,           #
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of            #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the              #
+#  GNU General Public License for more details.                              #
+#                                                                            #
+#  You should have received a copy of the GNU General Public License along   #
+#  with this program; if not, write to the Free Software Foundation, Inc.,   #
+#  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               #
 # ---------------------------------------------------------------------------#
 
 # Import section
@@ -39,8 +39,6 @@ import sys
 from src. tools.colored.colored import fg, attr
 
 # Main
-
-
 class Color():
     '''
     The colors directly available on the system
@@ -50,23 +48,23 @@ class Color():
 
     # Basic colors
     colors = {
-        'W'             : '\033[0m',    # white (like 'reset')
-        'D'             : '\033[2m',    # dims current color
-        'R'             : '\033[31m',   # red
-        'O'             : '\033[33m',   # orange
-        'G'             : '\033[32m',   # green
-        'GR'            : '\033[37m',   # gray
-        'B'             : '\033[34m',   # blue
-        'P'             : '\033[35m',   # purple
-        'C'             : '\033[36m',   # cyan
-
-        # Light colors
-        'LG'            : '\033[90m',   # light gray
-        'LR'            : '\033[91m',   # light red
-        'LL'            : '\033[92m',   # light green
-        'LY'            : '\033[93m',   # light yellow
-        'LB'            : '\033[94m',   # light blue
-        'LP'            : '\033[95m',   # light purple
+        'W'             : '\033[0m',       # white (like 'reset')
+        'D'             : '\033[2m',       # dims current color
+        'R'             : '\033[31m',      # red
+        'O'             : '\033[33m',      # orange
+        'G'             : '\033[32m',      # green
+        'GR'            : '\033[37m',      # gray
+        'B'             : '\033[34m',      # blue
+        'P'             : '\033[35m',      # purple
+        'C'             : '\033[36m',      # cyan
+ 
+        # Light colors 
+        'LG'            : '\033[90m',      # light gray
+        'LR'            : '\033[91m',      # light red
+        'LL'            : '\033[92m',      # light green
+        'LY'            : '\033[93m',      # light yellow
+        'LB'            : '\033[94m',      # light blue
+        'LP'            : '\033[95m',      # light purple
 
         # Dark colors
         'darkblack'     : '\033[030m',

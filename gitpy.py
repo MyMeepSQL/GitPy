@@ -50,4 +50,4 @@ try:
 
 except KeyboardInterrupt:
     Color.pl('\n  {!} Interrupted, shutting down...')
-    exit_tool(1)
+    exit_tool(1,pwd=cwd)
