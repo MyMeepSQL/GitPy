@@ -111,6 +111,8 @@ class Configuration(object):
         '''
             Load argument and parse them to the specific function.
         '''
+
+        cls.pwd = pwd
         # Get the arguments
         args = Arguments.get_arguments()
 
@@ -119,7 +121,7 @@ class Configuration(object):
             __MAIN__.GitPy.Banner()
             print()
             Color.pl('  {!} The -q/--quiet and -v/--verbose option are not compatible together.')
-            exit_tool(1)
+            exit_tool(1,pwd=cls.pwd)
 
 
 
@@ -150,7 +152,7 @@ class Configuration(object):
             __MAIN__.GitPy.Banner()
             print()
             Color.pl('  {!} You must specify a path where GitPy will be installed.')
-            exit_tool(1)
+            exit_tool(1,pwd=cls.pwd)
 
     # -------------------- [ MAIN ARGUMENTS ] -------------------- #
     @classmethod
@@ -167,7 +169,7 @@ class Configuration(object):
 
         if args.cli:
             Color.pl('  {!} The GitPy\'s CLI is not available yet.')
-            exit_tool(1)
+            exit_tool(1,pwd=cls.pwd)
 
     # -------------------- [ INSTALLATION ARGUMENTS ] -------------------- #
     @classmethod
@@ -197,13 +199,13 @@ class Configuration(object):
                 HM.option_console()
                 print()
                 GR.compare_version()
-                exit_tool(0)
+                exit_tool(0,pwd=cls.pwd)
             if args.cli:
                 __MAIN__.GitPy.Banner()
                 HM.option_cli()
                 print()
                 GR.compare_version()
-                exit_tool(0)
+                exit_tool(0,pwd=cls.pwd)
 
             # ---------- [ Installation options ] ---------- #
             if args.install:
@@ -211,31 +213,31 @@ class Configuration(object):
                 HM.option_install()
                 print()
                 GR.compare_version()
-                exit_tool(0)
+                exit_tool(0,pwd=cls.pwd)
             if args.uninstall:
                 __MAIN__.GitPy.Banner()
                 HM.option_uninstall()
                 print()
                 GR.compare_version()
-                exit_tool(0)
+                exit_tool(0,pwd=cls.pwd)
             if args.skip_update:
                 __MAIN__.GitPy.Banner()
                 HM.option_skip_update()
                 print()
                 GR.compare_version()
-                exit_tool(0)
+                exit_tool(0,pwd=cls.pwd)
             if args.offline:
                 __MAIN__.GitPy.Banner()
                 HM.option_offline()
                 print()
                 GR.compare_version()
-                exit_tool(0)
+                exit_tool(0,pwd=cls.pwd)
             if args.install_path:
                 __MAIN__.GitPy.Banner()
                 HM.option_install_path()
                 print()
                 GR.compare_version()
-                exit_tool(0)
+                exit_tool(0,pwd=cls.pwd)
 
             # ---------- [ Output options ] ---------- #
             if args.quiet:
@@ -243,14 +245,14 @@ class Configuration(object):
                 HM.option_quiet()
                 print()
                 GR.compare_version()
-                exit_tool(0)
+                exit_tool(0,pwd=cls.pwd)
 
             if args.verbose:
                 __MAIN__.GitPy.Banner()
                 HM.option_verbose()
                 print()
                 GR.compare_version()
-                exit_tool(0)
+                exit_tool(0,pwd=cls.pwd)
 
             # ---------- [ Additional options ] ---------- #
             if args.no_confirm:
@@ -258,7 +260,7 @@ class Configuration(object):
                 HM.option_no_confirm()
                 print()
                 GR.compare_version()
-                exit_tool(0)
+                exit_tool(0,pwd=cls.pwd)
 
             # ---------- [ Informations options ] ---------- #
             if args.info:
@@ -266,13 +268,13 @@ class Configuration(object):
                 HM.option_info()
                 print()
                 GR.compare_version()
-                exit_tool(0)
+                exit_tool(0,pwd=cls.pwd)
             if args.version:
                 __MAIN__.GitPy.Banner()
                 HM.option_version()
                 print()
                 GR.compare_version()
-                exit_tool(0)
+                exit_tool(0,pwd=cls.pwd)
 
             # ---------- [ Miscellaneous options ] ---------- #
             if args.update:
@@ -280,25 +282,25 @@ class Configuration(object):
                 HM.option_update()
                 print()
                 GR.compare_version()
-                exit_tool(0)
+                exit_tool(0,pwd=cls.pwd)
             if args.force_update:
                 __MAIN__.GitPy.Banner()
                 HM.option_force_update()
                 print()
                 GR.compare_version()
-                exit_tool(0)
+                exit_tool(0,pwd=cls.pwd)
             if args.show_env_var:
                 __MAIN__.GitPy.Banner()
                 HM.option_show_env_var()
                 print()
                 GR.compare_version()
-                exit_tool(0)
+                exit_tool(0,pwd=cls.pwd)
             if args.remove_cache:
                 __MAIN__.GitPy.Banner()
                 HM.option_remove_cache()
                 print()
                 GR.compare_version()
-                exit_tool(0)
+                exit_tool(0,pwd=cls.pwd)
             
 
             # ---- No options ---- #
@@ -307,7 +309,7 @@ class Configuration(object):
                 HM.main_help_msg()
                 print()
                 GR.compare_version()
-                exit_tool(0)
+                exit_tool(0,pwd=cls.pwd)
     
         if args.info:
             from src.util.informations import Informations
@@ -315,14 +317,14 @@ class Configuration(object):
             Informations()
             print()
             GR.compare_version()
-            exit_tool(0)
+            exit_tool(0,pwd=cls.pwd)
 
         if args.version:
             if args.verbose:
                 Color.pl(cls.version_message_verbose)
             else:
                 Color.pl(cls.version_message)
-            exit_tool(0)
+            exit_tool(0,pwd=cls.pwd)
 
     # -------------------- [ MISCELLANEOUS ARGUMENTS ] -------------------- #
     @classmethod
@@ -360,7 +362,7 @@ class Configuration(object):
             #                     config_file.write(cls.DEFAULT_INSTALL_PATH)
 
             #                 Color.pl('  {+} Config file re-generated.')
-            #                 exit_tool(0)
+            #                 exit_tool(0,pwd=cls.pwd)
 
             #             else:
             #                 Color.pl('  {*} Remove the configuration file yourself and re-run the the create config command.')
@@ -381,7 +383,7 @@ class Configuration(object):
             #                 config_file.write(cls.DEFAULT_INSTALL_PATH)
 
             #             Color.pl('  {+} Config file generated.')
-            #             exit_tool(0)
+            #             exit_tool(0,pwd=cls.pwd)
 
             #     else:
             #         Color.pl('  {!} GitPy are not installed on your system!')
@@ -395,7 +397,7 @@ class Configuration(object):
             except KeyError:
                 Color.pl('  {!} GitPy is not installed on this machine.')
                 Color.pl('  {*} Because the {C}{bold}GITPY_INSTALL_PATH{W} environment variable is not set.')
-                exit_tool(1)
+                exit_tool(1,pwd=cls.pwd)
             # if args.show_config:
             #     # Open the file in read mode
             #     with open(cls.CONFIG_FILE_PATH, "r") as config_file:

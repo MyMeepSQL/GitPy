@@ -37,7 +37,6 @@ import sys
 
 ## Third party libraries
 from src.util.colors import Color
-from src.util.remove_python_cache import remove_python_cache
 
 
 def exit_tool(code,pwd):
@@ -47,6 +46,8 @@ def exit_tool(code,pwd):
     :return: None
     '''
     from src.config import Configuration
+    from src.util.remove_python_cache import remove_python_cache
+    remove_python_cache(pwd=pwd)
     if Configuration.verbose == 3:
         if code == 0:
             Color.pl('  {§} Exiting with the exit code: {G}0{W}')
