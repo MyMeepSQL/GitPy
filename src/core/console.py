@@ -152,7 +152,7 @@ class Main_Console():
                 Color.pl('  {!} Invalid choice. Please enter a number between 1 and %s.' % len(items))
                 continue
 
-        selected_index = int(selected_index)
+        selected_index = int(selected_index) -1
 
         # Récupération des informations sur le dépôt
         if Configuration.verbose >= 3:
@@ -265,7 +265,7 @@ class Main_Console():
                 continue
 
 
-        selected_branch = branches_info[selected_branch_index]['name']
+        selected_branch = branches_info[selected_branch_index]['name'] -1
 
         # Demande de l'utilisateur pour télécharger le dépôt
         download_url = repo_info['clone_url']

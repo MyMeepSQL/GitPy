@@ -51,8 +51,9 @@ import gnureadline as global_readline # pip install gnureadline
 
 
 ## Third party libraries
-import src.__main__ as _MAIN
+
 import src.config as config
+from src.__main__ import GitPy
 from src.util.clear import clear
 from src.util.colors import Color
 from src.util.help_messages import Help_Messages as HM
@@ -65,40 +66,29 @@ class Help_message:
     commands = {
 
         # ---------- [ Core commands ] ---------- #
-        'set' : {
+        'search' : {
             'help' : Color.s('''
-            \r    Description
-            \r    -----------
-            \r    The {G}set{W} command is used for assign a value to a variable in the current
-            \r    loaded module that it will use for make a conversion or a migration.
-
-            \r {C}Usage{W}: set <VARIABLE> <VALUE>
+            \r{SB2}{bold}Search command{W}:
+            \r===============
+    
+            \r  Category
+            \r  --------
+            \r  Core commands
+    
+            \r  Description
+            \r  -----------
+            \r  Search a repository on GitHub with the GitHub API.
+            
+            \r{SB2}{bold}Others avalable informations{W}:
+            \r=============================
+    
+            \r  Usage
+            \r  -----
+            \r  search <REPONAME>
             '''),
-			'least_args' : 2,
-			'max_args' : 2
+			'least_args' : 1,
+			'max_args' : 1
         },
-
-
-        'run' : {
-            'help' : Color.s('''
-            \r    Description
-            \r    -----------
-            \r    Start the loaded module with the variables specified with the {G}set{W} command.
-            '''),
-            'least_args' : 0,
-            'max_args' : 0
-        },
-
-
-		'options' : {
-			'help' : '''
-            \r    Description
-            \r    -----------
-			\r    Show all variables' value of a loaded module.
-			''',
-			'least_args' : 0,
-			'max_args' : 0
-		},
 
 
 		'clear' : {
@@ -114,85 +104,27 @@ class Help_message:
 
 		'reset' : {
 			'help' : Color.s('''
-            \r    Description
-            \r    -----------
-            \r    Reset the current loaded module's variables,
-
-            \r    Option          Description
-            \r    ------          -----------
-            \r    -v              Reset {R}all variables{W} of the loaded module ({O}do not set the
-            \r                    reset counter to 0{W}).
-            \r    -1              Set the reset counter to 1. The value 1 means that the variables
-            \r                    WILL BE RESET when exit and re-run the main console.
-            \r    -0              Set the reset counter to 0. The value 0 means that the variables
-            \r                    will NOT be reset when exit and re-run the main console.
-            \r    -s, --status    Show the value of the reset counter.
-
-            \r    Usage
-            \r    -----
-            \r    reset <OPTION>
+            \r{SB2}{bold}Reset command{W}:
+            \r==============
+    
+            \r  Category
+            \r  --------
+            \r  Core commands
+    
+            \r  Description
+            \r  -----------
+            \r  Reset the terminal like if you ran it for the first time.
+            
+            \r{SB2}{bold}Others avalable informations{W}:
+            \r=============================
+    
+            \r  Usage
+            \r  -----
+            \r  reset
 			'''),
-            'options' :  {
-                '-v',
-                '-1',
-                '-0',
-                '-s',
-                '--status'
-            },
             'least_args' : 0,
             'max_args' : 1
 		},
-
-
-		'unload' : {
-			'help' : '''
-            \r    Description
-            \r    -----------
-			\r    Unload the current loaded module.
-			''',
-			'least_args' : 0,
-			'max_args' : 0
-		},
-
-
-		'use' : {
-			'help' : '''
-            \r    Description
-            \r    -----------
-			\r    Load a specific module for making convertion or making migration.
-			''',
-            'module_list' : {
-                'text_to_image'
-            },
-			'least_args' : 1,
-			'max_args' : 1
-		},
-
-
-		'show' : {
-			'help' : '''
-            \r    Description
-            \r    -----------
-			\r    Show the GitPy's modules and their modules in development too.
-
-            \r    Argument          Description
-            \r    --------          -----------
-            \r    [no_argument]     Show all modules
-            \r    ok                Show the stable modules
-            \r    dev               Show the "in development" modules
-
-            \r    Usage
-            \r    -----
-            \r    show [MODULE_STATUS]
-			''',
-            'arguments' :  {
-                'ok',
-                'dev'
-            },
-			'least_args' : 0,
-			'max_args' : 1
-		},
-
 
 		'help' : {
 			'help' : '''
@@ -204,33 +136,83 @@ class Help_message:
 
 
 		'whoami' : {
-			'help' : '''
-            \r    Description
-            \r    -----------
-			\r    Show the username of your current user that you have loaded GitPy.
-			''',
+			'help' : Color.s('''
+            \r{SB2}{bold}Whoami command{W}:
+            \r===============
+    
+            \r  Category
+            \r  --------
+            \r  Core commands
+    
+            \r  Description
+            \r  -----------
+            \r  Show the username of your current user that you have loaded GitPy.
+            
+            \r{SB2}{bold}Others avalable informations{W}:
+            \r=============================
+    
+            \r  Usage
+            \r  -----
+            \r  whoami
+			'''),
 			'least_args' : 0,
 			'max_args' : 0
 		},
 
 
 		'version' : {
-			'help' : '''
-            \r    Description
-            \r    -----------
-			\r    Show the current instance version of GitPy on your system.
-			''',
+			'help' : Color.s('''
+            \r{SB2}{bold}Version command{W}:
+            \r===============
+    
+            \r  Category
+            \r  --------
+            \r  Core commands
+    
+            \r  Description
+            \r  -----------
+            \r  Show the current instance version of GitPy on your system.
+
+            \r  Options                         Description
+            \r  -------                         -----------
+            \r  -v [LEVEL], --verbose [LEVEL]   Verbosity level: 1-3 (default: {G}0{W} | const: {G}1{W}).
+
+            \r{SB2}{bold}Others avalable informations{W}:
+            \r=============================
+    
+            \r  Usage
+            \r  -----
+            \r  version [OPTION]
+			'''),
+            'options' :  {
+                '-v',
+                '--verbose'
+            },
 			'least_args' : 0,
-			'max_args' : 0
+			'max_args' : 2
 		},
 
 
 		'exit' : {
-			'help' : '''
-            \r    Description
-            \r    -----------
-			\r    Clear cache and exit the GitPy's CLI environment.
-			''',
+			'help' : Color.s('''
+            \r{SB2}{bold}Exit command{W}:
+            \r=============
+    
+            \r  Category
+            \r  --------
+            \r  Core commands
+    
+            \r  Description
+            \r  -----------
+            \r  Clear cache and exit the GitPy's CLI environment.
+
+            \r{SB2}{bold}Others avalable informations{W}:
+            \r=============================
+    
+            \r  Usage
+            \r  -----
+            \r  exit]
+			'''),
 			'least_args' : 0,
 			'max_args' : 0
 		},
@@ -244,12 +226,12 @@ class Help_message:
             \r    Download and update the current instance of GitPy on the machine with
             \r    the latest stable version of GitPy from its repository.
 
-            \r    Options          Description
-            \r    -------          -----------
-            \r    --quiet          Prevent header from displaying. {O}Warning{W}: bypass any "Are your sure?"
-            \r                     message!
-            \r    --noconfirm      Bypass any and all "Are you sure?" messages.
-            \r    -v [VERBOSE]     verbosity level: 0-2 (default: {G}0{W})
+            \r    Options                         Description
+            \r    -------                         -----------
+            \r    -q,         --quiet             Prevent header from displaying. {O}Warning{W}: bypass any "Are your sure?"
+            \r                                    message!
+            \r                --noconfirm         Bypass any and all "Are you sure?" messages.
+            \r    -v [LEVEL], --verbose [LEVEL]   Verbosity level: 1-3 (default: {G}0{W} | const: {G}1{W}).
 
             \r    Usage
             \r    -----
@@ -298,7 +280,9 @@ class CLI_Console():
 
     def __init__(self, pwd):
 
-        _MAIN.Banner()
+        self.pwd = pwd
+
+        GitPy.Banner()
         print()
 
         Color.pl('  {+} For see all commands, try {G}help{W} command.\n')
@@ -357,6 +341,11 @@ class CLI_Console():
                         elif cmd_list_len == 2:
                             Help_message.print_detailed(cmd_list[1])
 
+                    if cmd == 'clear':
+                        clear()
+                    if cmd == 'reset':
+                        clear()
+                        self.__init__(pwd=self.pwd)
 
                     if cmd == 'whoami':
                         subprocess.run('whoami' , shell = True)

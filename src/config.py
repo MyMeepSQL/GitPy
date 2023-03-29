@@ -168,9 +168,11 @@ class Configuration(object):
             Main_Console(pwd=pwd)
 
         if args.cli:
-            Color.pl('  {!} The GitPy\'s CLI is not available yet.')
-            exit_tool(1,pwd=cls.pwd)
+            # Color.pl('  {!} The GitPy\'s CLI is not available yet.')
+            # exit_tool(1,pwd=cls.pwd)
 
+            from src.core.cli_console import CLI_Console
+            CLI_Console(pwd=pwd)
     # -------------------- [ INSTALLATION ARGUMENTS ] -------------------- #
     @classmethod
     def parse_installation_args(cls, args, pwd):
@@ -421,3 +423,31 @@ class Configuration(object):
     #         Process.call(command='pacman --help', shell=True)
     #         Process.call(command='pacman --dasdd', shell=True)
     #         Process.call('git clone https://github.com/MyMeepSQL/GitPy.git', shell=True)
+
+
+class Main_prompt():
+    original_prompt = prompt = Color.s('{underscore}GitPy{W}> {W}')
+    main_prompt_ready = True
+    SPACE = '#>SPACE$<#'
+
+    @staticmethod
+    def rst_prompt(prompt = prompt , prefix = '\r'):
+        import gnureadline as global_readline
+        Main_prompt.main_prompt_ready = True
+        sys.stdout.write(prefix + Main_prompt.prompt + global_readline.get_line_buffer())
+
+    @staticmethod
+    def set_main_prompt_ready():
+        Main_prompt.main_prompt_ready = True
+
+
+def print_shadow(msg):
+	print(msg)
+
+def chill():
+	pass
+
+def clone_dict_keys(_dict):
+	clone = deepcopy(_dict)
+	clone_keys = clone.keys()
+	return clone_keys

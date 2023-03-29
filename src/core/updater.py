@@ -69,8 +69,6 @@ class Updater():
     TEMP_PATH = Configuration.TEMP_PATH
     INSTALL_PATH = DEFAULT_INSTALL_PATH
     VERSION = Configuration.VERSION
-    REPO_VERSION = Configuration.REPO_VERSION
-    REPO_METADATA_URL = Configuration.REPO_METADATA_URL
 
     # Environment variables
     gitpy_path_env_var_name = Configuration.gitpy_path_env_var_name
@@ -80,6 +78,8 @@ class Updater():
     REPO_URL = Configuration.REPO_URL
     REPO_BRANCH = Configuration.REPO_BRANCH
     REPO_MASTER_BRANCH = Configuration.REPO_MASTER_BRANCH
+    REPO_VERSION = Configuration.REPO_VERSION
+    REPO_METADATA_URL = Configuration.REPO_METADATA_URL
 
     # cp_online_ver = None
 
@@ -339,7 +339,6 @@ class Updater():
                 except Exception as E:
                     Color.pexception(E)
                     # Color.pl(f'Exception : %s' % str(E) )
-                    # log_writer(f'gitpy, %s' % str(E) )
                 except KeyboardInterrupt:
                     Color.pl('\n  {!} Update process interrupted.')
                     Color.pl('  {!} You must re-run the update process to update GitPy correctly.')
