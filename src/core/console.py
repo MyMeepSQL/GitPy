@@ -431,8 +431,8 @@ class Main_Console():
 
         except KeyboardInterrupt:
             Color.pl('  {!} Interrupted, shutting down...')
-            remove_python_cache(pwd=self.pwd, line_enter=True)
-            exit_tool(1)
+            # Exit and removing the python cache
+            exit_tool(1,pwd=self.pwd)
 
     def __init__(self, pwd):
 
@@ -450,7 +450,8 @@ class Main_Console():
                 Color.pl('   {SY1}╰──╼{W} The user\'s platform is not a Linux machine.')
                 sleep(1)
             Color.pl('  {!} You tried to run GitPy on a non-linux machine. GitPy can be run only on a Linux kernel.')
-            exit_tool(1)
+            # Exit and removing the python cache
+            exit_tool(1,pwd=self.pwd)
 
         else:
             if Configuration.verbose == 3:
@@ -472,7 +473,7 @@ class Main_Console():
             #     else:
             #         Color.pl('  {-} Exiting...')
             #         # remove_python_cache(pwd=pwd, line_enter=True)
-            #     exit_tool(1)
+            #     exit_tool(1,pwd=self.pwd)
 
             # Check if the user is root or not
             if Configuration.verbose == 3:
@@ -483,7 +484,8 @@ class Main_Console():
                     Color.pl('   {SY1}╰──╼{W} The user is {C}not root{W}')
                 Color.pl('  {!} The GitPy Console must be run as root.')
                 Color.pl('  {*} Re-run with sudo or switch to root user.')
-                exit_tool(1)
+                # Exit and removing the python cache
+                exit_tool(1,pwd=self.pwd)
             else:
                 if Configuration.verbose == 3:
                     Color.pl('   {SY1}╰──╼{W} The user is {C}%s{W}' % ('root' if os.getuid() == 0 else 'not root'))
@@ -509,8 +511,8 @@ class Main_Console():
                         Color.pl('   {SY1}╰──╼{W} The user\'s Linux distro is {C}not Arch or Debian{W}')
                     Color.pl('  {!} You\'re not running Debian or Arch variant.')
                     Color.pl('  {*} GitPy can only be run on Debian or Arch based Linux distros.')
-                    Color.pl('  {-} Exiting...')
-                    exit_tool(1)
+                    # Exit and removing the python cache
+                    exit_tool(1,pwd=self.pwd)
                 if Configuration.verbose == 3:
                     Color.pl('  {§} Loading the main menu...')
                     Color.pl('   {SY1}╰──╼{W} Python: {SY1}self.main_menu(){W}')
