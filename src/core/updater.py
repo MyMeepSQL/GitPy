@@ -333,7 +333,7 @@ class Updater():
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Python: {SY1}sleep(1){W}')
                     sleep(1)
-                    Color.pl('  {+} GitPy successfully updated with the version: %s' % cp_online_ver)
+                    Color.pl('  {*} GitPy successfully updated with the version: %s' % cp_online_ver)
                     # Exit and removing the python cache
                     exit_tool(1,pwd=pwd)
                 except Exception as E:

@@ -94,8 +94,6 @@ class Color():
         'SGR1'          : fg('#777777'),   # Grey n°1
         'SW1'           : fg('#FFFFFF'),   # White n°1 (real white)
         'SW0'           : attr('reset')    # Reset
-
-        
     }
 
     # Helper string replacements
@@ -108,7 +106,8 @@ class Color():
         '{§}'           : '{W}{D}[{W}{SY1}&{W}{D}]{W}', # More information (verbose level: 3)
         '{!}'           : '{W}{D}[{W}{R}!{W}{D}]{W}',   # Error
         '{$}'           : '{W}{D}[{W}{O}${W}{D}]{W}',   # Warning
-        '{?}'           : '{W}{D}[{W}{C}?{W}{D}]{W}'    # Question
+        '{?}'           : '{W}{D}[{W}{C}?{W}{D}]{W}',    # Question
+        '{°}'           : '{W}{D}[{W}{C}-{W}{D}]{W}'    # Question
     }
 
     @staticmethod

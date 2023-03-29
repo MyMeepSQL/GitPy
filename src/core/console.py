@@ -5,7 +5,7 @@
 #  Filename ~ console.py                [Created: 2023-03-28 | 10:26 - AM]  #
 #                                       [Updated: 2023-03-28 | 12:02 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  The main console of gitpy                                               #
+#  The main console of gitpy                                                #
 #  Language ~ Python3                                                       #
 #---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
@@ -135,7 +135,7 @@ class Main_Console():
 
         # Demande de l'utilisateur pour choisir un dépôt
         Color.pl('  {*} Select the repository that you want to clone.')
-        Color.pl('  {*} Enter {G}back{W} to come back to the main menu.')
+        Color.pl('  {°} Enter {G}back{W} to come back to the main menu.')
         while True:
             try:
                 selected_index = input(self.prompt(menu='choose_repo'))
@@ -174,7 +174,7 @@ class Main_Console():
 
         if Configuration.verbose >= 3:
             Color.pl('   {SY1}╰──╼{W} Python: {SY1}repo_info = json.loads(response.text){W}')
-        
+
         repo_info = json.loads(response.text)
 
         # if Configuration.verbose >= 3:
@@ -219,10 +219,8 @@ class Main_Console():
             ('  Cloning URL         ::  %s' % repo_info['clone_url'], ''),
             ('','')
         ]
-        
+
         # Affichage des informations sur le dépôt
-
-
         if Configuration.verbose >= 3:
             Color.pl('  {§}  Displaying the information about the selected repository...')
             Color.pl('   {SY1}╰──╼{W} Python: {SY1}self.display_array(data=data){W}')
@@ -278,7 +276,6 @@ class Main_Console():
             Color.pl('  {!} The folder {C}%s{W} already exists.' % repo_install_path)
             replace_choice = input(Color.s('  {?} Do you want to replace it? [Y/n] '))
 
-
             if replace_choice == "y" or not replace_choice:
                 self.remove_existing_folder = True
             else:
@@ -292,7 +289,6 @@ class Main_Console():
                     if os.path.isdir(repo_install_path):
                         Color.pl('  {!} The folder {C}%s{W} already exists.' % repo_install_path)
                         continue
-
 
         # while os.path.isdir(repo_install_path) is True:
         #     Color.pl('  {!} The folder {C}%s{W} already exists.' % repo_install_path)
@@ -318,9 +314,85 @@ class Main_Console():
             Color.pl('  {-} Applying files permissions...')
             Process.call('chmod -R 777 "%s" ' % repo_install_path, shell=True)
 
-
             Color.pl('  {*} The repository has successfully been downloaded in the folder {C}%s{W}.' % repo_install_path)
+
+            notification_by_email = input(Color.s('  {?} Do you want to receive a notification by email when a new version of the repository is available? [y/N] '))
+
+            if notification_by_email.lower() == 'n' or not notification_by_email:
+                pass
+            else:
+                Color.pl('  {°} Enter the email address where you want to receive the notification.')
+                email_address = input(self.prompt(menu='choose_email_address'))
+
+                Color.pl('  {°} Enter the sender email address (the email address that will be used to send the notification email).')
+                smtp_sender_email_address = input(self.prompt(menu='choose_sender_email_address'))
+
+                Color.pl('  {°} Enter the SMTP server address.')
+                smtp_server = input(self.prompt(menu='choose_smtp_server'))
+
+                Color.pl('  {°} Enter the SMTP server port.')
+                smtp_port = input(self.prompt(menu='choose_smtp_port'))
+
+                Color.pl('  {°} Enter the SMTP server username.')
+                smtp_username = input(self.prompt(menu='choose_smtp_username'))
+
+                Color.pl('  {°} Enter the SMTP server password.')
+                smtp_password = input(self.prompt(menu='choose_smtp_password'))
+
+                Color.pl('  {°} Enter the SMTP server security (none or ssl or tls).')
+                smtp_security = input(self.prompt(menu='choose_smtp_security'))
+
+                if smtp_security.lower() == 'none':
+                    smtp_security = ''
+
+                Color.pl('  {°} Enter the SMTP server sender email address.')
+                smtp_sender = input(self.prompt(menu='choose_smtp_sender'))
+
+                Color.pl('  {°} Enter the SMTP server receiver email address.')
+                smtp_receiver = input(self.prompt(menu='choose_smtp_receiver'))
+
+                Color.pl('  {°} Enter the SMTP server subject.')
+                smtp_subject = input(self.prompt(menu='choose_smtp_subject'))
+
+                Color.pl('  {°} Enter the SMTP server message.')
+                smtp_message = input(self.prompt(menu='choose_smtp_message'))
+
+
+                Color.pl('  {-} Saving the notification settings...')
+                self.save_notification_settings(
+                    email_address,
+                    smtp_sender_email_address,
+                    smtp_server,
+                    smtp_port,
+                    smtp_username,
+                    smtp_password,
+                    smtp_security,
+                    smtp_sender,
+                    smtp_receiver,
+                    smtp_subject,
+                    smtp_message
+                )
+
+
+                Color.pl('  {-} Adding the notification cron job...')
+                self.add_notification_cron_job(
+                    repo_install_path,
+                    email_address,
+                    smtp_server,
+                    smtp_port,
+                    smtp_username,
+                    smtp_password,
+                    smtp_security,
+                    smtp_sender,
+                    smtp_receiver,
+                    smtp_subject,
+                    smtp_message
+                )
+                Color.pl('  {*} The notification cron job has successfully been added.')
+
+
             Color.pl('  {-} Return to the main menu...')
+        
 
             if Configuration.verbose == 3:
                 Color.pl('  {§} Python: {SY1}sleep(3){W}')
@@ -366,16 +438,39 @@ class Main_Console():
 
         if menu == 'main':
             return Color.s('{underscore}%s{W}:{underscore}search-repo{W}> ' % ptnm)
-        
+
         if menu == 'choose_repo':
             return Color.s('{underscore}%s{W}:{underscore}choose-repo{W}> ' % ptnm)
-        
+
         if menu == 'choose_branch':
             return Color.s('{underscore}%s{W}:{underscore}choose-branch{W}> ' % ptnm)
-        
+
         if menu == 'choose_download_dir':
             return Color.s('{underscore}%s{W}:{underscore}choose-download-dir{W}> ' % ptnm)
+
+
+        # SMTP settings
+        if menu == 'choose_email_address':
+            return Color.s('{underscore}%s{W}:{underscore}choose-email-adress{W}> ' % ptnm)
         
+        if menu == 'choose_sender_email_address':
+            return Color.s('{underscore}%s{W}:{underscore}choose-sender-email-adress{W}> ' % ptnm)
+
+        if menu == 'choose_smtp_server':
+            return Color.s('{underscore}%s{W}:{underscore}choose-smtp-server{W}> ' % ptnm)
+
+        if menu == 'choose_smtp_port':
+            return Color.s('{underscore}%s{W}:{underscore}choose-smtp-port{W}> ' % ptnm)
+
+        if menu == 'choose_smtp_username':
+            return Color.s('{underscore}%s{W}:{underscore}choose-smtp-username{W}> ' % ptnm)
+
+        if menu == 'choose_smtp_password':
+            return Color.s('{underscore}%s{W}:{underscore}choose-smtp-password{W}> ' % ptnm)
+        
+        if menu == 'choose_smtp_security':
+            return Color.s('{underscore}%s{W}:{underscore}choose-smtp-security{W}> ' % ptnm)
+
         # if menu == 'replace_folder':
         #     return Color.s('{underscore}%s{W}:{underscore}replace-folder{W}> ' % ptnm)
 

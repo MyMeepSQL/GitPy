@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 #---[Name & Dates]----------------------------------------------------------#
-#  Filename ~ detect_mail.py            [Created: 2023-03-29 |  9:31 - AM]  #
+#  Filename ~ email_utils.py            [Created: 2023-03-29 |  9:31 - AM]  #
 #                                       [Updated: 2023-03-29 |  9:31 - AM]  #
 #---[Info]------------------------------------------------------------------#
 #  Check if the entered value are a correct email and detect the email      #
@@ -34,6 +34,7 @@
 
 
 # Imports section
+import configparser
 
 ## Third party imports
 
@@ -129,23 +130,31 @@ class Email_Utils():
         print(cls.mail_server_ssl)
         print(cls.mail_server_tls)
 
+# Email_Utils.__init__(email='bonjour@gmail.com')
 
 
-# def test():
-#     domain = Email_Utils.detect_email_domain(email='test@gmail.com')
-
-#     if domain == 'gmail.com':
-#         Email_Utils.mail_server = 'smtp.gmail.com'
-#         Email_Utils.mail_server_port = 587
-#         Email_Utils.mail_server_ssl = 465
-#         Email_Utils.mail_server_tls = 587
-
-#     elif domain == 'outlook.com' or domain == 'hotmail.com':
-#         Email_Utils.mail_server = 'smtp-mail.outlook.com'
-#         Email_Utils.mail_server_port = 587
-#         Email_Utils.mail_server_ssl = 465
-#         Email_Utils.mail_server_tls = 587
+# ---------------------------- #
 
 
+# An small exemple of how to use the configparser module
+# to read and write in a .conf file.
 
-Email_Utils.__init__(email='bonjour@gmail.com')
+config_file = 'test.conf'
+config = configparser.ConfigParser()
+config.read(config_file)
+
+config.add_section(section='test')
+config.remove_section(section='test')
+
+# Write the updated configuration back to the file
+with open(config_file, 'w') as configfile:
+    config.write(configfile)
+
+# # Value variables (of the 'convpro.conf' file)
+# rootperm = config.get('general', 'rootperm')
+# reset = config.get('console', 'reset')
+
+# # Get the console section
+# console_info = config['console']
+# # Write the loaded module into 'convpro.conf' file
+# console_info['module_selected'] = 'VALUE'
