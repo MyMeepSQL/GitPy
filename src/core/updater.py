@@ -309,7 +309,7 @@ class Updater():
                     sleep(1)
 
                     #  ---------- [ GitPy Update ] ---------- #
-                    Color.pl('  {-} Updating GitPy...')
+                    Color.pl('  {-} Updating GitPy into {C}%s{W}...' % self.INSTALL_PATH)
                     # Install GitPy by moving all the files from the temp. folder to the main folder
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Copying all files from the GitPy\'s temporary folder to the main directory ({C}%s{W})...' % self.INSTALL_PATH)
