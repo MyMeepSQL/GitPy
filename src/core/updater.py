@@ -71,7 +71,9 @@ class Updater():
     VERSION = Configuration.VERSION
 
     # Environment variables
+    ## The GitPy's install path
     gitpy_install_path_env_var_name = Configuration.gitpy_install_path_env_var_name
+    ## The News Version Notification's config file
     gitpy_install_path_env_var_value = Configuration.gitpy_install_path_env_var_value
 
     # Github's repo settings
