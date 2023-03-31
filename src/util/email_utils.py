@@ -40,6 +40,8 @@ import configparser
 
 ## Third party imports
 from src.config import Configuration
+from src.util.env_var import set_env_var
+from src.util.colors import Color
 
 # Main
 class Email_Utils():
@@ -134,6 +136,9 @@ class Email_Utils():
         GITPY_PATH = os.environ[Configuration.gitpy_path_env_var_name]
         INSTALL_PATH = GITPY_PATH
 
+        # Create the name of a environment variable that will contain the password of the email account
+        smtp_password_env_var_name = 'GITPY_%s_SMTP_PASSWORD' % github_repo_name.upper()
+
         # Create the configparser object
         config_file = '%sconfig/new_version_notification.conf' % INSTALL_PATH
         config = configparser.ConfigParser()
@@ -156,7 +161,10 @@ class Email_Utils():
         config.set(github_repo_name, 'smtp_security', smtp_security)
 
         config.set(github_repo_name, 'smtp_username', smtp_username)
-        config.set(github_repo_name, 'smtp_password', smtp_password)
+        
+        # The 'smtp_password' will contain the name of the environment variable 
+        # that will contain the password of the email account
+        config.set(github_repo_name, 'smtp_password', smtp_password_env_var_name)
 
         config.set(github_repo_name, 'email_subject', 'New version of %s' % github_repo_name)
         config.set(github_repo_name, 'email_message', 'A new version of %s is available on %s' % (github_repo_name, github_repo_url))
@@ -164,6 +172,10 @@ class Email_Utils():
         # Write the updated configuration back to the file
         with open(config_file, 'w') as configfile:
             config.write(configfile)
+
+        # Create the environment variable that will contain the password of the email account
+        Color.pl('  {-} Creating the environment variable that will contain the password of the email account...')
+        set_env_var(smtp_password_env_var_name, smtp_password)
 
     @classmethod
     def __init__(cls,email):
