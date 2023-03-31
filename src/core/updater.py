@@ -214,7 +214,6 @@ class Updater():
             except KeyError:
                 Color.pl('  {!} GitPy is not installed on this machine.')
                 Color.pl('  {*} Because the GITPY_INSTALL_PATH environment variable is not set (in the {C}/etc/environment{W} file).')
-                Color.pl('  {-} Exiting...')
                 # Exit and removing the python cache
                 exit_tool(1,pwd=pwd)
             # Check if the use are connected to the Internet network with the internet_check() function
@@ -335,7 +334,7 @@ class Updater():
                     sleep(1)
                     Color.pl('  {*} GitPy successfully updated with the version: %s' % cp_online_ver)
                     # Exit and removing the python cache
-                    exit_tool(1,pwd=pwd)
+                    exit_tool(0,pwd=pwd)
                 except Exception as E:
                     Color.pexception(E)
                     # Color.pl(f'Exception : %s' % str(E) )
