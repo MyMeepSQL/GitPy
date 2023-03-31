@@ -201,8 +201,8 @@ class Uninstaller():
                     remove_env_var(var_name=self.gitpy_install_path_env_var_name)
                     Color.pl('  {*} GitPy are successfully uninstalled from your system.')
                     Color.pl('  {*} You need to restart your machine to completly remove the {C}{bold}%s{W} and the {C}{bold}%s{W} environment variable.' % (
-                        self.INSTALL_PATH,
-                        self.gitpy_install_path_env_var_name
+                        self.gitpy_install_path_env_var_name,
+                        self.gitpy_path_notification_config_file_name
                     ))
                     choice_2 = input(Color.s('  {?} Do you want to reboot your machine now? [y/n] '))
                     if choice_2.lower() == 'y':
