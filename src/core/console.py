@@ -641,6 +641,7 @@ class Main_Console():
                     Color.pl('  {§} Call the {P}internet_check(){W} function.')
                     Color.pl('   {SY1}╰──╼{W} Python: {SY1}request.urlopen(host, timeout=10){W}')
 
+                # Check if the user is connected to the Internet
                 if internet_check() == True:
                     Color.pl('  {+} Internet status: {G}Connected{W}.')
                     pass
@@ -648,5 +649,7 @@ class Main_Console():
                     Color.pl('  {+} Internet status: {R}Not connected{W}.')
                     Color.pl('  {!} No Internet connexion found, please check if you are connected to the Internet and retry.')
                     exit_tool(1,pwd=self.pwd)
+
+                # Load the main menu
                 self.main_menu()
         
