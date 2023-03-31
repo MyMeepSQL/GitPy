@@ -562,12 +562,12 @@ class Main_Console():
         if Configuration.verbose == 3:
             Color.pl('  {§} Checking if the user\'s platform is a Linux machine or not...')
             Color.pl('   {SY1}├──╼{W} Python: {SY1}platform.system() != Linux{W}')
-            sleep(1)
+            sleep(0.2)
         if platform.system() != 'Linux':
             if Configuration.verbose == 3:
                 Color.pl('   {SY1}├──╼{W} The user\'s platform is {R}%s{W}' % platform.system())
                 Color.pl('   {SY1}╰──╼{W} The user\'s platform is not a Linux machine.')
-                sleep(1)
+                sleep(0.2)
             Color.pl('  {!} You tried to run GitPy on a non-linux machine. GitPy can be run only on a Linux kernel.')
             # Exit and removing the python cache
             exit_tool(1,pwd=self.pwd)
@@ -575,7 +575,7 @@ class Main_Console():
         else:
             if Configuration.verbose == 3:
                 Color.pl('   {SY1}╰──╼{W} The user\'s platform is {C}%s{W}' % platform.system())
-                sleep(1)
+                sleep(0.2)
             # Check if the GITPY_INSTALL_PATH environment variable is set or not
             # try:
             #     GITPY_PATH = os.environ[self.gitpy_path_env_var_name]
@@ -608,21 +608,21 @@ class Main_Console():
             else:
                 if Configuration.verbose == 3:
                     Color.pl('   {SY1}╰──╼{W} The user is {C}%s{W}' % ('root' if os.getuid() == 0 else 'not root'))
-                    sleep(1)
+                    sleep(0.2)
                     Color.pl('  {§} Checking if the user\'s Linux distro is Debian or Arch based...')
                     Color.pl('   {SY1}├──╼{W} Python: {SY1}BD.__init__(){W}')
-                    sleep(1)
+                    sleep(0.2)
                 # Distro check
                 if BD.__init__() == 'Arch':
                     if Configuration.verbose == 3:
                         Color.pl('   {SY1}╰──╼{W} The user\'s Linux distro is {C}Arch{W}')
-                        sleep(1)
+                        sleep(0.2)
                     based_distro = 'Arch'
                     pass
                 elif BD.__init__() == 'Debian':
                     if Configuration.verbose == 3:
                         Color.pl('   {SY1}╰──╼{W} The user\'s Linux distro is {C}Arch{W}')
-                        sleep(1)
+                        sleep(0.2)
                     based_distro = 'Debian'
                     pass
                 else:
@@ -632,10 +632,7 @@ class Main_Console():
                     Color.pl('  {*} GitPy can only be run on Debian or Arch based Linux distros.')
                     # Exit and removing the python cache
                     exit_tool(1,pwd=self.pwd)
-                if Configuration.verbose == 3:
-                    Color.pl('  {§} Loading the main menu...')
-                    Color.pl('   {SY1}╰──╼{W} Python: {SY1}self.main_menu(){W}')
-                    sleep(1)
+
                 # Check if the use are connected to the Internet network with the internet_check() function
                 Color.pl('  {-} Checking for internet connexion...')
                 if Configuration.verbose == 3:
@@ -652,5 +649,9 @@ class Main_Console():
                     exit_tool(1,pwd=self.pwd)
 
                 # Load the main menu
+                if Configuration.verbose == 3:
+                    Color.pl('  {§} Loading the main menu...')
+                    Color.pl('   {SY1}╰──╼{W} Python: {SY1}self.main_menu(){W}')
+                    sleep(0.2)
                 self.main_menu()
         
