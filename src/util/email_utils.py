@@ -53,7 +53,6 @@ class Email_Utils():
             mail_server_port (int): The email server port.
             mail_server_ssl (int): The email server ssl port.
             mail_server_tls (int): The email server tls port.
-            
     '''
 
     # Email server
