@@ -58,6 +58,7 @@ from src.util.clear import clear
 from src.util.colors import Color
 from src.util.exit_tool import exit_tool
 from src.util.help_messages import Help_Messages as HM
+from src.util.email_utils import Email_Utils as EU
 from src.util.informations import Informations
 from src.util.based_distro import Based_Distro as BD
 from src.util.internet_check import internet_check
@@ -322,10 +323,7 @@ class Main_Console():
                 pass
             else:
                 Color.pl('  {°} Enter the email address where you want to receive the notification.')
-                email_address = input(self.prompt(menu='choose_email_address'))
-
-                Color.pl('  {°} Enter the sender email address (the email address that will be used to send the notification email).')
-                smtp_sender_email_address = input(self.prompt(menu='choose_sender_email_address'))
+                receiver_email_address = input(self.prompt(menu='choose_email_address'))
 
                 Color.pl('  {°} Enter the SMTP server address.')
                 smtp_server = input(self.prompt(menu='choose_smtp_server'))
@@ -345,11 +343,8 @@ class Main_Console():
                 if smtp_security.lower() == 'none':
                     smtp_security = ''
 
-                Color.pl('  {°} Enter the SMTP server sender email address.')
-                smtp_sender = input(self.prompt(menu='choose_smtp_sender'))
-
-                Color.pl('  {°} Enter the SMTP server receiver email address.')
-                smtp_receiver = input(self.prompt(menu='choose_smtp_receiver'))
+                Color.pl('  {°} Enter the sender email address (the email address that will be used to send the notification email).')
+                smtp_sender_email_address = input(self.prompt(menu='choose_sender_email_address'))
 
                 Color.pl('  {°} Enter the SMTP server subject.')
                 smtp_subject = input(self.prompt(menu='choose_smtp_subject'))
@@ -359,19 +354,22 @@ class Main_Console():
 
 
                 Color.pl('  {-} Saving the notification settings...')
-                self.save_notification_settings(
-                    email_address,
-                    smtp_sender_email_address,
-                    smtp_server,
-                    smtp_port,
-                    smtp_username,
-                    smtp_password,
-                    smtp_security,
-                    smtp_sender,
-                    smtp_receiver,
-                    smtp_subject,
-                    smtp_message
-                )
+
+                EU.save_notification_settings(
+                    github_repo_name=repo_info['name'],
+                    github_repo_owner=repo_info['owner']['login'],
+                    github_repo_branch=selected_branch,
+                    github_repo_url=repo_info['html_url'],
+                    github_repo_api_url=repo_info['url'],
+                    
+
+                    receiver_email_address=receiver_email_address,
+                    
+                    smtp_server=smtp_server,
+                    smtp_port=smtp_port,
+                    smtp_security=smtp_security,
+                    smtp_sender_email_address=smtp_sender_email_address
+                    )
 
 
                 Color.pl('  {-} Adding the notification cron job...')

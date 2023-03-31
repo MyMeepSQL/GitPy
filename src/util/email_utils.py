@@ -3,10 +3,12 @@
 
 #---[Name & Dates]----------------------------------------------------------#
 #  Filename ~ email_utils.py            [Created: 2023-03-29 |  9:31 - AM]  #
-#                                       [Updated: 2023-03-29 |  9:31 - AM]  #
+#                                       [Updated: 2023-03-31 |  9:31 - AM]  #
 #---[Info]------------------------------------------------------------------#
 #  Check if the entered value are a correct email and detect the email      #
 #  domain.                                                                  #
+#  Detect the domain of the email.                                          #
+#  Save the email configuration in a .conf file.                            #
 #  Language ~ Python3                                                       #
 #---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
@@ -32,17 +34,26 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.              #
 #---------------------------------------------------------------------------#
 
-
 # Imports section
+import os
 import configparser
 
 ## Third party imports
+from src.config import Configuration
 
-
-
+# Main
 class Email_Utils():
     '''
         Check if the entered value are a correct email and detect the email domain.
+        Detect the domain of the email.
+        Save the email configuration in a .conf file.
+
+        Attributes:
+            mail_server (str): The email server.
+            mail_server_port (int): The email server port.
+            mail_server_ssl (int): The email server ssl port.
+            mail_server_tls (int): The email server tls port.
+            
     '''
 
     # Email server
@@ -51,20 +62,20 @@ class Email_Utils():
     mail_server_ssl = None
     mail_server_tls = None
 
-        # Google mail server:
+    # Google mail server:
 
-        # mail_server = 'smtp.gmail.com'
-        # mail_port = 587
-        # tls_port = 587
-        # ssl_port = 465
+    # mail_server = 'smtp.gmail.com'
+    # mail_port = 587
+    # tls_port = 587
+    # ssl_port = 465
 
 
-        # Outlook mail server:
+    # Outlook & Hotmail mail server:
 
-        # mail_server = 'smtp-mail.outlook.com'
-        # mail_port = 587
-        # tls_port = 587
-        # ssl_port = 465
+    # mail_server = 'smtp-mail.outlook.com'
+    # mail_port = 587
+    # tls_port = 587
+    # ssl_port = 465
 
     @classmethod
     def detect_email_domain(cls,email):
@@ -101,17 +112,70 @@ class Email_Utils():
             return False
 
         return True
-    
+
     @classmethod
-    def __init__(cls, email):
-        '''Init the class.
+    def save_notification_settings(
+        cls,
+
+        github_repo_name,
+        github_repo_owner,
+        github_repo_branch,
+        github_repo_url,
+        github_repo_api_url,
+
+        receiver_email_address,
         
+        smtp_server,
+        smtp_port,
+        smtp_security,
+        smtp_sender_email_address,
+
+        email_subject,
+        email_message
+        ):
+
+        GITPY_PATH = os.environ[Configuration.gitpy_path_env_var_name]
+        INSTALL_PATH = GITPY_PATH
+
+        # Create the configparser object
+        config_file = '%s/config/new_version_notification.conf' % INSTALL_PATH
+        config = configparser.ConfigParser()
+        config.read(config_file)
+
+        # Add the sections
+        config.add_section(section=github_repo_name)
+
+        # Add the options
+        config.set(github_repo_name, 'github_repo_name', github_repo_name)
+        config.set(github_repo_name, 'github_repo_owner', github_repo_owner)
+        config.set(github_repo_name, 'github_repo_branch', github_repo_branch)
+        config.set(github_repo_name, 'github_repo_url', github_repo_url)
+        config.set(github_repo_name, 'github_repo_api_url', github_repo_api_url)
+
+        config.set(github_repo_name, 'receiver_email_address', receiver_email_address)
+
+        config.set(github_repo_name, 'smtp_server', smtp_server)
+        config.set(github_repo_name, 'smtp_port', smtp_port)
+        config.set(github_repo_name, 'smtp_security', smtp_security)
+        config.set(github_repo_name, 'smtp_sender_email_address', smtp_sender_email_address)
+
+        config.set(github_repo_name, 'email_subject', email_subject)
+        config.set(github_repo_name, 'email_message', email_message)
+
+        # Write the updated configuration back to the file
+        with open(config_file, 'w') as configfile:
+            config.write(configfile)
+
+    @classmethod
+    def __init__(cls,email):
+        '''Init the class.
+
         Args:
             email (str): The email to check.
         '''
 
         domain = cls.detect_email_domain(email=email)
-        print(domain)
+        # print(domain)
 
         if domain == 'gmail.com':
             cls.mail_server = 'smtp.gmail.com'
@@ -130,6 +194,7 @@ class Email_Utils():
         print(cls.mail_server_ssl)
         print(cls.mail_server_tls)
 
+
 # Email_Utils.__init__(email='bonjour@gmail.com')
 
 
@@ -139,16 +204,16 @@ class Email_Utils():
 # An small exemple of how to use the configparser module
 # to read and write in a .conf file.
 
-config_file = 'test.conf'
-config = configparser.ConfigParser()
-config.read(config_file)
+# config_file = 'test.conf'
+# config = configparser.ConfigParser()
+# config.read(config_file)
 
-config.add_section(section='test')
-config.remove_section(section='test')
+# config.add_section(section='test')
+# config.remove_section(section='test')
 
-# Write the updated configuration back to the file
-with open(config_file, 'w') as configfile:
-    config.write(configfile)
+# # Write the updated configuration back to the file
+# with open(config_file, 'w') as configfile:
+#     config.write(configfile)
 
 # # Value variables (of the 'convpro.conf' file)
 # rootperm = config.get('general', 'rootperm')
