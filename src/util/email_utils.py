@@ -36,6 +36,7 @@
 
 # Imports section
 import os
+import getpass
 import configparser
 
 ## Third party imports
