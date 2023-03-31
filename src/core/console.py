@@ -59,6 +59,7 @@ from src.util.colors import Color
 from src.util.exit_tool import exit_tool
 from src.util.help_messages import Help_Messages as HM
 from src.util.informations import Informations
+from src.util.email_utils import Email_Utils as EU
 from src.util.based_distro import Based_Distro as BD
 from src.util.internet_check import internet_check
 from src.util.remove_python_cache import remove_python_cache
