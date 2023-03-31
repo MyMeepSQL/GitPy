@@ -58,7 +58,6 @@ from src.util.clear import clear
 from src.util.colors import Color
 from src.util.exit_tool import exit_tool
 from src.util.help_messages import Help_Messages as HM
-from src.util.email_utils import Email_Utils as EU
 from src.util.informations import Informations
 from src.util.based_distro import Based_Distro as BD
 from src.util.internet_check import internet_check
@@ -326,6 +325,11 @@ class Main_Console():
 
                 Color.pl('  {*} Enter the email address where you want to receive the notification.')
                 receiver_email_address = input(self.prompt(menu='choose_email_address'))
+                Color.pl('  {°} Enter the email address where you want to receive the notification.')
+                email_address = input(self.prompt(menu='choose_email_address'))
+
+                Color.pl('  {°} Enter the sender email address (the email address that will be used to send the notification email).')
+                smtp_sender_email_address = input(self.prompt(menu='choose_sender_email_address'))
 
                 Color.pl('  {*} Enter the SMTP server address.')
                 smtp_server = input(self.prompt(menu='choose_smtp_server'))
@@ -341,7 +345,7 @@ class Main_Console():
 
                 # The client's email address and password
                 Color.pl('  {*} Enter the SMTP server username (the email).')
-                smtp_username = input(self.prompt(menu='choose_smtp_username'))
+                smtp_username =  input(self.prompt(menu='choose_smtp_username'))
                 Color.pl('  {*} Enter the SMTP server password.')
                 smtp_password = getpass.getpass(self.prompt(menu='choose_smtp_password'))
                 print(smtp_password)
@@ -365,6 +369,33 @@ class Main_Console():
                     smtp_password=smtp_password
 
                     )
+                Color.pl('  {°} Enter the SMTP server sender email address.')
+                smtp_sender = input(self.prompt(menu='choose_smtp_sender'))
+
+                Color.pl('  {°} Enter the SMTP server receiver email address.')
+                smtp_receiver = input(self.prompt(menu='choose_smtp_receiver'))
+
+                Color.pl('  {°} Enter the SMTP server subject.')
+                smtp_subject = input(self.prompt(menu='choose_smtp_subject'))
+
+                Color.pl('  {°} Enter the SMTP server message.')
+                smtp_message = input(self.prompt(menu='choose_smtp_message'))
+
+
+                Color.pl('  {-} Saving the notification settings...')
+                self.save_notification_settings(
+                    email_address,
+                    smtp_sender_email_address,
+                    smtp_server,
+                    smtp_port,
+                    smtp_username,
+                    smtp_password,
+                    smtp_security,
+                    smtp_sender,
+                    smtp_receiver,
+                    smtp_subject,
+                    smtp_message
+                )
 
 
                 Color.pl('  {-} Adding the notification cron job...')
@@ -604,4 +635,18 @@ class Main_Console():
                     Color.pl('  {§} Loading the main menu...')
                     Color.pl('   {SY1}╰──╼{W} Python: {SY1}self.main_menu(){W}')
                     sleep(1)
+                # Check if the use are connected to the Internet network with the internet_check() function
+                Color.pl('  {-} Checking for internet connexion...')
+                if Configuration.verbose == 3:
+                    Color.pl('  {§} Call the {P}internet_check(){W} function.')
+                    Color.pl('   {SY1}╰──╼{W} Python: {SY1}request.urlopen(host, timeout=10){W}')
+
+                if internet_check() == True:
+                    Color.pl('  {+} Internet status: {G}Connected{W}.')
+                    pass
+                else:
+                    Color.pl('  {+} Internet status: {R}Not connected{W}.')
+                    Color.pl('  {!} No Internet connexion found, please check if you are connected to the Internet and retry.')
+                    exit_tool(1,pwd=self.pwd)
                 self.main_menu()
+        
