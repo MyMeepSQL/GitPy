@@ -71,8 +71,8 @@ class Updater():
     VERSION = Configuration.VERSION
 
     # Environment variables
-    gitpy_path_env_var_name = Configuration.gitpy_path_env_var_name
-    gitpy_path_env_var_value = Configuration.DEFAULT_INSTALL_PATH
+    gitpy_install_path_env_var_name = Configuration.gitpy_install_path_env_var_name
+    gitpy_install_path_env_var_value = Configuration.gitpy_install_path_env_var_value
 
     # Github's repo settings
     REPO_URL = Configuration.REPO_URL
