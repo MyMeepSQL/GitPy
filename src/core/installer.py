@@ -67,11 +67,18 @@ class Installer():
     BIN_PATH = Configuration.BIN_PATH
     TEMP_PATH = Configuration.TEMP_PATH
     INSTALL_PATH = DEFAULT_INSTALL_PATH
+    NOTIFICATION_CONFIG_FILE = Configuration.DEFAULT_NOTIFICATION_CONFIG_FILE
     PROGRAM_NAME = Configuration.program_name
 
     # Environment variables
-    gitpy_path_env_var_name = Configuration.gitpy_path_env_var_name
-    gitpy_path_env_var_value = Configuration.DEFAULT_INSTALL_PATH
+
+    ## The GitPy's install path
+    gitpy_install_path_env_var_name = Configuration.gitpy_install_path_env_var_name
+    gitpy_install_path_env_var_value = Configuration.gitpy_install_path_env_var_value
+
+    ## The News Version Notification's config file
+    gitpy_path_notification_config_file_env_var_name = Configuration.gitpy_path_notification_config_file_name
+    gitpy_path_notification_config_file_env_var_value = Configuration.gitpy_path_notification_config_file_valuev
 
     # Packages list for Arch based distros (pacman)
     arch_package_list = [
@@ -139,7 +146,7 @@ class Installer():
         if args.install_path:
             self.INSTALL_PATH = ''.join(args.install_path).strip()
             self.INSTALL_PATH = check_folder_path(self.INSTALL_PATH,self.PROGRAM_NAME)
-            self.gitpy_path_env_var_value = self.INSTALL_PATH
+            self.gitpy_install_path_env_var_value = self.INSTALL_PATH
             
         # gitpy main file in /usr/bin/
         gitpy_command_bin = Create_bin_file.__init__(path=self.INSTALL_PATH)
@@ -219,7 +226,13 @@ class Installer():
                 shutil.rmtree(self.TEMP_PATH)
                 sleep(1)
                 # Create the environment variable
-                set_env_var(var_name=self.gitpy_path_env_var_name, var_value=self.gitpy_path_env_var_value)
+
+                ## The environment variable is used to know where GitPy is installed
+                set_env_var(var_name=self.gitpy_install_path_env_var_name, var_value=self.gitpy_install_path_env_var_value)
+
+                ## The environment variable is used to know where the News Version Notification config file is
+                set_env_var(var_name=self.gitpy_path_notification_config_file_env_var_name, var_value=self.gitpy_path_notification_config_file_env_var_value)
+    
             except KeyboardInterrupt:
                 Color.pl('\n  {!} Installation process interrupted.')
                 Color.pl('  {!} You must re-run the installation process to install GitPy correctly.')  
@@ -416,8 +429,8 @@ class Installer():
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Create the {C}{bold}GITPY_INSTALL_PATH{W} environment variable...')
                         Color.pl('  {§} Call the {P}set_env_var(){W} function.')
-                        Color.pl('   {SY1}╰──╼{W} Python: {SY1}set_env_var(name=self.gitpy_path_env_var_name, value=self.gitpy_path_env_var_value){W}')
-                    set_env_var(var_name=self.gitpy_path_env_var_name, var_value=self.gitpy_path_env_var_value)
+                        Color.pl('   {SY1}╰──╼{W} Python: {SY1}set_env_var(name=self.gitpy_install_path_env_var_name, value=self.gitpy_install_path_env_var_value){W}')
+                    set_env_var(var_name=self.gitpy_install_path_env_var_name, var_value=self.gitpy_install_path_env_var_value)
 
                     # -------------------- [ FINISH ] -------------------- #
                     Color.pl('  {+} GitPy are successfully installed on your system.')

@@ -42,6 +42,7 @@ import configparser
 from src.config import Configuration
 from src.util.env_var import set_env_var
 from src.util.colors import Color
+from src.core.send_email import send_email
 
 # Main
 class Email_Utils():
@@ -158,7 +159,6 @@ class Email_Utils():
 
         config.set(github_repo_name, 'smtp_server', smtp_server)
         config.set(github_repo_name, 'smtp_port', smtp_port)
-        config.set(github_repo_name, 'smtp_security', smtp_security)
 
         config.set(github_repo_name, 'smtp_username', smtp_username)
         
@@ -176,7 +176,7 @@ class Email_Utils():
         # Create the environment variable that will contain the password of the email account
         Color.pl('  {-} Creating the environment variable that will contain the password of the email account...')
         set_env_var(smtp_password_env_var_name, smtp_password)
-
+    
     @classmethod
     def __init__(cls,email):
         '''Init the class.
