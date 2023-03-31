@@ -39,7 +39,7 @@ import rich
 import json
 import shutil
 import random
-import src.tools.requests as requests
+import getpass
 import platform
 import subprocess
 import configparser
@@ -65,6 +65,7 @@ from src.util.internet_check import internet_check
 from src.util.remove_python_cache import remove_python_cache
 from src.util.if_package_exists import package_exists
 from src.tools.colored.colored import fg, attr
+import src.tools.requests as requests
 # from src.tools.box import box
 # from src.tools.box.table import Table
 # from src.tools.box.console import Console
@@ -136,7 +137,7 @@ class Main_Console():
 
         # Demande de l'utilisateur pour choisir un dépôt
         Color.pl('  {*} Select the repository that you want to clone.')
-        Color.pl('  {°} Enter {G}back{W} to come back to the main menu.')
+        Color.pl('  {*} Enter {G}back{W} to come back to the main menu.')
         while True:
             try:
                 selected_index = input(self.prompt(menu='choose_repo'))
@@ -322,36 +323,28 @@ class Main_Console():
             if notification_by_email.lower() == 'n' or not notification_by_email:
                 pass
             else:
-                Color.pl('  {°} Enter the email address where you want to receive the notification.')
+
+                Color.pl('  {*} Enter the email address where you want to receive the notification.')
                 receiver_email_address = input(self.prompt(menu='choose_email_address'))
 
-                Color.pl('  {°} Enter the SMTP server address.')
+                Color.pl('  {*} Enter the SMTP server address.')
                 smtp_server = input(self.prompt(menu='choose_smtp_server'))
 
-                Color.pl('  {°} Enter the SMTP server port.')
+                Color.pl('  {*} Enter the SMTP server port.')
                 smtp_port = input(self.prompt(menu='choose_smtp_port'))
 
-                Color.pl('  {°} Enter the SMTP server username.')
-                smtp_username = input(self.prompt(menu='choose_smtp_username'))
-
-                Color.pl('  {°} Enter the SMTP server password.')
-                smtp_password = input(self.prompt(menu='choose_smtp_password'))
-
-                Color.pl('  {°} Enter the SMTP server security (none or ssl or tls).')
+                Color.pl('  {*} Enter the SMTP server security (none or ssl or tls).')
                 smtp_security = input(self.prompt(menu='choose_smtp_security'))
 
                 if smtp_security.lower() == 'none':
                     smtp_security = ''
 
-                Color.pl('  {°} Enter the sender email address (the email address that will be used to send the notification email).')
-                smtp_sender_email_address = input(self.prompt(menu='choose_sender_email_address'))
-
-                Color.pl('  {°} Enter the SMTP server subject.')
-                smtp_subject = input(self.prompt(menu='choose_smtp_subject'))
-
-                Color.pl('  {°} Enter the SMTP server message.')
-                smtp_message = input(self.prompt(menu='choose_smtp_message'))
-
+                # The client's email address and password
+                Color.pl('  {*} Enter the SMTP server username (the email).')
+                smtp_username = input(self.prompt(menu='choose_smtp_username'))
+                Color.pl('  {*} Enter the SMTP server password.')
+                smtp_password = getpass.getpass(self.prompt(menu='choose_smtp_password'))
+                print(smtp_password)
 
                 Color.pl('  {-} Saving the notification settings...')
 
@@ -362,13 +355,15 @@ class Main_Console():
                     github_repo_url=repo_info['html_url'],
                     github_repo_api_url=repo_info['url'],
                     
-
                     receiver_email_address=receiver_email_address,
                     
                     smtp_server=smtp_server,
                     smtp_port=smtp_port,
                     smtp_security=smtp_security,
-                    smtp_sender_email_address=smtp_sender_email_address
+                    
+                    smtp_username=smtp_username,
+                    smtp_password=smtp_password
+
                     )
 
 

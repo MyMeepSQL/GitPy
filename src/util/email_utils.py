@@ -36,7 +36,6 @@
 
 # Imports section
 import os
-import getpass
 import configparser
 
 ## Third party imports
@@ -116,29 +115,27 @@ class Email_Utils():
     @classmethod
     def save_notification_settings(
         cls,
-
         github_repo_name,
         github_repo_owner,
         github_repo_branch,
         github_repo_url,
         github_repo_api_url,
-
+        
         receiver_email_address,
         
         smtp_server,
         smtp_port,
         smtp_security,
-        smtp_sender_email_address,
-
-        email_subject,
-        email_message
+        
+        smtp_username,
+        smtp_password
         ):
 
         GITPY_PATH = os.environ[Configuration.gitpy_path_env_var_name]
         INSTALL_PATH = GITPY_PATH
 
         # Create the configparser object
-        config_file = '%s/config/new_version_notification.conf' % INSTALL_PATH
+        config_file = '%sconfig/new_version_notification.conf' % INSTALL_PATH
         config = configparser.ConfigParser()
         config.read(config_file)
 
@@ -157,10 +154,12 @@ class Email_Utils():
         config.set(github_repo_name, 'smtp_server', smtp_server)
         config.set(github_repo_name, 'smtp_port', smtp_port)
         config.set(github_repo_name, 'smtp_security', smtp_security)
-        config.set(github_repo_name, 'smtp_sender_email_address', smtp_sender_email_address)
 
-        config.set(github_repo_name, 'email_subject', email_subject)
-        config.set(github_repo_name, 'email_message', email_message)
+        config.set(github_repo_name, 'smtp_username', smtp_username)
+        config.set(github_repo_name, 'smtp_password', smtp_password)
+
+        config.set(github_repo_name, 'email_subject', 'New version of %s' % github_repo_name)
+        config.set(github_repo_name, 'email_message', 'A new version of %s is available on %s' % (github_repo_name, github_repo_url))
 
         # Write the updated configuration back to the file
         with open(config_file, 'w') as configfile:
