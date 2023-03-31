@@ -210,8 +210,8 @@ class Updater():
             try:
                 if Configuration.verbose == 3:
                     Color.pl('  {§} Checking if the {C}{bold}GITPY_INSTALL_PATH{W} environment variable is set or not...')
-                    Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.environ[self.gitpy_path_env_var_name]{W}')
-                GITPY_PATH = os.environ[self.gitpy_path_env_var_name]
+                    Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.environ[self.gitpy_install_path_env_var_name]{W}')
+                GITPY_PATH = os.environ[self.gitpy_install_path_env_var_name]
                 self.INSTALL_PATH = GITPY_PATH
             except KeyError:
                 Color.pl('  {!} GitPy is not installed on this machine.')
