@@ -370,34 +370,6 @@ class Main_Console():
                     smtp_password=smtp_password
 
                     )
-                Color.pl('  {°} Enter the SMTP server sender email address.')
-                smtp_sender = input(self.prompt(menu='choose_smtp_sender'))
-
-                Color.pl('  {°} Enter the SMTP server receiver email address.')
-                smtp_receiver = input(self.prompt(menu='choose_smtp_receiver'))
-
-                Color.pl('  {°} Enter the SMTP server subject.')
-                smtp_subject = input(self.prompt(menu='choose_smtp_subject'))
-
-                Color.pl('  {°} Enter the SMTP server message.')
-                smtp_message = input(self.prompt(menu='choose_smtp_message'))
-
-
-                Color.pl('  {-} Saving the notification settings...')
-                self.save_notification_settings(
-                    email_address,
-                    smtp_sender_email_address,
-                    smtp_server,
-                    smtp_port,
-                    smtp_username,
-                    smtp_password,
-                    smtp_security,
-                    smtp_sender,
-                    smtp_receiver,
-                    smtp_subject,
-                    smtp_message
-                )
-
 
                 Color.pl('  {-} Adding the notification cron job...')
                 self.add_notification_cron_job(
@@ -413,12 +385,9 @@ class Main_Console():
                     smtp_subject,
                     smtp_message
                 )
-                Color.pl('  {*} The notification cron job has successfully been added.')
-
 
             Color.pl('  {-} Return to the main menu...')
         
-
             if Configuration.verbose == 3:
                 Color.pl('  {§} Python: {SY1}sleep(3){W}')
             sleep(3)
@@ -430,7 +399,6 @@ class Main_Console():
         else:
             self.show_main_menu = True
             self.main_menu()
-
 
     def display_array(self, data):
         '''
