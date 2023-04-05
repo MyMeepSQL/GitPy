@@ -81,7 +81,7 @@ class Main_Console():
     VERSION = Configuration.VERSION # Current version of GitPy in the Configuration's Class.
     # REPO_VERSION=config.Configuration.REPO_VERSION # The latest version of GitPy from the GitHub Repository
     REPO_URL = Configuration.REPO_URL
-    gitpy_path_env_var_name = Configuration.gitpy_path_env_var_name
+    gitpy_install_path_env_var_name = Configuration.gitpy_install_path_env_var_name
 
     # Parameters
     remove_existing_folder = False
@@ -372,19 +372,19 @@ class Main_Console():
                     )
 
                 Color.pl('  {-} Adding the notification cron job...')
-                self.add_notification_cron_job(
-                    repo_install_path,
-                    email_address,
-                    smtp_server,
-                    smtp_port,
-                    smtp_username,
-                    smtp_password,
-                    smtp_security,
-                    smtp_sender,
-                    smtp_receiver,
-                    smtp_subject,
-                    smtp_message
-                )
+                # self.add_notification_cron_job(
+                #     repo_install_path,
+                #     email_address,
+                #     smtp_server,
+                #     smtp_port,
+                #     smtp_username,
+                #     smtp_password,
+                #     smtp_security,
+                #     smtp_sender,
+                #     smtp_receiver,
+                #     smtp_subject,
+                #     smtp_message
+                # )
 
             Color.pl('  {-} Return to the main menu...')
         
@@ -546,7 +546,7 @@ class Main_Console():
                 sleep(0.2)
             # Check if the GITPY_INSTALL_PATH environment variable is set or not
             # try:
-            #     GITPY_PATH = os.environ[self.gitpy_path_env_var_name]
+            #     GITPY_PATH = os.environ[self.gitpy_install_path_env_var_name]
             #     INSTALL_PATH = GITPY_PATH
             # except KeyError:
             #     Color.pl('  {!} GitPy is not installed on this machine.')
