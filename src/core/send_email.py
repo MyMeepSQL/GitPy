@@ -113,9 +113,9 @@ def send_email():
         # Check if the subsripted repo (in the section name) have a new version (if the repo got a new commit) using the GitHub API
         if check_for_new_commit(github_repo_owner, github_repo_name, current_commit_sha) is True:
 
-            # Créer le message de l'email.
+            # Create the email message
             message = MIMEMultipart()
-            message['From'] = smtp_username
+            message['From'] = 'GitPy Notification <%s>' % smtp_username
             message['To'] = receiver_email
             message['Subject'] = 'New version of %s' % github_repo_name
 
