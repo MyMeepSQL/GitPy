@@ -106,7 +106,7 @@ class Color():
         '{§}'           : '{W}{D}[{W}{SY1}&{W}{D}]{W}', # More information (verbose level: 3)
         '{!}'           : '{W}{D}[{W}{R}!{W}{D}]{W}',   # Error
         '{$}'           : '{W}{D}[{W}{O}${W}{D}]{W}',   # Warning
-        '{?}'           : '{W}{D}[{W}{C}?{W}{D}]{W}',    # Question
+        '{?}'           : '{W}{D}[{W}{C}?{W}{D}]{W}',   # Question
         '{°}'           : '{W}{D}[{W}{C}-{W}{D}]{W}'    # Question
     }
 

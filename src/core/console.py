@@ -61,6 +61,7 @@ from src.util.help_messages import Help_Messages as HM
 from src.util.informations import Informations
 from src.util.email_utils import Email_Utils as EU
 from src.util.based_distro import Based_Distro as BD
+from src.util.add_cron_job import add_cron_job
 from src.util.internet_check import internet_check
 from src.util.remove_python_cache import remove_python_cache
 from src.util.if_package_exists import package_exists
@@ -379,7 +380,6 @@ class Main_Console():
                     
                     smtp_server=smtp_server,
                     smtp_port=smtp_port,
-                    # smtp_security=smtp_security,
                     
                     smtp_username=smtp_username,
                     smtp_password=smtp_password
@@ -387,21 +387,12 @@ class Main_Console():
                     )
 
                 Color.pl('  {-} Adding the notification cron job...')
-                # self.add_notification_cron_job(
-                #     repo_install_path,
-                #     email_address,
-                #     smtp_server,
-                #     smtp_port,
-                #     smtp_username,
-                #     smtp_password,
-                #     smtp_security,
-                #     smtp_sender,
-                #     smtp_receiver,
-                #     smtp_subject,
-                #     smtp_message
-                # )
+                add_cron_job()
 
-            Color.pl('  {-} Return to the main menu...')
+            Color.pl('  {*} All done!')
+            Color.pl('  {*} You will receive a notification by email when a new version of the repository is available.')
+            Color.pl('  {°} Press {C}Enter{W} to return to the main menu.')
+            input()
         
             if Configuration.verbose == 3:
                 Color.pl('  {§} Python: {SY1}sleep(3){W}')
