@@ -83,6 +83,7 @@ def send_email():
 
     # Variables
     notification_config_file_path = os.environ['GITPY_NOTIFICATION_CONFIG_FILE_PATH']
+
     config_file = notification_config_file_path
 
     # Create the configparser object
@@ -99,7 +100,7 @@ def send_email():
         smtp_server = config.get(section, 'smtp_server')
         smtp_port = config.get(section, 'smtp_port')
         smtp_username = config.get(section, 'smtp_username')
-        smtp_password_env_var_name = config.get(section, 'smtp_password_env_var_name')
+        smtp_password_env_var_name = os.environ[config.get(section, 'smtp_password')]
         smtp_password = os.environ[smtp_password_env_var_name]
         receiver_email = config.get(section, 'receiver_email')
         github_repo_name = config.get(section, 'github_repo_name')
