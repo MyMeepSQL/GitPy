@@ -3,7 +3,7 @@
 
 #---[Name & Dates]----------------------------------------------------------#
 #  Filename ~ send_email.py             [Created: 2023-03-31 | 10:49 - AM]  #
-#                                       [Updated: 2023-03-28 | 10:49 - AM]  #
+#                                       [Updated: 2023-04-05 |  9:04 - AM]  #
 #---[Info]------------------------------------------------------------------#
 #  Send a email via SMTP server                                             #
 #  Language ~ Python3                                                       #
@@ -38,62 +38,68 @@ import configparser
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-# Variables
-notification_config_file_path = os.environ['GITPY_NOTIFICATION_CONFIG_FILE_PATH']
-config_file = notification_config_file_path
+# Functions section
+def send_email():
+    '''
+        Send a email via SMTP server
+    '''
 
-# Create the configparser object
-config = configparser.ConfigParser()
-config.read(config_file)
+    # Variables
+    notification_config_file_path = os.environ['GITPY_NOTIFICATION_CONFIG_FILE_PATH']
+    config_file = notification_config_file_path
 
-# Get the sections
-sections = config.sections()
+    # Create the configparser object
+    config = configparser.ConfigParser()
+    config.read(config_file)
 
-# Show the sections
-for section in sections:
-    print(section)
+    # Get the sections
+    sections = config.sections()
+
+    # Show the sections
+    for section in sections:
+        print(section)
 
 
-# # Write the updated configuration back to the file
-# with open(config_file, 'w') as configfile:
-#     config.write(configfile)
+    # # Write the updated configuration back to the file
+    # with open(config_file, 'w') as configfile:
+    #     config.write(configfile)
 
-# # Value variables (of the 'convpro.conf' file)
-# rootperm = config.get('general', 'rootperm')
-# reset = config.get('console', 'reset')
+    # # Value variables (of the 'convpro.conf' file)
+    # rootperm = config.get('general', 'rootperm')
+    # reset = config.get('console', 'reset')
 
-# # Get the console section
-# console_info = config['console']
-# # Write the loaded module into 'convpro.conf' file
-# console_info['module_selected'] = 'VALUE'
+    # # Get the console section
+    # console_info = config['console']
+    # # Write the loaded module into 'convpro.conf' file
+    # console_info['module_selected'] = 'VALUE'
 
-# # SMTP connection settings
-# smtp_server = smtp_server
-# smtp_port = smtp_port
-# smtp_username = smtp_username
+    # # SMTP connection settings
+    # smtp_server = smtp_server
+    # smtp_port = smtp_port
+    # smtp_username = smtp_username
 
-# PASSWORD = smtp_password_env_var_name
-# smtp_password = 'votre_mot_de_passe_gmail'
+    # PASSWORD = smtp_password_env_var_name
+    # smtp_password = 'votre_mot_de_passe_gmail'
 
-# # Creation of the SMTP connection object
-# smtp_conn = smtplib.SMTP(smtp_server, smtp_port)
-# ## Enable TLS encryption
-# smtp_conn.starttls()  
-# ## Connection to the SMTP server
-# smtp_conn.login(smtp_username, smtp_password)  
+    # # Creation of the SMTP connection object
+    # smtp_conn = smtplib.SMTP(smtp_server, smtp_port)
+    # ## Enable TLS encryption
+    # smtp_conn.starttls()  
+    # ## Connection to the SMTP server
+    # smtp_conn.login(smtp_username, smtp_password)  
 
-# # Construction of the email
-# msg = MIMEMultipart()
-# msg['From'] = smtp_username
-# msg['To'] = receiver_email
-# msg['Subject'] = 'New version of %s' % github_repo_name
+    # # Construction of the email
+    # msg = MIMEMultipart()
+    # msg['From'] = smtp_username
+    # msg['To'] = receiver_email
+    # msg['Subject'] = 'New version of %s' % github_repo_name
 
-# # Body of the email
-# body = 'A new version of %s is available on %s' % (github_repo_name, github_repo_url)
-# msg.attach(MIMEText(body, 'plain'))
+    # # Body of the email
+    # body = 'A new version of %s is available on %s' % (github_repo_name, github_repo_url)
+    # msg.attach(MIMEText(body, 'plain'))
 
-# # Sending the email
-# smtp_conn.sendmail(smtp_username, receiver_email , msg.as_string())
+    # # Sending the email
+    # smtp_conn.sendmail(smtp_username, receiver_email , msg.as_string())
 
-# # Disconnection of the SMTP server
-# smtp_conn.quit()
+    # # Disconnection of the SMTP server
+    # smtp_conn.quit()
