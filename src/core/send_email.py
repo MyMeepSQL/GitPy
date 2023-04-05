@@ -104,7 +104,7 @@ def send_email():
         # print(smtp_password_env_var_name)
         smtp_password = os.environ[config.get(section, 'smtp_password')]
         print(smtp_password)
-        receiver_email = config.get(section, 'receiver_email')
+        receiver_email = config.get(section, 'receiver_email_address')
         github_repo_name = config.get(section, 'github_repo_name')
         github_repo_owner = config.get(section, 'github_repo_owner')
         github_repo_url = config.get(section, 'github_repo_url')
