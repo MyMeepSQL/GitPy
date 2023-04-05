@@ -393,13 +393,9 @@ class Main_Console():
             Color.pl('  {*} You will receive a notification by email when a new version of the repository is available.')
             Color.pl('  {°} Press {C}Enter{W} to return to the main menu.')
             input()
-        
-            if Configuration.verbose == 3:
-                Color.pl('  {§} Python: {SY1}sleep(3){W}')
-            sleep(3)
             
             self.show_main_menu = True
-            # clear()
+            clear()
             self.main_menu()
 
         else:
