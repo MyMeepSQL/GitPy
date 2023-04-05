@@ -36,6 +36,7 @@
 
 # Imports section
 import os
+import requests
 import configparser
 
 ## Third party imports
@@ -128,13 +129,15 @@ class Email_Utils():
         
         smtp_server,
         smtp_port,
-        smtp_security,
+        # smtp_security,
         
         smtp_username,
-        smtp_password
+        smtp_password,
+
+        current_commit_sha
         ):
 
-        GITPY_PATH = os.environ[Configuration.gitpy_path_env_var_name]
+        GITPY_PATH = os.environ[Configuration.gitpy_install_path_env_var_name]
         INSTALL_PATH = GITPY_PATH
 
         # Create the name of a environment variable that will contain the password of the email account
@@ -154,6 +157,7 @@ class Email_Utils():
         config.set(github_repo_name, 'github_repo_branch', github_repo_branch)
         config.set(github_repo_name, 'github_repo_url', github_repo_url)
         config.set(github_repo_name, 'github_repo_api_url', github_repo_api_url)
+        config.set(github_repo_name, 'current_commit_sha', current_commit_sha)
 
         config.set(github_repo_name, 'receiver_email_address', receiver_email_address)
 

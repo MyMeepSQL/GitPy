@@ -104,7 +104,7 @@ class Main_Console():
 
     def get_github_repo_info(self,repo_name, username=None):
         # Recherche des dépôts ayant un nom similaire
-        search_url = f"https://api.github.com/search/repositories?q={repo_name}"
+        search_url = 'https://api.github.com/search/repositories?q=%s' % repo_name
         if username:
             search_url += f"+user:{username}"
 
@@ -131,7 +131,7 @@ class Main_Console():
         # while True:
         # clear()
         # Affichage des dépôts trouvés
-        Color.pl('\n  {*} Here are the similar repositories found for \'%s\':' % repo_name)
+        Color.pl('  {*} Here are the similar repositories found for \'%s\':' % repo_name)
         for index, repo in enumerate(search_results['items']):
             Color.pl('  {D}[{W}{SB2}%s{W}{D}]{W} %s'% (index+1,repo['full_name']))
 
@@ -201,6 +201,24 @@ class Main_Console():
 
         seconde_line = '=' * information_line_length
 
+        # Replace with your GitHub username and repository name
+        username = repo_info['owner']['login']
+        repo_name = repo_info['name']
+
+        # Build the URL for the API call
+        url = 'https://api.github.com/repos/%s/%s/commits' % (username, repo_name)
+
+        # Send a GET request to the API with the appropriate headers
+        headers = {'Accept': 'application/vnd.github.v3+json'}
+        response = requests.get(url, headers=headers)
+
+        # Check the response status code
+        if response.status_code != 200:
+            raise Exception(f' Request failed with status code {response.status_code}')
+
+        # Parse the JSON response and get the SHA hash of the latest commit
+        current_commit_sha = response.json()[0]['sha']
+
         data = [
             ('',''), 
             ('  Information about \'%s\':' % repo_info['name'], ''),
@@ -219,6 +237,7 @@ class Main_Console():
             ('  API\'s URL           ::  %s' % repo_info['url'], ''),
             ('  License             ::  %s' % repo_info['license']['name'] if repo_info['license'] else 'None', ''),
             ('  Cloning URL         ::  %s' % repo_info['clone_url'], ''),
+            ('  Latest commit SHA   ::  %s' % current_commit_sha, ''),
             ('','')
         ]
 
@@ -338,11 +357,11 @@ class Main_Console():
                 Color.pl('  {*} Enter the SMTP server port.')
                 smtp_port = input(self.prompt(menu='choose_smtp_port'))
 
-                Color.pl('  {*} Enter the SMTP server security (none or ssl or tls).')
-                smtp_security = input(self.prompt(menu='choose_smtp_security'))
+                # Color.pl('  {*} Enter the SMTP server security (none or ssl or tls).')
+                # smtp_security = input(self.prompt(menu='choose_smtp_security'))
 
-                if smtp_security.lower() == 'none':
-                    smtp_security = ''
+                # if smtp_security.lower() == 'none':
+                #     smtp_security = ''
 
                 # The client's email address and password
                 Color.pl('  {*} Enter the SMTP server username (the email).')
@@ -359,16 +378,17 @@ class Main_Console():
                     github_repo_branch=selected_branch,
                     github_repo_url=repo_info['html_url'],
                     github_repo_api_url=repo_info['url'],
+                    current_commit_sha=current_commit_sha,
                     
                     receiver_email_address=receiver_email_address,
                     
                     smtp_server=smtp_server,
                     smtp_port=smtp_port,
-                    smtp_security=smtp_security,
+                    # smtp_security=smtp_security,
                     
                     smtp_username=smtp_username,
                     smtp_password=smtp_password
-
+                    
                     )
 
                 Color.pl('  {-} Adding the notification cron job...')
