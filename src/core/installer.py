@@ -5,7 +5,7 @@
 #  Filename ~ installer.py              [Created: 2023-03-07 | 10:27 - AM]  #
 #                                       [Updated: 2023-03-14 |  9:21 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  The installer of GitPy for install GitPy and the                       #
+#  The installer of GitPy for install GitPy and the                         #
 #  dependencies                                                             #
 #  Language ~ Python3                                                       #
 #---[Authors]---------------------------------------------------------------#
@@ -77,8 +77,8 @@ class Installer():
     gitpy_install_path_env_var_value = Configuration.gitpy_install_path_env_var_value
 
     ## The News Version Notification's config file
-    gitpy_path_notification_config_file_env_var_name = Configuration.gitpy_path_notification_config_file_name
-    gitpy_path_notification_config_file_env_var_value = Configuration.gitpy_path_notification_config_file_value
+    gitpy_path_notification_config_file_env_var_name = Configuration.gitpy_notification_config_file_env_var_name
+    gitpy_path_notification_config_file_env_var_value = Configuration.gitpy_notification_config_file_env_var_value
 
     # Packages list for Arch based distros (pacman)
     arch_package_list = [

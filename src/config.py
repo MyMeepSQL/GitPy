@@ -87,15 +87,15 @@ class Configuration(object):
     # Where GitPy is installed
     DEFAULT_INSTALL_PATH = r'/opt/gitpy/'
     # The News Version Notification's config file
-    DEFAULT_NOTIFICATION_CONFIG_FILE = r'/opt/gitpy/config/new_version_notification.conf'
+    DEFAULT_NOTIFICATION_CONFIG_FILE_PATH = r'/opt/gitpy/config/new_version_notification.conf'
 
     # For the environment variables
     ## The GitPy's install path
     gitpy_install_path_env_var_name = 'GITPY_INSTALL_PATH'
     gitpy_install_path_env_var_value = DEFAULT_INSTALL_PATH
     ## The News Version Notification's config file
-    gitpy_path_notification_config_file_name = 'GITPY_NOTIFICATION_CONFIG_FILE'
-    gitpy_path_notification_config_file_value = DEFAULT_NOTIFICATION_CONFIG_FILE
+    gitpy_notification_config_file_env_var_name = 'GITPY_NOTIFICATION_CONFIG_FILE_PATH'
+    gitpy_notification_config_file_env_var_value = DEFAULT_NOTIFICATION_CONFIG_FILE_PATH
 
     # The logs file
     # LOG_FILE_PATH = DEFAULT_INSTALL_PATH + r'logs'
@@ -105,7 +105,6 @@ class Configuration(object):
 
     # The GitPy temporary directory
     TEMP_PATH = r'/tmp/gitpy/'
-
 
     # Github's repo settings
     REPO_URL = 'https://github.com/MyMeepSQL/gitpy.git'

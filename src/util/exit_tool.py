@@ -3,7 +3,7 @@
 
 #---[Name & Dates]----------------------------------------------------------#
 #  Filename ~ exit_tool.py              [Created: 2023-03-28 |  8:54 - PM]  #
-#                                       [Updated: 2023-03-28 |  8:54 - PM]  #
+#                                       [Updated: 2023-04-03 | 15:00 - PM]  #
 #---[Info]------------------------------------------------------------------#
 #  Just a small function to prompt a exit message if verbose was applied    #
 #  Language ~ Python3                                                       #
@@ -31,19 +31,20 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.              #
 #---------------------------------------------------------------------------#
 
-
 # Imports section
 import sys
-
 ## Third party libraries
 from src.util.colors import Color
 
-
+# Function section
 def exit_tool(code,pwd):
     '''
-    Exit with a message if verbose was applied
-    :param code: Exit code
-    :return: None
+        Exit and removing the python cache with a message if verbose was applied
+
+        Args:
+            code (int): The exit code
+            pwd (str): The current working directory
+
     '''
     from src.config import Configuration
     from src.util.remove_python_cache import remove_python_cache

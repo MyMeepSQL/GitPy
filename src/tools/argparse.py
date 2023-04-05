@@ -1832,7 +1832,7 @@ class ArgumentParser(_AttributeHolder, _ActionsContainer):
     def parse_args(self, args=None, namespace=None):
         args, argv = self.parse_known_args(args, namespace)
         if argv:
-            msg = _(Color.s('{O}Unrecognized arguments{W}: %s'))
+            msg = _(Color.s('Unrecognized arguments: %s'))
             _MAIN.GitPy.Banner()
             print()
             self.error(msg % ' '.join(argv))

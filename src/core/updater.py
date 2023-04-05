@@ -209,13 +209,13 @@ class Updater():
             # Check if the GITPY_INSTALL_PATH environment variable is set or not
             try:
                 if Configuration.verbose == 3:
-                    Color.pl('  {§} Checking if the {C}{bold}GITPY_INSTALL_PATH{W} environment variable is set or not...')
+                    Color.pl('  {§} Checking if the {C}{bold}%s{W} environment variable is set or not...' % self.gitpy_install_path_env_var_name)
                     Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.environ[self.gitpy_install_path_env_var_name]{W}')
                 GITPY_PATH = os.environ[self.gitpy_install_path_env_var_name]
                 self.INSTALL_PATH = GITPY_PATH
             except KeyError:
                 Color.pl('  {!} GitPy is not installed on this machine.')
-                Color.pl('  {*} Because the GITPY_INSTALL_PATH environment variable is not set (in the {C}/etc/environment{W} file).')
+                Color.pl('  {*} Because the %s environment variable is not set (in the {C}/etc/environment{W} file).' % self.gitpy_install_path_env_var_name)
                 # Exit and removing the python cache
                 exit_tool(1,pwd=pwd)
             # Check if the use are connected to the Internet network with the internet_check() function
