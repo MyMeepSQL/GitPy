@@ -37,7 +37,7 @@ import os
 # Main functions
 def set_env_var(var_name: str, var_value: str):
     '''
-    Create a environment variable
+        Create a environment variable
     '''
     # ---------- [ For the /etc/bash.bashrc file ] ---------- #
     # Set the environment variable in the current process
@@ -85,7 +85,7 @@ def set_env_var(var_name: str, var_value: str):
 
 def remove_env_var(var_name: str):
     '''
-    Remove a environment variable
+        Remove a environment variable
     '''
     # ---------- [ For the /etc/bash.bashrc file ] ---------- #
     # Open the /etc/bash.bashrc file
