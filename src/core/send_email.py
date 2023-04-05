@@ -3,9 +3,9 @@
 
 #---[Name & Dates]----------------------------------------------------------#
 #  Filename ~ send_email.py             [Created: 2023-03-31 | 10:49 - AM]  #
-#                                       [Updated: 2023-04-05 |  9:04 - AM]  #
+#                                       [Updated: 2023-04-05 |  9:59 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  Send a email via SMTP server                                             #
+#  Send a email of the new Repo's version  via SMTP server                  #
 #  Language ~ Python3                                                       #
 #---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
@@ -38,6 +38,9 @@ import smtplib
 import configparser
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+
+## Third party libraries
+from src.util.colors import Color
 
 # Functions section
 def check_for_new_commit(repo_owner, repo_name, current_sha):
@@ -126,6 +129,8 @@ def send_email():
 
             # Sending the email
             smtp_conn.sendmail(smtp_username, receiver_email , msg.as_string())
+
+            Color.pl('  {*} Email successfully sent to {G}%s{W}!' % receiver_email)
 
 
 

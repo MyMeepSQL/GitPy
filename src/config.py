@@ -129,8 +129,6 @@ class Configuration(object):
             Color.pl('  {!} The -q/--quiet and -v/--verbose option are not compatible together.')
             exit_tool(1,pwd=cls.pwd)
 
-
-
         # Set the verbosity level
         if args.verbose == 1:
             cls.verbose = 1
@@ -146,6 +144,7 @@ class Configuration(object):
         cls.first_args_to_parse(args)
         cls.parse_main_args(args, pwd)
         cls.parse_installation_args(args, pwd)
+        cls.parse_repo_args(args)
         cls.parse_miscellaneous_args(args, pwd)
         # cls.parse_test_args(args)
 
@@ -192,6 +191,16 @@ class Configuration(object):
         if args.uninstall:
             from src.core.uninstaller import entry_point as Uninstaller
             Uninstaller(args=args, pwd=pwd)
+
+    # -------------------- [ REPO ARGUMENTS ] -------------------- #
+    @classmethod
+    def parse_repo_args(cls, args):    
+        '''
+            Parse all repo arguments
+        '''
+        if args.check_repo:
+            from src.core.send_email import send_email
+            send_email()
 
     # -------------------- [ INFORMATIONS ARGUMENTS ] -------------------- #
     @classmethod

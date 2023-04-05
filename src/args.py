@@ -117,6 +117,7 @@ class Arguments(argparse.ArgumentParser):
 
         cls._add_main_args(gitpy.add_argument_group(Color.s('{SB2}{bold}Main options{W}')))
         cls._add_installation_args(gitpy.add_argument_group(Color.s('{SB2}{bold}Installation options{W}')))
+        cls._add_repo_args(gitpy.add_argument_group(Color.s('{SB2}{bold}Repository options{W}')))
         cls._add_output_args(gitpy.add_argument_group(Color.s('{SB2}{bold}Output options{W}')))
         cls._add_additional_args(gitpy.add_argument_group(Color.s('{SB2}{bold}Additional options{W}')))
         cls._add_informations_args(gitpy.add_argument_group(Color.s('{SB2}{bold}Informations options{W}')))
@@ -127,7 +128,7 @@ class Arguments(argparse.ArgumentParser):
         return gitpy.parse_args()
 
 
-    # -------------------- [ VPN Arguments ] -------------------- #
+    # -------------------- [ Main Arguments ] -------------------- #
     @classmethod
     def _add_main_args(cls,main):
         main.add_argument(
@@ -178,6 +179,17 @@ class Arguments(argparse.ArgumentParser):
             metavar='PATH',
             dest='install_path',
             help=Color.s('the path where GitPy will be installed (default: {G}%s{W})' % config.Configuration.DEFAULT_INSTALL_PATH),
+        )
+
+
+    # -------------------- [ Repository Arguments ] -------------------- #
+    @classmethod
+    def _add_repo_args(cls,repo):
+        repo.add_argument(
+            '-cr','--check-repo',
+            action='store_true',
+            dest='check_repo',
+            help=Color.s('check if the repository in the notification config file have a new commit avalable and send a notificarion via mail if it\'s the case')
         )
 
 

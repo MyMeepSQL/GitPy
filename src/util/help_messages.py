@@ -71,6 +71,14 @@ class Help_Messages():
         \r  -iP [PATH], --install-path [PATH]        Chose where GitPy will be install on the system
         \r                                           (default: {G}%s{W}).
 
+        \r{SB2}{bold}Repository options{W}:
+        \r===================
+
+        \r  Options                                  Description
+        \r  -------                                  -----------
+        \r  -cr,        --check-repo                 Check if the repository in the notification config file have a new 
+        \r                                           commit avalable and send a notificarion via mail if it\'s the case.
+
         \r{SB2}{bold}Output options{W}:
         \r===============
 
