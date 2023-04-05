@@ -113,25 +113,21 @@ def send_email():
         # Check if the subsripted repo (in the section name) have a new version (if the repo got a new commit) using the GitHub API
         if check_for_new_commit(github_repo_owner, github_repo_name, current_commit_sha) is True:
 
-            # SMTP connection
-            smtp_conn = smtplib.SMTP(smtp_server, smtp_port)
-            ## Enable TLS encryption
-            smtp_conn.starttls()
-            ## Connection to the SMTP server
-            smtp_conn.login(smtp_username, smtp_password)
-
-            # Construction of the email
-            msg = MIMEMultipart()
-            msg['From'] = smtp_username
-            msg['To'] = receiver_email
-            msg['Subject'] = 'New version of %s' % github_repo_name
+            # Créer le message de l'email.
+            message = MIMEMultipart()
+            message['From'] = smtp_username
+            message['To'] = receiver_email
+            message['Subject'] = 'New version of %s' % github_repo_name
 
             # Body of the email
             body = 'A new version of %s is available on %s' % (github_repo_name, github_repo_url)
-            msg.attach(MIMEText(body, 'plain'))
+            message.attach(MIMEText(body, 'plain'))
 
-            # Sending the email
-            smtp_conn.sendmail(smtp_username, receiver_email , msg.as_string())
+            # Sending the emai via SMTP server
+            with smtplib.SMTP(smtp_server, smtp_port) as smtp:
+                smtp.starttls()
+                smtp.login(smtp_username, smtp_password)
+                smtp.send_message(message)
 
             Color.pl('  {*} Email successfully sent to {G}%s{W}!' % receiver_email)
 
