@@ -345,11 +345,6 @@ class Main_Console():
 
                 Color.pl('  {*} Enter the email address where you want to receive the notification.')
                 receiver_email_address = input(self.prompt(menu='choose_email_address'))
-                Color.pl('  {°} Enter the email address where you want to receive the notification.')
-                email_address = input(self.prompt(menu='choose_email_address'))
-
-                Color.pl('  {°} Enter the sender email address (the email address that will be used to send the notification email).')
-                smtp_sender_email_address = input(self.prompt(menu='choose_sender_email_address'))
 
                 Color.pl('  {*} Enter the SMTP server address.')
                 smtp_server = input(self.prompt(menu='choose_smtp_server'))
