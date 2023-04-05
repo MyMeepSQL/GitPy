@@ -60,8 +60,9 @@ from src.util.check_path import check_folder_path
 # Main
 class Installer():
     '''
-    The installer of GitPy
+        The installer of GitPy
     '''
+
     # Variables
     DEFAULT_INSTALL_PATH = Configuration.DEFAULT_INSTALL_PATH
     BIN_PATH = Configuration.BIN_PATH
@@ -71,7 +72,6 @@ class Installer():
     PROGRAM_NAME = Configuration.program_name
 
     # Environment variables
-
     ## The GitPy's install path
     gitpy_install_path_env_var_name = Configuration.gitpy_install_path_env_var_name
     gitpy_install_path_env_var_value = Configuration.gitpy_install_path_env_var_value
@@ -147,6 +147,7 @@ class Installer():
             self.INSTALL_PATH = ''.join(args.install_path).strip()
             self.INSTALL_PATH = check_folder_path(self.INSTALL_PATH,self.PROGRAM_NAME)
             self.gitpy_install_path_env_var_value = self.INSTALL_PATH
+            self.gitpy_path_notification_config_file_env_var_value = self.INSTALL_PATH + 'config/new_version_notification.conf'
             
         # gitpy main file in /usr/bin/
         gitpy_command_bin = Create_bin_file.__init__(path=self.INSTALL_PATH)
