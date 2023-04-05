@@ -40,7 +40,7 @@ from email.mime.multipart import MIMEMultipart
 
 # Variables
 notification_config_file_path = os.environ['GITPY_NOTIFICATION_CONFIG_FILE_PATH']
-config_file = 'notification_config_file_path'
+config_file = notification_config_file_path
 
 # Create the configparser object
 config = configparser.ConfigParser()

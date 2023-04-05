@@ -67,7 +67,7 @@ class Installer():
     BIN_PATH = Configuration.BIN_PATH
     TEMP_PATH = Configuration.TEMP_PATH
     INSTALL_PATH = DEFAULT_INSTALL_PATH
-    NOTIFICATION_CONFIG_FILE = Configuration.DEFAULT_NOTIFICATION_CONFIG_FILE
+    NOTIFICATION_CONFIG_FILE = Configuration.DEFAULT_NOTIFICATION_CONFIG_FILE_PATH
     PROGRAM_NAME = Configuration.program_name
 
     # Environment variables
