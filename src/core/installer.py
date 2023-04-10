@@ -92,12 +92,13 @@ class Installer():
         'python3-pip',
         'git',
         'curl',
-        'wget'
+        'wget',
     ]
     # pip package list 
     pip_package_name_list = [
         'rich',
-        'gnureadline'
+        'gnureadline',
+        'crontab',
     ]
 
     # Github's repo settings
@@ -117,6 +118,7 @@ class Installer():
             Color.pl('  {!} You tried to run GitPy on a non-linux machine!')
             Color.pl('  {*} GitPy can be run only on a Linux kernel.')
             exit_tool(1,pwd=self.pwd)
+
         else:
             if os.getuid() != 0:
                 GitPy.Banner()
@@ -129,9 +131,11 @@ class Installer():
                 if BD.__init__() == 'Arch':
                     based_distro = 'Arch'
                     pass
+
                 elif BD.__init__() == 'Debian':
                     based_distro = 'Debian'
                     pass
+
                 else:
                     GitPy.Banner()
                     print()
@@ -141,8 +145,10 @@ class Installer():
 
         if args.skip_update:
             UPDATE_SYSTEM_SKIPED='(Skipped)'
+
         else:
             UPDATE_SYSTEM_SKIPED=''
+            
         if args.install_path:
             self.INSTALL_PATH = ''.join(args.install_path).strip()
             self.INSTALL_PATH = check_folder_path(self.INSTALL_PATH,self.PROGRAM_NAME)
@@ -156,59 +162,65 @@ class Installer():
         if args.quiet:
             # -------------------- [ Quiet installation ] -------------------- #
             try:
-                # ---------- [ System update ] ---------- #
+                ## System update
                 if args.skip_update:
                     pass
+
                 else:
                     sleep(0.5)
                     if based_distro == 'Arch':
                         Process.call('pacman -Syy')
+
                     elif based_distro == 'Debian':
                         Process.call('apt update')
                     sleep(1)
 
-                # ---------- [ Tools installation ] ---------- #
+                ## Tools installation
                 if based_distro == 'Arch':
                     for arch_package_name in self.arch_package_list:
                         if package_exists(package=arch_package_name):
                             pass
+
                         else:
                             Process.call('pacman --needed --noconfirm -q -S %s'% arch_package_name, shell=True)
                 elif based_distro == 'Debian':
                     for debian_package_name in self.debian_package_list:
                         if package_exists(package=debian_package_name):
                             pass
+
                         else:
                             Process.call('apt install -qqq-y %s'% debian_package_name, shell=True)
 
-                ## ------ [ PIP package ] ------ ##
+                ## PIP package
                 for pip_package_name in self.pip_package_name_list:
                     try:
                         pkg_resources.get_distribution(pip_package_name)
+
                     except pkg_resources.DistributionNotFound:
                         Process.call('pip install %s' % pip_package_name, shell=True)
 
-                # ---------- [ GitPy installation ] ---------- #
+                ## GitPy installation
                 if os.path.isdir(self.INSTALL_PATH):
                     shutil.rmtree(self.INSTALL_PATH)
+
                     if os.path.isdir(self.TEMP_PATH):
                         shutil.rmtree(self.TEMP_PATH)
 
-                ## ------ [ GitPy files ] ------ ##
-                ### ---- [ Create the main folder in /usr/share/ ] ---- ###
+                ## GitPy files
+                ### Create the main folder in /usr/share/
                 os.makedirs(self.INSTALL_PATH, mode=0o777)    # Create the main directory of GitPy
 
-                ### ---- [ Create the temp folder that be use to download the latest GitPy version from GitHub
-                #          in it and install GitPy from this folder                                            ] ---- ###
+                ### Create the temp folder that be use to download the latest GitPy version from GitHub
+                ### in it and install GitPy from this folder
                 os.makedirs(self.TEMP_PATH, mode=0o777)
 
-                ### ---- [ Clone the latest version of GitPy into the temp. folder ] ---- ###
+                ### Clone the latest version of GitPy into the temp. folder
                 Process.call('git clone %s --verbose --branch %s %s' % (self.REPO_URL , self.REPO_BRANCH , self.TEMP_PATH), shell=True)
 
-                ### ---- [ Install GitPy by moving all the files from the temp. folder to the main folder ] ---- ###
+                ### Install GitPy by moving all the files from the temp. folder to the main folder
                 shutil.copytree(src=self.TEMP_PATH, dst=self.INSTALL_PATH, dirs_exist_ok=True)
 
-                ### ---- [ Create the command 'gitpy' in /usr/bin ] ---- ###
+                ### Create the command 'gitpy' in /usr/bin
                 # If a file called 'gitpy' already exist, inform the user and delete it
                 if os.path.isfile(self.BIN_PATH + 'gitpy'):
                     os.remove(self.BIN_PATH + 'gitpy')
@@ -219,7 +231,7 @@ class Installer():
                 with open(self.BIN_PATH + 'gitpy', 'x') as gitpy_file:
                     gitpy_file.write(gitpy_command_bin)
 
-                ### ---- [ Apply rights on files ] ---- ###
+                ### Apply rights on files
                 sleep(1)
                 Process.call('chmod 777 %sgitpy' % self.BIN_PATH, shell=True)
                 Process.call('chmod 777 -R %s' % self.INSTALL_PATH, shell=True)
@@ -239,21 +251,27 @@ class Installer():
                 Color.pl('  {!} You must re-run the installation process to install GitPy correctly.')  
                 # Exit and removing the python cache
                 exit_tool(1,pwd=self.pwd)
+
         else:
             # -------------------- [ No quiet installation ] -------------------- #
             GitPy.Banner()
             print()
+
             if Configuration.verbose >= 1:
                 Color.pl('  {*} Verbosity level: %s' % Configuration.verbose)
+
                 if Configuration.verbose == 1:
                     Color.pl('   {G}╰──╼{W} Verbose level 1 ({C}Blue color{W}) : {&}')
+
                 if Configuration.verbose == 2:
                     Color.pl('   {G}├──╼{W} Verbose level 1 ({C}Blue color{W}) : {&}')
                     Color.pl('   {G}╰──╼{W} Verbose level 2 ({P}Pink color{W}) : {#}')
+
                 if Configuration.verbose == 3:
                     Color.pl('   {G}├──╼{W} Verbose level 1 ({C}Blue color{W})   : {&}')
                     Color.pl('   {G}├──╼{W} Verbose level 2 ({P}Pink color{W})   : {#}')
                     Color.pl('   {G}╰──╼{W} Verbose level 3 ({SY1}Yellow color{W}) : {§}')
+
             # Check if the use are connected to the Internet network with the internet_check() function
             Color.pl('  {-} Checking for internet connexion...')
             if Configuration.verbose == 3:
@@ -263,18 +281,20 @@ class Installer():
             if internet_check() == True:
                 Color.pl('  {+} Internet status: {G}Connected{W}.')
                 pass
+
             else:
                 Color.pl('  {+} Internet status: {R}Not connected{W}.')
                 Color.pl('  {!} No Internet connexion found, please check if you are connected to the Internet and retry.')
                 exit_tool(1,pwd=self.pwd)
+
             if Configuration.verbose == 3:
                 Color.pl('  {§} Check if the GitPy\'s repositorie are reachable or not...')
                 Color.pl('   {SY1}╰──╼{W} Call the {SY1}is_reachable(){W} function.')
 
-            ## ---------- [ Check if the GitPy repositorie on GitHub are reachable or not ] ---------- ##
+            ## Check if the GitPy repositorie on GitHub are reachable or not
             GR.is_reachable(args)
 
-            # ---- [ The info box ] ---- #
+            # The info box
             Color.pl('''  {*} {underscore}This tool will{W}:
                     \r     {D}[{W}{LL}1{W}{D}]{W} Update your system. %s
                     \r     {D}[{W}{LL}2{W}{D}]{W} Install python-pip.
@@ -295,116 +315,140 @@ class Installer():
                 self.BIN_PATH
                 )
             )
+
             if args.no_confirm:
                 Color.pl('  {?} Do you want to continue? [Y/n] y')
                 choice_1 = 'y'
+
             else:
                 choice_1 = input(Color.s('  {?} Do you want to continue? [Y/n] '))
+
             if choice_1.lower() == 'y' or not choice_1:
                 try:
-                    # ---------- [ System update ] ---------- #
+                    # System update
                     if args.skip_update:
                         Color.pl('  {*} System update skiped.')
                         pass
+
                     else:
                         Color.pl('  {-} Updating your system...')
                         if Configuration.verbose == 3:
                             Color.pl('  {§} Python: {SY1}sleep(0.5){W}')
+
                         sleep(0.5)
                         if based_distro == 'Arch':
                             Process.call('pacman -Syy')
+
                         elif based_distro == 'Debian':
                             Process.call('apt update')
+
                         if Configuration.verbose == 3:
                                 Color.pl('  {§} Python: {SY1}sleep(1){W}')
+
                         sleep(1)
 
-                    # ---------- [ Tools installation ] ---------- #
+                    # Tools installation
                     if based_distro == 'Arch':
                         for arch_package_name in self.arch_package_list:
                             if package_exists(package=arch_package_name):
                                 Color.pl('  {*} The package \'%s\' are already installed.' % arch_package_name)
+
                             else:
                                 Color.pl('  {-} Installing \'%s\' package...' % arch_package_name)
                                 Process.call('pacman --needed --noconfirm -v -S %s'% arch_package_name, shell=True)
+
                     elif based_distro == 'Debian':
                         for debian_package_name in self.debian_package_list:
                             if package_exists(package=debian_package_name):
                                 Color.pl('  {*} The package \'%s\' are already installed.' % debian_package_name)
+
                             else:
                                 Color.pl('  {-} Installing \'%s\' package...' % debian_package_name)
                                 Process.call('apt install -y %s'% debian_package_name, shell=True)
 
-                    ## ------ [ PIP package ] ------ ##
+                    ## PIP package
                     for pip_package_name in self.pip_package_name_list:
                         try:
                             pkg_resources.get_distribution(pip_package_name)
                             Color.pl('  {*} PIP\'s package \'%s\' already intsalled.' % pip_package_name)
+
                         except pkg_resources.DistributionNotFound:
                             Color.pl('  {-} Installing \'%s\' PIP\'s package...' % pip_package_name)
                             Process.call('pip install %s' % pip_package_name, shell=True)
 
-                    # ---------- [ GitPy installation ] ---------- #
+                    # GitPy installation
                     if os.path.isdir(self.INSTALL_PATH):
                         Color.pl('  {$} A GitPy instance already exist in {C}%s{W}.' % self.INSTALL_PATH)
+
                         if args.no_confirm:
                             Color.pl('  {?} Do you want to replace it? [Y/n] y')
                             choice_2 = 'y'
+
                         else:
                             choice_2 = input(Color.s('  {?} Do you want to replace it? [Y/n] '))
+
                         if choice_2.lower() == 'y' or not choice_2:
                             Color.pl('  {-} Deleting current GitPy files...')
+                            
                             if Configuration.verbose == 3:
                                 Color.pl('   {SY1}╰──╼{W} Python: {SY1}shutil.rmtree(%s){W}' % self.INSTALL_PATH)
+
                             shutil.rmtree(self.INSTALL_PATH)
+
                             if os.path.isdir(self.TEMP_PATH):
                                 if Configuration.verbose  == 3:
                                     Color.pl('  {§} GitPy\'s temporary folder detected.')
                                     Color.pl('  {§} Remove it...')
                                     Color.pl('   {SY1}╰──╼{W} Python: {SY1}shutil.rmtree(self.TEMP_PATH){W}')
+
                                 shutil.rmtree(self.TEMP_PATH)
+
                         else:
                             Color.pl('  {!} You must remove the current GitPy files by yourself for continue the install process!')
                             # Exit and removing the python cache
                             exit_tool(1,pwd=self.pwd)
 
-                    ## ------ [ GitPy files ] ------ ##
+                    ## GitPy files
                     Color.pl('  {-} Installing GitPy files...')
 
-                    ### ---- [ Create the main folder in /usr/share/ ] ---- ###
+                    ### Create the main directory of GitPy
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Creating main folder ({C}%s{W})...' % self.INSTALL_PATH)
                         Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.makedirs(INSTALL_PATH, mode=0o777){W}')
-                    os.makedirs(self.INSTALL_PATH, mode=0o777)    # Create the main directory of GitPy
 
-                    ### ---- [ Create the temp folder that be use to download the latest GitPy version from GitHub
-                    #          in it and install GitPy from this folder                                            ] ---- ###
+                    os.makedirs(self.INSTALL_PATH, mode=0o777)    
+
+                    ### Create the temp folder that be use to download the latest GitPy version from GitHub
+                    ### in it and install GitPy from this folder
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Creating temporary folder ({C}%s{W})...' % self.TEMP_PATH)
                         Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.makedirs(self.TEMP_PATH, mode=0o777){W}')
+
                     os.makedirs(self.TEMP_PATH, mode=0o777)
 
-                    ### ---- [ Clone the latest version of GitPy into the temp. folder ] ---- ###
+                    ### Clone the latest version of GitPy into the temp. folder
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Cloning files from GitHub to the temporary directory...')
                     Process.call('git clone %s --verbose --branch %s %s' % (self.REPO_URL , self.REPO_BRANCH , self.TEMP_PATH), shell=True)
 
-                    ### ---- [ Install GitPy by moving all the files from the temp. folder to the main folder ] ---- ###
+                    ### Install GitPy by moving all the files from the temp. folder to the main folder
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Copying all files from the GitPy\'s temporary folder to the main directory ({C}%s{W})...' % self.INSTALL_PATH)
                         Color.pl('   {SY1}╰──╼{W} Python: {SY1}shutil.copytree(src=self.TEMP_PATH, dst=INSTALL_PATH, dirs_exist_ok=True){W}')
                     shutil.copytree(src=self.TEMP_PATH, dst=self.INSTALL_PATH, dirs_exist_ok=True)
 
-                    ### ---- [ Create the command 'gitpy' in /usr/bin ] ---- ###
-                    # If a file called 'gitpy' already exist, inform the user and delete it
+                    ### Create the command 'gitpy' in /usr/bin
+                    ### If a file called 'gitpy' already exist, inform the user and delete it
                     if os.path.isfile(self.BIN_PATH + 'gitpy'):
                         if Configuration.verbose == 3:
                             Color.pl('  {§} The gitpy command already exist in {C}%s{W}' % self.BIN_PATH)
                             Color.pl('  {§} Remove it...')
                             Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.remove(self.BIN_PATH + \'gitpy\'){W})')
                         os.remove(self.BIN_PATH + 'gitpy')
+
                     else:
                         pass
+
                     # Create the command 'gitpy' in /usr/bin/
                     Color.pl('  {-} Create the {G}gitpy{W} command into {C}%s{W}...' % self.BIN_PATH)
 
@@ -412,20 +456,27 @@ class Installer():
                     with open(self.BIN_PATH + 'gitpy', 'x') as gitpy_file:
                         gitpy_file.write(gitpy_command_bin)
 
-                    ### ---- [ Apply rights on files ] ---- ###
+                    ### Apply rights on files
                     Color.pl('  {-} Apply rights to the new files...')
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Python: {SY1}sleep(1){W}')
+
                     sleep(1)
+
                     Process.call('chmod 777 %sgitpy' % self.BIN_PATH, shell=True)
                     Process.call('chmod 777 -R %s' % self.INSTALL_PATH, shell=True)
+
                     # Deleting the temporary directory
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Remove the temporary directory ({C}%s{W})...' % self.TEMP_PATH)
+
                     shutil.rmtree(self.TEMP_PATH)
+
                     if Configuration.verbose == 3:
                         Color.pl('  {#} Python: {SY1}sleep(1){W}')
+
                     sleep(1)
+
                     # Create the environment variable
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Create the {C}{bold}GITPY_INSTALL_PATH{W} environment variable...')
@@ -446,21 +497,25 @@ class Installer():
                     # -------------------- [ FINISH ] -------------------- #
                     Color.pl('  {+} GitPy are successfully installed on your system.')
                     Color.pl('  {*} You need to restart your machine to use GitPy normaly.')
-                    choice_3 = input(Color.s('  {?} Do you want to reboot your machine now? [y/n] '))
-                    if choice_3.lower() == 'y':
+                    reboot = input(Color.s('  {?} Do you want to reboot your machine now? [y/n] '))
+
+                    if reboot.lower() == 'y':
                         # Removing the python cache
                         remove_python_cache(pwd=pwd)
                         Color.pl('  {-} Rebooting the machine...')
                         Process.call('reboot', shell=True)
+
                     else:
                         Color.pl('  {*} Now you can run the command {G}gitpy{W} anywhere in the terminal.')
                         # Exit and removing the python cache
                         exit_tool(0,pwd=self.pwd)
+
                 except KeyboardInterrupt:
                     Color.pl('\n  {!} Installation process interrupted.')
                     Color.pl('  {*} You must re-run the installation process to install GitPy correctly.')
                     # Exit and removing the python cache
                     exit_tool(1,pwd=self.pwd)
+
             else:
                 Color.pl('  {*} Aborted')
                 # Exit and removing the python cache
@@ -469,10 +524,12 @@ class Installer():
 def entry_point(args, pwd):
     try:
         Installer(args=args, pwd=pwd)
+
     except EOFError:
         Color.pl('\n  {*} Aborted')
         # Exit and removing the python cache
         exit_tool(1,pwd=pwd)
+        
     except KeyboardInterrupt:
         Color.pl('\n  {*} Aborted')
         # Exit and removing the python cache
