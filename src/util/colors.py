@@ -170,7 +170,7 @@ class Color():
         '''
         # from src.__main__ import GitPy
         from src.config import Configuration
-        # GitPy.Banner()
+        # Color.pl(GitPy.Banner())
         # print()
         Color.pl('\n  {!} {R}Error: %s' % str(exception))
         if Configuration.verbose == 0:

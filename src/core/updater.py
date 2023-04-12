@@ -86,7 +86,7 @@ class Updater():
     def __init__(self, args, pwd):
         # Check if the user's platform is a Linux machine or not
         if platform.system() != 'Linux':
-            GitPy.Banner()
+            Color.pl(GitPy.Banner())
             print()
             Color.pl('  {!} You tried to run GitPy on a non-linux machine!')
             Color.pl('  {*} GitPy can be run only on a Linux kernel.')
@@ -97,7 +97,7 @@ class Updater():
         else:
             # Check if the user ran GitPy with root privileges or not
             if os.getuid() != 0:
-                GitPy.Banner()
+                Color.pl(GitPy.Banner())
                 print()
                 Color.pl('  {!} The GitPy Updater must be run as root.')
                 Color.pl('  {*} Re-run with sudo or switch to root user.')
@@ -116,7 +116,7 @@ class Updater():
                     pass
 
                 else:
-                    GitPy.Banner()
+                    Color.pl(GitPy.Banner())
                     print()
                     Color.pl('  {!} You\'re not running Arch or Debian variant.')
                     Color.pl('  {*} GitPy can only run on Arch or Debian based distros.')
@@ -236,7 +236,7 @@ class Updater():
                 exit_tool(1,pwd=pwd)
         else:
             # -------------------- [ No quiet installation ] -------------------- #
-            GitPy.Banner()
+            Color.pl(GitPy.Banner())
             print()
             if Configuration.verbose >= 1:
                 Color.pl('  {*} Verbosity level: %s' % Configuration.verbose)

@@ -72,7 +72,7 @@ class Uninstaller():
     # Main
     def __init__(self, args, pwd):
 
-        GitPy.Banner()
+        Color.pl(GitPy.Banner())
         print()
 
         # Check if the user's platform is a Linux machine or not
@@ -99,7 +99,7 @@ class Uninstaller():
                 sleep(0.2)
 
             if os.getuid() != 0:
-                GitPy.Banner()
+                Color.pl(GitPy.Banner())
                 print()
                 
                 Color.pl('  {!} The GitPy Uninstaller must be run as root.')
@@ -119,7 +119,7 @@ class Uninstaller():
                     pass
 
                 else:
-                    GitPy.Banner()
+                    Color.pl(GitPy.Banner())
                     print()
 
                     Color.pl('  {!} You\'re not running Arch or Debian variant.')
@@ -157,7 +157,7 @@ class Uninstaller():
             exit_tool(0,pwd=pwd)
 
         else: # -------------------- [ No quiet uninstallation ] -------------------- #
-            GitPy.Banner()
+            Color.pl(GitPy.Banner())
             if Configuration.verbose >= 1:
                 Color.pl('\n  {*} Verbosity level: %s' % Configuration.verbose)
                 if Configuration.verbose == 1:

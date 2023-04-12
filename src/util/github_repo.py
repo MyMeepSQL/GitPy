@@ -108,6 +108,7 @@ class GitHub_Repo():
             Color.pl('  {*} Cannot check if a new version of GitPy are avalable or not.')
             Configuration.REPO_VERSION = 'no-internet'
 
+    @staticmethod
     def is_reachable(args):
         '''
             Checks if a GitHub repository is reachable.

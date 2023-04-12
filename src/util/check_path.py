@@ -44,7 +44,7 @@ from src.config import Configuration
 # Main
 def check_folder_path(folder_path,folder_name):
     if '//' in folder_path:
-        GitPy.Banner()
+        Color.pl(GitPy.Banner())
         print()
         Color.pl('  {!} The path must not contain double slash (//)!')
         if Configuration.verbose == 3:

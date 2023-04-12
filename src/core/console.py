@@ -473,7 +473,7 @@ class Main_Console():
             while True:
                 if self.show_main_menu == True:
                     clear()
-                    GitPy.Banner()
+                    Color.pl(GitPy.Banner())
                     Color.pl('''{D}╭──────────────────────────────────────────────────────────────╼
 │
 │{W}  GitPy - A tool to search and download a GitHub repository quickly.{D}

@@ -282,7 +282,7 @@ class CLI_Console():
 
         self.pwd = pwd
 
-        GitPy.Banner()
+        Color.pl(GitPy.Banner())
         print()
 
         Color.pl('  {+} For see all commands, try {G}help{W} command.\n')

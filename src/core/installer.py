@@ -40,7 +40,7 @@ import pkg_resources
 from time import sleep
 
 ## Third party libraries
-import src.util.github_repo as GR
+from src.util.github_repo import GitHub_Repo
 from src.__main__ import GitPy
 from src.config import Configuration
 from src.util.colors import Color
@@ -110,7 +110,7 @@ class Installer():
 
         # Check if the user's platform is a Linux machine or not
         if platform.system() != 'Linux':
-            GitPy.Banner()
+            Color.pl(GitPy.Banner())
             print()
             Color.pl('  {!} You tried to run GitPy on a non-linux machine!')
             Color.pl('  {*} GitPy can be run only on a Linux kernel.')
@@ -118,7 +118,7 @@ class Installer():
 
         else:
             if os.getuid() != 0:
-                GitPy.Banner()
+                Color.pl(GitPy.Banner())
                 print()
                 Color.pl('  {!} The GitPy Installer must be run as root.')
                 Color.pl('  {*} Re-run with sudo or switch to root user.')
@@ -134,7 +134,7 @@ class Installer():
                     pass
 
                 else:
-                    GitPy.Banner()
+                    Color.pl(GitPy.Banner())
                     print()
                     Color.pl('  {!} You\'re not running Arch or Debian variant.')
                     Color.pl('  {*} GitPy can only run on Arch or Debian based distros.')
@@ -251,7 +251,7 @@ class Installer():
 
         else:
             # -------------------- [ No quiet installation ] -------------------- #
-            GitPy.Banner()
+            Color.pl(GitPy.Banner())
             print()
 
             if Configuration.verbose >= 1:
@@ -289,7 +289,7 @@ class Installer():
                 Color.pl('   {SY1}╰──╼{W} Call the {SY1}is_reachable(){W} function.')
 
             ## Check if the GitPy repositorie on GitHub are reachable or not
-            GR.is_reachable(args)
+            GitHub_Repo.is_reachable(args)
 
             # The info box
             Color.pl('''  {*} {underscore}This tool will{W}:

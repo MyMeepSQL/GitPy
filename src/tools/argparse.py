@@ -92,8 +92,8 @@ import sys as _sys
 from gettext import gettext as _, ngettext
 
 
-## Third-party modules
-import src.__main__ as _MAIN
+## GitPy's modules
+from src.__main__ import GitPy
 from src.util.colors import Color
 
 SUPPRESS = '==SUPPRESS=='
@@ -1101,7 +1101,7 @@ class _HelpAction(Action):
             help=help)
 
     def __call__(self, parser, namespace, values, option_string=None):
-        _MAIN.GitPy.Banner()
+        Color.pl(GitPy.Banner())
         print()
         parser.print_help()
         parser.exit()
@@ -1833,7 +1833,7 @@ class ArgumentParser(_AttributeHolder, _ActionsContainer):
         args, argv = self.parse_known_args(args, namespace)
         if argv:
             msg = _(Color.s('Unrecognized arguments: %s'))
-            _MAIN.GitPy.Banner()
+            Color.pl(GitPy.Banner())
             print()
             self.error(msg % ' '.join(argv))
         return args
@@ -1937,7 +1937,7 @@ class ArgumentParser(_AttributeHolder, _ActionsContainer):
                     if conflict_action in seen_non_default_actions:
                         msg = _('not allowed with argument %s')
                         action_name = _get_action_name(conflict_action)
-                        _MAIN.GitPy.Banner()
+                        Color.pl(GitPy.Banner())
                         print()
                         raise ArgumentError(action, msg % action_name)
 
@@ -1984,7 +1984,7 @@ class ArgumentParser(_AttributeHolder, _ActionsContainer):
                             explicit_arg = new_explicit_arg
                         else:
                             msg = _('ignored explicit argument %r')
-                            _MAIN.GitPy.Banner()
+                            Color.pl(GitPy.Banner())
                             print()
                             raise ArgumentError(action, msg % explicit_arg)
 
@@ -2000,7 +2000,7 @@ class ArgumentParser(_AttributeHolder, _ActionsContainer):
                     # explicit argument
                     else:
                         msg = _('ignored explicit argument %r')
-                        _MAIN.GitPy.Banner()
+                        Color.pl(GitPy.Banner())
                         print()
                         raise ArgumentError(action, msg % explicit_arg)
 
@@ -2175,7 +2175,7 @@ class ArgumentParser(_AttributeHolder, _ActionsContainer):
                 msg = ngettext('expected %s argument',
                                'expected %s arguments',
                                action.nargs) % action.nargs
-            _MAIN.GitPy.Banner()
+            Color.pl(GitPy.Banner())
             print()
             raise ArgumentError(action, msg)
 
@@ -2522,7 +2522,7 @@ class ArgumentParser(_AttributeHolder, _ActionsContainer):
             args = {'value': value,
                     'choices': ', '.join(map(repr, action.choices))}
             msg = _('invalid choice: %(value)r (choose from %(choices)s)')
-            _MAIN.GitPy.Banner()
+            Color.pl(GitPy.Banner())
             print()
             raise ArgumentError(action, msg % args)
 
