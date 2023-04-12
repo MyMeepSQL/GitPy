@@ -3,9 +3,9 @@
 
 #---[Name & Dates]----------------------------------------------------------#
 #  Filename ~ uninstaller.py            [Created: 2023-03-14 | 10:25 - AM]  #
-#                                       [Updated: 2023-03-14 | 12:01 - AM]  #
+#                                       [Updated: 2023-04-10 | 14:55 - PM]  #
 #---[Info]------------------------------------------------------------------#
-#  Uninstall GitPy from your system                                        #
+#  Uninstall GitPy from your system                                         #
 #  Language ~ Python3                                                       #
 #---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
@@ -73,46 +73,73 @@ class Uninstaller():
 
     # Main
     def __init__(self, args, pwd):
+
+        GitPy.Banner()
+        print()
+
         # Check if the user's platform is a Linux machine or not
+        if Configuration.verbose == 3:
+            Color.pl('  {§} Checking if the user\'s platform is a Linux machine or not...')
+            Color.pl('   {SY1}├──╼{W} Python: {SY1}platform.system() != Linux{W}')
+            sleep(0.2)
+
         if platform.system() != 'Linux':
-            GitPy.Banner()
-            print()
+            if Configuration.verbose == 3:
+                Color.pl('   {SY1}├──╼{W} The user\'s platform is {R}%s{W}' % platform.system())
+                Color.pl('   {SY1}╰──╼{W} The user\'s platform is not a Linux machine.')
+                sleep(0.2)
+
             Color.pl('  {!} You tried to run GitPy on a non-linux machine!')
             Color.pl('  {*} GitPy can be run only on a Linux kernel.')
+
             # Exit and removing the python cache
             exit_tool(1,pwd=pwd)
+
         else:
+            if Configuration.verbose == 3:
+                Color.pl('   {SY1}╰──╼{W} The user\'s platform is {C}%s{W}' % platform.system())
+                sleep(0.2)
+
             if os.getuid() != 0:
                 GitPy.Banner()
                 print()
+                
                 Color.pl('  {!} The GitPy Uninstaller must be run as root.')
                 Color.pl('  {*} Re-run with sudo or switch to root user.')
+
                 # Exit and removing the python cache
                 exit_tool(1,pwd=pwd)
+
             else:
                 # Distro check
                 if BD.__init__() == 'Arch':
                     based_distro = 'Arch'
                     pass
+
                 elif BD.__init__() == 'Debian':
                     based_distro = 'Debian'
                     pass
+
                 else:
                     GitPy.Banner()
                     print()
+
                     Color.pl('  {!} You\'re not running Arch or Debian variant.')
                     Color.pl('  {*} GitPy can only run on Arch or Debian based distros.')
+                    
                     # Exit and removing the python cache
                     exit_tool(1,pwd=pwd)
-        if args.quiet:
-            # -------------------- [ Quiet installation ] -------------------- #
+
+        if args.quiet: # -------------------- [ Quiet uninstallation ] -------------------- #
+
             # Check if the GITPY_INSTALL_PATH environment variable is set or not
             try:
                 GITPY_PATH = os.environ[self.gitpy_install_path_env_var_name]
                 self.INSTALL_PATH = GITPY_PATH
+
             except KeyError:
-                Color.pl('  {!} GitPy is not installed on this machine.')
-                Color.pl('  {*} Because the {C}{bold}GITPY_INSTALL_PATH{W} environment variable is not set (in the {C}/etc/environment{W} file).')
+                Color.pl('GitPy is not installed on this machine.')
+                Color.pl('Because the {C}{bold}%s{W} environment variable is not set.' % self.gitpy_install_path_env_var_name)
                 # Exit and removing the python cache
                 exit_tool(1,pwd=pwd)
 
@@ -124,37 +151,43 @@ class Uninstaller():
 
             # Remove the GITPY_INSTALL_PAT environment variable 
             remove_env_var(var_name=self.gitpy_install_path_env_var_name)
+
             # Remove the GITPY_INSTALL_PAT environment variable 
             remove_env_var(var_name=self.gitpy_notification_config_file_env_var_name)
 
             # Exit and removing the python cache
             exit_tool(0,pwd=pwd)
-        else:
-            # -------------------- [ No quiet installation ] -------------------- #
+
+        else: # -------------------- [ No quiet uninstallation ] -------------------- #
             GitPy.Banner()
             if Configuration.verbose >= 1:
                 Color.pl('\n  {*} Verbosity level: %s' % Configuration.verbose)
                 if Configuration.verbose == 1:
                     Color.pl('   {G}╰──╼{W} Verbose level 1 ({C}Blue color{W}) : {&}')
+
                 if Configuration.verbose == 2:
                     Color.pl('   {G}├──╼{W} Verbose level 1 ({C}Blue color{W}) : {&}')
                     Color.pl('   {G}╰──╼{W} Verbose level 2 ({P}Pink color{W}) . {#}')
+                    
                 if Configuration.verbose == 3:
                     Color.pl('   {G}├──╼{W} Verbose level 1 ({C}Blue color{W})   : {&}')
                     Color.pl('   {G}├──╼{W} Verbose level 2 ({P}Pink color{W})   : {#}')
                     Color.pl('   {G}╰──╼{W} Verbose level 3 ({SY1}Yellow color{W}) : {§}')
+
             # Check if the GITPY_INSTALL_PATH environment variable is set or not
             try:
                 if Configuration.verbose == 3:
-                    Color.pl('  {§} Checking if the {C}{bold}GITPY_INSTALL_PATH{W} environment variable is set or not...')
+                    Color.pl('  {§} Checking if the {C}{bold}%s{W} environment variable is set or not...' % self.gitpy_install_path_env_var_name)
                     Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.environ[self.gitpy_install_path_env_var_name]{W}')
                 GITPY_PATH = os.environ[self.gitpy_install_path_env_var_name]
                 self.INSTALL_PATH = GITPY_PATH
+
             except KeyError:
-                Color.pl('  {!} GitPy is not installed on this machine.')
-                Color.pl('  {*} Because the GITPY_INSTALL_PATH environment variable is not set (in the {C}/etc/environment{W} file).')
+                Color.pl('\n  {!} GitPy is not installed on this machine.')
+                Color.pl('  {*} Because the {C}{bold}%s{W} environment variable is not set.' % self.gitpy_install_path_env_var_name)
                 # Exit and removing the python cache
                 exit_tool(1,pwd=pwd)
+
             # Inform the user what the uninstaller will do
             Color.pl('''  {*} {underscore}This tool will{W}:
                     \r     {D}[{W}{LL}1{W}{D}]{W} Remove the {C}%s{W} folder.
@@ -168,8 +201,6 @@ class Uninstaller():
                 self.gitpy_notification_config_file_env_var_name
                 )
             )
-
-
 
             if args.no_confirm:
                 Color.pl('  {?} Do you want to continue? [Y/n] y')
@@ -226,10 +257,12 @@ class Uninstaller():
 def entry_point(args, pwd):
     try:
         Uninstaller(args=args, pwd=pwd)
+
     except EOFError:
         Color.pl('\n  {*} Aborted')
         # Exit and removing the python cache
         exit_tool(1,pwd=pwd)
+
     except KeyboardInterrupt:
         Color.pl('\n  {*} Aborted')
         # Exit and removing the python cache

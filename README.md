@@ -2,9 +2,9 @@
 
 #---[Metadata]--------------------------------------------------------------#
 #  Filename ~ README.md                 [Created: 2022-11-23 |  1:23 - PM]  #
-#                                       [Updated: 2023-03-28 |  7:45 - PM]  #
+#                                       [Updated: 2023-04-11 |  9:57 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  A long description of the GitPy                                          #
+#  A long description of the GitPy for the GitHub page                      #
 #  Language ~ Markdown                                                      #
 #---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #

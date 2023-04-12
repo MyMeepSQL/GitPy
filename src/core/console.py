@@ -538,7 +538,10 @@ class Main_Console():
                 Color.pl('   {SY1}├──╼{W} The user\'s platform is {R}%s{W}' % platform.system())
                 Color.pl('   {SY1}╰──╼{W} The user\'s platform is not a Linux machine.')
                 sleep(0.2)
-            Color.pl('  {!} You tried to run GitPy on a non-linux machine. GitPy can be run only on a Linux kernel.')
+
+            Color.pl('  {!} You tried to run GitPy on a non-linux machine!')
+            Color.pl('  {*} GitPy can be run only on a Linux kernel.')
+
             # Exit and removing the python cache
             exit_tool(1,pwd=self.pwd)
 
@@ -546,23 +549,30 @@ class Main_Console():
             if Configuration.verbose == 3:
                 Color.pl('   {SY1}╰──╼{W} The user\'s platform is {C}%s{W}' % platform.system())
                 sleep(0.2)
+
             # Check if the GITPY_INSTALL_PATH environment variable is set or not
-            # try:
-            #     GITPY_PATH = os.environ[self.gitpy_install_path_env_var_name]
-            #     INSTALL_PATH = GITPY_PATH
-            # except KeyError:
-            #     Color.pl('  {!} GitPy is not installed on this machine.')
-            #     Color.pl('  {*} Because the {C}{bold}GITPY_INSTALL_PATH{W} environment variable is not set (in the {C}/etc/environment{W} file).')
-            #     Color.pl('  {*} If you just installed GitPy without restart you machine after, please reboot it and try again.')
-            #     Color.pl('  {*} Otherwise, please install GitPy before using it.')
-            #     reboot = input(Color.s('  {?} Do you want to reboot now? [y/n] '))
-            #     if reboot.lower() == 'y':
-            #         Color.pl('  {-} Rebooting...')
-            #         Process.call('reboot')
-            #     else:
-            #         Color.pl('  {-} Exiting...')
-            #         # remove_python_cache(pwd=pwd, line_enter=True)
-            #     exit_tool(1,pwd=self.pwd)
+            try:
+                GITPY_PATH = os.environ[self.gitpy_install_path_env_var_name]
+                INSTALL_PATH = GITPY_PATH
+
+            except KeyError:
+                Color.pl('  {!} GitPy is not installed on this machine.')
+                Color.pl('  {*} Because the {C}{bold}%s{W} environment variable is not set.' % self.gitpy_install_path_env_var_name)
+                Color.pl('  {*} If you just installed GitPy without restart you machine after, please reboot it and try again.')
+                Color.pl('  {*} Otherwise, please install GitPy before using it.')
+                reboot = input(Color.s('  {?} Do you want to reboot now? [y/n] '))
+
+                if reboot.lower() == 'y':
+                    Color.pl('  {-} Rebooting...')
+                    Process.call('reboot')
+                else:
+                    Color.pl('  {*} Check if GitPy is correctly installed and try again.')
+                    Color.pl('  {*} If you still have the same problem, please report it on the GitHub repo below.')
+                    Color.pl('  {*} (%s)' % self.REPO_URL)
+
+
+                    # remove_python_cache(pwd=pwd, line_enter=True)
+                    exit_tool(1,pwd=self.pwd)
 
             # Check if the user is root or not
             if Configuration.verbose == 3:

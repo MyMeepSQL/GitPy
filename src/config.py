@@ -3,9 +3,9 @@
 
 #---[Name & Dates]----------------------------------------------------------#
 #  Filename ~ config.py                 [Created: 2023-03-28 |  8:35 - AM]  #
-#                                       [Updated: 2023-03-28 |  9:28 - AM]  #
+#                                       [Updated: 2023-04-10 | 13:27 - PM]  #
 #---[Info]------------------------------------------------------------------#
-#  The python config file of gitpy                                         #
+#  The Python config file of gitpy                                          #
 #  Language ~ Python3                                                       #
 #---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
@@ -40,39 +40,31 @@ import subprocess
 import configparser
 from time import sleep
 from copy import deepcopy
-from ipaddress import ip_address
-from subprocess import check_output
 
 ## Third party libraries
 import src.__main__ as __MAIN__
 from src.args import Arguments
 import src.util.github_repo as GR
-from src.util.clear import clear
 from src.util.exit_tool import exit_tool
 from src.util.colors import Color
 from src.util.help_messages import Help_Messages as HM
-from src.util.internet_check import internet_check
 
 # Main
-class Configuration(object):
+class Configuration():
     '''
         The configuration class of GitPy. Where all the variables are stored.
         This class is used to parse all arguments from the 'ars.py' file (The "Arguments"' class).
     '''
 
     # Verbosity level: 1 = executed commands, 2 = executed commands and stdout/stderr, 
-    # 3 = level 1 + 2 + more information about the execution of python functions
+    # 3 = level 1 + 2 + more information about the execution of Python functions
     verbose = 0
-
     program_name = 'gitpy'
 
     # The main version of GitPy
     VERSION = '0.0.0.1'
-
-    # The GitPy's version from the Github's repo. Will be attributed by the 'compare_version' 
-    # function from the 'github_repo.py' file
-    REPO_VERSION = None
-
+    OWNER_EMAIL = 'thomas.pellissier.pro@proton.me'
+    
     # The version's message for the -V/--version argument
     version_message = VERSION
     version_message_verbose = '''GitPy %s
@@ -89,14 +81,6 @@ class Configuration(object):
     # The News Version Notification's config file
     DEFAULT_NOTIFICATION_CONFIG_FILE_PATH = r'/opt/gitpy/config/new_version_notification.conf'
 
-    # For the environment variables
-    ## The GitPy's install path
-    gitpy_install_path_env_var_name = 'GITPY_INSTALL_PATH'
-    gitpy_install_path_env_var_value = DEFAULT_INSTALL_PATH
-    ## The News Version Notification's config file
-    gitpy_notification_config_file_env_var_name = 'GITPY_NOTIFICATION_CONFIG_FILE_PATH'
-    gitpy_notification_config_file_env_var_value = DEFAULT_NOTIFICATION_CONFIG_FILE_PATH
-
     # The logs file
     # LOG_FILE_PATH = DEFAULT_INSTALL_PATH + r'logs'
 
@@ -106,19 +90,36 @@ class Configuration(object):
     # The GitPy temporary directory
     TEMP_PATH = r'/tmp/gitpy/'
 
+    # For the environment variables
+    ## The GitPy's install path
+    gitpy_install_path_env_var_name = 'GITPY_INSTALL_PATH'
+    gitpy_install_path_env_var_value = DEFAULT_INSTALL_PATH
+    ## The News Version Notification's config file
+    gitpy_notification_config_file_env_var_name = 'GITPY_NOTIFICATION_CONFIG_FILE_PATH'
+    gitpy_notification_config_file_env_var_value = DEFAULT_NOTIFICATION_CONFIG_FILE_PATH
+
     # Github's repo settings
-    REPO_URL = 'https://github.com/MyMeepSQL/gitpy.git'
+    REPO_URL = 'https://github.com/MyMeepSQL/GitPy.git'
     REPO_BRANCH = 'master'
     REPO_MASTER_BRANCH = 'master'
     REPO_METADATA_URL = 'https://raw.githubusercontent.com/MyMeepSQL/GitPy/master/metadata.json'
+    REPO_ISSUES_URL = 'https://github.com/MyMeepSQL/GitPy/issues'
+    ## The GitPy's version from the Github's repo. Will be attributed by the 'compare_version' 
+    ## function from the 'github_repo.py' file
+    REPO_VERSION = None
+
 
     @classmethod
     def load_arguments(cls, pwd):
         '''
             Load argument and parse them to the specific function.
+
+            Arguments:
+                pwd (str): The current working directory
         '''
 
         cls.pwd = pwd
+        
         # Get the arguments
         args = Arguments.get_arguments()
 
@@ -126,7 +127,8 @@ class Configuration(object):
         if args.quiet and args.verbose:
             __MAIN__.GitPy.Banner()
             print()
-            Color.pl('  {!} The -q/--quiet and -v/--verbose option are not compatible together.')
+
+            Color.pl('  {!} The {G}-q{W}/{G}--quiet{W} and {G}-v{W}/{G}--verbose{W} option are not compatible together.')
             exit_tool(1,pwd=cls.pwd)
 
         # Set the verbosity level
@@ -152,6 +154,9 @@ class Configuration(object):
     def first_args_to_parse(cls,args):
         '''
             Parse the first arguments that should be parsed before the others.
+
+            Arguments:
+                args (object): The arguments object
         '''
         if args.install_path == '0':
             __MAIN__.GitPy.Banner()
@@ -159,11 +164,16 @@ class Configuration(object):
             Color.pl('  {!} You must specify a path where GitPy will be installed.')
             exit_tool(1,pwd=cls.pwd)
 
+
     # -------------------- [ MAIN ARGUMENTS ] -------------------- #
     @classmethod
     def parse_main_args(cls, args, pwd):
         '''
             Parse all main arguments.
+
+            Arguments:
+                args (object): The arguments object
+                pwd (str): The current working directory
         '''
         if args.console:
             Color.pl('  {-} Starting the GitPy\'s console...')
@@ -178,11 +188,17 @@ class Configuration(object):
 
             from src.core.cli_console import CLI_Console
             CLI_Console(pwd=pwd)
+
+
     # -------------------- [ INSTALLATION ARGUMENTS ] -------------------- #
     @classmethod
     def parse_installation_args(cls, args, pwd):
         '''
             Parse all installation arguments
+
+            Arguments:
+                args (object): The arguments object
+                pwd (str): The current working directory
         '''
         if args.install:
             from src.core.installer import entry_point as Installer
@@ -192,21 +208,29 @@ class Configuration(object):
             from src.core.uninstaller import entry_point as Uninstaller
             Uninstaller(args=args, pwd=pwd)
 
+
     # -------------------- [ REPO ARGUMENTS ] -------------------- #
     @classmethod
     def parse_repo_args(cls, args):    
         '''
             Parse all repo arguments
+
+            Arguments:
+                args (object): The arguments object
         '''
         if args.check_repo:
             from src.core.send_email import send_email
             send_email()
+
 
     # -------------------- [ INFORMATIONS ARGUMENTS ] -------------------- #
     @classmethod
     def parse_informations_args(cls, args):
         '''
             Parse all informations arguments
+
+            Arguments:
+                args (object): The arguments object
         '''
         if args.help:
             # Show more help for wich command
@@ -256,6 +280,7 @@ class Configuration(object):
                 GR.compare_version()
                 exit_tool(0,pwd=cls.pwd)
 
+
             # ---------- [ Output options ] ---------- #
             if args.quiet:
                 __MAIN__.GitPy.Banner()
@@ -271,6 +296,7 @@ class Configuration(object):
                 GR.compare_version()
                 exit_tool(0,pwd=cls.pwd)
 
+
             # ---------- [ Additional options ] ---------- #
             if args.no_confirm:
                 __MAIN__.GitPy.Banner()
@@ -278,6 +304,7 @@ class Configuration(object):
                 print()
                 GR.compare_version()
                 exit_tool(0,pwd=cls.pwd)
+
 
             # ---------- [ Informations options ] ---------- #
             if args.info:
@@ -292,6 +319,7 @@ class Configuration(object):
                 print()
                 GR.compare_version()
                 exit_tool(0,pwd=cls.pwd)
+
 
             # ---------- [ Miscellaneous options ] ---------- #
             if args.update:
@@ -343,87 +371,42 @@ class Configuration(object):
                 Color.pl(cls.version_message)
             exit_tool(0,pwd=cls.pwd)
 
+
     # -------------------- [ MISCELLANEOUS ARGUMENTS ] -------------------- #
     @classmethod
     def parse_miscellaneous_args(cls, args, pwd):
         '''
             Parse all miscellaneous arguments
+
+            Arguments:
+                args (object): The arguments object
+                pwd (str): The current working directory
         '''
         if args.update:
             from src.core.updater import entry_point as Updater
             Updater(args, pwd=pwd)
 
-            # if args.regenerate_config:
-            #     if os.path.isdir(cls.DEFAULT_INSTALL_PATH):
-            #         if os.path.isfile(cls.DEFAULT_INSTALL_PATH):
-            #             Color.pl('  {$} A configuration file is already present')
-            #             choice_1=input(Color.s('  {?} Do you want to continue? [Y/n] '))
-
-            #             if choice_1.islower() == 'y' or not choice_1:
-            #                 Color.pl('  {-} Deleting old config file...')
-
-            #                 if args.verbose:
-            #                     if args.verbose > 1:
-            #                         Color.pl('   {P}╰──╼{W} Python: {P}os.remove(cls.CONFIG_FILE_PATH){W}')
-
-            #                 os.remove(cls.DEFAULT_INSTALL_PATH)
-
-            #                 Color.pl('  {-} Generating the config file...')
-
-            #                 if args.verbose:
-            #                     if args.verbose > 1:
-            #                         Color.pl('''   {P}╰──╼{W} Python: {P}with open(cls.CONFIG_FILE_PATH, 'w') as config_file:
-            #                                 \r                    config_file.write(cls.CONFIG_FILE_CONTENT){W}''')
-
-            #                 with open(cls.DEFAULT_INSTALL_PATH, 'w') as config_file:
-            #                     config_file.write(cls.DEFAULT_INSTALL_PATH)
-
-            #                 Color.pl('  {+} Config file re-generated.')
-            #                 exit_tool(0,pwd=cls.pwd)
-
-            #             else:
-            #                 Color.pl('  {*} Remove the configuration file yourself and re-run the the create config command.')
-            #                 exit_tool(1)
-
-            #         else:
-            #             Color.pl('  {*} The config file was not found')
-            #             sleep(0.5)
-            #             Color.pl('  {-} Generating the config file...')
-            #             sleep(1)
-
-            #             if args.verbose:
-            #                 if args.verbose > 1:
-            #                     Color.pl('''   {P}╰──╼{W} Python: {P}with open(cls.CONFIG_FILE_PATH, 'w') as config_file:
-            #                             \r                    config_file.write(cls.CONFIG_FILE_CONTENT){W}''')
-
-            #             with open(cls.DEFAULT_INSTALL_PATH, 'w') as config_file:
-            #                 config_file.write(cls.DEFAULT_INSTALL_PATH)
-
-            #             Color.pl('  {+} Config file generated.')
-            #             exit_tool(0,pwd=cls.pwd)
-
-            #     else:
-            #         Color.pl('  {!} GitPy are not installed on your system!')
-            #         Color.pl('  {*} Run {G}conpro --install{W} for install GitPy on your system')
-            #         exit_tool(1)
-
         if args.show_env_var:
-            try:
-                GITPY_PATH = os.environ[cls.gitpy_path_env_var_name]
-                Color.pl('%s=%s' % (cls.gitpy_path_env_var_name, GITPY_PATH))
-            except KeyError:
-                Color.pl('  {!} GitPy is not installed on this machine.')
-                Color.pl('  {*} Because the {C}{bold}GITPY_INSTALL_PATH{W} environment variable is not set.')
-                exit_tool(1,pwd=cls.pwd)
-            # if args.show_config:
-            #     # Open the file in read mode
-            #     with open(cls.CONFIG_FILE_PATH, "r") as config_file:
-            #         # Read the file content
-            #         content=config_file.read()
-            #         # Prompt the file content
-            #         Color.pl(content)
-            #         # Close the file
-            #         content=config_file.close()
+            if args.show_env_var == 'install_path':
+                try:
+                    GITPY_PATH = os.environ[cls.gitpy_install_path_env_var_name]
+                    Color.pl('%s=%s' % (cls.gitpy_install_path_env_var_name, GITPY_PATH))
+
+                except KeyError:
+                    Color.pl('  {!} GitPy is not installed on this machine.')
+                    Color.pl('  {*} Because the {C}{bold}%s{W} environment variable is not set.' % cls.gitpy_install_path_env_var_name)
+                    exit_tool(1,pwd=cls.pwd)
+
+        # if args.show_config:
+        #     # Open the file in read mode
+        #     with open(cls.CONFIG_FILE_PATH, "r") as config_file:
+        #         # Read the file content
+        #         content=config_file.read()
+        #         # Prompt the file content
+        #         Color.pl(content)
+        #         # Close the file
+        #         content=config_file.close()
+
         if args.remove_cache:
             from src.util.remove_python_cache import remove_python_cache
             remove_python_cache(pwd=pwd)
@@ -441,6 +424,10 @@ class Configuration(object):
 
 
 class Main_prompt():
+    '''
+        Main prompt class for the GitPy's CLI environment (GitPy's shell).
+    '''
+
     original_prompt = prompt = Color.s('{underscore}GitPy{W}> {W}')
     main_prompt_ready = True
     SPACE = '#>SPACE$<#'

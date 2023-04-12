@@ -3,7 +3,7 @@
 
 #---[Name & Dates]----------------------------------------------------------#
 #  Filename ~ installer.py              [Created: 2023-03-07 | 10:27 - AM]  #
-#                                       [Updated: 2023-03-14 |  9:21 - AM]  #
+#                                       [Updated: 2023-04-10 | 14:30 - PM]  #
 #---[Info]------------------------------------------------------------------#
 #  The installer of GitPy for install GitPy and the                         #
 #  dependencies                                                             #
@@ -479,7 +479,7 @@ class Installer():
 
                     # Create the environment variable
                     if Configuration.verbose == 3:
-                        Color.pl('  {§} Create the {C}{bold}GITPY_INSTALL_PATH{W} environment variable...')
+                        Color.pl('  {§} Create the {C}{bold}%s{W} environment variable...' % self.gitpy_install_path_env_var_name)
                         Color.pl('  {§} Call the {P}set_env_var(){W} function.')
                         Color.pl('   {SY1}╰──╼{W} Python: {SY1}set_env_var(name=self.gitpy_install_path_env_var_name, value=self.gitpy_install_path_env_var_value){W}')
 
@@ -487,7 +487,7 @@ class Installer():
                         set_env_var(var_name=self.gitpy_install_path_env_var_name, var_value=self.gitpy_install_path_env_var_value)
 
                     if Configuration.verbose == 3:
-                        Color.pl('  {§} Create the {C}{bold}GITPY_NOTIFICATION_CONFIG_FILE{W} environment variable...')
+                        Color.pl('  {§} Create the {C}{bold}%s{W} environment variable...' % self.gitpy_path_notification_config_file_env_var_name)
                         Color.pl('  {§} Call the {P}set_env_var(){W} function.')
                         Color.pl('   {SY1}╰──╼{W} Python: {SY1}set_env_var(name=self.gitpy_path_notification_config_file_env_var_name, value=self.gitpy_path_notification_config_file_env_var_value){W}')
 

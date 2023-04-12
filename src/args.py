@@ -3,9 +3,9 @@
 
 #---[Name & Dates]----------------------------------------------------------#
 #  Filename ~ args.py                   [Created: 2023-03-21 | 10:26 - AM]  #
-#                                       [Updated: 2023-03-21 | 12:00 - AM]  #
+#                                       [Updated: 2023-04-10 | 13:18 - PM]  #
 #---[Info]------------------------------------------------------------------#
-#  All arguments of the 'gitpy' command                                    #
+#  All arguments of the 'gitpy' command                                     #
 #  Language ~ Python3                                                       #
 #---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
@@ -268,9 +268,12 @@ class Arguments(argparse.ArgumentParser):
         )
         misc.add_argument(
             '--show-env-var',
-            action='store_true',
+            type=str,
+            nargs='?',
+            const='install_path',
+            choices=['install_path','notif_conf_path'],
             dest='show_env_var',
-            help='prompt the value of the \'GITPY_INSTALL_PATH\' environment variable'
+            help='prompt the value of the a environment variable'
         )
         misc.add_argument(
             '--remove-cache',

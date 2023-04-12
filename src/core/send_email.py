@@ -3,7 +3,7 @@
 
 #---[Name & Dates]----------------------------------------------------------#
 #  Filename ~ send_email.py             [Created: 2023-03-31 | 10:49 - AM]  #
-#                                       [Updated: 2023-04-05 |  9:59 - AM]  #
+#                                       [Updated: 2023-04-10 | 15:30 - PM]  #
 #---[Info]------------------------------------------------------------------#
 #  Send a email of the new Repo's version  via SMTP server                  #
 #  Language ~ Python3                                                       #
@@ -83,7 +83,6 @@ def send_email():
 
     # Variables
     notification_config_file_path = os.environ['GITPY_NOTIFICATION_CONFIG_FILE_PATH']
-
     config_file = notification_config_file_path
 
     # Create the configparser object
@@ -119,6 +118,7 @@ def send_email():
             message['To'] = receiver_email
             message['Subject'] = 'New version of %s' % github_repo_name
 
+
             # Body of the email
             body = 'A new version of %s is available on %s' % (github_repo_name, github_repo_url)
             message.attach(MIMEText(body, 'plain'))
@@ -130,3 +130,6 @@ def send_email():
                 smtp.send_message(message)
 
             Color.pl('  {*} Email successfully sent to {G}%s{W}!' % receiver_email)
+        
+        else:
+            Color.pl('  {!} No new version of {G}%s{W} available!' % section)

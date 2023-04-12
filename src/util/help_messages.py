@@ -3,9 +3,9 @@
 
 #---[Name & Dates]----------------------------------------------------------#
 #  Filename ~ help_messages.py          [Created: 2023-02-21 | 10:26 - AM]  #
-#                                       [Updated: 2023-02-28 |  9:12 - AM]  #
+#                                       [Updated: 2023-04-10 | 13:34 - PM]  #
 #---[Info]------------------------------------------------------------------#
-#  All help messages for GitPy                                             #
+#  All help messages for GitPy                                              #
 #  Language ~ Python3                                                       #
 #---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
@@ -35,16 +35,29 @@
 from time import sleep
 
 ## Third party libraries
-import src.config as config
+import src.config as C
 from src.args import Arguments
 from src.util.colors import Color
 
 # Main
 class Help_Messages():
     '''
-    All help messages for: the 'gitpy' command, the main console and the CLI environment.
+        All help messages for: the 'gitpy' command, the main console and the CLI environment.
     '''
-    def main_help_msg():
+
+    # Variables
+    DEFAULT_INSTALL_PATH = C.Configuration.DEFAULT_INSTALL_PATH
+    REPO_ISSUES_URL = C.Configuration.REPO_ISSUES_URL
+    OWNER_EMAIL = C.Configuration.OWNER_EMAIL
+
+    # For the environment variables
+    ## The GitPy's install path
+    gitpy_install_path_env_var_name = C.Configuration.gitpy_install_path_env_var_name
+    ## The News Version Notification's config file
+    gitpy_notification_config_file_env_var_name = C.Configuration.gitpy_notification_config_file_env_var_name
+
+    @classmethod
+    def main_help_msg(cls):
         '''
         The help message of the gitpy command (gitpy -h/--help)
         '''
@@ -112,7 +125,8 @@ class Help_Messages():
         \r  -u,         --update               [+]   Update the GitPy directly from GitHub.
         \r  -fu,        --force-update               Update AOVPNS even if the version on the machine is already the latest.
         \r              --show-config                Prompt the content of the config file.
-        \r              --show-env-var               Prompt the value of the {C}{bold}GITPY_INSTALL_PATH{W} environment variable.
+        \r              --show-env-var         [+]   Prompt the value of the a environment variable.
+        \r                                           (const: {G}install_path{W}).
         \r              --remove-cache         [+]   Delete python cache from the GitPy directory.
 
         \r{SB2}{bold}Others avalable informations{W}:
@@ -126,11 +140,12 @@ class Help_Messages():
         \r  ------
         \r  Report all bugs to <thomas.pellissier.pro@proton.me> or open an issue at <https://github.com/MyMeepSQL/gitpy/issues>.
         \r  The options with the [+] mean that it may require additional option(s).
-        \r  If you want more details about a command, run: {G}gitpy --help <OPTION>{W}''' % config.Configuration.DEFAULT_INSTALL_PATH)
+        \r  If you want more details about a command, run: {G}gitpy --help <OPTION>{W}''' % cls.DEFAULT_INSTALL_PATH)
 
 
     # -------------------- [ Main options ] -------------------- #
-    def option_cli():
+    @classmethod
+    def option_cli(cls):
         '''
         The help message for the --cli option
         '''
@@ -155,7 +170,8 @@ class Help_Messages():
         \r  -----
         \r  gitpy --cli''')
 
-    def option_console():
+    @classmethod
+    def option_console(cls):
         '''
         The help message for the --console option
         '''
@@ -181,7 +197,8 @@ class Help_Messages():
 
 
     # -------------------- [ Installation options ] -------------------- #
-    def option_install():
+    @classmethod
+    def option_install(cls):
         '''
         The help message for the --install option
         '''
@@ -212,7 +229,8 @@ class Help_Messages():
         \r  -----
         \r  gitpy --install [OPTIONS]''')
 
-    def option_uninstall():
+    @classmethod
+    def option_uninstall(cls):
         '''
         The help message for the --uninstall option
         '''
@@ -242,7 +260,8 @@ class Help_Messages():
         \r  -----
         \r  gitpy --uninstall [OPTIONS]''')
 
-    def option_skip_update():
+    @classmethod
+    def option_skip_update(cls):
         '''
         The help message for the --skip-update option
         '''
@@ -258,9 +277,9 @@ class Help_Messages():
         \r  -----------
         \r  Do no ask "Are your sure?" every time a choice appears.
 
-        \r  Options           Description
-        \r  -------           -----------
-        \r  --install         Install GitPy with all depencies on your system.
+        \r  Options     Description
+        \r  -------     -----------
+        \r  --install   Install GitPy with all depencies on your system.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
@@ -269,7 +288,8 @@ class Help_Messages():
         \r  -----
         \r  gitpy --install --skip-update''')
 
-    def option_offline():
+    @classmethod
+    def option_offline(cls):
         '''
         The help message for the --offline option
         '''
@@ -287,9 +307,9 @@ class Help_Messages():
         \r  By default, the installaiton process will download the latest 
         \r  version of GitPy from the GitHub repository.
 
-        \r  Options           Description
-        \r  -------           -----------
-        \r  --install         Install GitPy with all depencies on your system.
+        \r  Options     Description
+        \r  -------     -----------
+        \r  --install   Install GitPy with all depencies on your system.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
@@ -298,7 +318,8 @@ class Help_Messages():
         \r  -----
         \r  gitpy --install --offline''')
 
-    def option_install_path():
+    @classmethod
+    def option_install_path(cls):
         '''
         The help message for the --install-path option
         '''
@@ -313,11 +334,11 @@ class Help_Messages():
         \r  Description
         \r  -----------
         \r  You can specify the path where GitPy will be installed.
-        \r  By default, GitPy will be installed in %s.
+        \r  By default, GitPy will be installed in {C}%s{W}.
 
-        \r  Options           Description
-        \r  -------           -----------
-        \r  --install         Install GitPy with all depencies on your system.
+        \r  Options     Description
+        \r  -------     -----------
+        \r  --install   Install GitPy with all depencies on your system.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
@@ -326,11 +347,12 @@ class Help_Messages():
         \r  -----
         \r  gitpy --install -iP <PATH>
         \r    or
-        \r  gitpy --install --install-path <PATH>''' % config.Configuration.DEFAULT_INSTALL_PATH)
+        \r  gitpy --install --install-path <PATH>''' % cls.DEFAULT_INSTALL_PATH)
 
 
     # -------------------- [ Output options ] -------------------- #
-    def option_quiet():
+    @classmethod
+    def option_quiet(cls):
         '''
         The help message for the -q/--quiet option
         '''
@@ -361,7 +383,8 @@ class Help_Messages():
         \r    or
         \r  gitpy <OPTIONS> --quiet''')
 
-    def option_verbose():
+    @classmethod
+    def option_verbose(cls):
         '''
         The help message for the -v/--verbose option
         '''
@@ -404,7 +427,8 @@ class Help_Messages():
 
 
     # -------------------- [ Additional options ] -------------------- #
-    def option_no_confirm():
+    @classmethod
+    def option_no_confirm(cls):
         '''
         The help message for the -y/--no-confirm option
         '''
@@ -437,7 +461,8 @@ class Help_Messages():
 
 
     # -------------------- [ Informations options ] -------------------- #
-    def option_info():
+    @classmethod
+    def option_info(cls):
         '''
         The help message for the --info option
         '''
@@ -460,7 +485,8 @@ class Help_Messages():
         \r  -----
         \r  gitpy --info''')
 
-    def option_version():
+    @classmethod
+    def option_version(cls):
         '''
         The help message for the -V/--version option
         '''
@@ -491,7 +517,8 @@ class Help_Messages():
 
 
     # -------------------- [ Miscellaneous options ] -------------------- #
-    def option_update():
+    @classmethod
+    def option_update(cls):
         '''
         The help message for the -u/--update option
         '''
@@ -524,7 +551,8 @@ class Help_Messages():
         \r    or
         \r  gitpy --update [OPTIONS]''')
 
-    def option_force_update():
+    @classmethod
+    def option_force_update(cls):
         '''
         The help message for the -fu/--force-update option
         '''
@@ -541,9 +569,9 @@ class Help_Messages():
         \r  Update AOVPN even if the GitPy' instance version on the machine is 
         \r  already the latest.
 
-        \r  Options        Description
-        \r  -------        -----------
-        \r  -u,  --update  Update the GitPy directly from GitHub.
+        \r  Options         Description
+        \r  -------         -----------
+        \r  -u,  --update   Update the GitPy directly from GitHub.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
@@ -558,10 +586,12 @@ class Help_Messages():
         \r    or
         \r  gitpy --update --force-update [OPTIONS]''')
 
-    def option_show_env_var():
+    @classmethod
+    def option_show_env_var(cls):
         '''
-        The help message for the --show-env-var option
+            The help message for the --show-env-var option
         '''
+
         Color.pl('''
         \r{SB2}{bold}Show env var option{W}:
         \r====================
@@ -572,18 +602,29 @@ class Help_Messages():
 
         \r  Description
         \r  -----------
-        \r  Show the value of the {C}{bold}GITPY_INSTALL_PATH{W} environment variable.
+        \r  Show the value of the entered environment variable.
+
+        \r  Arguments         Description
+        \r  ---------         -----------
+        \r  install_path      The value of the {G}%s{W} environment variable.
+        \r  notif_conf_path   The value of the {G}%s{W} environment variable.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
 
         \r  Usage
         \r  -----
-        \r  gitpy --show-env-var''')
+        \r  gitpy --show-env-var [ARGUMENT]''' % (
+            (
+            cls.gitpy_install_path_env_var_name, cls.gitpy_notification_config_file_env_var_name
+            )
+        )
+    )
 
-    def option_remove_cache():
+    @classmethod
+    def option_remove_cache(cls):
         '''
-        The help message for the --remove-cache option 
+            The help message for the --remove-cache option 
         '''
         Color.pl('''
         \r{SB2}{bold}Remove cache option{W}:
@@ -610,7 +651,8 @@ class Help_Messages():
 
 
     # -------------------- [ Consoles ] -------------------- #
-    def console_help_message():
+    @classmethod
+    def console_help_message(cls):
         '''
         The main help message of the main console (not the CLI one)
         '''
@@ -636,12 +678,17 @@ class Help_Messages():
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
 
-        \r  Report all bugs to <thomas.pellissier.pro@proton.me> or open an issue at <https://github.com/MyMeepSQL/gitpy/issues>.''')
-
+        \r  Report all bugs to <%s> or open an issue at <%s>.''' % (
+            (
+            cls.OWNER_EMAIL,
+            cls.REPO_ISSUES_URL
+            )
+        )
+    )
 
     # -------------------- [ CLI Consoles ] -------------------- #
-
-    def CLI_env_main_help_msg():
+    @classmethod
+    def CLI_env_main_help_msg(cls):
         '''
         The main help message of the CLI environment
         '''

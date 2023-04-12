@@ -3,10 +3,10 @@
 
 #---[Name & Dates]----------------------------------------------------------#
 #  Filename ~ updater.py                [Created: 2023-03-21 |  8:32 - AM]  #
-#                                       [Updated: 2023-03-21 | 10:23 - AM]  #
+#                                       [Updated: 2023-04-10 | 15:58 - PM]  #
 #---[Info]------------------------------------------------------------------#
-#  The updater of GitPy for download and install the latest                #
-#  version of GitPy from the GitHub repository.                            #
+#  The updater of GitPy for download and install the latest                 #
+#  version of GitPy from the GitHub repository.                             #
 #  Language ~ Python3                                                       #
 #---[Authors]---------------------------------------------------------------#
 #  Thomas Pellissier (MyMeepSQL)                                            #
@@ -79,7 +79,6 @@ class Updater():
     # Github's repo settings
     REPO_URL = Configuration.REPO_URL
     REPO_BRANCH = Configuration.REPO_BRANCH
-    REPO_MASTER_BRANCH = Configuration.REPO_MASTER_BRANCH
     REPO_VERSION = Configuration.REPO_VERSION
     REPO_METADATA_URL = Configuration.REPO_METADATA_URL
 
@@ -93,8 +92,10 @@ class Updater():
             print()
             Color.pl('  {!} You tried to run GitPy on a non-linux machine!')
             Color.pl('  {*} GitPy can be run only on a Linux kernel.')
+            
             # Exit and removing the python cache
             exit_tool(1,pwd=pwd)
+
         else:
             # Check if the user ran GitPy with root privileges or not
             if os.getuid() != 0:
@@ -102,16 +103,20 @@ class Updater():
                 print()
                 Color.pl('  {!} The GitPy Updater must be run as root.')
                 Color.pl('  {*} Re-run with sudo or switch to root user.')
+
                 # Exit and removing the python cache
                 exit_tool(1,pwd=pwd)
+
             else:
                 # Distro check
                 if BD.__init__() == 'Arch':
                     based_distro = 'Arch'
                     pass
+
                 elif BD.__init__() == 'Debian':
                     based_distro = 'Debian'
                     pass
+
                 else:
                     GitPy.Banner()
                     print()
@@ -126,63 +131,103 @@ class Updater():
         if args.quiet:
             # -------------------- [ Quiet update ] -------------------- #
             try:
+                # Check if the GITPY_INSTALL_PATH environment variable is set or not
+                try:
+                    GITPY_PATH = os.environ[self.gitpy_install_path_env_var_name]
+                    self.INSTALL_PATH = GITPY_PATH
+
+                except KeyError:
+                    Color.pl('GitPy is not installed on this machine.')
+                    Color.pl('Because the {C}{bold}%s{W} environment variable is not set.' % self.gitpy_install_path_env_var_name)
+                    Color.pl('If you just installed GitPy without restart you machine after, please reboot it and try again.')
+                    Color.pl('Otherwise, please install GitPy before using it.')
+                    reboot = input(Color.s('Do you want to reboot now? [y/n] '))
+
+                    if reboot.lower() == 'y':
+                        Color.pl('Rebooting...')
+                        Process.call('reboot')
+
+                    else:
+                        Color.pl('Check if GitPy is correctly installed and try again.')
+                        Color.pl('If you still have the same problem, please report it on the GitHub repo below.')
+                        Color.pl('(%s)' % self.REPO_URL)
+
+                        # remove_python_cache(pwd=pwd, line_enter=True)
+                        exit_tool(1,pwd=pwd)
+
                 if internet_check() == False:
                     Color.pl('Internet status: {R}Not connected{W}.')
                     Color.pl('No Internet connexion found, please check if you are connected to the Internet and retry.')
                     # Exit and removing the python cache
                     exit_tool(1,pwd=pwd)
 
-                ## ---------- [ Check if the GitPy repositorie on GitHub are reachable or not ] ---------- ##
+                ## Check if the GitPy repositorie on GitHub are reachable or not
                 GR.is_reachable(args)
 
-                ## ---------- [ Check if the GitPy version is up to date or not ] ---------- ##
+                ## Check if the GitPy version is up to date or not
                 rqst = get('%s' % self.REPO_METADATA_URL, timeout=5)
                 fetch_sc = rqst.status_code
+
                 if fetch_sc == 200:
                     metadata = rqst.text
                     json_data = loads(metadata)
                     cp_online_ver = json_data['version']
+
                     if version.parse(cp_online_ver) > version.parse(self.VERSION):
                         pass
+
                     else:
                         Color.pl('  {!} You already have the latest version of GitPy!')
                         # Exit and removing the python cache
                         exit_tool(1,pwd=pwd)
+
                 sleep(0.5)
 
-                # ---------- [ Prepare the update ] ---------- #
+                # Prepare the update
+
                 # If a file called 'gitpy' already exist in /usr/bin/, inform the user and delete it
                 if os.path.isfile(self.BIN_PATH + 'gitpy'):
                     os.remove(self.BIN_PATH + 'gitpy')
+
                 # Remove the temporary directory if it already exists
                 if os.path.isdir(self.TEMP_PATH):
                     shutil.rmtree(self.TEMP_PATH)
+
                 # Create the temp folder that be use to download the latest GitPy version from GitHub
                 # in it and install GitPy from this folder
                 os.makedirs(self.TEMP_PATH, mode=0o777)
+
                 # Remove the current GitPy instance
                 shutil.rmtree(self.INSTALL_PATH)
+
                 # Create the main folder where GitPy will be installed
                 os.makedirs(self.INSTALL_PATH, mode=0o777)
+
                 # Clone the latest version of GitPy into the temp. folder
                 Process.call('git clone %s --branch %s %s' % (self.REPO_URL , self.REPO_BRANCH , self.TEMP_PATH), shell=True)
                 sleep(1)
 
-                #  ---------- [ GitPy Update ] ---------- #
+                # GitPy Update
                 # Install GitPy by moving all the files from the temp. folder to the main folder
                 shutil.copytree(src=self.TEMP_PATH, dst=self.INSTALL_PATH, dirs_exist_ok=True)
+
                 # Update the command 'gitpy' in /usr/bin/
                 with open(self.BIN_PATH + 'gitpy', 'x') as gitpy_file:
                     gitpy_file.write(gitpy_command_bin)
+
                 # Apply rights on files
                 sleep(1)
+
                 Process.call('chmod 777 %sgitpy' % self.BIN_PATH, shell=True)
                 Process.call('chmod 777 -R %s' % self.INSTALL_PATH, shell=True)
+
                 # Deleting the temporary directory
                 shutil.rmtree(self.TEMP_PATH)
                 sleep(1)
+
                 # Exit and removing the python cache
                 exit_tool(0,pwd=pwd)
+
             except Exception as E:
                 Color.pexception(E)
                 # Color.pl(f'Exception : %s' % str(E) )
@@ -215,9 +260,22 @@ class Updater():
                 self.INSTALL_PATH = GITPY_PATH
             except KeyError:
                 Color.pl('  {!} GitPy is not installed on this machine.')
-                Color.pl('  {*} Because the %s environment variable is not set (in the {C}/etc/environment{W} file).' % self.gitpy_install_path_env_var_name)
-                # Exit and removing the python cache
-                exit_tool(1,pwd=pwd)
+                Color.pl('  {*} Because the {C}{bold}%s{W} environment variable is not set.' % self.gitpy_install_path_env_var_name)
+                Color.pl('  {*} If you just installed GitPy without restart you machine after, please reboot it and try again.')
+                Color.pl('  {*} Otherwise, please install GitPy before using it.')
+                reboot = input(Color.s('  {?} Do you want to reboot now? [y/n] '))
+
+                if reboot.lower() == 'y':
+                    Color.pl('  {-} Rebooting...')
+                    Process.call('reboot')
+                else:
+                    Color.pl('  {*} Check if GitPy is correctly installed and try again.')
+                    Color.pl('  {*} If you still have the same problem, please report it on the GitHub repo below.')
+                    Color.pl('  {*} (%s)' % self.REPO_URL)
+
+                    # remove_python_cache(pwd=pwd, line_enter=True)
+                    exit_tool(1,pwd=pwd)
+
             # Check if the use are connected to the Internet network with the internet_check() function
             Color.pl('  {-} Checking for internet connexion...')
             if Configuration.verbose == 3:
