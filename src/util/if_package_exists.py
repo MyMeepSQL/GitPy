@@ -35,15 +35,15 @@
 import subprocess
 
 ## Third party libraries
-from src.util.based_distro import Based_Distro as BD
+from src.util.based_distro import Based_Distro
 
 # Main
 def package_exists(package):
     '''
     Check if package are install on the machine
     '''
-    if BD.__init__() == 'Debian':
+    if Based_Distro() == 'Debian':
         result = subprocess.run('dpkg -s %s' % package, shell = True, stdout = subprocess.PIPE)
-    elif BD.__init__() == 'Arch':
+    elif Based_Distro() == 'Arch':
         result = subprocess.run('pacman -Q %s' % package, shell = True, stdout = subprocess.PIPE)
     return result.stdout != b''

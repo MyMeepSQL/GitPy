@@ -42,14 +42,12 @@ from time import sleep
 ## Third party libraries
 from src.__main__ import GitPy
 from src.config import Configuration
-from src.util.clear import clear
 from src.util.colors import Color
 from src.util.exit_tool import exit_tool
-from src.util.internet_check import internet_check
 from src.util.env_var import remove_env_var
 from src.util.process import Process
 from src.util.remove_python_cache import remove_python_cache
-from src.util.based_distro import Based_Distro as BD
+from src.util.based_distro import Based_Distro
 
 # Main
 class Uninstaller():
@@ -112,11 +110,11 @@ class Uninstaller():
 
             else:
                 # Distro check
-                if BD.__init__() == 'Arch':
+                if Based_Distro() == 'Arch':
                     based_distro = 'Arch'
                     pass
 
-                elif BD.__init__() == 'Debian':
+                elif Based_Distro() == 'Debian':
                     based_distro = 'Debian'
                     pass
 

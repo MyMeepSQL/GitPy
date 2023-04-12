@@ -60,11 +60,9 @@ from src.util.exit_tool import exit_tool
 from src.util.help_messages import Help_Messages as HM
 from src.util.informations import Informations
 from src.util.email_utils import Email_Utils as EU
-from src.util.based_distro import Based_Distro as BD
+from src.util.based_distro import Based_Distro
 from src.util.add_cron_job import add_cron_job
 from src.util.internet_check import internet_check
-from src.util.remove_python_cache import remove_python_cache
-from src.util.if_package_exists import package_exists
 from src.tools.colored.colored import fg, attr
 import src.tools.requests as requests
 # from src.tools.box import box
@@ -589,16 +587,16 @@ class Main_Console():
                     Color.pl('   {SY1}╰──╼{W} The user is {C}%s{W}' % ('root' if os.getuid() == 0 else 'not root'))
                     sleep(0.2)
                     Color.pl('  {§} Checking if the user\'s Linux distro is Debian or Arch based...')
-                    Color.pl('   {SY1}├──╼{W} Python: {SY1}BD.__init__(){W}')
+                    Color.pl('   {SY1}├──╼{W} Python: {SY1}Based_Distro(){W}')
                     sleep(0.2)
                 # Distro check
-                if BD.__init__() == 'Arch':
+                if Based_Distro() == 'Arch':
                     if Configuration.verbose == 3:
                         Color.pl('   {SY1}╰──╼{W} The user\'s Linux distro is {C}Arch{W}')
                         sleep(0.2)
                     based_distro = 'Arch'
                     pass
-                elif BD.__init__() == 'Debian':
+                elif Based_Distro() == 'Debian':
                     if Configuration.verbose == 3:
                         Color.pl('   {SY1}╰──╼{W} The user\'s Linux distro is {C}Arch{W}')
                         sleep(0.2)

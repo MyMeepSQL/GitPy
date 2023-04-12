@@ -35,21 +35,17 @@
 # Imports section
 import os
 
-## Third party libraries
-from src.util.process import Process
-
-# Main
-class Based_Distro():
+# Function section
+def Based_Distro():
     '''
-    Check if the user machine distro is based on Debian or Arch
+        Check if the user machine distro is based on Debian or Arch
     '''
-    def __init__(self=None):
-        # if we trigger on sources.list then we know its Debian based distro
-        if os.path.isfile("/etc/apt/sources.list"):
-            return 'Debian'
-        # If pacman.conf exists, we have a Arch based distro
-        elif os.path.isfile("/etc/pacman.conf"):
-            return 'Arch'
-        else:
-            return 'Any based'
+    # if we trigger on sources.list then we know its Debian based distro
+    if os.path.isfile("/etc/apt/sources.list"):
+        return 'Debian'
+    # If pacman.conf exists, we have a Arch based distro
+    elif os.path.isfile("/etc/pacman.conf"):
+        return 'Arch'
+    else:
+        return 'Any based'
     

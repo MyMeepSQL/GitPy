@@ -34,10 +34,8 @@
 
 # Imports section
 import os
-import sys
 import shutil
 import platform
-import subprocess
 import pkg_resources
 from time import sleep
 
@@ -45,12 +43,11 @@ from time import sleep
 import src.util.github_repo as GR
 from src.__main__ import GitPy
 from src.config import Configuration
-from src.util.clear import clear
 from src.util.colors import Color
 from src.util.process import Process
 from src.util.exit_tool import exit_tool
 from src.util.env_var import set_env_var
-from src.util.based_distro import Based_Distro as BD
+from src.util.based_distro import Based_Distro
 from src.util.internet_check import internet_check
 from src.util.remove_python_cache import remove_python_cache
 from src.util.if_package_exists import package_exists
@@ -128,11 +125,11 @@ class Installer():
                 exit_tool(1,pwd=self.pwd)
             else:
                 # Distro check
-                if BD.__init__() == 'Arch':
+                if Based_Distro() == 'Arch':
                     based_distro = 'Arch'
                     pass
 
-                elif BD.__init__() == 'Debian':
+                elif Based_Distro() == 'Debian':
                     based_distro = 'Debian'
                     pass
 

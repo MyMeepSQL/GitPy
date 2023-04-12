@@ -52,10 +52,8 @@ from src.util.process import Process
 import src.util.github_repo as GR
 from src.util.exit_tool import exit_tool
 from src.util.internet_check import internet_check
-from src.util.based_distro import Based_Distro as BD
-from src.util.remove_python_cache import remove_python_cache
+from src.util.based_distro import Based_Distro
 from src.util.create_bin_file import Create_bin_file
-from src.util.env_var import set_env_var, remove_env_var
 
 # Main
 class Updater():
@@ -109,11 +107,11 @@ class Updater():
 
             else:
                 # Distro check
-                if BD.__init__() == 'Arch':
+                if Based_Distro() == 'Arch':
                     based_distro = 'Arch'
                     pass
 
-                elif BD.__init__() == 'Debian':
+                elif Based_Distro() == 'Debian':
                     based_distro = 'Debian'
                     pass
 
