@@ -51,7 +51,7 @@ class GitPy(object):
             # If the user ran gitpy with any option(s) 
 
             # Print the banner before prompt the error message
-            self.Banner()   
+            Color.pl(self.Banner())
 
             Color.pl('''
                 \r  {*} {C}Usage{W}: gitpy <OPTIONS>
