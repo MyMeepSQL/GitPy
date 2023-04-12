@@ -49,7 +49,7 @@ from src.tools.requests import get
 from src.util.clear import clear
 from src.util.colors import Color
 from src.util.process import Process
-import src.util.github_repo as GR
+from src.util.github_repo import GitHub_Repo
 from src.util.exit_tool import exit_tool
 from src.util.internet_check import internet_check
 from src.util.based_distro import Based_Distro
@@ -160,7 +160,7 @@ class Updater():
                     exit_tool(1,pwd=pwd)
 
                 ## Check if the GitPy repositorie on GitHub are reachable or not
-                GR.is_reachable(args)
+                GitHub_Repo.is_reachable(args)
 
                 ## Check if the GitPy version is up to date or not
                 rqst = get('%s' % self.REPO_METADATA_URL, timeout=5)
@@ -292,7 +292,7 @@ class Updater():
             if Configuration.verbose == 3:
                 Color.pl('  {§} Check if the GitPy\'s repositorie are reachable or not...')
                 Color.pl('   {SY1}╰──╼{W} Call the {SY1}is_reachable(){W} function.')
-            GR.is_reachable(args)
+            GitHub_Repo.is_reachable(args)
 
             # ---- [ The info box ] ---- #
             Color.pl('''  {*} {underscore}This tool will{W}:
