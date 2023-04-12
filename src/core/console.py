@@ -82,6 +82,7 @@ class Main_Console():
     VERSION = Configuration.VERSION # Current version of GitPy in the Configuration's Class.
     # REPO_VERSION=config.Configuration.REPO_VERSION # The latest version of GitPy from the GitHub Repository
     REPO_URL = Configuration.REPO_URL
+    REPO_ISSUES_URL = Configuration.REPO_ISSUES_URL
     gitpy_install_path_env_var_name = Configuration.gitpy_install_path_env_var_name
 
     # Parameters
@@ -566,10 +567,8 @@ class Main_Console():
                     Color.pl('  {-} Rebooting...')
                     Process.call('reboot')
                 else:
-                    Color.pl('  {*} Check if GitPy is correctly installed and try again.')
-                    Color.pl('  {*} If you still have the same problem, please report it on the GitHub repo below.')
-                    Color.pl('  {*} (%s)' % self.REPO_URL)
-
+                    Color.pl('  {*} Check if GitPy is correctly installed by reinstalling it and try again.')
+                    Color.pl('  {*} If you still have the same problem, please report it on the GitPy\'s GitHub repository issues (%s).' % self.REPO_URL)
 
                     # remove_python_cache(pwd=pwd, line_enter=True)
                     exit_tool(1,pwd=self.pwd)
