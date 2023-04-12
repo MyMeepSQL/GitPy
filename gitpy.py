@@ -34,20 +34,13 @@
 # Import section
 import os
 import sys
-from src import __main__
 
 ## Third party libraries
-from src.util.colors import Color
-from src.util.exit_tool import exit_tool
+from src import __main__
 
-# Main
-try:
-    # Where this file is executed
-    cwd = os.path.dirname(os.path.abspath(__file__))
+# Where this file is executed
+cwd = os.path.dirname(os.path.abspath(__file__))
 
-    # Call the entry point of the main file of GitPy
-    __main__.entry_point(pwd = cwd)
+# Call the entry point of the main file of GitPy
+__main__.entry_point(pwd=cwd)
 
-except KeyboardInterrupt:
-    Color.pl('\n  {!} Interrupted, shutting down...')
-    exit_tool(1,pwd=cwd)

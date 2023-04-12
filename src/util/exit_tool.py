@@ -33,6 +33,7 @@
 
 # Imports section
 import sys
+
 ## Third party libraries
 from src.util.colors import Color
 
@@ -48,6 +49,9 @@ def exit_tool(code,pwd):
     '''
     from src.config import Configuration
     from src.util.remove_python_cache import remove_python_cache
+
+    if not pwd:
+        pwd = Configuration.pwd
     remove_python_cache(pwd=pwd)
     if Configuration.verbose == 3:
         if code == 0:

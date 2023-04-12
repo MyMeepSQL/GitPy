@@ -42,9 +42,7 @@ from time import sleep
 from copy import deepcopy
 
 ## Third party libraries
-import src.__main__ as __MAIN__
-from src.args import Arguments
-import src.util.github_repo as GR
+from src.util.github_repo import GitHub_Repo
 from src.util.exit_tool import exit_tool
 from src.util.colors import Color
 from src.util.help_messages import Help_Messages as HM
@@ -59,11 +57,18 @@ class Configuration():
     # Verbosity level: 1 = executed commands, 2 = executed commands and stdout/stderr, 
     # 3 = level 1 + 2 + more information about the execution of Python functions
     verbose = 0
-    program_name = 'gitpy'
+    PROGRAM_NAME = 'gitpy'
 
     # The main version of GitPy
     VERSION = '0.0.0.1'
-    OWNER_EMAIL = 'thomas.pellissier.pro@proton.me'
+
+    # Owner's info
+    ## MyMeepSQL
+    OWNER_EMAIL_MYMEEPSQL = 'thomas.pellissier.pro@proton.me'
+    OWNER_DISCORDTAG_MYMEEPSQL = 'MyMeepSQL#0141 '
+    ## Bashy
+    OWNER_EMAIL_BASHY = 'petitpierre@duck.com'
+    OWNER_DISCORDTAG_BASHY = 'Bashy#2643 '
     
     # The version's message for the -V/--version argument
     version_message = VERSION
@@ -99,18 +104,21 @@ class Configuration():
     gitpy_notification_config_file_env_var_value = DEFAULT_NOTIFICATION_CONFIG_FILE_PATH
 
     # Github's repo settings
-    REPO_URL = 'https://github.com/MyMeepSQL/GitPy.git'
+    REPO_URL = 'https://github.com/MyMeepSQL/GitPy'
+    REPO_CLONE_URL = 'https://github.com/MyMeepSQL/GitPy.git'
     REPO_BRANCH = 'master'
     REPO_MASTER_BRANCH = 'master'
     REPO_METADATA_URL = 'https://raw.githubusercontent.com/MyMeepSQL/GitPy/master/metadata.json'
+    REPO_CHANGELOG_URL = 'https://github.com/MyMeepSQL/GitPy/blob/master/src/docs/CHANGELOG.md'
     REPO_ISSUES_URL = 'https://github.com/MyMeepSQL/GitPy/issues'
     ## The GitPy's version from the Github's repo. Will be attributed by the 'compare_version' 
     ## function from the 'github_repo.py' file
     REPO_VERSION = None
 
-
     @classmethod
     def load_arguments(cls, pwd):
+        from src.__main__ import GitPy
+        from src.args import Arguments
         '''
             Load argument and parse them to the specific function.
 
@@ -125,7 +133,7 @@ class Configuration():
 
         # if the user run gitpy with -q/--quiet and -v/--verbose options
         if args.quiet and args.verbose:
-            __MAIN__.GitPy.Banner()
+            Color.pl(GitPy.Banner())
             print()
 
             Color.pl('  {!} The {G}-q{W}/{G}--quiet{W} and {G}-v{W}/{G}--verbose{W} option are not compatible together.')
@@ -152,6 +160,7 @@ class Configuration():
 
     @classmethod
     def first_args_to_parse(cls,args):
+        from src.__main__ import GitPy  
         '''
             Parse the first arguments that should be parsed before the others.
 
@@ -159,7 +168,7 @@ class Configuration():
                 args (object): The arguments object
         '''
         if args.install_path == '0':
-            __MAIN__.GitPy.Banner()
+            Color.pl(GitPy.Banner())
             print()
             Color.pl('  {!} You must specify a path where GitPy will be installed.')
             exit_tool(1,pwd=cls.pwd)
@@ -226,6 +235,7 @@ class Configuration():
     # -------------------- [ INFORMATIONS ARGUMENTS ] -------------------- #
     @classmethod
     def parse_informations_args(cls, args):
+        from src.__main__ import GitPy  
         '''
             Parse all informations arguments
 
@@ -236,132 +246,132 @@ class Configuration():
             # Show more help for wich command
             # ---------- [ Main options ] ---------- #
             if args.console:
-                __MAIN__.GitPy.Banner()
-                HM.option_console()
+                Color.pl(GitPy.Banner())
+                Color.pl(HM.option_console())
                 print()
-                GR.compare_version()
+                GitHub_Repo.compare_version()
                 exit_tool(0,pwd=cls.pwd)
             if args.cli:
-                __MAIN__.GitPy.Banner()
-                HM.option_cli()
+                Color.pl(GitPy.Banner())
+                Color.pl(HM.option_cli())
                 print()
-                GR.compare_version()
+                GitHub_Repo.compare_version()
                 exit_tool(0,pwd=cls.pwd)
 
             # ---------- [ Installation options ] ---------- #
             if args.install:
-                __MAIN__.GitPy.Banner()
-                HM.option_install()
+                Color.pl(GitPy.Banner())
+                Color.pl(HM.option_install())
                 print()
-                GR.compare_version()
+                GitHub_Repo.compare_version()
                 exit_tool(0,pwd=cls.pwd)
             if args.uninstall:
-                __MAIN__.GitPy.Banner()
-                HM.option_uninstall()
+                Color.pl(GitPy.Banner())
+                Color.pl(HM.option_uninstall())
                 print()
-                GR.compare_version()
+                GitHub_Repo.compare_version()
                 exit_tool(0,pwd=cls.pwd)
             if args.skip_update:
-                __MAIN__.GitPy.Banner()
-                HM.option_skip_update()
+                Color.pl(GitPy.Banner())
+                Color.pl(HM.option_skip_update())
                 print()
-                GR.compare_version()
+                GitHub_Repo.compare_version()
                 exit_tool(0,pwd=cls.pwd)
             if args.offline:
-                __MAIN__.GitPy.Banner()
-                HM.option_offline()
+                Color.pl(GitPy.Banner())
+                Color.pl(HM.option_offline())
                 print()
-                GR.compare_version()
+                GitHub_Repo.compare_version()
                 exit_tool(0,pwd=cls.pwd)
             if args.install_path:
-                __MAIN__.GitPy.Banner()
-                HM.option_install_path()
+                Color.pl(GitPy.Banner())
+                Color.pl(HM.option_install_path())
                 print()
-                GR.compare_version()
+                GitHub_Repo.compare_version()
                 exit_tool(0,pwd=cls.pwd)
 
 
             # ---------- [ Output options ] ---------- #
             if args.quiet:
-                __MAIN__.GitPy.Banner()
-                HM.option_quiet()
+                Color.pl(GitPy.Banner())
+                Color.pl(HM.option_quiet())
                 print()
-                GR.compare_version()
+                GitHub_Repo.compare_version()
                 exit_tool(0,pwd=cls.pwd)
 
             if args.verbose:
-                __MAIN__.GitPy.Banner()
-                HM.option_verbose()
+                Color.pl(GitPy.Banner())
+                Color.pl(HM.option_verbose())
                 print()
-                GR.compare_version()
+                GitHub_Repo.compare_version()
                 exit_tool(0,pwd=cls.pwd)
 
 
             # ---------- [ Additional options ] ---------- #
             if args.no_confirm:
-                __MAIN__.GitPy.Banner()
-                HM.option_no_confirm()
+                Color.pl(GitPy.Banner())
+                Color.pl(HM.option_no_confirm)
                 print()
-                GR.compare_version()
+                GitHub_Repo.compare_version()
                 exit_tool(0,pwd=cls.pwd)
 
 
             # ---------- [ Informations options ] ---------- #
             if args.info:
-                __MAIN__.GitPy.Banner()
-                HM.option_info()
+                Color.pl(GitPy.Banner())
+                Color.pl(HM.option_info())
                 print()
-                GR.compare_version()
+                GitHub_Repo.compare_version()
                 exit_tool(0,pwd=cls.pwd)
             if args.version:
-                __MAIN__.GitPy.Banner()
-                HM.option_version()
+                Color.pl(GitPy.Banner())
+                Color.pl(HM.option_version())
                 print()
-                GR.compare_version()
+                GitHub_Repo.compare_version()
                 exit_tool(0,pwd=cls.pwd)
 
 
             # ---------- [ Miscellaneous options ] ---------- #
             if args.update:
-                __MAIN__.GitPy.Banner()
-                HM.option_update()
+                Color.pl(GitPy.Banner())
+                Color.pl(HM.option_update())
                 print()
-                GR.compare_version()
+                GitHub_Repo.compare_version()
                 exit_tool(0,pwd=cls.pwd)
             if args.force_update:
-                __MAIN__.GitPy.Banner()
-                HM.option_force_update()
+                Color.pl(GitPy.Banner())
+                Color.pl(HM.option_force_update())
                 print()
-                GR.compare_version()
+                GitHub_Repo.compare_version()
                 exit_tool(0,pwd=cls.pwd)
             if args.show_env_var:
-                __MAIN__.GitPy.Banner()
-                HM.option_show_env_var()
+                Color.pl(GitPy.Banner())
+                Color.pl(HM.option_show_env_var())
                 print()
-                GR.compare_version()
+                GitHub_Repo.compare_version()
                 exit_tool(0,pwd=cls.pwd)
             if args.remove_cache:
-                __MAIN__.GitPy.Banner()
-                HM.option_remove_cache()
+                Color.pl(GitPy.Banner())
+                Color.pl(HM.option_remove_cache())
                 print()
-                GR.compare_version()
+                GitHub_Repo.compare_version()
                 exit_tool(0,pwd=cls.pwd)
             
 
             # ---- No options ---- #
             else:
-                __MAIN__.GitPy.Banner()
-                HM.main_help_msg()
+                Color.pl(GitPy.Banner())
+                Color.pl(HM.main_help_msg())
                 print()
-                GR.compare_version()
+                GitHub_Repo.compare_version()
                 exit_tool(0,pwd=cls.pwd)
     
         if args.info:
             from src.util.informations import Informations
-            __MAIN__.GitPy.Banner()
-            Informations()
+            Color.pl(GitPy.Banner())
+            Color.pl(Informations.print_info())
             print()
-            GR.compare_version()
+            GitHub_Repo.compare_version()
             exit_tool(0,pwd=cls.pwd)
 
         if args.version:

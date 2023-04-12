@@ -32,27 +32,18 @@
 #---------------------------------------------------------------------------#
 
 # Imports section
-import argparse
-import platform
 import sys
-import subprocess
-import textwrap
-import os
-import re as _re
-import sys as _sys
-from time import strftime
-from time import sleep
 from gettext import gettext as _
 
 ## Third party libraries
 from src.config import Configuration
 from src.util.colors import Color
-from src.util.remove_python_cache import remove_python_cache
+from src.util.exit_tool import exit_tool
 
 # Main
 class GitPy(object):
     '''
-    The first GitPy class that will be called first when the user runs GitPy
+        The first GitPy class that will be called first when the user runs GitPy
     '''
 
     def __init__(self, pwd):
@@ -65,9 +56,9 @@ class GitPy(object):
             Color.pl('''
                 \r  {*} {C}Usage{W}: gitpy <OPTIONS>
                 \r  {!} Missing options
-                \r  {*} Try {G}gitpy --help{W} for more information.''')
+                \r  {*} Try {G}gitpy -h{W} or {G}gitpy --help{W} for more information.''')
 
-            sys.exit(1)
+            exit_tool(1, pwd=pwd)
 
         # elif '--help' in sys.argv or '-h' in sys.argv:
 
@@ -92,56 +83,22 @@ class GitPy(object):
         #     sys.exit(1)
 
     # Banner
-    def Banner(self=None):
+    @staticmethod
+    def Banner():
         '''
-        The banner of the 'gitpy' command
+            The banner of the 'gitpy' command
         '''
-        Color.pl('''{SB2}{bold}
+        
+        return '''{SB2}{bold}
             \r ┌─┐┬┌┬┐┌─┐┬ ┬ {W}{bold}{{W}{D}%s{W}{bold}}{W}{SB2}{bold}
             \r │ ┬│ │ ├─┘└┬┘ {W}{D}by MyMeepSQL & Bashy{W}{SB2}{bold}
-            \r └─┘┴ ┴ ┴   ┴  {W}{GR}{underscore}%s{W}''' 
+            \r └─┘┴ ┴ ┴   ┴  {W}{GR}{underscore}%s{W}''' % (Configuration.VERSION, Configuration.REPO_URL)
 
-            % (Configuration.VERSION, Configuration.REPO_URL)
-        )
-
-    # def start(self, pwd):
-    #     '''
-    #     Run GitPy with the given arguments 
-    #     '''
-
-    #     if len(sys.argv) == 1:
-    #         '''
-    #         If the user ran gitpy with any option(s) 
-    #         '''
-
-    #         self.Banner()   # Print the banner before prompt the error message
-
-    #         Color.pl('''
-    #             \r  {*} {C}Usage{W}: gitpy [OPTIONS]
-    #             \r  {!} {O}Missing options{W}
-    #             \r  {*} Try {G}gitpy --help{W} for more information.''')
-    #         sys.exit(1)
-    #     # elif '--help' in sys.argv or '-h' in sys.argv:
-
-    #     #     ''' If the user ran gitpy with the '-h/--help' option '''
-
-    #     #     Banner()
-    #     #     print()
-
-    #     #     # Get the avalable arguments of GitPy in Arguments class
-    #     #     args = Arguments()
-
-    #     #     # Load parsed argument into the Configuration class
-    #     #     C.load_from_arguments(args.get_arguments, pwd = pwd)
-
-    #     else:
-    #         # Load parsed argument into the Configuration class
-    #         Configuration(pwd=pwd)
 
 # Main (entry point)
 def entry_point(pwd):
     '''
-    The entry point of the GitPy
+        The entry point of the GitPy
     '''
 
     try:
@@ -185,5 +142,5 @@ def entry_point(pwd):
         Color.pl('  {*} If the problem was not solved, please report the issue on {C}%s{W}' % Configuration.REPO_URL)
 
     except KeyboardInterrupt as ki:
-        # Color.pexception(ki)
+        Color.pexception(ki)
         Color.pl('\n  {!} Interrupted, shutting down...')

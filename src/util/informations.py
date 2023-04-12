@@ -30,22 +30,35 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.              #
 #---------------------------------------------------------------------------#
  
-# Imports section
-## Third party libraries
+# Third party libraries
 from src.util.colors import Color
 from src.config import Configuration
 
 # Main
 class Informations():
     '''
-    The main class of the informations page of GitPy that will be called when the user runs gitpy --info. 
-    This class will display all informations about GitPy.
+        The main class of the informations page of GitPy that will be called when the user runs gitpy --info. 
+        This class will display all informations about GitPy.
     '''
 
+    PROGRAM_NAME = Configuration.PROGRAM_NAME
     VERSION = Configuration.VERSION
 
-    def __init__(self):
-        Color.pl('''
+    REPO_URL = Configuration.REPO_URL
+    REPO_CLONE_URL = Configuration.REPO_CLONE_URL
+    REPO_CHANGELOG_URL = Configuration.REPO_CHANGELOG_URL
+    REPO_ISSUES_URL = Configuration.REPO_ISSUES_URL
+
+    OWNER_EMAIL_MYMEEPSQL = Configuration.OWNER_EMAIL_MYMEEPSQL
+    OWNER_DISCORDTAG_MYMEEPSQL = Configuration.OWNER_DISCORDTAG_MYMEEPSQL
+
+    OWNER_EMAIL_BASHY = Configuration.OWNER_EMAIL_BASHY
+    OWNER_DISCORDTAG_BASHY = Configuration.OWNER_DISCORDTAG_BASHY
+
+    @classmethod
+    def print_info(self):
+
+        return '''
         \r  {*} All informations about the GitPy.
 
         \r{SB2}{bold}Informations about GitPy{W}:
@@ -53,51 +66,67 @@ class Informations():
 
         \r  Description
         \r  -----------
-        \r  GitPy is a tool to automatate an OpenVPN server configuration 
-        \r  and installation with users. It's a tool for Linux distros based
-        \r  on Debian or Arch (for the moment).
+        \r  GitPy is a tool to search and download GitHub repositories. 
+        \r  It's a Python3 program that uses the GitHub API to search and download repositories.
 
-        \r  Options                         Description
-        \r  -------                         -----------
-        \r  --install                       Install GitPy with all depencies on your system.
-        \r  --uninstall                     Uninstall GitPy from your system.
-        \r  --update                        Update the GitPy directly from GitHub.
-        \r  --console                       Start the main console of GitPy.
-        \r  --cli                           Start the CLI environment of GitPy.
+        \r  Main Options                   Description
+        \r  ------------                   -----------
+        \r       --install                 Install GitPy with all depencies on your system.
+        \r       --uninstall               Uninstall GitPy from your system.
+        \r       --update                  Update the GitPy directly from GitHub.
+        \r       --console                 Start the main console of GitPy.
+        \r       --cli                     Start the CLI environment of GitPy.
+        \r  -h,  --help                    Display the help page of GitPy.
 
-        \r  Program                         Version (on your system)
-        \r  -------                         ------------------------
-        \r  gitpy                           %s
+        \r  Program                        Version (on your system)
+        \r  -------                        ------------------------
+        \r  %s                          %s
 
-        \r  Copyright & Licensing
-        \r  ---------------------
-        \r  Owner                           © PSociety
-        \r  Copyright                       Copyright (C) 2021-2023 PSociety, {R}All rights reserved{W}.
-        \r  License                         This program is under GNU General Public License v3.0 (GPL 3.0). You can modify the program and 
-        \r                                  share it as long as the original author appears in credits and the program is on the same license.
+        \r  Copyright & Licensing          Description
+        \r  ---------------------          ----------- 
+        \r  Owner                          © PSociety
+        \r  Copyright                      Copyright (C) 2021-2023 PSociety, {R}All rights reserved{W}.
+        \r  License                        This program is under GNU General Public License v3.0 (GPL 3.0). 
+        \r                                 You can modify the program and share it as long as the original 
+        \r                                 author appears in credits and the program is on the same license.
 
-        \r  Other informations
-        \r  ------------------
-        \r  GitHub page                     https://github.com/MyMeepSQL/gitpy
-        \r  Changelogs                      https://github.com/MyMeepSQL/GitPy/blob/master/src/docs/CHANGELOG.md
-        \r  Issues pages                    https://github.com/MyMeepSQL/gitpy/issues
+        \r  Other informations             Description
+        \r  ------------------             -----------
+        \r  GitHub page URL                %s
+        \r  Clone URL                      %s
+        \r  Changelogs                     %s
+        \r  Issues pages                   %s
 
         \r{SB2}{bold}Informations about authors{W}:
         \r===========================
 
-        \r  Main informations
-        \r  -----------------
-        \r  MyMeepSQL's fullname            Thomas Pellissier
-        \r  MyMeepSQL's email               thomas.pellissier.pro@proton.me ({bold}only for professional{W} or for {G}report bugs of GitPy{W})
+        \r  Main informations              Description
+        \r  -----------------              -----------
+        \r  MyMeepSQL's fullname           Thomas Pellissier
+        \r  MyMeepSQL's email              %s ({bold}only for professional{W} or for {G}report bugs of GitPy{W})
 
-        \r  Bashy's fullname                Jonas Petitpierre
-        \r  Bashy's email                   petitpierre@duck.com ({bold}only for personal{W} or for {G}report bugs of GitPy{W})
+        \r  Bashy's fullname               Jonas Petitpierre
+        \r  Bashy's email                  %s ({bold}only for personal{W} or for {G}report bugs of GitPy{W})
 
-        \r  Other informations
-        \r  ------------------
-        \r  MyMeepSQL's GitHub profile      https://github.com/MyMeepSQL
-        \r  MyMeepSQL's Twitter profile     https://twitter.com/MyMeepSQL
-        \r  MyMeepSQL's Discord username    MyMeepSQL#0141
+        \r  Other informations             Description
+        \r  ------------------             -----------
+        \r  MyMeepSQL's GitHub profile     https://github.com/MyMeepSQL
+        \r  MyMeepSQL's Twitter profile    https://twitter.com/MyMeepSQL
+        \r  MyMeepSQL's Discord username   %s
 
-        \r  Bashy's GitHub profile          https://github.com/jonas52
-        \r  Bashy's Discord username        Bashy#2643''' % self.VERSION)
+        \r  Bashy's GitHub profile         https://github.com/jonas52
+        \r  Bashy's Discord username       %s''' % (
+
+            self.PROGRAM_NAME,
+            self.VERSION,
+
+            self.REPO_URL,
+            self.REPO_CLONE_URL,
+            self.REPO_CHANGELOG_URL,
+            self.REPO_ISSUES_URL,
+
+            self.OWNER_EMAIL_MYMEEPSQL,
+            self.OWNER_EMAIL_BASHY,
+            self.OWNER_DISCORDTAG_MYMEEPSQL,
+            self.OWNER_DISCORDTAG_BASHY
+        )

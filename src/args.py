@@ -37,8 +37,7 @@ from gettext import gettext as _
 
 ## Third party libraries
 import src.tools.argparse as argparse
-import src.config as config
-import src.__main__ as _MAIN
+from src.config import Configuration
 from src.util.colors import Color
 
 # Custom help formatter (not in use because to the custom help message in the 'help_messages.py' file)
@@ -46,19 +45,22 @@ class BetterHelpFormatter(argparse.HelpFormatter):
     def add_usage(self, usage, actions, groups, prefix=None):
         if prefix is None:
             prefix = Color.s('{SB2}{bold}Usage{W}: ')
+
         return super(BetterHelpFormatter , self).add_usage(usage, actions, groups, prefix)
+    
     def _fill_text(self, text, width, indent):
         return ''.join(indent + line for line in text.splitlines(keepends=True))
 
 # Main
 class Arguments(argparse.ArgumentParser):
     '''
-    All arguments of the 'gitpy' command
+        All arguments of the 'gitpy' command
     '''
+
     @classmethod
     def get_arguments(cls):
         '''
-        Returns parser.args() containing all program arguments
+            Returns parser.args() containing all program arguments
         '''
 
         """
@@ -178,7 +180,7 @@ class Arguments(argparse.ArgumentParser):
             const='0',
             metavar='PATH',
             dest='install_path',
-            help=Color.s('the path where GitPy will be installed (default: {G}%s{W})' % config.Configuration.DEFAULT_INSTALL_PATH),
+            help=Color.s('the path where GitPy will be installed (default: {G}%s{W})' % Configuration.DEFAULT_INSTALL_PATH),
         )
 
 

@@ -69,7 +69,7 @@ class Installer():
     TEMP_PATH = Configuration.TEMP_PATH
     INSTALL_PATH = DEFAULT_INSTALL_PATH
     NOTIFICATION_CONFIG_FILE = Configuration.DEFAULT_NOTIFICATION_CONFIG_FILE_PATH
-    PROGRAM_NAME = Configuration.program_name
+    PROGRAM_NAME = Configuration.PROGRAM_NAME
 
     # Environment variables
     ## The GitPy's install path
@@ -102,7 +102,7 @@ class Installer():
     ]
 
     # Github's repo settings
-    REPO_URL = Configuration.REPO_URL
+    REPO_CLONE_URL = Configuration.REPO_CLONE_URL
     REPO_BRANCH = Configuration.REPO_BRANCH
     REPO_MASTER_BRANCH = Configuration.REPO_MASTER_BRANCH
 
@@ -215,7 +215,7 @@ class Installer():
                 os.makedirs(self.TEMP_PATH, mode=0o777)
 
                 ### Clone the latest version of GitPy into the temp. folder
-                Process.call('git clone %s --verbose --branch %s %s' % (self.REPO_URL , self.REPO_BRANCH , self.TEMP_PATH), shell=True)
+                Process.call('git clone %s --verbose --branch %s %s' % (self.REPO_CLONE_URL , self.REPO_BRANCH , self.TEMP_PATH), shell=True)
 
                 ### Install GitPy by moving all the files from the temp. folder to the main folder
                 shutil.copytree(src=self.TEMP_PATH, dst=self.INSTALL_PATH, dirs_exist_ok=True)
@@ -429,7 +429,7 @@ class Installer():
                     ### Clone the latest version of GitPy into the temp. folder
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Cloning files from GitHub to the temporary directory...')
-                    Process.call('git clone %s --verbose --branch %s %s' % (self.REPO_URL , self.REPO_BRANCH , self.TEMP_PATH), shell=True)
+                    Process.call('git clone %s --verbose --branch %s %s' % (self.REPO_CLONE_URL , self.REPO_BRANCH , self.TEMP_PATH), shell=True)
 
                     ### Install GitPy by moving all the files from the temp. folder to the main folder
                     if Configuration.verbose == 3:

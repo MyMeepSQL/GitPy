@@ -77,7 +77,7 @@ class Updater():
     gitpy_install_path_env_var_value = Configuration.gitpy_install_path_env_var_value
 
     # Github's repo settings
-    REPO_URL = Configuration.REPO_URL
+    REPO_CLONE_URL = Configuration.REPO_CLONE_URL
     REPO_BRANCH = Configuration.REPO_BRANCH
     REPO_VERSION = Configuration.REPO_VERSION
     REPO_METADATA_URL = Configuration.REPO_METADATA_URL
@@ -150,7 +150,7 @@ class Updater():
                     else:
                         Color.pl('Check if GitPy is correctly installed and try again.')
                         Color.pl('If you still have the same problem, please report it on the GitHub repo below.')
-                        Color.pl('(%s)' % self.REPO_URL)
+                        Color.pl('(%s)' % self.REPO_CLONE_URL)
 
                         # remove_python_cache(pwd=pwd, line_enter=True)
                         exit_tool(1,pwd=pwd)
@@ -204,7 +204,7 @@ class Updater():
                 os.makedirs(self.INSTALL_PATH, mode=0o777)
 
                 # Clone the latest version of GitPy into the temp. folder
-                Process.call('git clone %s --branch %s %s' % (self.REPO_URL , self.REPO_BRANCH , self.TEMP_PATH), shell=True)
+                Process.call('git clone %s --branch %s %s' % (self.REPO_CLONE_URL , self.REPO_BRANCH , self.TEMP_PATH), shell=True)
                 sleep(1)
 
                 # GitPy Update
@@ -271,7 +271,7 @@ class Updater():
                 else:
                     Color.pl('  {*} Check if GitPy is correctly installed and try again.')
                     Color.pl('  {*} If you still have the same problem, please report it on the GitHub repo below.')
-                    Color.pl('  {*} (%s)' % self.REPO_URL)
+                    Color.pl('  {*} (%s)' % self.REPO_CLONE_URL)
 
                     # remove_python_cache(pwd=pwd, line_enter=True)
                     exit_tool(1,pwd=pwd)
@@ -362,7 +362,7 @@ class Updater():
                     Color.pl('  {-} Downloading the latest GitPy\'s version into {C}%s{W}...' % self.TEMP_PATH)
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Cloning files from GitHub to the temporary directory...')
-                    Process.call('git clone %s --branch %s %s' % (self.REPO_URL , self.REPO_BRANCH , self.TEMP_PATH), shell=True)
+                    Process.call('git clone %s --branch %s %s' % (self.REPO_CLONE_URL , self.REPO_BRANCH , self.TEMP_PATH), shell=True)
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Python: {SY1}sleep(1){W}')
                     sleep(1)

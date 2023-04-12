@@ -35,8 +35,6 @@
 from time import sleep
 
 ## Third party libraries
-import src.config as C
-from src.args import Arguments
 from src.util.colors import Color
 
 # Main
@@ -45,25 +43,16 @@ class Help_Messages():
         All help messages for: the 'gitpy' command, the main console and the CLI environment.
     '''
 
-    # Variables
-    DEFAULT_INSTALL_PATH = C.Configuration.DEFAULT_INSTALL_PATH
-    REPO_ISSUES_URL = C.Configuration.REPO_ISSUES_URL
-    OWNER_EMAIL = C.Configuration.OWNER_EMAIL
-
-    # For the environment variables
-    ## The GitPy's install path
-    gitpy_install_path_env_var_name = C.Configuration.gitpy_install_path_env_var_name
-    ## The News Version Notification's config file
-    gitpy_notification_config_file_env_var_name = C.Configuration.gitpy_notification_config_file_env_var_name
-
-    @classmethod
-    def main_help_msg(cls):
+    
+    def main_help_msg():
         '''
-        The help message of the gitpy command (gitpy -h/--help)
+            The help message of the gitpy command (gitpy -h/--help)
         '''
-        Color.pl('''
-        \r{SB2}{bold}VPN options{W}:
-        \r============
+        from src.config import Configuration
+
+        return '''
+        \r{SB2}{bold}Main options{W}:
+        \r=============
 
         \r  Options                                  Description
         \r  -------                                  -----------
@@ -140,16 +129,17 @@ class Help_Messages():
         \r  ------
         \r  Report all bugs to <thomas.pellissier.pro@proton.me> or open an issue at <https://github.com/MyMeepSQL/gitpy/issues>.
         \r  The options with the [+] mean that it may require additional option(s).
-        \r  If you want more details about a command, run: {G}gitpy --help <OPTION>{W}''' % cls.DEFAULT_INSTALL_PATH)
+        \r  If you want more details about a command, run: {G}gitpy --help <OPTION>{W}''' % Configuration.DEFAULT_INSTALL_PATH
 
 
     # -------------------- [ Main options ] -------------------- #
-    @classmethod
-    def option_cli(cls):
+    
+    
+    def option_cli():
         '''
         The help message for the --cli option
         '''
-        Color.pl('''
+        return '''
         \r{SB2}{bold}CLI option{W}:
         \r===========
 
@@ -157,8 +147,8 @@ class Help_Messages():
         \r  --------
         \r  Main options
 
-        \r  Description
-        \r  -----------
+        \r  Option's Description
+        \r  --------------------
         \r  Start the CLI environment of GitPy. The CLI environment of GitPy
         \r  work like a shell, you can use the command like you do in a shell.
         \r  Inspired by the Metasploit Framework.
@@ -168,14 +158,15 @@ class Help_Messages():
 
         \r  Usage
         \r  -----
-        \r  gitpy --cli''')
+        \r  gitpy --cli'''
 
-    @classmethod
-    def option_console(cls):
+    
+    
+    def option_console():
         '''
         The help message for the --console option
         '''
-        Color.pl('''
+        return '''
         \r{SB2}{bold}Console option{W}:
         \r===============
 
@@ -183,8 +174,8 @@ class Help_Messages():
         \r  --------
         \r  Main options
 
-        \r  Description
-        \r  -----------
+        \r  Option's Description
+        \r  --------------------
         \r  Start the main console of GitPy. This console work like a choice
         \r  menu console. Inspired by the Social Engineering Toolkit (SET).
 
@@ -193,16 +184,17 @@ class Help_Messages():
 
         \r  Usage
         \r  -----
-        \r  gitpy --console''')
+        \r  gitpy --console'''
 
 
     # -------------------- [ Installation options ] -------------------- #
-    @classmethod
-    def option_install(cls):
+    
+    
+    def option_install():
         '''
         The help message for the --install option
         '''
-        Color.pl('''
+        return '''
         \r{SB2}{bold}Install option{W}:
         \r===============
 
@@ -210,8 +202,8 @@ class Help_Messages():
         \r  --------
         \r  Installation options
 
-        \r  Description
-        \r  -----------
+        \r  Option's Description
+        \r  --------------------
         \r  Install GitPy on your system with all of his depencies.
 
         \r  Options                         Description
@@ -227,14 +219,15 @@ class Help_Messages():
 
         \r  Usage
         \r  -----
-        \r  gitpy --install [OPTIONS]''')
+        \r  gitpy --install [OPTIONS]'''
 
-    @classmethod
-    def option_uninstall(cls):
+    
+    
+    def option_uninstall():
         '''
         The help message for the --uninstall option
         '''
-        Color.pl('''
+        return '''
         \r{SB2}{bold}Uninstall option{W}:
         \r=================
 
@@ -242,8 +235,8 @@ class Help_Messages():
         \r  --------
         \r  Installation options
 
-        \r  Description
-        \r  -----------
+        \r  Option's Description
+        \r  --------------------
         \r  Remove GitPy from your system (do not remove depencies)
 
         \r  Options                         Description
@@ -258,14 +251,15 @@ class Help_Messages():
 
         \r  Usage
         \r  -----
-        \r  gitpy --uninstall [OPTIONS]''')
+        \r  gitpy --uninstall [OPTIONS]'''
 
-    @classmethod
-    def option_skip_update(cls):
+    
+    
+    def option_skip_update():
         '''
         The help message for the --skip-update option
         '''
-        Color.pl('''
+        return '''
         \r{SB2}{bold}Skip update option{W}:
         \r===================
 
@@ -273,8 +267,8 @@ class Help_Messages():
         \r  --------
         \r  Installation options
 
-        \r  Description
-        \r  -----------
+        \r  Option's Description
+        \r  --------------------
         \r  Do no ask "Are your sure?" every time a choice appears.
 
         \r  Options     Description
@@ -286,14 +280,15 @@ class Help_Messages():
 
         \r  Usage
         \r  -----
-        \r  gitpy --install --skip-update''')
+        \r  gitpy --install --skip-update'''
 
-    @classmethod
-    def option_offline(cls):
+    
+    
+    def option_offline():
         '''
         The help message for the --offline option
         '''
-        Color.pl('''
+        return '''
         \r{SB2}{bold}Offline option{W}:
         \r===============
 
@@ -301,8 +296,8 @@ class Help_Messages():
         \r  --------
         \r  Installation options
 
-        \r  Description
-        \r  -----------
+        \r  Option's Description
+        \r  --------------------
         \r  Install GitPy from the local files (do not download anything).
         \r  By default, the installaiton process will download the latest 
         \r  version of GitPy from the GitHub repository.
@@ -316,14 +311,18 @@ class Help_Messages():
 
         \r  Usage
         \r  -----
-        \r  gitpy --install --offline''')
+        \r  gitpy --install --offline'''
 
-    @classmethod
-    def option_install_path(cls):
+    
+    
+    def option_install_path():
         '''
         The help message for the --install-path option
         '''
-        Color.pl('''
+
+        from src.config import Configuration
+
+        return '''
         \r{SB2}{bold}Install Path option{W}:
         \r====================
 
@@ -331,8 +330,8 @@ class Help_Messages():
         \r  --------
         \r  Installation options
 
-        \r  Description
-        \r  -----------
+        \r  Option's Description
+        \r  --------------------
         \r  You can specify the path where GitPy will be installed.
         \r  By default, GitPy will be installed in {C}%s{W}.
 
@@ -347,16 +346,17 @@ class Help_Messages():
         \r  -----
         \r  gitpy --install -iP <PATH>
         \r    or
-        \r  gitpy --install --install-path <PATH>''' % cls.DEFAULT_INSTALL_PATH)
+        \r  gitpy --install --install-path <PATH>''' % Configuration.DEFAULT_INSTALL_PATH
 
 
     # -------------------- [ Output options ] -------------------- #
-    @classmethod
-    def option_quiet(cls):
+    
+    
+    def option_quiet():
         '''
         The help message for the -q/--quiet option
         '''
-        Color.pl('''
+        return '''
         \r{SB2}{bold}Quiet option{W}:
         \r===================
 
@@ -364,8 +364,8 @@ class Help_Messages():
         \r  --------
         \r  Output option
 
-        \r  Description
-        \r  -----------
+        \r  Option's Description
+        \r  --------------------
         \r  No output given and bypass all "Are you sure?" style message.
 
         \r  Options           Description
@@ -381,14 +381,15 @@ class Help_Messages():
         \r  -----
         \r  gitpy <OPTIONS> -q
         \r    or
-        \r  gitpy <OPTIONS> --quiet''')
+        \r  gitpy <OPTIONS> --quiet'''
 
-    @classmethod
-    def option_verbose(cls):
+    
+    
+    def option_verbose():
         '''
         The help message for the -v/--verbose option
         '''
-        Color.pl('''
+        return '''
         \r{SB2}{bold}Verbose option{W}:
         \r===============
 
@@ -396,11 +397,19 @@ class Help_Messages():
         \r  --------
         \r  Output option
 
-        \r  Description
-        \r  -----------
+        \r  Option's Description
+        \r  --------------------
         \r  Prompt more informations during the execution of the script.
         \r  The default value of the verbose level is 0. If you use the -v 
         \r  without any value, the verbose level will be set to 1 (const).
+
+        \r  LEVEL             Description
+        \r  -----             -----------
+        \r    0               No verbose
+        \r    1               Display the command executed
+        \r    2               Display the command executed and the output
+        \r    3               Display the command executed and the output, and display more informations
+        \r                    about the excecusion of python functions.
 
         \r  Options           Description
         \r  -------           -----------
@@ -411,28 +420,21 @@ class Help_Messages():
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
 
-        \r  Verbosity level
-        \r  ---------------
-        \r  0: No verbose
-        \r  1: Display the command executed
-        \r  2: Display the command executed and the output
-        \r  3: Display the command executed and the output, and display more informations
-        \r     about the excecusion of python functions.
-
         \r  Usage
         \r  -----
         \r  gitpy <OPTIONS> -v [LEVEL]
         \r    or
-        \r  gitpy <OPTIONS> --verbose [LEVEL]''')
+        \r  gitpy <OPTIONS> --verbose [LEVEL]'''
 
 
     # -------------------- [ Additional options ] -------------------- #
-    @classmethod
-    def option_no_confirm(cls):
+    
+    
+    def option_no_confirm():
         '''
         The help message for the -y/--no-confirm option
         '''
-        Color.pl('''
+        return '''
         \r{SB2}{bold}No confirmation option{W}:
         \r=======================
 
@@ -440,8 +442,8 @@ class Help_Messages():
         \r  --------
         \r  Additional options
 
-        \r  Description
-        \r  -----------
+        \r  Option's Description
+        \r  --------------------
         \r  Do no ask "Are your sure?" every time a choice appears.
 
         \r  Options           Description
@@ -457,16 +459,17 @@ class Help_Messages():
         \r  -----
         \r  gitpy <OPTIONS> -y
         \r    or
-        \r  gitpy <OPTIONS> --no-confirm''')
+        \r  gitpy <OPTIONS> --no-confirm'''
 
 
     # -------------------- [ Informations options ] -------------------- #
-    @classmethod
-    def option_info(cls):
+    
+    
+    def option_info():
         '''
         The help message for the --info option
         '''
-        Color.pl('''
+        return '''
         \r{SB2}{bold}Information option{W}:
         \r===================
 
@@ -474,8 +477,8 @@ class Help_Messages():
         \r  --------
         \r  Informations options
 
-        \r  Description
-        \r  -----------
+        \r  Option's Description
+        \r  --------------------
         \r  Show all informations about GitPy. Version, owner, etc.
 
         \r{SB2}{bold}Others avalable informations{W}:
@@ -483,14 +486,15 @@ class Help_Messages():
 
         \r  Usage
         \r  -----
-        \r  gitpy --info''')
+        \r  gitpy --info'''
 
-    @classmethod
-    def option_version(cls):
+    
+    
+    def option_version():
         '''
         The help message for the -V/--version option
         '''
-        Color.pl('''
+        return '''
         \r{SB2}{bold}Version option{W}:
         \r===============
 
@@ -498,8 +502,8 @@ class Help_Messages():
         \r  --------
         \r  Informations options
 
-        \r  Description
-        \r  -----------
+        \r  Option's Description
+        \r  --------------------
         \r  Show the GitPy's version and exit.
 
         \r  Options                         Description
@@ -513,16 +517,17 @@ class Help_Messages():
         \r  -----
         \r  gitpy -V [OPTION]
         \r    or
-        \r  gitpy --version [OPTION]''')
+        \r  gitpy --version [OPTION]'''
 
 
     # -------------------- [ Miscellaneous options ] -------------------- #
-    @classmethod
-    def option_update(cls):
+    
+    
+    def option_update():
         '''
         The help message for the -u/--update option
         '''
-        Color.pl('''
+        return '''
         \r{SB2}{bold}Force Update option{W}:
         \r====================
 
@@ -530,8 +535,8 @@ class Help_Messages():
         \r  --------
         \r  Miscellaneous options
 
-        \r  Description
-        \r  -----------
+        \r  Option's Description
+        \r  --------------------
         \r  Download and update the current instance of GitPy on the machine with
         \r  the latest stable version of GitPy from its repository.
 
@@ -549,14 +554,15 @@ class Help_Messages():
         \r  -----
         \r  gitpy -U [OPTIONS]
         \r    or
-        \r  gitpy --update [OPTIONS]''')
+        \r  gitpy --update [OPTIONS]'''
 
-    @classmethod
-    def option_force_update(cls):
+    
+    
+    def option_force_update():
         '''
         The help message for the -fu/--force-update option
         '''
-        Color.pl('''
+        return '''
         \r{SB2}{bold}Update option{W}:
         \r==============
 
@@ -564,8 +570,8 @@ class Help_Messages():
         \r  --------
         \r  Miscellaneous options
 
-        \r  Description
-        \r  -----------
+        \r  Option's Description
+        \r  --------------------
         \r  Update AOVPN even if the GitPy' instance version on the machine is 
         \r  already the latest.
 
@@ -584,15 +590,18 @@ class Help_Messages():
         \r    or
         \r  gitpy --update -fu [OPTIONS]
         \r    or
-        \r  gitpy --update --force-update [OPTIONS]''')
+        \r  gitpy --update --force-update [OPTIONS]'''
 
-    @classmethod
-    def option_show_env_var(cls):
+    
+    
+    def option_show_env_var():
         '''
             The help message for the --show-env-var option
         '''
 
-        Color.pl('''
+        from src.config import Configuration
+
+        return '''
         \r{SB2}{bold}Show env var option{W}:
         \r====================
 
@@ -600,8 +609,8 @@ class Help_Messages():
         \r  --------
         \r  Miscellaneous options
 
-        \r  Description
-        \r  -----------
+        \r  Option's Description
+        \r  --------------------
         \r  Show the value of the entered environment variable.
 
         \r  Arguments         Description
@@ -616,17 +625,17 @@ class Help_Messages():
         \r  -----
         \r  gitpy --show-env-var [ARGUMENT]''' % (
             (
-            cls.gitpy_install_path_env_var_name, cls.gitpy_notification_config_file_env_var_name
+            Configuration.gitpy_install_path_env_var_name, Configuration.gitpy_notification_config_file_env_var_name
             )
         )
-    )
 
-    @classmethod
-    def option_remove_cache(cls):
+    
+    
+    def option_remove_cache():
         '''
             The help message for the --remove-cache option 
         '''
-        Color.pl('''
+        return '''
         \r{SB2}{bold}Remove cache option{W}:
         \r====================
 
@@ -634,8 +643,8 @@ class Help_Messages():
         \r  --------
         \r  Miscellaneous options
 
-        \r  Description
-        \r  -----------
+        \r  Option's Description
+        \r  --------------------
         \r  Delete all __pycache__ directories and .pyc files of GitPy.
 
         \r  Options                         Description
@@ -647,16 +656,20 @@ class Help_Messages():
 
         \r  Usage
         \r  -----
-        \r  gitpy --remove-cache [OPTIONS]''')
+        \r  gitpy --remove-cache [OPTIONS]'''
 
 
     # -------------------- [ Consoles ] -------------------- #
-    @classmethod
-    def console_help_message(cls):
+    
+    
+    def console_help_message():
         '''
         The main help message of the main console (not the CLI one)
         '''
-        Color.pl('''
+
+        from src.config import Configuration
+
+        return '''
         \r{SB2}{bold}Core options{W}:
         \r=============
         
@@ -680,19 +693,19 @@ class Help_Messages():
 
         \r  Report all bugs to <%s> or open an issue at <%s>.''' % (
             (
-            cls.OWNER_EMAIL,
-            cls.REPO_ISSUES_URL
+            Configuration.OWNER_EMAIL_MYMEEPSQL,
+            Configuration.REPO_ISSUES_URL
             )
         )
-    )
 
     # -------------------- [ CLI Consoles ] -------------------- #
-    @classmethod
-    def CLI_env_main_help_msg(cls):
+    
+    
+    def CLI_env_main_help_msg():
         '''
         The main help message of the CLI environment
         '''
-        Color.pl('''
+        return '''
         \r {SB2}{bold}Core commands{W}
         \r =============
 
@@ -717,4 +730,4 @@ class Help_Messages():
         \r    
 
         \r    The commands with the [+] mean that it may require additional arguments.
-        \r    If you want more details about a command, run: {G}help <COMMAND>{W}''')
+        \r    If you want more details about a command, run: {G}help <COMMAND>{W}'''
