@@ -51,4 +51,4 @@ def add_cron_job():
 
     # Writes the modifications of CronTab
     cron.write()
-
+    

@@ -95,7 +95,7 @@ class Installer():
     pip_package_name_list = [
         'rich',
         'gnureadline',
-        'crontab',
+        'python-crontab',
     ]
 
     # Github's repo settings
