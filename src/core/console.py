@@ -138,18 +138,23 @@ class Main_Console():
         # Demande de l'utilisateur pour choisir un dépôt
         Color.pl('  {*} Select the repository that you want to clone.')
         Color.pl('  {*} Enter {G}back{W} to come back to the main menu.')
+        
         while True:
             try:
                 selected_index = input(self.prompt(menu='choose_repo'))
                 if selected_index == 'back':
                     self.show_main_menu = True
                     break
+
                 if not selected_index:
                     continue
+
                 if int(selected_index) > len(items) or int(selected_index) < 1:
                     Color.pl('  {!} Invalid choice. Please enter a number between 1 and %s.' % len(items))
                     continue
+
                 break
+
             except ValueError:
                 Color.pl('  {!} Invalid choice. Please enter a number between 1 and %s.' % len(items))
                 continue
@@ -263,22 +268,29 @@ class Main_Console():
         if Configuration.verbose >= 3:
             Color.pl('  {§}  Getting information about the branches of the selected repository...')
             Color.pl('   {SY1}╰──╼{W} Request: {SY1}GET %s/branches{W}' % repo_info['url'])
+
         branches_url = f"{repo_info['url']}/branches"
         response = requests.get(branches_url)
         branches_info = json.loads(response.text)
+
         Color.pl('\n  {*} All branches avalable for \'%s\':' % repo_info['name'])
+
         for index, branch in enumerate(branches_info):
             Color.pl('  {D}[{W}{SB2}%s{W}{D}]{W} %s' % (index+1,branch['name']))
+
         Color.pl('  {*} Select the branch that you want to download.')
         while True:
             try:
                 selected_branch_index = int(input(self.prompt(menu='choose_branch')))
                 if not selected_branch_index:
                     continue
+
                 if selected_branch_index > len(branches_info) or selected_branch_index < 1:
                     Color.pl('  {!} Invalid choice. Please enter a number between 1 and %s.' % len(branches_info))
                     continue
+
                 break
+
             except ValueError:
                 Color.pl('  {!} Invalid choice. Please enter a number between 1 and %s.' % len(branches_info))
                 continue
@@ -299,9 +311,12 @@ class Main_Console():
 
             if replace_choice == "y" or not replace_choice:
                 self.remove_existing_folder = True
+
             else:
+
                 Color.pl('  {!} You need to choose a new path where you want to download the repository.')
                 Color.pl('  {*} Enter the path where you want to download the repository.')
+
                 while os.path.isdir(repo_install_path) == True:
                     download_dir = input(self.prompt(menu='choose_download_dir'))
                     repo_install_path = ''.join(download_dir).strip()
@@ -386,6 +401,10 @@ class Main_Console():
                     )
 
                 Color.pl('  {-} Adding the notification cron job...')
+                if Configuration.verbose == 3:
+                    Color.pl('  {§} Call the {P}add_cron_job(){W} function.')
+                    Color.pl('   {SY1}├──╼{W} Python: {SY1}add_cron_job{W}')
+                    Color.pl('   {SY1}╰──╼{W} Crontab: {SY1}run the "gitpy --check-repo" every day at 19h{W}')
                 add_cron_job()
 
             Color.pl('  {*} All done!')
@@ -441,7 +460,6 @@ class Main_Console():
 
         if menu == 'choose_download_dir':
             return Color.s('{underscore}%s{W}:{underscore}choose-download-dir{W}> ' % ptnm)
-
 
         # SMTP settings
         if menu == 'choose_email_address':

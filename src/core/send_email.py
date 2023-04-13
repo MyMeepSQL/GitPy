@@ -129,7 +129,8 @@ def send_email():
                 smtp.login(smtp_username, smtp_password)
                 smtp.send_message(message)
 
+            Color.pl('  {*} A vew version of {G}%s{W} are avalable!' % github_repo_name)
             Color.pl('  {*} Email successfully sent to {G}%s{W}!' % receiver_email)
         
         else:
-            Color.pl('  {!} No new version of {G}%s{W} available!' % section)
+            Color.pl('  {!} No new version of {G}%s{W} available!' % github_repo_name)
