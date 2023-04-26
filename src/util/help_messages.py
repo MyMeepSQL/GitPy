@@ -616,7 +616,6 @@ class Help_Messages():
         \r  Arguments         Description
         \r  ---------         -----------
         \r  install_path      The value of the {G}%s{W} environment variable.
-        \r  notif_conf_path   The value of the {G}%s{W} environment variable.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
@@ -624,13 +623,9 @@ class Help_Messages():
         \r  Usage
         \r  -----
         \r  gitpy --show-env-var [ARGUMENT]''' % (
-            (
-            Configuration.gitpy_install_path_env_var_name, Configuration.gitpy_notification_config_file_env_var_name
-            )
+            Configuration.gitpy_install_path_env_var_name
         )
 
-    
-    
     def option_remove_cache():
         '''
             The help message for the --remove-cache option 

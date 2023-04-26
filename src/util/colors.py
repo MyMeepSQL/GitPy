@@ -100,14 +100,14 @@ class Color():
     replacements = {
         '{+}'           : '{W}{D}[{W}{G}+{W}{D}]{W}',   # Finished process
         '{-}'           : '{W}{D}[{W}{G}-{W}{D}]{W}',   # Process in execution
+        '{>}'           : '{W}{D}[{W}{C}>{W}{D}]{W}',   # Input
         '{*}'           : '{W}{D}[{W}{G}*{W}{D}]{W}',   # Information(s)
         '{&}'           : '{W}{D}[{W}{C}&{W}{D}]{W}',   # Command executed (verbose level: 1)
         '{#}'           : '{W}{D}[{W}{P}&{W}{D}]{W}',   # Command output (verbose level: 2)
         '{§}'           : '{W}{D}[{W}{SY1}&{W}{D}]{W}', # More information (verbose level: 3)
         '{!}'           : '{W}{D}[{W}{R}!{W}{D}]{W}',   # Error
         '{$}'           : '{W}{D}[{W}{O}${W}{D}]{W}',   # Warning
-        '{?}'           : '{W}{D}[{W}{C}?{W}{D}]{W}',   # Question
-        '{°}'           : '{W}{D}[{W}{C}-{W}{D}]{W}'    # Question
+        '{?}'           : '{W}{D}[{W}{C}?{W}{D}]{W}'    # Question
     }
 
     @staticmethod

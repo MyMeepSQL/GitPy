@@ -124,13 +124,13 @@ class Email_Utils():
         github_repo_branch,
         github_repo_url,
         github_repo_api_url,
-        
+
         receiver_email_address,
-        
+
         smtp_server,
         smtp_port,
         # smtp_security,
-        
+
         smtp_username,
         smtp_password,
 

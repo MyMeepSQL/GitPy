@@ -378,7 +378,7 @@ class Main_Console():
                 smtp_username =  input(self.prompt(menu='choose_smtp_username'))
                 Color.pl('  {*} Enter the SMTP server password.')
                 smtp_password = getpass.getpass(self.prompt(menu='choose_smtp_password'))
-                print(smtp_password)
+                # print(smtp_password)
 
                 Color.pl('  {-} Saving the notification settings...')
 
@@ -389,15 +389,15 @@ class Main_Console():
                     github_repo_url=repo_info['html_url'],
                     github_repo_api_url=repo_info['url'],
                     current_commit_sha=current_commit_sha,
-                    
+
                     receiver_email_address=receiver_email_address,
-                    
+
                     smtp_server=smtp_server,
                     smtp_port=smtp_port,
-                    
+
                     smtp_username=smtp_username,
                     smtp_password=smtp_password
-                    
+
                     )
 
                 Color.pl('  {-} Adding the notification cron job...')
@@ -649,4 +649,3 @@ class Main_Console():
                     Color.pl('   {SY1}╰──╼{W} Python: {SY1}self.main_menu(){W}')
                     sleep(0.2)
                 self.main_menu()
-        

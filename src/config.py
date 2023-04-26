@@ -60,7 +60,7 @@ class Configuration():
     PROGRAM_NAME = 'gitpy'
 
     # The main version of GitPy
-    VERSION = '0.0.0.1'
+    VERSION = '0.0.1'
 
     # Owner's info
     ## MyMeepSQL
@@ -84,7 +84,7 @@ class Configuration():
     # Where GitPy is installed
     DEFAULT_INSTALL_PATH = r'/opt/gitpy/'
     # The News Version Notification's config file
-    DEFAULT_NOTIFICATION_CONFIG_FILE_PATH = r'/opt/gitpy/config/new_version_notification.conf'
+    # DEFAULT_NOTIFICATION_CONFIG_FILE_PATH = r'/opt/gitpy/config/new_version_notification.conf'
 
     # The logs file
     # LOG_FILE_PATH = DEFAULT_INSTALL_PATH + r'logs'

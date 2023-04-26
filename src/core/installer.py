@@ -50,7 +50,7 @@ from src.util.env_var import set_env_var
 from src.util.based_distro import Based_Distro
 from src.util.internet_check import internet_check
 from src.util.remove_python_cache import remove_python_cache
-from src.util.if_package_exists import package_exists
+from src.util.if_package_exist import package_exists
 from src.util.create_bin_file import Create_bin_file
 from src.util.check_path import check_folder_path
 
@@ -150,7 +150,7 @@ class Installer():
             self.INSTALL_PATH = ''.join(args.install_path).strip()
             self.INSTALL_PATH = check_folder_path(self.INSTALL_PATH,self.PROGRAM_NAME)
             self.gitpy_install_path_env_var_value = self.INSTALL_PATH
-            self.gitpy_path_notification_config_file_env_var_value = self.INSTALL_PATH + 'config/new_version_notification.conf'
+            # self.gitpy_path_notification_config_file_env_var_value = self.INSTALL_PATH + 'config/new_version_notification.conf'
             
         # gitpy main file in /usr/bin/
         gitpy_command_bin = Create_bin_file.__init__(path=self.INSTALL_PATH)

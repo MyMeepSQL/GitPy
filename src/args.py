@@ -110,7 +110,7 @@ class Arguments(argparse.ArgumentParser):
         gitpy = Arguments(
             prog='gitpy',
             description='GitPy - A Python3 tool for search and download a GitHub\'s repository directly in the terminal',
-            usage='gitpy [options]',
+            usage='gitpy <options> [-h|--help] [-v[<level>]|--verbose[=<level>]] [-V|--version]',
             add_help=False,
             allow_abbrev=False,
             prefix_chars='-',
@@ -251,7 +251,7 @@ class Arguments(argparse.ArgumentParser):
     @classmethod
     def _add_miscellaneous_args(cls,misc):
         misc.add_argument(
-            '-u','--update',
+            '--update',
             action='store_true',
             dest='update',
             help='update GitPy directly from GitHub'

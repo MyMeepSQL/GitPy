@@ -150,8 +150,8 @@ class Uninstaller():
             # Remove the GITPY_INSTALL_PAT environment variable 
             remove_env_var(var_name=self.gitpy_install_path_env_var_name)
 
-            # Remove the GITPY_INSTALL_PAT environment variable 
-            remove_env_var(var_name=self.gitpy_notification_config_file_env_var_name)
+            # Remove the GITPY_NOTIFICATION_CONFIG_FILE_PATH environment variable 
+            # remove_env_var(var_name=self.gitpy_notification_config_file_env_var_name)
 
             # Exit and removing the python cache
             exit_tool(0,pwd=pwd)
@@ -191,12 +191,11 @@ class Uninstaller():
                     \r     {D}[{W}{LL}1{W}{D}]{W} Remove the {C}%s{W} folder.
                     \r     {D}[{W}{LL}2{W}{D}]{W} Remove the {C}%sgitpy{W} file.
                     \r     {D}[{W}{LL}3{W}{D}]{W} Remove the {C}{bold}%s{W} environment variable.
-                    \r     {D}[{W}{LL}4{W}{D}]{W} Remove the {C}{bold}%s{W} environment variable.
                     ''' % (
                 self.INSTALL_PATH,
                 self.BIN_PATH,
                 self.gitpy_install_path_env_var_name,
-                self.gitpy_notification_config_file_env_var_name
+                # self.gitpy_notification_config_file_env_var_name
                 )
             )
 
@@ -223,16 +222,17 @@ class Uninstaller():
                         Color.pl('   {SY1}╰──╼{W} Python: {SY1}os.remove(self.BIN_PATH + \'gitpy\'){W}')
                     os.remove(self.BIN_PATH + 'gitpy')
 
-                    ## ------ [ Remove the 'GITPY_INSTALL_PAT' environment variable ] ------ ##
+                    ## ------ [ Remove the 'GITPY_INSTALL_PATH' environment variable ] ------ ##
                     if Configuration.verbose == 3:
                         Color.pl('  {§} Removing the {C}{bold}GITPY_INSTALL_PAT{W} environment variable...')
                         Color.pl('   {SY1}╰──╼{W} Python: {SY1}remove_env_var(self.gitpy_install_path_env_var_name){W}')
+
                     remove_env_var(var_name=self.gitpy_install_path_env_var_name)
+
                     Color.pl('  {*} GitPy are successfully uninstalled from your system.')
-                    Color.pl('  {*} You need to restart your machine to completly remove the {C}{bold}%s{W} and the {C}{bold}%s{W} environment variable.' % (
-                        self.gitpy_install_path_env_var_name,
-                        self.gitpy_notification_config_file_env_var_name
-                    ))
+                    Color.pl('  {*} You need to restart your machine to completly remove the {C}{bold}%s{W} environment variable.' % 
+                        self.gitpy_install_path_env_var_name
+                    )
                     choice_2 = input(Color.s('  {?} Do you want to reboot your machine now? [y/n] '))
                     if choice_2.lower() == 'y':
                         # Removing the python cache
@@ -242,11 +242,13 @@ class Uninstaller():
                     else:
                         # Exit and removing the python cache
                         exit_tool(0,pwd=pwd)
+
                 except KeyboardInterrupt:
                     Color.pl('\n  {!} Uninstallation process interrupted.')
                     Color.pl('  {*} You must re-run the uninstalation process to uninstall GitPy correctly.')
                     # Exit and removing the python cache
                     exit_tool(1,pwd=pwd)
+
             else:
                 Color.pl('  {*} Aborted')
                 # Exit and removing the python cache
