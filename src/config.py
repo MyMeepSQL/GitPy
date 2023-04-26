@@ -97,7 +97,7 @@ class Configuration():
     gitpy_install_path_env_var_value = DEFAULT_INSTALL_PATH
     ## The News Version Notification's config file
     gitpy_notification_config_file_env_var_name = 'GITPY_NOTIFICATION_CONFIG_FILE_PATH'
-    gitpy_notification_config_file_env_var_value = DEFAULT_NOTIFICATION_CONFIG_FILE_PATH
+    # gitpy_notification_config_file_env_var_value = DEFAULT_NOTIFICATION_CONFIG_FILE_PATH
 
     # Github's repo settings
     REPO_URL = 'https://github.com/MyMeepSQL/GitPy'
