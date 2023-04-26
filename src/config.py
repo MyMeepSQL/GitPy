@@ -32,12 +32,8 @@
 #---------------------------------------------------------------------------#
 
 # Imports section
-import re
 import os
 import sys
-import platform
-import subprocess
-import configparser
 from time import sleep
 from copy import deepcopy
 
