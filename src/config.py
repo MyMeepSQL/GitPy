@@ -445,7 +445,7 @@ class Configuration():
                     Color.pl('  {!} GitPy is not installed on this machine.')
                     Color.pl('  {*} Because the {C}{bold}%s{W} environment variable is not set.' % cls.gitpy_install_path_env_var_name)
                     exit_tool(1,pwd=cls.pwd)
-            
+
             else:
                 try:
                     GITPY_PATH = os.environ[cls.gitpy_install_path_env_var_name]
@@ -455,7 +455,6 @@ class Configuration():
                     Color.pl('  {!} GitPy is not installed on this machine.')
                     Color.pl('  {*} Because the {C}{bold}%s{W} environment variable is not set.' % cls.gitpy_install_path_env_var_name)
                     exit_tool(1,pwd=cls.pwd)
-
 
         # if args.show_config:
         #     # Open the file in read mode
