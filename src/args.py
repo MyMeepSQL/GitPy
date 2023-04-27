@@ -110,7 +110,7 @@ class Arguments(argparse.ArgumentParser):
         gitpy = Arguments(
             prog='gitpy',
             description='GitPy - A Python3 tool for search and download a GitHub\'s repository directly in the terminal',
-            usage='gitpy <options> [-h|--help] [-v[<level>]|--verbose[=<level>]] [-V|--version]',
+            usage='gitpy [options]',
             add_help=False,
             allow_abbrev=False,
             prefix_chars='-',
@@ -192,6 +192,13 @@ class Arguments(argparse.ArgumentParser):
             action='store_true',
             dest='check_repo',
             help=Color.s('check if the repository in the notification config file have a new commit avalable and send a notificarion via mail if it\'s the case')
+        )
+
+        repo.add_argument(
+            '-us','--unsub',
+            action='store_true',
+            dest='unsub',
+            help=Color.s('allows you to delete a subscription by mail from a Github directory')
         )
 
 
