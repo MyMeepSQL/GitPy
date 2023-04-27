@@ -80,7 +80,9 @@ class Help_Messages():
         \r  -------                                  -----------
         \r  -cr,        --check-repo                 Check if the repository in the notification config file have a new 
         \r                                           commit avalable and send a notificarion via mail if it\'s the case.
+        \r              --unsub                      Allows you to unsubscribe from a repository registered with GitPy.
 
+        
         \r{SB2}{bold}Output options{W}:
         \r===============
 
@@ -112,7 +114,7 @@ class Help_Messages():
         \r  Options                                  Description
         \r  -------                                  -----------
         \r  -u,         --update               [+]   Update the GitPy directly from GitHub.
-        \r  -fu,        --force-update               Update GitPy even if the version on the machine is already the latest.
+        \r  -fu,        --force-update               Update AOVPNS even if the version on the machine is already the latest.
         \r              --show-config                Prompt the content of the config file.
         \r              --show-env-var         [+]   Prompt the value of the a environment variable.
         \r                                           (const: {G}install_path{W}).
@@ -616,6 +618,7 @@ class Help_Messages():
         \r  Arguments         Description
         \r  ---------         -----------
         \r  install_path      The value of the {G}%s{W} environment variable.
+        \r  notif_conf_path   The value of the {G}%s{W} environment variable.
 
         \r{SB2}{bold}Others avalable informations{W}:
         \r=============================
@@ -623,9 +626,13 @@ class Help_Messages():
         \r  Usage
         \r  -----
         \r  gitpy --show-env-var [ARGUMENT]''' % (
-            Configuration.gitpy_install_path_env_var_name
+            (
+            Configuration.gitpy_install_path_env_var_name, Configuration.gitpy_notification_config_file_env_var_name
+            )
         )
 
+    
+    
     def option_remove_cache():
         '''
             The help message for the --remove-cache option 
