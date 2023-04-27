@@ -32,8 +32,12 @@
 #---------------------------------------------------------------------------#
 
 # Imports section
+import re
 import os
 import sys
+import platform
+import subprocess
+import configparser
 from time import sleep
 from copy import deepcopy
 
@@ -56,7 +60,7 @@ class Configuration():
     PROGRAM_NAME = 'gitpy'
 
     # The main version of GitPy
-    VERSION = '0.0.1'
+    VERSION = '0.0.0.1'
 
     # Owner's info
     ## MyMeepSQL
@@ -80,7 +84,7 @@ class Configuration():
     # Where GitPy is installed
     DEFAULT_INSTALL_PATH = r'/opt/gitpy/'
     # The News Version Notification's config file
-    # DEFAULT_NOTIFICATION_CONFIG_FILE_PATH = r'/opt/gitpy/config/new_version_notification.conf'
+    DEFAULT_NOTIFICATION_CONFIG_FILE_PATH = r'/opt/gitpy/config/new_version_notification.conf'
 
     # The logs file
     # LOG_FILE_PATH = DEFAULT_INSTALL_PATH + r'logs'
@@ -97,7 +101,7 @@ class Configuration():
     gitpy_install_path_env_var_value = DEFAULT_INSTALL_PATH
     ## The News Version Notification's config file
     gitpy_notification_config_file_env_var_name = 'GITPY_NOTIFICATION_CONFIG_FILE_PATH'
-    # gitpy_notification_config_file_env_var_value = DEFAULT_NOTIFICATION_CONFIG_FILE_PATH
+    gitpy_notification_config_file_env_var_value = DEFAULT_NOTIFICATION_CONFIG_FILE_PATH
 
     # Github's repo settings
     REPO_URL = 'https://github.com/MyMeepSQL/GitPy'
@@ -216,7 +220,7 @@ class Configuration():
 
     # -------------------- [ REPO ARGUMENTS ] -------------------- #
     @classmethod
-    def parse_repo_args(cls, args):    
+    def parse_repo_args(cls, args):
         '''
             Parse all repo arguments
 
@@ -227,6 +231,44 @@ class Configuration():
             from src.core.send_email import send_email
             send_email()
 
+        if args.unsub:
+            config = configparser.ConfigParser()
+            INSTALL_PATH = os.environ.get(cls.gitpy_install_path_env_var_name)
+            NOTIF_CONFIG_FILE_PATH = INSTALL_PATH + 'config/new_version_notification.conf'
+            config.read(NOTIF_CONFIG_FILE_PATH)
+
+            # Obtient la liste de toutes les sections dans le fichier de configuration
+            sections = config.sections()
+
+            # Vérifie si le fichier de configuration contient des sections
+            if len(sections) == 0:
+                Color.pl('  {!} The configuration file does not contain any sections.')
+            else:
+                Color.pl('  {*} Here are the sections of the configuration file :')
+                for i, section in enumerate(sections):
+                    Color.pl('  {D}[{W}{SB2}%s{W}{D}]{W} %s'% (i+1, section))
+                # Demande à l'utilisateur de sélectionner une section à supprimer
+                selection = input(Color.s("  {*} Enter the number of the section you wish to delete :  "))
+
+                # Vérifie si l'utilisateur a entré un nombre valide
+                try:
+                    selection = int(selection)
+                    if selection < 1 or selection > len(sections):
+                        Color.pl('  {!} Invalid selection. Please enter a valid section number.')
+                        return
+                except ValueError:
+                    Color.pl('  {!} Invalid selection. Please enter a valid section number.')
+                    return
+
+                # Supprime la section sélectionnée
+                section_to_remove = sections[selection-1]
+                config.remove_section(section_to_remove)
+
+                # Écrit les modifications dans le fichier
+                with open(NOTIF_CONFIG_FILE_PATH, 'w') as configfile:
+                    config.write(configfile)
+                Color.pl('  {*} The section %s has been successfully removed.' %section_to_remove)
+                    
 
     # -------------------- [ INFORMATIONS ARGUMENTS ] -------------------- #
     @classmethod
