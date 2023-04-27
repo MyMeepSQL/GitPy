@@ -294,7 +294,7 @@ class Main_Console():
 
         if os.path.isdir(repo_install_path):
             Color.pl('  {!} The folder {C}%s{W} already exists.' % repo_install_path)
-            replace_choice = input(Color.s('  {?} Do you want to replace it? [Y/n] '))
+            replace_choice = input(Color.s('  {?} Do you want to replace it? [Y/n]: '))
 
             if replace_choice == "y" or not replace_choice:
                 self.remove_existing_folder = True
@@ -322,7 +322,7 @@ class Main_Console():
 
         Color.pl('  {*} The repository \'%s\' will be downloaded in the folder {C}%s{W}.' % (repo_info['name'],repo_install_path))
 
-        download_choice = input(Color.s('  {?} Do you want to download this repository? [Y/n] '))
+        download_choice = input(Color.s('  {?} Do you want to download this repository? [Y/n]: '))
 
         if download_choice == "y" or not download_choice:
             # download_command = f"git clone -b {selected_branch} {download_url} {repo_install_path}"
@@ -564,7 +564,7 @@ class Main_Console():
                 Color.pl('  {*} Because the {C}{bold}%s{W} environment variable is not set.' % self.gitpy_install_path_env_var_name)
                 Color.pl('  {*} If you just installed GitPy without restart you machine after, please reboot it and try again.')
                 Color.pl('  {*} Otherwise, please install GitPy before using it.')
-                reboot = input(Color.s('  {?} Do you want to reboot now? [y/n] '))
+                reboot = input(Color.s('  {?} Do you want to reboot now? [y/n]: '))
 
                 if reboot.lower() == 'y':
                     Color.pl('  {-} Rebooting...')

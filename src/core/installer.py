@@ -314,11 +314,11 @@ class Installer():
             )
 
             if args.no_confirm:
-                Color.pl('  {?} Do you want to continue? [Y/n] y')
+                Color.pl('  {?} Do you want to continue? [Y/n]: y')
                 choice_1 = 'y'
 
             else:
-                choice_1 = input(Color.s('  {?} Do you want to continue? [Y/n] '))
+                choice_1 = input(Color.s('  {?} Do you want to continue? [Y/n]: '))
 
             if choice_1.lower() == 'y' or not choice_1:
                 try:
@@ -378,11 +378,11 @@ class Installer():
                         Color.pl('  {$} A GitPy instance already exist in {C}%s{W}.' % self.INSTALL_PATH)
 
                         if args.no_confirm:
-                            Color.pl('  {?} Do you want to replace it? [Y/n] y')
+                            Color.pl('  {?} Do you want to replace it? [Y/n]: y')
                             choice_2 = 'y'
 
                         else:
-                            choice_2 = input(Color.s('  {?} Do you want to replace it? [Y/n] '))
+                            choice_2 = input(Color.s('  {?} Do you want to replace it? [Y/n]: '))
 
                         if choice_2.lower() == 'y' or not choice_2:
                             Color.pl('  {-} Deleting current GitPy files...')
@@ -494,7 +494,7 @@ class Installer():
                     # -------------------- [ FINISH ] -------------------- #
                     Color.pl('  {+} GitPy are successfully installed on your system.')
                     Color.pl('  {*} You need to restart your machine to use GitPy normaly.')
-                    reboot = input(Color.s('  {?} Do you want to reboot your machine now? [y/n] '))
+                    reboot = input(Color.s('  {?} Do you want to reboot your machine now? [y/N]: '))
 
                     if reboot.lower() == 'y':
                         # Removing the python cache

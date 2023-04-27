@@ -139,7 +139,7 @@ class Updater():
                     Color.pl('Because the {C}{bold}%s{W} environment variable is not set.' % self.gitpy_install_path_env_var_name)
                     Color.pl('If you just installed GitPy without restart you machine after, please reboot it and try again.')
                     Color.pl('Otherwise, please install GitPy before using it.')
-                    reboot = input(Color.s('Do you want to reboot now? [y/n] '))
+                    reboot = input(Color.s('Do you want to reboot now? [y/n]: '))
 
                     if reboot.lower() == 'y':
                         Color.pl('Rebooting...')
@@ -261,7 +261,7 @@ class Updater():
                 Color.pl('  {*} Because the {C}{bold}%s{W} environment variable is not set.' % self.gitpy_install_path_env_var_name)
                 Color.pl('  {*} If you just installed GitPy without restart you machine after, please reboot it and try again.')
                 Color.pl('  {*} Otherwise, please install GitPy before using it.')
-                reboot = input(Color.s('  {?} Do you want to reboot now? [y/n] '))
+                reboot = input(Color.s('  {?} Do you want to reboot now? [y/n]: '))
 
                 if reboot.lower() == 'y':
                     Color.pl('  {-} Rebooting...')
@@ -301,10 +301,10 @@ class Updater():
                     \r     {D}[{W}{LL}3{W}{D}]{W} Apply all rights on the new files.
             ''' % self.TEMP_PATH)
             if args.no_confirm:
-                Color.pl('  {?} Do you want to continue? [Y/n] y')
+                Color.pl('  {?} Do you want to continue? [Y/n]: y')
                 choice_1 = 'y'
             else:
-                choice_1 = input(Color.s('  {?} Do you want to continue? [Y/n] '))
+                choice_1 = input(Color.s('  {?} Do you want to continue? [Y/n]: '))
             if choice_1 == 'y' or choice_1 == 'Y' or not choice_1:
                 try:
                     Color.pl('  {-} Fetching metadata...')
