@@ -55,21 +55,18 @@ Liens à modifier
 <!--  [ Authors ] -->
 <p align="center">
     <a href="https://github.com/MyMeepSQL">
-        <img src="https://img.shields.io/badge/Made%20by-Thomas%20Pellissier%20(MyMeepSQL)-important?style=for-the-badge" alt="Made by">
-    <a href="https://github.com/jonas52">
-        <img src="https://img.shields.io/badge/Made%20by-Jonas%20Petitpierre%20(Bashy)-important?style=for-the-badge" alt="Made by">
-    </a>
+        <img src="https://img.shields.io/badge/Made%20by-Thomas%20Pellissier%20(MyMeepSQL)%20&%20Jonas%20Petitpierre%20(Bashy)-important?style=for-the-badge" alt="Made by">
     <a href="https://github.com/PentestSociety">
-        <img src="https://img.shields.io/badge/Owner-©%20PSociety™%20(MyMeepSQL)-important?style=for-the-badge" alt="Owner">
+        <img src="https://img.shields.io/badge/Owner-©%20PSociety-important?style=for-the-badge" alt="Owner">
     </a>
 </p>
 
 <!--  [ Version ] -->
 <p align="center">
-    <img src="https://img.shields.io/badge/Version-0.0.0.1-success?style=for-the-badge" alt="gitpy's version">
+    <img src="https://img.shields.io/badge/Version-0.0.1-success?style=for-the-badge" alt="gitpy's version">
 </p>
 
-<!--  [ Informations about this repositorie ] -->
+<!--  [ Informations about this repository ] -->
 <p align="center">
     <a href="https://github.com/MyMeepSQL/gitpy/stargazers">
         <img src="https://img.shields.io/github/stars/MyMeepSQL/gitpy?style=for-the-badge&color=success" alt="Stars">
