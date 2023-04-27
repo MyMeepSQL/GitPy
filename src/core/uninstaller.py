@@ -33,10 +33,8 @@
 
 # Imports section
 import os
-import sys
 import shutil
 import platform
-import subprocess
 from time import sleep
 
 ## Third party libraries
@@ -66,7 +64,7 @@ class Uninstaller():
     gitpy_install_path_env_var_name = Configuration.gitpy_install_path_env_var_name
 
     ## The News Version Notification's config file
-    gitpy_notification_config_file_env_var_name = Configuration.gitpy_notification_config_file_env_var_name
+    # gitpy_notification_config_file_env_var_name = Configuration.gitpy_notification_config_file_env_var_name
 
 
     # Main
@@ -98,10 +96,7 @@ class Uninstaller():
                 Color.pl('   {SY1}╰──╼{W} The user\'s platform is {C}%s{W}' % platform.system())
                 sleep(0.2)
 
-            if os.getuid() != 0:
-                Color.pl(GitPy.Banner())
-                print()
-                
+            if os.getuid() != 0:                
                 Color.pl('  {!} The GitPy Uninstaller must be run as root.')
                 Color.pl('  {*} Re-run with sudo or switch to root user.')
 

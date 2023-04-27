@@ -74,7 +74,7 @@ class Configuration():
     version_message = VERSION
     version_message_verbose = '''GitPy %s
     \r
-    \rCopyright (C) 2021-2023 PSociety™, All rights reserved. By Thomas Pellissier (MyMeepSQL)
+    \rCopyright (C) 2021-2023 PSociety™, All rights reserved. By Thomas Pellissier (MyMeepSQL) & Jonas Petitpiere (Bashy)
     \rLicense GPLv3+: GNU GPL version 3 or later <https://www.gnu.org/licenses/gpl-3.0.html>.
     \rThis is free software; you can modify the program and share it as long as the {R}original authors
     \rappears in credit and the program is of the same license{W}.
