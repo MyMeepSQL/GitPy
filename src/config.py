@@ -60,7 +60,7 @@ class Configuration():
     PROGRAM_NAME = 'gitpy'
 
     # The main version of GitPy
-    VERSION = '0.0.0.1'
+    VERSION = '0.0.1'
 
     # Owner's info
     ## MyMeepSQL
