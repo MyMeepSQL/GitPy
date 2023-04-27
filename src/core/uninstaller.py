@@ -72,8 +72,9 @@ class Uninstaller():
     # Main
     def __init__(self, args, pwd):
 
-        Color.pl(GitPy.Banner())
-        print()
+        if not args.quiet:
+            Color.pl(GitPy.Banner())
+            print()
 
         # Check if the user's platform is a Linux machine or not
         if Configuration.verbose == 3:
@@ -151,7 +152,6 @@ class Uninstaller():
             exit_tool(0,pwd=pwd)
 
         else: # -------------------- [ No quiet uninstallation ] -------------------- #
-            Color.pl(GitPy.Banner())
             if Configuration.verbose >= 1:
                 Color.pl('\n  {*} Verbosity level: %s' % Configuration.verbose)
                 if Configuration.verbose == 1:
