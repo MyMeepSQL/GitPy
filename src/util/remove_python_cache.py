@@ -43,11 +43,6 @@ from src.config import Configuration
 def remove_python_cache(pwd,line_enter=None):
     try:
         if Configuration.verbose == 0:
-            # for dirpath, dirnames, filenames in os.walk(aovpns_dir):
-            #     for dirname in dirnames:
-            #         if search_pattern in dirname:
-            #             full_path = os.path.join(dirpath, dirname)
-            #             shutil.rmtree(full_path)
 
             if os.path.isdir('%s/src/__pycache__/' % pwd):
                 shutil.rmtree('%s/src/__pycache__/' % pwd)
@@ -71,27 +66,6 @@ def remove_python_cache(pwd,line_enter=None):
                 shutil.rmtree('%s/src/tools/packaging/__pycache__/' % pwd)
 
         else:
-            # if args.v erbose:
-            #     if Configuration.verbose >= 1:
-            #         Color.pl('  {&} Removing python cache...')
-
-            # for dirpath, dirnames, filenames in os.walk(aovpns_dir):
-            #     for dirname in dirnames:
-            #         if search_pattern in dirname:
-            #             full_path = os.path.join(dirpath, dirname)
-
-            #             if Configuration.verbose == 3:
-            #                 Color.p('   {SY1}├──╼{W} Python: {SY1}shutil.rmtree(%s){W} ...' % full_path)
-
-            #             if os.path.isdir(full_path):
-            #                 shutil.rmtree(full_path)
-            #                 if Configuration.verbose == 3:
-            #                     Color.p(' {G}OK{W}\n')
-            #             else:
-            #                 if Configuration.verbose == 3:
-            #                     Color.p(' {O}NOT FOUND{W}\n')
-
-
             if Configuration.verbose == 3:
                 if line_enter is True:
                     Color.pl('\n  {§} Removing python cache...')

@@ -112,7 +112,7 @@ class Help_Messages():
         \r  Options                                  Description
         \r  -------                                  -----------
         \r  -u,         --update               [+]   Update the GitPy directly from GitHub.
-        \r  -fu,        --force-update               Update AOVPNS even if the version on the machine is already the latest.
+        \r  -fu,        --force-update               Update GitPy even if the version on the machine is already the latest.
         \r              --show-config                Prompt the content of the config file.
         \r              --show-env-var         [+]   Prompt the value of the a environment variable.
         \r                                           (const: {G}install_path{W}).

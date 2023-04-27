@@ -228,7 +228,7 @@ Miscellaneous options:
   Options                                  Description
   -------                                  -----------
   -u,  --update                      [+]   Update the GitPy directly from GitHub.
-  -fu, --force-update                      Update AOVPNS even if the version on the machine is already the latest.
+  -fu, --force-update                      Update GitPy even if the version on the machine is already the latest.
        --show-config                       Prompt the content of the config file.
        --show-env-var                      Prompt the value of the GITPY_INSTALL_PATH environment variable.
        --remove-cache                [+]   Delete python cache from the GitPy directory.
