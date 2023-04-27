@@ -480,16 +480,16 @@ class Installer():
                         Color.pl('  {§} Call the {P}set_env_var(){W} function.')
                         Color.pl('   {SY1}╰──╼{W} Python: {SY1}set_env_var(name=self.gitpy_install_path_env_var_name, value=self.gitpy_install_path_env_var_value){W}')
 
-                        ## The environment variable is used to know where GitPy is installed
-                        set_env_var(var_name=self.gitpy_install_path_env_var_name, var_value=self.gitpy_install_path_env_var_value)
+                    ## The environment variable is used to know where GitPy is installed
+                    set_env_var(var_name=self.gitpy_install_path_env_var_name, var_value=self.gitpy_install_path_env_var_value)
 
                     # if Configuration.verbose == 3:
                     #     Color.pl('  {§} Create the {C}{bold}%s{W} environment variable...' % self.gitpy_path_notification_config_file_env_var_name)
                     #     Color.pl('  {§} Call the {P}set_env_var(){W} function.')
                     #     Color.pl('   {SY1}╰──╼{W} Python: {SY1}set_env_var(name=self.gitpy_path_notification_config_file_env_var_name, value=self.gitpy_path_notification_config_file_env_var_value){W}')
 
-                    #     ## The environment variable is used to know where the News Version Notification config file is
-                    #     set_env_var(var_name=self.gitpy_path_notification_config_file_env_var_name, var_value=self.gitpy_path_notification_config_file_env_var_value)
+                    # ## The environment variable is used to know where the News Version Notification config file is
+                    # set_env_var(var_name=self.gitpy_path_notification_config_file_env_var_name, var_value=self.gitpy_path_notification_config_file_env_var_value)
                     
                     # -------------------- [ FINISH ] -------------------- #
                     Color.pl('  {+} GitPy are successfully installed on your system.')
