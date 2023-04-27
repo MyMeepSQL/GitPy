@@ -33,32 +33,19 @@
 
 # Import section
 import os
-import re
-import sys
-import rich
 import json
-import shutil
-import random
 import getpass
 import platform
-import subprocess
-import configparser
 from time import sleep
-from time import strftime
-from tracemalloc import start
-import gnureadline as global_readline # pip install gnureadline
 
 ## Third party libraries
 from src.__main__ import GitPy
 from src.config import Configuration
-import src.util.ip_domain as IP_Domain
 from src.util.process import Process
 from src.util.check_path import check_folder_path
 from src.util.clear import clear
 from src.util.colors import Color
 from src.util.exit_tool import exit_tool
-from src.util.help_messages import Help_Messages as HM
-from src.util.informations import Informations
 from src.util.email_utils import Email_Utils as EU
 from src.util.based_distro import Based_Distro
 from src.util.add_cron_job import add_cron_job

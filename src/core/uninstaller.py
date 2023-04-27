@@ -33,8 +33,10 @@
 
 # Imports section
 import os
+import sys
 import shutil
 import platform
+import subprocess
 from time import sleep
 
 ## Third party libraries
@@ -64,7 +66,7 @@ class Uninstaller():
     gitpy_install_path_env_var_name = Configuration.gitpy_install_path_env_var_name
 
     ## The News Version Notification's config file
-    # gitpy_notification_config_file_env_var_name = Configuration.gitpy_notification_config_file_env_var_name
+    gitpy_notification_config_file_env_var_name = Configuration.gitpy_notification_config_file_env_var_name
 
 
     # Main
@@ -114,9 +116,6 @@ class Uninstaller():
                     pass
 
                 else:
-                    Color.pl(GitPy.Banner())
-                    print()
-
                     Color.pl('  {!} You\'re not running Arch or Debian variant.')
                     Color.pl('  {*} GitPy can only run on Arch or Debian based distros.')
                     
