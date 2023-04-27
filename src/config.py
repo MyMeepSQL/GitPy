@@ -233,7 +233,7 @@ class Configuration():
 
         if args.unsub:
             config = configparser.ConfigParser()
-            INSTALL_PATH = os.environ.get(cls.gitpy_install_path_env_var_name)
+            INSTALL_PATH = os.environ.[cls.gitpy_install_path_env_var_name]
             NOTIF_CONFIG_FILE_PATH = INSTALL_PATH + 'config/new_version_notification.conf'
             config.read(NOTIF_CONFIG_FILE_PATH)
 
