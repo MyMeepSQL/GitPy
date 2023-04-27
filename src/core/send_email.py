@@ -82,8 +82,9 @@ def send_email():
     '''
 
     # Variables
-    notification_config_file_path = os.environ['GITPY_NOTIFICATION_CONFIG_FILE_PATH']
-    config_file = notification_config_file_path
+    INSTALL_PATH = os.environ['GITPY_INSTALL_PATH']
+    NOTIF_CONFIG_FILE_PATH = INSTALL_PATH + 'src/config/new_version_notification.conf'
+    config_file = NOTIF_CONFIG_FILE_PATH
 
     # Create the configparser object
     config = configparser.ConfigParser()
