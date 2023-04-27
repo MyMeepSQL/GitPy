@@ -144,7 +144,7 @@ class Email_Utils():
         smtp_password_env_var_name = 'GITPY_%s_SMTP_PASSWORD' % github_repo_name.upper()
 
         # Create the configparser object
-        config_file = '%sconfig/new_version_notification.conf' % INSTALL_PATH
+        config_file = '%ssrc/config/new_version_notification.conf' % INSTALL_PATH
         config = configparser.ConfigParser()
         config.read(config_file)
 

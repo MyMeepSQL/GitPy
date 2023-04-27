@@ -234,7 +234,7 @@ class Configuration():
         if args.unsub:
             config = configparser.ConfigParser()
             INSTALL_PATH = os.environ[cls.gitpy_install_path_env_var_name]
-            NOTIF_CONFIG_FILE_PATH = INSTALL_PATH + 'config/new_version_notification.conf'
+            NOTIF_CONFIG_FILE_PATH = INSTALL_PATH + 'src/config/new_version_notification.conf'
             config.read(NOTIF_CONFIG_FILE_PATH)
 
             # Obtient la liste de toutes les sections dans le fichier de configuration
