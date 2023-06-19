@@ -68,7 +68,7 @@ class Configuration():
     OWNER_DISCORDTAG_MYMEEPSQL = 'MyMeepSQL#0141 '
     ## Bashy
     OWNER_EMAIL_BASHY = 'petitpierre@duck.com'
-    OWNER_DISCORDTAG_BASHY = 'Bashy#2643 '
+    OWNER_DISCORDTAG_BASHY = 'Bashy#2643'
     
     # The version's message for the -V/--version argument
     version_message = VERSION

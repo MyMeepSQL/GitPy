@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 #---[Name & Dates]----------------------------------------------------------#
-#  Filename ~ console.py                [Created: 2023-02-21 |  8:35 - AM]  #
+#  Filename ~ clear.py                  [Created: 2023-02-21 |  8:35 - AM]  #
 #                                       [Updated: 2023-02-21 |  9:24 - AM]  #
 #---[Info]------------------------------------------------------------------#
 #  The terminal prompt clear function                                       #

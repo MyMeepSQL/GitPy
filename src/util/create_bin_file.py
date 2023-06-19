@@ -5,7 +5,7 @@
 #  Filename ~ create_bin_file.py        [Created: 2023-02-21 | 11:25 - AM]  #
 #                                       [Updated: 2023-02-21 | 11:39 - AM]  #
 #---[Info]------------------------------------------------------------------#
-#  Create the content of the bin file (gitpy) with the correct install     #
+#  Create the content of the bin file (gitpy) with the correct install      #
 #  path                                                                     #
 #  Language ~ Python3                                                       #
 #---[Authors]---------------------------------------------------------------#
